@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{4a1fa870-6ef7-4d08-a2a7-3f19253f8296}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f51b0395-3bca-4eff-802a-ef1a44e7ae37}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{a359b213-1706-4408-b687-eb15bdcaf82a}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="CocoGUILIB">
+      <UniqueIdentifier>{dd97dddb-8f1e-4a79-ab32-0631660dc5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\BaseClasses">
+      <UniqueIdentifier>{df0f9bea-4bb4-4654-9116-2617cde9c388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\BaseClasses\Graphics">
+      <UniqueIdentifier>{d6637b20-d87a-40fc-a0ad-cdd10f155848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\BaseClasses\Widget">
+      <UniqueIdentifier>{2749bab2-e419-4745-96b4-dde6ca39293f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\CGraphics">
+      <UniqueIdentifier>{bb251b2d-c1d6-4be4-87fb-3d777431dd04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\Component">
+      <UniqueIdentifier>{9ed9fc33-b4be-43d7-a126-4a7986c88d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\System">
+      <UniqueIdentifier>{1e8ed11b-2ca6-4bb9-a947-0f06ae01189d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\System\Json">
+      <UniqueIdentifier>{cdfe53a5-47b2-497d-b640-3f643dfc031d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\System\Json\json">
+      <UniqueIdentifier>{c3e510b2-642b-4a2b-aafc-98569aba240e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\System\Json\lib_json">
+      <UniqueIdentifier>{6d3318ac-ef64-4f35-9e3a-7e16e320afc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CocoGUILIB\UIElements">
+      <UniqueIdentifier>{ae112251-46ed-45dc-b5bc-445bc89b7751}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\CloseSelected.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\CloseNormal.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\HelloWorld.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="res\test.ico">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_internalarray.inl">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </None>
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_internalmap.inl">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </None>
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_valueiterator.inl">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </None>
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\sconscript">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="test.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Graphics\UIElement.h">
+      <Filter>CocoGUILIB\BaseClasses\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.h">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.h">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoWidget.h">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleLayerColor.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleSprite.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CLabelAtlas.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CPrimitivesNode.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CRenderNode.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CTextField.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoButton.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLoadingBar.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoPanel.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoScrollView.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoSlider.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextArea.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextButton.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextField.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CCSReader.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\InputLayer.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UIInputManager.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UIScene.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UISystem.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\CSContentJsonDictionary.h">
+      <Filter>CocoGUILIB\System\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\autolink.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\config.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\features.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\forwards.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\json_lib.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\reader.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\value.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\writer.h">
+      <Filter>CocoGUILIB\System\Json\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_batchallocator.h">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_tool.h">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UILabelAtlas.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UIScale9Sprite.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UISprite.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UIText.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UITextArea.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.h">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Graphics\UIElement.cpp">
+      <Filter>CocoGUILIB\BaseClasses\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.cpp">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.cpp">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoWidget.cpp">
+      <Filter>CocoGUILIB\BaseClasses\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleLayerColor.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleSprite.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CLabelAtlas.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CPrimitivesNode.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CRenderNode.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CTextField.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoButton.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLoadingBar.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoPanel.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoScrollView.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoSlider.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextArea.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextButton.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextField.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CCSReader.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\InputLayer.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UIInputManager.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UIScene.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UISystem.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\CSContentJsonDictionary.cpp">
+      <Filter>CocoGUILIB\System\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_reader.cpp">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_value.cpp">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_writer.cpp">
+      <Filter>CocoGUILIB\System\Json\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UILabelAtlas.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UIScale9Sprite.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UISprite.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UIText.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UITextArea.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.cpp">
+      <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

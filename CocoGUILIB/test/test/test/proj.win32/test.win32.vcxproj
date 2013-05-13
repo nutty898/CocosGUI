@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6F0CB6C-FD4B-4B12-8979-86C4C8881330}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)cocos2dx;$(SolutionDir)cocos2dx\include;$(SolutionDir)cocos2dx\kazmath\include;$(SolutionDir)cocos2dx\platform\win32;$(SolutionDir)cocos2dx\platform\third_party\win32;$(SolutionDir)cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)external;$(SolutionDir)CocosDenshion\include;$(SolutionDir)..\..\CocoGUILIB\BaseClasses\Graphics;$(SolutionDir)..\..\CocoGUILIB\BaseClasses\Widget;$(SolutionDir)..\..\CocoGUILIB\CGraphics;$(SolutionDir)..\..\CocoGUILIB\Component;$(SolutionDir)..\..\CocoGUILIB\System;$(SolutionDir)..\..\CocoGUILIB\System\Json;$(SolutionDir)..\..\CocoGUILIB\System\Json\json;$(SolutionDir)..\..\CocoGUILIB\System\Json\lib_json;$(SolutionDir)\..\..\CocoGUILIB\UIElements;$(SolutionDir)\extensions\GUI\CCControlExtension;$(SolutionDir)\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;libExtensions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>test.h</HeaderFileName>
+      <InterfaceIdentifierFileName>test_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>test_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/test.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)cocos2dx;$(SolutionDir)cocos2dx\include;$(SolutionDir)cocos2dx\kazmath\include;$(SolutionDir)cocos2dx\platform\win32;$(SolutionDir)cocos2dx\platform\third_party\win32;$(SolutionDir)cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)external;$(SolutionDir)CocosDenshion\include;$(SolutionDir)..\..\CocoGUILIB\BaseClasses\Graphics;$(SolutionDir)..\..\CocoGUILIB\BaseClasses\Widget;$(SolutionDir)..\..\CocoGUILIB\CGraphics;$(SolutionDir)..\..\CocoGUILIB\Component;$(SolutionDir)..\..\CocoGUILIB\System;$(SolutionDir)..\..\CocoGUILIB\System\Json;$(SolutionDir)..\..\CocoGUILIB\System\Json\json;$(SolutionDir)..\..\CocoGUILIB\System\Json\lib_json;$(SolutionDir)\..\..\CocoGUILIB\UIElements;$(SolutionDir)\extensions\GUI\CCControlExtension;$(SolutionDir)\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;4530;4305;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libCocosDenshion.lib;libExtensions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>test.h</HeaderFileName>
+      <InterfaceIdentifierFileName>test_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>test_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/test.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_internalarray.inl" />
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_internalmap.inl" />
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_valueiterator.inl" />
+    <None Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\sconscript" />
+    <None Include="..\Resources\CloseNormal.png" />
+    <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\HelloWorld.png" />
+    <None Include="res\test.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="test.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Graphics\UIElement.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoWidget.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleLayerColor.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleSprite.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CLabelAtlas.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CPrimitivesNode.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CRenderNode.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\CTextField.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoButton.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLoadingBar.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoPanel.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoScrollView.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoSlider.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextArea.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextButton.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoTextField.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CCSReader.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\InputLayer.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\CSContentJsonDictionary.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\autolink.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\config.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\features.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\forwards.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\json_lib.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\reader.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\value.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\json\writer.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_batchallocator.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_tool.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UIInputManager.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UIScene.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\UISystem.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UILabelAtlas.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UIScale9Sprite.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UISprite.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UIText.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UITextArea.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.h" />
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\VisibleRect.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Graphics\UIElement.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\BaseClasses\Widget\CocoWidget.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleLayerColor.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CClipAbleSprite.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CLabelAtlas.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CPrimitivesNode.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CRenderNode.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\CTextField.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoButton.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLoadingBar.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoPanel.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoScrollView.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoSlider.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextArea.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextButton.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoTextField.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CCSReader.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\InputLayer.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\CSContentJsonDictionary.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_reader.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_value.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\Json\lib_json\json_writer.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UIInputManager.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UIScene.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\UISystem.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UILabelAtlas.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UIScale9Sprite.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UISprite.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UIText.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UITextArea.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
