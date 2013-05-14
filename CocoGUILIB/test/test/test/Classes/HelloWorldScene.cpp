@@ -30,12 +30,16 @@ bool HelloWorld::init()
     
     cs::CocoScrollView* sc = (cs::CocoScrollView*)(COCOUISYSTEM->getWidgetByName("scrollview"));
     sc->setUpdateEnable(true);
+    sc->setMoveMode(cs::SCROLLVIEW_MOVE_MODE_ACTION);
     cs::CocoTextButton* bt = (cs::CocoTextButton*)(COCOUISYSTEM->getWidgetByName("backtotopbutton"));
     bt->addReleaseEvent(this, coco_releaseselector(HelloWorld::backToTop));
     cs::CocoSlider* sld = (cs::CocoSlider*)(COCOUISYSTEM->getWidgetByName("slider"));
     sld->addPercentChangedEvent(this, coco_percentchangedselector(HelloWorld::sliderPercentChanged));
     cs::CocoButton* anib = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("animationbutton"));
     anib->addReleaseEvent(this, coco_releaseselector(HelloWorld::playUIAnimation));
+    cs::CocoTextField* tfd = dynamic_cast<cs::CocoTextField*>(COCOUISYSTEM->getWidgetByName("textfield"));
+    tfd->setCharacterLength(4);
+    tfd->setIsPassWord(true);
     cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
     exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
     exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));

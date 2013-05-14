@@ -29,6 +29,7 @@
 
 #include "CocoWidget.h"
 #include "UISprite.h"
+#include "UIScale9Sprite.h"
 
 namespace cs {
     class CocoImageView : public CocoWidget
@@ -55,14 +56,19 @@ namespace cs {
         virtual void setFlipY(bool flipY);
         virtual void setColor(int r,int g,int b);
         virtual void setOpacity(int opcity);
+        void setScale9Enable(bool able);
+        void setScale9Size(float width,float height);
+        void setTexturesScale9(const char* fileName, cocos2d::CCRect capInsets, bool useSpriteFrame = false);
     protected:
         int m_nViewType;
-        UISprite* m_pImage;
+        UIElement* m_pImage;
         int m_nClickCount;
         float m_fClickTimeInterval;
         bool m_bStartCheckDoubleClick;
         bool m_touchRelease;
         bool m_bDoubleClickEnable;
+        
+        bool m_bScale9Enable;
     };
 }
 

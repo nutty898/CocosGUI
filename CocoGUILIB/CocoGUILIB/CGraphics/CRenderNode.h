@@ -117,6 +117,8 @@ namespace cs {
         void closeIME();
         void setPlaceHolder(const char* placeHolder);
         void setTextFieldSize(float width,float height);
+        void setCharacterLength(int length);
+        void setIsPassword(bool isPassword);
         //clipsprite
         void setClipAble(bool able);
         void setClipRect(float x,float y,float width,float height);

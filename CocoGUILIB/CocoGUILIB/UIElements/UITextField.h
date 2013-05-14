@@ -44,6 +44,8 @@ namespace cs {
         void setTextColor(int r,int g,int b);
         void setFontSize(int size);
         const char* getStringValue();
+        void setCharacterLength(int length);
+        void setIsPassWord(bool isPassword);
     protected:
     };
 }

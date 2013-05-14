@@ -791,6 +791,11 @@ void CCScale9Sprite::visit()
 
 void CCScale9Sprite::setColor(const ccColor3B& color)
 {
+    if (!_scale9Image)
+    {
+        return;
+    }
+    
     _color = color;
 
     CCObject* child;
@@ -807,6 +812,11 @@ void CCScale9Sprite::setColor(const ccColor3B& color)
 
 void CCScale9Sprite::setOpacity(GLubyte opacity)
 {
+    if (!_scale9Image)
+    {
+        return;
+    }
+    
     _opacity = opacity;
 
     CCObject* child;

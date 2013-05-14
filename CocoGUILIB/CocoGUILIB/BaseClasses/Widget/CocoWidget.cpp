@@ -389,6 +389,16 @@ namespace cs {
         }
     }
     
+    void CocoWidget::initPressState(int state)
+    {
+        if (this->m_nCurPressState == state)
+        {
+            return;
+        }
+        this->m_nPrevPressstate = this->m_nCurPressState;
+        this->m_nCurPressState = state;
+    }
+    
     void CocoWidget::setPressState(int state)
     {
         if (this->m_nCurPressState == state){

@@ -43,8 +43,10 @@ namespace cs {
         virtual bool init();
 //        virtual bool initWithOptions(cocos2d::CCDictionary* options);
 //        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
-        void setTextures(const char* normal,const char* selected,const char* disabled,bool useSpriteFrame = false);
-        void setTexturesScale9(const char* normal,const char* selected,const char* disabled,cocos2d::CCRect capInsets,bool useSpriteFrame = false);
+        void initPressState(int state);
+        
+        virtual void setTextures(const char* normal,const char* selected,const char* disabled,bool useSpriteFrame = false);
+        virtual void setTexturesScale9(const char* normal,const char* selected,const char* disabled,cocos2d::CCRect capInsets,bool useSpriteFrame = false);
         void setNormalTexture(const char* normal,bool useSpriteFrame = false);
         void setPressedTexture(const char* selected,bool useSpriteFrame = false);
         void setDisabledTexture(const char* disabled,bool useSpriteFrame = false);
@@ -56,8 +58,8 @@ namespace cs {
         virtual void onPressStateChangedToDisabled();
         virtual CRenderNode* getValidNode();
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        void setScale9Enable(bool able);
-        void setScale9Size(float width,float height);
+        virtual void setScale9Enable(bool able);
+        virtual void setScale9Size(float width,float height);
         virtual void setColor(int r,int g,int b);
         virtual void setOpacity(int opcity);
         virtual void setFlipX(bool flipX);
