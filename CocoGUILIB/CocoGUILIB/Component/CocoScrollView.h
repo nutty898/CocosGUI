@@ -29,7 +29,48 @@
 
 #include "CocoPanel.h"
 
-namespace cs {
+namespace cs
+{
+    enum SCROLLVIEW_MOVE_MODE
+    {
+        SCROLLVIEW_MOVE_MODE_NONE,
+        SCROLLVIEW_MOVE_MODE_NORMAL,
+        SCROLLVIEW_MOVE_MODE_ACTION
+    };
+    
+    enum SCROLLVIEW_BERTH_ORI
+    {
+        SCROLLVIEW_BERTH_ORI_NONE,
+        SCROLLVIEW_BERTH_ORI_TOP,
+        SCROLLVIEW_BERTH_ORI_BOTTOM,
+        SCROLLVIEW_BERTH_ORI_VERTICAL_CENTER,
+        SCROLLVIEW_BERTH_ORI_LEFT,
+        SCROLLVIEW_BERTH_ORI_RIGHT,
+        SCROLLVIEW_BERTH_ORI_HORIZONTAL_CENTER
+    };
+    
+    typedef void (cocos2d::CCObject::*SEL_ScrollToTopEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_ScrollToBottomEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_ScrollToLeftEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_ScrollToRightEvent)(cocos2d::CCObject*);
+    #define coco_ScrollToTopSelector(_SELECTOR) (cs::SEL_ScrollToTopEvent)(&_SELECTOR)
+    #define coco_ScrollToBottomSelector(_SELECTOR) (cs::SEL_ScrollToBottomEvent)(&_SELECTOR)
+    #define coco_ScrollToLeftSelector(_SELECTOR) (cs::SEL_ScrollToLeftEvent)(&_SELECTOR)
+    #define coco_ScrollToRightSelector(_SELECTOR) (cs::SEL_ScrollToRightEvent)(&_SELECTOR)
+    
+    typedef void (cocos2d::CCObject::*SEL_BerthToTopEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_BerthToBottomEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_BerthToVerticalCenterEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_BerthToLeftEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_BerthToRightEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_BerthToHorizontalCenterEvent)(cocos2d::CCObject*);
+    #define coco_BerthToTopSelector(_SELECTOR) (cs::SEL_BerthToTopEvent)(&_SELECTOR)
+    #define coco_BerthToBottomSelector(_SELECTOR) (cs::SEL_BerthToBottomEvent)(&_SELECTOR)
+    #define coco_BerthToVerticalCenterSelector(_SELECTOR) (cs::SEL_BerthToVerticalCenterEvent)(&_SELECTOR)
+    #define coco_BerthToLeftSelector(_SELECTOR) (cs::SEL_BerthToLeftEvent)(&_SELECTOR)
+    #define coco_BerthToRightSelector(_SELECTOR) (cs::SEL_BerthToRightEvent)(&_SELECTOR)
+    #define coco_HorizontalCenterSelector(_SELECTOR) (cs::SEL_BerthToHorizontalCenterEvent)(&_SELECTOR)
+    
     class CocoScrollView : public CocoPanel
     {
     public:
@@ -51,6 +92,10 @@ namespace cs {
         void startAutoScrollChildren(float v);
         void stopAutoScrollChildren();
         float getCurAutoScrollDistance(float time);
+        void resetPositionWithAction();
+        CocoWidget* getCheckPositionChild();
+        float calculateOffsetWithDragForce(float moveOffset);
+        void handleScrollActionEvent();
         void setDirection(int direction);
         bool scrollChildren(float touchOffset);
         void scrollToBottom();
@@ -71,6 +116,33 @@ namespace cs {
 //        virtual CRenderNode* getValidNode();
         virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(float width,float height);
+        
+        void scrollToTopEvent();
+        void scrollToBottomEvent();
+        void scrollToLeftEvent();
+        void scrollToRightEvent();
+        
+        void addScrollToTopEvent(cocos2d::CCObject* target, SEL_ScrollToTopEvent selector);
+        void addScrollToBottomEvent(cocos2d::CCObject* target, SEL_ScrollToBottomEvent selector);
+        void addScrollToLeftEvent(cocos2d::CCObject* target, SEL_ScrollToLeftEvent selector);
+        void addScrollToRightEvent(cocos2d::CCObject* target, SEL_ScrollToRightEvent selector);
+        
+        void berthToTopEvent();
+        void berthToBottomEvent();
+        void berthToVerticalCenterEvent();
+        void berthToLeftEvent();
+        void berthToRightEvent();
+        void berthToHorizontalCenterEvent();
+        
+        void addBerthToTopEvent(cocos2d::CCObject* target, SEL_BerthToTopEvent selector);
+        void addBerthToBottomEvent(cocos2d::CCObject* target, SEL_BerthToBottomEvent selector);
+        void addBerthToVerticalCenterEvent(cocos2d::CCObject* target, SEL_BerthToVerticalCenterEvent selector);
+        void addBerthToLeftEvent(cocos2d::CCObject* target, SEL_BerthToLeftEvent selector);
+        void addBerthToRightEvent(cocos2d::CCObject* target, SEL_BerthToRightEvent selector);
+        void addBerthToHorizontalCenterEvent(cocos2d::CCObject* target, SEL_BerthToHorizontalCenterEvent selector);
+        
+        void stopAction();
+        
     protected:
         int m_nDirection;
         float m_fTouchStartLocation;
@@ -85,11 +157,28 @@ namespace cs {
         CocoWidget* m_pLeftChild;
         CocoWidget* m_pRightChild;
         
+        float m_fDisBoundaryToChild_0;
+        float m_fDisBetweenChild;
+        float m_fDragForce;
+        
         int m_nHandleState;//0 normal, 1 top boundary, 2 bottom boundary
         int m_nMoveDirection;//0 pull down, 1 push up
         
+        CC_SYNTHESIZE(SCROLLVIEW_MOVE_MODE, m_eMoveMode, MoveMode);
+        CC_SYNTHESIZE(SCROLLVIEW_BERTH_ORI, m_eBerthOrientation, BerthOrientation);
+        bool isRunningAction;
+        
         bool m_bTopEnd;
         bool m_bBottomEnd;
+        bool m_bLeftEnd;
+        bool m_bRightEnd;
+        
+        bool m_bBerthToTop = false;
+        bool m_bBerthToBottom = false;
+        bool m_bBerthToLeft = false;
+        bool m_bBerthToRight = false;
+        bool m_bBerthToVerticalCenter = false;
+        bool m_bBerthToHorizontalCenter = false;
         
         bool m_bAutoScroll;
         
@@ -102,6 +191,28 @@ namespace cs {
         float m_fChildrenSizeHeight;
         float m_fChildrenSizeWidth;
         float m_fChildFocusCancelOffset;
+        
+        cocos2d::CCObject* m_pScrollToTopListener;
+        SEL_ScrollToTopEvent m_pfnScrollToTopSelector;
+        cocos2d::CCObject* m_pScrollToBottomListener;
+        SEL_ScrollToBottomEvent m_pfnScrollToBottomSelector;
+        cocos2d::CCObject* m_pScrollToLeftListener;
+        SEL_ScrollToLeftEvent m_pfnScrollToLeftSelector;
+        cocos2d::CCObject* m_pScrollToRightListener;
+        SEL_ScrollToRightEvent m_pfnScrollToRightSelector;
+        
+        cocos2d::CCObject* m_pBerthToTopListener;
+        SEL_BerthToTopEvent m_pfnBerthToTopSelector;
+        cocos2d::CCObject* m_pBerthToBottomListener;
+        SEL_BerthToBottomEvent m_pfnBerthToBottomSelector;
+        cocos2d::CCObject* m_pBerthToVerticalCenterListener;
+        SEL_BerthToVerticalCenterEvent m_pfnBerthToVerticalCenterSelector;
+        cocos2d::CCObject* m_pBerthToLeftListener;
+        SEL_BerthToLeftEvent m_pfnBerthToLeftSelector;
+        cocos2d::CCObject* m_pBerthToRightListener;
+        SEL_BerthToRightEvent m_pfnBerthToRightSelector;
+        cocos2d::CCObject* m_pBerthToHorizontalCenterListener;
+        SEL_BerthToHorizontalCenterEvent m_pfnBerthToHorizontalCenterSelector;
     };
 }
 

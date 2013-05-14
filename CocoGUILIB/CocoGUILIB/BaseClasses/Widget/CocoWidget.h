@@ -82,6 +82,7 @@ namespace cs{
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchCanceled(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchLongClicked(cocos2d::CCPoint &touchPoint);
+        void initPressState(int state);
         void setPressState(int state);
         virtual void disable();
         virtual void active();
