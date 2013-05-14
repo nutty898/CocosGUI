@@ -33,7 +33,7 @@
 
 
 namespace cs{
-    typedef void (cocos2d::CCObject::*SEL_PushEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_PushEvent)(cocos2d::CCObject*); 
     typedef void (cocos2d::CCObject::*SEL_MoveEvent)(cocos2d::CCObject*);
     typedef void (cocos2d::CCObject::*SEL_ReleaseEvent)(cocos2d::CCObject*);
     typedef void (cocos2d::CCObject::*SEL_CancelEvent)(cocos2d::CCObject*);
