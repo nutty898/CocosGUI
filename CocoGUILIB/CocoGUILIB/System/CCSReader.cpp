@@ -94,6 +94,9 @@ namespace cs {
         }else if (classname && strcmp(classname, "Slider") == 0){
             widget = CocoSlider::create();
             this->setPropsForSliderFromCCDictionary(widget, uiOptions);
+        }else if (classname && strcmp(classname, "ImageButton") == 0){
+            widget = CocoImageButton::create();
+            this->setPropsForImageButtonFromCCDictionary(widget, uiOptions);
         }
         cocos2d::CCArray* arr = DICTOOL->getArrayValue(data, "children");
         if (arr) {
@@ -149,6 +152,9 @@ namespace cs {
         }else if (classname && strcmp(classname, "Slider") == 0){
             widget = CocoSlider::create();
             this->setPropsForSliderFromJsonDictionary(widget, uiOptions);
+        }else if (classname && strcmp(classname, "ImageButton") == 0){
+            widget = CocoImageButton::create();
+            this->setPropsForImageButtonFromJsonDictionary(widget, uiOptions);
         }
         int childrenCount = DICTOOL->getArrayCount_json(data, "children");
         for (int i=0;i<childrenCount;i++){
@@ -332,13 +338,42 @@ namespace cs {
     void CCSReader::setPropsForImageViewFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options)
     {
         this->setPropsForWidgetFromCCDictionary(widget, options);
+        
         CocoImageView* imageView = (CocoImageView*)widget;
         const char* imageFileName = DICTOOL->getStringValue(options, "fileName");
-        imageView->setTexture(imageFileName,widget->getUseMergedTexture());
+        cocos2d::CCObject*  scale9EnableExist = DICTOOL->checkObjectExist(options, "scale9Enable");
+        bool scale9Enable = false;
+        if (scale9EnableExist)
+        {
+            scale9Enable = DICTOOL->getBooleanValue(options, "scale9Enable");
+        }
+        imageView->setScale9Enable(scale9Enable);
+        if (scale9Enable)
+        {
+            float cx = DICTOOL->getFloatValue(options, "capInsetsX");
+            float cy = DICTOOL->getFloatValue(options, "capInsetsY");
+            float cw = DICTOOL->getFloatValue(options, "capInsetsWidth");
+            float ch = DICTOOL->getFloatValue(options, "capInsetsHeight");
+            
+            imageView->setTexturesScale9(imageFileName, cocos2d::CCRect(cx, cy, cw, ch), widget->getUseMergedTexture());
+            bool sw = DICTOOL->checkObjectExist(options, "scale9Width");
+            bool sh = DICTOOL->checkObjectExist(options, "scale9Height");
+            if (sw && sh)
+            {
+                float swf = DICTOOL->getFloatValue(options, "scale9Width");
+                float shf = DICTOOL->getFloatValue(options, "scale9Height");
+                imageView->setScale9Size(swf, shf);
+            }
+        }
+        else
+        {
+            imageView->setTexture(imageFileName, widget->getUseMergedTexture());
+        }
         bool flipX = DICTOOL->getBooleanValue(options, "flipX");
         bool flipY = DICTOOL->getBooleanValue(options, "flipY");
         imageView->setFlipX(flipX);
         imageView->setFlipY(flipY);
+        
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
     }
     
@@ -445,6 +480,20 @@ namespace cs {
         }
         slider->setSlidBallTextures(DICTOOL->getStringValue(options, "ballNormal"), DICTOOL->getStringValue(options, "ballPressed"), DICTOOL->getStringValue(options, "ballDisabled"),widget->getUseMergedTexture());
         slider->setSlidBallPercent(DICTOOL->getIntValue(options, "percent"));
+        
+        cocos2d::CCObject* showProgressBarExist = DICTOOL->checkObjectExist(options, "showProgressBar");
+        bool showProgressBar = false;
+        if (showProgressBarExist)
+        {
+            showProgressBar = DICTOOL->getBooleanValue(options, "showProgressBar");
+        }
+        if (showProgressBar)
+        {
+            slider->setShowProgressBar(showProgressBar);
+            slider->setProgressBarTextureScale9(DICTOOL->getStringValue(options, "progressBarFileName"), 0, 0, 0, 0, widget->getUseMergedTexture());
+            slider->setProgressBarScale(barLength);
+        }
+        
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
     }
     
@@ -534,6 +583,61 @@ namespace cs {
         loadingBar->setDirection(DICTOOL->getIntValue(options, "direction"));
         loadingBar->setPercent(DICTOOL->getIntValue(options, "percent"));
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
+    }
+    
+    void CCSReader::setPropsForImageButtonFromCCDictionary(cs::CocoWidget *widget, cocos2d::CCDictionary *options)
+    {
+        this->setPropsForButtonFromCCDictionary(widget, options);
+        
+        CocoImageButton* imageButton = dynamic_cast<CocoImageButton*>(widget);
+        
+        const char* imageNormalFileName = DICTOOL->getStringValue(options, "imageNormal");
+        const char* imagePressedFileName = DICTOOL->getStringValue(options, "imagePressed");
+        const char* imageDisabledFileName = DICTOOL->getStringValue(options, "imageDisabled");
+        
+        bool imageScale9Enable = DICTOOL->getBooleanValue(options, "imageScale9Enable");
+        imageButton->setImageScale9Enable(imageScale9Enable);
+        if (imageScale9Enable)
+        {
+            float cx = DICTOOL->getFloatValue(options, "imageCapInsetsX");
+            float cy = DICTOOL->getFloatValue(options, "imageCapInsetsY");
+            float cw = DICTOOL->getFloatValue(options, "imageCapInsetsWidth");
+            float ch = DICTOOL->getFloatValue(options, "imageCapInsetsHeight");
+            imageButton->setImageTexturesScale9(imageNormalFileName, imagePressedFileName, imageDisabledFileName,
+                                                cocos2d::CCRect(cx, cy, cw, ch),
+                                                widget->getUseMergedTexture());
+            bool imageSw = DICTOOL->checkObjectExist(options, "imageScale9Width");
+            bool imageSh = DICTOOL->checkObjectExist(options, "imageScale9Height");
+            if (imageSw && imageSh)
+            {
+                float imageSwf = DICTOOL->getFloatValue(options, "imageScale9Width");
+                float imageShf = DICTOOL->getFloatValue(options, "imageScale9Height");
+                imageButton->setImageScale9Size(imageSwf, imageShf);
+            }
+        }
+        else
+        {
+            imageButton->setImageTextures(imageNormalFileName, imagePressedFileName, imageDisabledFileName, widget->getUseMergedTexture());
+        }
+        
+        bool imageFlipX = DICTOOL->getBooleanValue(options, "imageFlipX");
+        bool imageFlipY = DICTOOL->getBooleanValue(options, "imageFlipY");
+        imageButton->setImageFlipX(imageFlipX);
+        imageButton->setImageFlipY(imageFlipY);
+        
+        bool imageOp = DICTOOL->checkObjectExist(options, "imageOpacity");
+        if (imageOp)
+        {
+            GLubyte imageOpbyte = DICTOOL->getIntValue(options, "imageOpacity");
+            imageButton->setImageOpacity(imageOpbyte);
+        }
+        bool imageCr = DICTOOL->checkObjectExist(options, "imageColorR");
+        bool imageCg = DICTOOL->checkObjectExist(options, "imageColorG");
+        bool imageCb = DICTOOL->checkObjectExist(options, "imageColorB");
+        GLubyte imageColorR = imageCr ? DICTOOL->getIntValue(options, "imageColorR") : 255;
+        GLubyte imageColorG = imageCg ? DICTOOL->getIntValue(options, "imageColorG") : 255;
+        GLubyte imageColorB = imageCb ? DICTOOL->getIntValue(options, "imageColorB") : 255;
+        imageButton->setImageColor(imageColorR, imageColorG, imageColorB);
     }
     
     /****************************************************json**************************************************/
@@ -637,13 +741,42 @@ namespace cs {
     void CCSReader::setPropsForImageViewFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options)
     {
         this->setPropsForWidgetFromJsonDictionary(widget, options);
+        
         CocoImageView* imageView = (CocoImageView*)widget;
         const char* imageFileName = DICTOOL->getStringValue_json(options, "fileName");
-        imageView->setTexture(imageFileName,widget->getUseMergedTexture());
+        bool scale9EnableExist = DICTOOL->checkObjectExist_json(options, "scale9Enable");
+        bool scale9Enable = false;
+        if (scale9EnableExist)
+        {
+            scale9Enable = DICTOOL->getBooleanValue_json(options, "scale9Enable");
+        }
+        imageView->setScale9Enable(scale9Enable);
+        if (scale9Enable)
+        {
+            float cx = DICTOOL->getFloatValue_json(options, "capInsetsX");
+            float cy = DICTOOL->getFloatValue_json(options, "capInsetsY");
+            float cw = DICTOOL->getFloatValue_json(options, "capInsetsWidth");
+            float ch = DICTOOL->getFloatValue_json(options, "capInsetsHeight");
+            
+            imageView->setTexturesScale9(imageFileName, cocos2d::CCRect(cx, cy, cw, ch), widget->getUseMergedTexture());
+            bool sw = DICTOOL->checkObjectExist_json(options, "scale9Width");
+            bool sh = DICTOOL->checkObjectExist_json(options, "scale9Height");
+            if (sw && sh)
+            {
+                float swf = DICTOOL->getFloatValue_json(options, "scale9Width");
+                float shf = DICTOOL->getFloatValue_json(options, "scale9Height");
+                imageView->setScale9Size(swf, shf);
+            }
+        }
+        else
+        {
+            imageView->setTexture(imageFileName, widget->getUseMergedTexture());
+        }
         bool flipX = DICTOOL->getBooleanValue_json(options, "flipX");
         bool flipY = DICTOOL->getBooleanValue_json(options, "flipY");
         imageView->setFlipX(flipX);
         imageView->setFlipY(flipY);
+        
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
     }
     
@@ -750,6 +883,20 @@ namespace cs {
         }
         slider->setSlidBallTextures(DICTOOL->getStringValue_json(options, "ballNormal"), DICTOOL->getStringValue_json(options, "ballPressed"), DICTOOL->getStringValue_json(options, "ballDisabled"),widget->getUseMergedTexture());
         slider->setSlidBallPercent(DICTOOL->getIntValue_json(options, "percent"));
+        
+        bool showProgressBarExist = DICTOOL->checkObjectExist_json(options, "showProgressBar");
+        bool showProgressBar = false;
+        if (showProgressBarExist)
+        {
+            showProgressBar = DICTOOL->getBooleanValue_json(options, "showProgressBar");
+        }
+        if (showProgressBar)
+        {
+            slider->setShowProgressBar(showProgressBar);
+            slider->setProgressBarTextureScale9(DICTOOL->getStringValue_json(options, "progressBarFileName"), 0, 0, 0, 0, widget->getUseMergedTexture());
+            slider->setProgressBarScale(barLength);
+        }
+        
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
     }
     
@@ -839,5 +986,60 @@ namespace cs {
         loadingBar->setDirection(DICTOOL->getIntValue_json(options, "direction"));
         loadingBar->setPercent(DICTOOL->getIntValue_json(options, "percent"));
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
+    }
+    
+    void CCSReader::setPropsForImageButtonFromJsonDictionary(cs::CocoWidget *widget, cs::CSJsonDictionary *options)
+    {
+        this->setPropsForButtonFromJsonDictionary(widget, options);
+        
+        CocoImageButton* imageButton = dynamic_cast<CocoImageButton*>(widget);
+        
+        const char* imageNormalFileName = DICTOOL->getStringValue_json(options, "imageNormal");
+        const char* imagePressedFileName = DICTOOL->getStringValue_json(options, "imagePressed");
+        const char* imageDisabledFileName = DICTOOL->getStringValue_json(options, "imageDisabled");
+        
+        bool imageScale9Enable = DICTOOL->getBooleanValue_json(options, "imageScale9Enable");
+        imageButton->setImageScale9Enable(imageScale9Enable);
+        if (imageScale9Enable)
+        {
+            float cx = DICTOOL->getFloatValue_json(options, "imageCapInsetsX");
+            float cy = DICTOOL->getFloatValue_json(options, "imageCapInsetsY");
+            float cw = DICTOOL->getFloatValue_json(options, "imageCapInsetsWidth");
+            float ch = DICTOOL->getFloatValue_json(options, "imageCapInsetsHeight");
+            imageButton->setImageTexturesScale9(imageNormalFileName, imagePressedFileName, imageDisabledFileName,
+                                                cocos2d::CCRect(cx, cy, cw, ch),
+                                                widget->getUseMergedTexture());
+            bool imageSw = DICTOOL->checkObjectExist_json(options, "imageScale9Width");
+            bool imageSh = DICTOOL->checkObjectExist_json(options, "imageScale9Height");
+            if (imageSw && imageSh)
+            {
+                float imageSwf = DICTOOL->getFloatValue_json(options, "imageScale9Width");
+                float imageShf = DICTOOL->getFloatValue_json(options, "imageScale9Height");
+                imageButton->setImageScale9Size(imageSwf, imageShf);
+            }
+        }
+        else
+        {
+            imageButton->setImageTextures(imageNormalFileName, imagePressedFileName, imageDisabledFileName, widget->getUseMergedTexture());
+        }
+        
+        bool imageFlipX = DICTOOL->getBooleanValue_json(options, "imageFlipX");
+        bool imageFlipY = DICTOOL->getBooleanValue_json(options, "imageFlipY");
+        imageButton->setImageFlipX(imageFlipX);
+        imageButton->setImageFlipY(imageFlipY);
+        
+        bool imageOp = DICTOOL->checkObjectExist_json(options, "imageOpacity");
+        if (imageOp)
+        {
+            GLubyte imageOpbyte = DICTOOL->getIntValue_json(options, "imageOpacity");
+            imageButton->setImageOpacity(imageOpbyte);
+        }
+        bool imageCr = DICTOOL->checkObjectExist_json(options, "imageColorR");
+        bool imageCg = DICTOOL->checkObjectExist_json(options, "imageColorG");
+        bool imageCb = DICTOOL->checkObjectExist_json(options, "imageColorB");
+        GLubyte imageColorR = imageCr ? DICTOOL->getIntValue_json(options, "imageColorR") : 255;
+        GLubyte imageColorG = imageCg ? DICTOOL->getIntValue_json(options, "imageColorG") : 255;
+        GLubyte imageColorB = imageCb ? DICTOOL->getIntValue_json(options, "imageColorB") : 255;
+        imageButton->setImageColor(imageColorR, imageColorG, imageColorB);
     }
 }

@@ -23,31 +23,40 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef __CocoStudioGUITest__CocoStudio__
-#define __CocoStudioGUITest__CocoStudio__
 
+#ifndef __Test__CocoListView__
+#define __Test__CocoListView__
 
-#include "CocoWidget.h"
-#include "CocoContainerWidget.h"
-#include "CocoRootWidget.h"
-#include "CocoButton.h"
-#include "CocoCheckBox.h"
-#include "CocoImageView.h"
-#include "CocoLabel.h"
-#include "CocoLabelAtlas.h"
-#include "CocoLoadingBar.h"
-#include "CocoPanel.h"
+#include <iostream>
 #include "CocoScrollView.h"
-#include "CocoSlider.h"
-#include "CocoTextArea.h"
-#include "CocoTextButton.h"
-#include "CocoTextField.h"
-#include "CocoImageButton.h"
-#include "UISystem.h"
-#include "CCSReader.h"
+
+namespace cs
+{
+    typedef void (cocos2d::CCObject::*SEL_InitChildEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_UpdateChildEvent)(cocos2d::CCObject*);
+    #define coco_InitChildSelector(_SELECTOR) (cs::SEL_InitChildEvent)(&_SELECTOR)
+    #define coco_UpdateChildSelector(_SELECTOR) (cs::SEL_UpdateChildEvent)(&_SELECTOR)
     
-namespace cs {
-const char* CocoStudioVersion();
+    class CocoListView : public CocoScrollView
+    {
+    public:
+        CocoListView();
+        virtual ~CocoListView();
+        static CocoListView* create();
+        virtual bool init();
+        virtual bool addChild(CocoWidget* widget);
+//        virtual void removeChildMoveToTrash(CocoWidget* child);
+//        virtual void removeChildReferenceOnly(CocoWidget* child);
+//        virtual void removeAllChildrenAndCleanUp(bool cleanup);
+//        CocoWidget* getCheckPositionChild();
+        
+    protected:
+        cocos2d::CCObject* m_pInitChildListener;
+        SEL_InitChildEvent m_pfnInitChildSelector;
+        cocos2d::CCObject* m_pUpdateChildListener;
+        SEL_UpdateChildEvent m_pfnUpdateChildSelector;
+    };
 }
 
-#endif /* defined(__CocoStudioGUITest__CocoStudio__) */
+
+#endif /* defined(__Test__CocoListView__) */

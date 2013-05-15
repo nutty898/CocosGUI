@@ -156,4 +156,14 @@ namespace cs {
         CocoWidget::setAnchorPoint(pt);
         this->uiTextField->setAnchorPoint(pt);
     }
+    
+    void CocoTextField::setCharacterLength(int length)
+    {
+        this->uiTextField->setCharacterLength(length);
+    }
+    
+    void CocoTextField::setIsPassWord(bool isPassword)
+    {
+        this->uiTextField->setIsPassWord(isPassword);
+    }
 }

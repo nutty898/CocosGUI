@@ -82,4 +82,14 @@ namespace cs {
     {
         return this->m_pCRenderNode->getStringValue();
     }
+    
+    void UITextField::setCharacterLength(int length)
+    {
+        this->m_pCRenderNode->setCharacterLength(length);
+    }
+    
+    void UITextField::setIsPassWord(bool isPassword)
+    {
+        this->m_pCRenderNode->setIsPassword(isPassword);
+    }
 }
