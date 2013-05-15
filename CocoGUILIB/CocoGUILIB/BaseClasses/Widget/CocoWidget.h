@@ -75,6 +75,7 @@ namespace cs{
         void setBeTouchAble(bool able);
         bool getBeTouchAble();
         void setUpdateEnable(bool able);
+        bool getBeFocus();
         void setBeFocus(bool fucos);
         void didNotSelectSelf();
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);

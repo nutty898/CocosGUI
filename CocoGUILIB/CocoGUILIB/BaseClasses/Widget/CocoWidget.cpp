@@ -376,6 +376,11 @@ namespace cs {
         }
     }
     
+    bool CocoWidget::getBeFocus()
+    {
+        return this->m_bFocus;
+    }
+    
     void CocoWidget::setBeFocus(bool fucos)
     {
         if (fucos == this->m_bFocus){

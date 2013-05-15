@@ -378,9 +378,11 @@
          "options" : {
          "x" : 240,
          "y" : 96,
-         "scale9Enable" : true,         
+         "scale9Enable" : true,
          "normal" : "UIRES/backtotopnormal.png",
          "pressed" : "UIRES/backtotoppressed.png",
+         "scale9Width" : 200,
+         "scale9Height" : 100,
          "imageScale9Enable" : true,
          "imageCapInsetsX" : 0,
          "imageCapInsetsY" : 0,

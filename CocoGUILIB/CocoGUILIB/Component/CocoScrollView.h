@@ -93,7 +93,7 @@ namespace cs
         void stopAutoScrollChildren();
         float getCurAutoScrollDistance(float time);
         void resetPositionWithAction();
-        CocoWidget* getCheckPositionChild();
+        virtual CocoWidget* getCheckPositionChild();
         float calculateOffsetWithDragForce(float moveOffset);
         void handleScrollActionEvent();
         void setDirection(int direction);
