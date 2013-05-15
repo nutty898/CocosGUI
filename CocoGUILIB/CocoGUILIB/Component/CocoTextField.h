@@ -56,6 +56,8 @@ namespace cs {
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
         virtual void setColor(int r,int g,int b);
         virtual void setOpacity(int opcity);
+        void setCharacterLength(int length);
+        void setIsPassWord(bool isPassword);
     protected:
         UITextField* uiTextField;
         float m_fTouchWidth;

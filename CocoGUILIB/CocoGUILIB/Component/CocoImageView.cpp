@@ -36,7 +36,8 @@ namespace cs {
     m_fClickTimeInterval(0.0),
     m_bStartCheckDoubleClick(false),
     m_touchRelease(false),
-    m_bDoubleClickEnable(false)
+    m_bDoubleClickEnable(false),
+    m_bScale9Enable(false)
     {
 
     }
@@ -59,8 +60,16 @@ namespace cs {
     
     bool CocoImageView::init()
     {
-        if (CocoWidget::init()) {
-            this->m_pImage = new UISprite();
+        if (CocoWidget::init())
+        {
+            if (this->m_bScale9Enable)
+            {
+                this->m_pImage = new UIScale9Sprite();
+            }
+            else
+            {
+                this->m_pImage = new UISprite();
+            }            
             this->m_pImage->init();
             this->addUIElement(this->m_pImage);
             return true;
@@ -70,12 +79,12 @@ namespace cs {
 
     void CocoImageView::setTexture(const char* fileName,bool useSpriteFrame)
     {
-        this->m_pImage->loadTexture(fileName,useSpriteFrame);
+        dynamic_cast<UISprite*>(this->m_pImage)->loadTexture(fileName,useSpriteFrame);
     }
     
     void CocoImageView::setTextureRect(float x,float y,float width,float height)
     {
-        this->m_pImage->setRect(x,y,width,height);
+        dynamic_cast<UISprite*>(this->m_pImage)->setRect(x,y,width,height);        
     }
     
     CRenderNode* CocoImageView::getValidNode()
@@ -179,5 +188,49 @@ namespace cs {
     {
         CocoWidget::setAnchorPoint(pt);
         this->m_pImage->setAnchorPoint(pt);
+    }
+    
+    void CocoImageView::setScale9Enable(bool able)
+    {
+        if (this->m_bScale9Enable == able)
+        {
+            return;
+        }
+        
+        this->m_nPrevPressstate = -1;
+        this->m_nCurPressState = -1;
+        this->m_bScale9Enable = able;
+        this->removeAllUIElementsAndCleanUp(true);
+        this->m_pImage = NULL;
+        
+        if (this->m_bScale9Enable)
+        {
+            this->m_pImage = new UIScale9Sprite();
+        }
+        else
+        {
+            this->m_pImage = new UISprite();
+        }
+        this->m_pImage->init();
+        this->addUIElement(m_pImage);
+    }
+    
+    void CocoImageView::setScale9Size(float width, float height)
+    {
+        if (!this->m_bScale9Enable)
+        {
+            return;
+        }
+        dynamic_cast<UIScale9Sprite*>(this->m_pImage)->setScaleSize(width, height);
+    }
+    
+    void CocoImageView::setTexturesScale9(const char *fileName, cocos2d::CCRect capInsets, bool useSpriteFrame)
+    {
+        dynamic_cast<UIScale9Sprite*>(this->m_pImage)->loadTexture(fileName,
+                                                                   capInsets.origin.x,
+                                                                   capInsets.origin.y,
+                                                                   capInsets.size.width,
+                                                                   capInsets.size.height,
+                                                                   useSpriteFrame);
     }
 }

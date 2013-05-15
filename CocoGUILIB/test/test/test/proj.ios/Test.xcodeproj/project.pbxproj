@@ -84,6 +84,8 @@
 		38B6455D17409DCC00A681C0 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B6455817409DCC00A681C0 /* CloseSelected.png */; };
 		38B6455E17409DCC00A681C0 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 38B6455917409DCC00A681C0 /* HelloWorld.png */; };
 		38B6455F17409DCC00A681C0 /* UIRES in Resources */ = {isa = PBXBuildFile; fileRef = 38B6455A17409DCC00A681C0 /* UIRES */; };
+		38B6B3421742378000CF4C07 /* CocoImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B6B3401742377F00CF4C07 /* CocoImageButton.cpp */; };
+		38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38F780C6174320E600D5F228 /* CocoListView.cpp */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
 		BF1373F1128A899E00D9F789 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492B6912891AC600A09262 /* libz.dylib */; };
@@ -253,6 +255,10 @@
 		38B6455817409DCC00A681C0 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		38B6455917409DCC00A681C0 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		38B6455A17409DCC00A681C0 /* UIRES */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UIRES; sourceTree = "<group>"; };
+		38B6B3401742377F00CF4C07 /* CocoImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoImageButton.cpp; sourceTree = "<group>"; };
+		38B6B3411742377F00CF4C07 /* CocoImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoImageButton.h; sourceTree = "<group>"; };
+		38F780C6174320E600D5F228 /* CocoListView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoListView.cpp; sourceTree = "<group>"; };
+		38F780C7174320E600D5F228 /* CocoListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoListView.h; sourceTree = "<group>"; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		781C33B31547F06B00633F88 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		781C33B51547F06B00633F88 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -535,6 +541,10 @@
 				38B644D717409B8800A681C0 /* CocoTextButton.h */,
 				38B644D817409B8800A681C0 /* CocoTextField.cpp */,
 				38B644D917409B8800A681C0 /* CocoTextField.h */,
+				38B6B3401742377F00CF4C07 /* CocoImageButton.cpp */,
+				38B6B3411742377F00CF4C07 /* CocoImageButton.h */,
+				38F780C6174320E600D5F228 /* CocoListView.cpp */,
+				38F780C7174320E600D5F228 /* CocoListView.h */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -812,6 +822,8 @@
 				38B6453517409B8800A681C0 /* UIText.cpp in Sources */,
 				38B6453617409B8800A681C0 /* UITextArea.cpp in Sources */,
 				38B6453717409B8800A681C0 /* UITextField.cpp in Sources */,
+				38B6B3421742378000CF4C07 /* CocoImageButton.cpp in Sources */,
+				38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

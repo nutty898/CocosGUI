@@ -376,6 +376,11 @@ namespace cs {
         }
     }
     
+    bool CocoWidget::getBeFocus()
+    {
+        return this->m_bFocus;
+    }
+    
     void CocoWidget::setBeFocus(bool fucos)
     {
         if (fucos == this->m_bFocus){
@@ -387,6 +392,16 @@ namespace cs {
         }else{
             this->setPressState(0);
         }
+    }
+    
+    void CocoWidget::initPressState(int state)
+    {
+        if (this->m_nCurPressState == state)
+        {
+            return;
+        }
+        this->m_nPrevPressstate = this->m_nCurPressState;
+        this->m_nCurPressState = state;
     }
     
     void CocoWidget::setPressState(int state)

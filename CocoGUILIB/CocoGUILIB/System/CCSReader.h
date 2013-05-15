@@ -59,6 +59,7 @@ namespace cs {
         void setPropsForTextButtonFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
         void setPropsForTextFieldFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
         void setPropsForLoadingBarFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
+        void setPropsForImageButtonFromCCDictionary(CocoWidget* widget, cocos2d::CCDictionary* options);
         
         void setPropsForWidgetFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setColorPropsForWidgetFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
@@ -75,6 +76,8 @@ namespace cs {
         void setPropsForTextButtonFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setPropsForTextFieldFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setPropsForLoadingBarFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
+        void setPropsForImageButtonFromJsonDictionary(CocoWidget* widget, cs::CSJsonDictionary* options);
+        
     protected:
     };
 }

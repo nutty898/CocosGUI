@@ -77,10 +77,19 @@ namespace cs {
             this->addUIElement(m_pButtonNormal);
             this->addUIElement(m_pButtonClicked);
             this->addUIElement(m_pButtonDisable);
-            this->setPressState(0);
+            this->initPressState(0);
             return true;
         }
         return false;
+    }
+    
+    void CocoButton::initPressState(int state)
+    {
+        CocoWidget::initPressState(state);
+        
+        this->m_pButtonNormal->setVisible(true);
+        this->m_pButtonClicked->setVisible(false);
+        this->m_pButtonDisable->setVisible(false);
     }
     
     void CocoButton::setScale9Enable(bool able)
@@ -113,7 +122,7 @@ namespace cs {
         this->addUIElement(m_pButtonNormal);
         this->addUIElement(m_pButtonClicked);
         this->addUIElement(m_pButtonDisable);
-        this->setPressState(0);
+        this->initPressState(0);
     }
     
     void CocoButton::setScale9Size(float width, float height)

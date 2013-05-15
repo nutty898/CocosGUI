@@ -151,6 +151,28 @@
           }
           ]
         },
+         /* gui mark */
+         {
+         "classname" : "ImageView",
+         "options" :
+         {
+         "x" : 30,
+         "y" : 290,
+         "fileName" : "UIRES/ccicon.png",
+         "scale9Enable" : false,
+         "capInsetsX" : 20,
+         "capInsetsY" : 20,
+         "capInsetsWidth" : 10,
+         "capInsetsHeight" : 10,
+         "scale9Width" : 120,
+         "scale9Height" : 80,
+         "flipX" : false,
+         "flipY" : false
+         },
+         "children" :[]
+         },
+         // before
+         /*
          {
          "classname" : "ImageView",
          "options" :
@@ -161,6 +183,8 @@
          },
          "children" :[]
          },
+          */
+         /**/
          {
          "classname" : "Label",
          "options" :
@@ -209,6 +233,26 @@
          },
          "children" :[]
          },
+         /* gui mark */
+         {
+         "classname" : "Slider",
+         "options" :
+         {
+         "x" : 70,
+         "y" : 160,
+         "barFileName" : "UIRES/slidbar.png",
+         "ballNormal" : "UIRES/sliderballnormal.png",
+         "ballPressed" :"UIRES/sliderballpressed.png",
+         "percent" : 50,
+         "showProgressBar" : true,
+         "progressBarFileName" : "UIRES/slider_bar_active_9patch.png",
+         "touchAble" : true,
+         "name" : "slider"
+         },
+         "children" :[]
+         },
+         // before
+         /*
          {
          "classname" : "Slider",
          "options" :
@@ -224,6 +268,8 @@
          },
          "children" :[]
          },
+          */
+         /**/
          {
          "classname" : "Label",
          "options" :
@@ -301,12 +347,81 @@
          },
          "children" :[]
          },
+         /* gui mark */
+         {
+         "classname" : "TextField",
+         "options" :
+         {
+         "x" : 190,
+         "y" : 200,
+         "fontSize" : 20,
+         "placeHolder" : "tap to input",
+         "touchAble" : true,
+         "name" : "textfield"
+         },
+         "children" :[]
+         },
+         {
+         "classname" : "Label",
+         "options" :
+         {
+         "x" : 190,
+         "y" : 185,
+         "text" : "输入框",
+         "touchAble" : false,
+         "touchSacleEnable" : false
+         },
+         "children" :[]
+         },
+         {
+         "classname" : "ImageButton",
+         "options" : {
+         "x" : 240,
+         "y" : 96,
+         "scale9Enable" : true,
+         "normal" : "UIRES/backtotopnormal.png",
+         "pressed" : "UIRES/backtotoppressed.png",
+         "scale9Width" : 200,
+         "scale9Height" : 100,
+         "imageScale9Enable" : true,
+         "imageCapInsetsX" : 0,
+         "imageCapInsetsY" : 0,
+         "imageCapInsetsWidth" : 0,
+         "imageCapInsetsHeight" : 0,
+         "imageScale9Width" : 60,
+         "imageScale9Height" : 60,
+         "imageNormal" : "UIRES/sliderballnormal.png",
+         "imagePressed" : "UIRES/sliderballpressed.png",
+         "touchAble" : true,
+         "imageFlipX" : true,
+         "imageFlipY" : true,
+         "imageOpacity" : 255,
+         "imageColorR" : 255,
+         "imageColorG" : 255,
+         "imageColorB" : 255,
+         "name" : "imagebutton"
+         },
+         "children" : []
+         },
+         {
+         "classname" : "Label",
+         "options" :
+         {
+         "x" : 240,
+         "y" : 70,
+         "text" : "图形按钮",
+         "touchAble" : false,
+         "touchSacleEnable" : false
+         },
+         "children" :[]
+         },
+         /**/
          {
          "classname" : "Button",
          "options" :
          {
          "x" : 430,
-         "y" : 40,
+         "y" : 40,         
          "touchAble" : true,
          "touchSacleEnable" : true,
          "name" : "exitbutton",

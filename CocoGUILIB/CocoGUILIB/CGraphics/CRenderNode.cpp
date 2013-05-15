@@ -76,7 +76,7 @@ namespace cs{
                 this->m_pRenderNode = cocos2d::CCLabelTTF::create();
                 break;
             case NODE_TEXTFIELD://6
-                this->m_pRenderNode = CCTextFieldTTF::textFieldWithPlaceHolder("input words here", "Thonburi", 20);
+                this->m_pRenderNode = CTextField::create("input words here", "Thonburi", 20);
                 break;
             case NODE_CLIPSPRITE://7
                 this->m_pRenderNode = CClipAbleSprite::create();
@@ -215,7 +215,7 @@ namespace cs{
                 ((CCLabelTTF*)(this->m_pRenderNode))->setOpacity(opacity);
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setOpacity(opacity);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setOpacity(opacity);
                 break;
             case NODE_CLIPSPRITE:
                 ((CClipAbleSprite*)(this->m_pRenderNode))->setOpacity(opacity);
@@ -257,7 +257,7 @@ namespace cs{
                 opacity = ((CCLabelTTF*)(this->m_pRenderNode))->getOpacity();
                 break;
             case NODE_TEXTFIELD:
-                opacity = ((CCTextFieldTTF*)(this->m_pRenderNode))->getOpacity();
+                opacity = dynamic_cast<CTextField*>(this->m_pRenderNode)->getOpacity();
                 break;
             case NODE_CLIPSPRITE:
                 opacity = ((CClipAbleSprite*)(this->m_pRenderNode))->getOpacity();
@@ -327,7 +327,7 @@ namespace cs{
                 ((CCLabelTTF*)(this->m_pRenderNode))->setFlipX(flipX);
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setFlipX(flipX);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setFlipX(flipX);
                 break;
             case NODE_CLIPSPRITE:
                 ((CClipAbleSprite*)(this->m_pRenderNode))->setFlipX(flipX);
@@ -359,7 +359,7 @@ namespace cs{
                 isFlipX = ((CCLabelTTF*)(this->m_pRenderNode))->isFlipX();
                 break;
             case NODE_TEXTFIELD:
-                isFlipX = ((CCTextFieldTTF*)(this->m_pRenderNode))->isFlipX();
+                isFlipX = dynamic_cast<CTextField*>(this->m_pRenderNode)->isFlipX();
                 break;
             case NODE_CLIPSPRITE:
                 isFlipX = ((CClipAbleSprite*)(this->m_pRenderNode))->isFlipX();
@@ -390,7 +390,7 @@ namespace cs{
                 ((CCLabelTTF*)(this->m_pRenderNode))->setFlipY(flipY);
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setFlipY(flipY);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setFlipY(flipY);
                 break;
             case NODE_CLIPSPRITE:
                 ((CClipAbleSprite*)(this->m_pRenderNode))->setFlipY(flipY);
@@ -422,7 +422,7 @@ namespace cs{
                 flipY = ((CCLabelTTF*)(this->m_pRenderNode))->isFlipY();
                 break;
             case NODE_TEXTFIELD:
-                flipY = ((CCTextFieldTTF*)(this->m_pRenderNode))->isFlipY();
+                flipY = dynamic_cast<CTextField*>(this->m_pRenderNode)->isFlipY();
                 break;
             case NODE_CLIPSPRITE:
                 flipY = ((CClipAbleSprite*)(this->m_pRenderNode))->isFlipY();
@@ -594,7 +594,7 @@ namespace cs{
                 ((extension::CCScale9Sprite*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setColor(ccc3(r, g, b));
             case NODE_CLIPSPRITE:
                 ((CClipAbleSprite*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
                 break;
@@ -633,7 +633,7 @@ namespace cs{
                 color = ((extension::CCScale9Sprite*)(this->m_pRenderNode))->getColor();
                 break;
             case NODE_TEXTFIELD:
-                color = ((CCTextFieldTTF*)(this->m_pRenderNode))->getColor();
+                color = dynamic_cast<CTextField*>(this->m_pRenderNode)->getColor();
             case NODE_CLIPSPRITE:
                 color = ((CClipAbleSprite*)(this->m_pRenderNode))->getColor();
                 break;
@@ -653,6 +653,10 @@ namespace cs{
     
     void CRenderNode::setScale9FileAndCapInsets(const char *fileName, float x, float y, float width, float height,bool useSpriteFrame)
     {
+        if(NULL == fileName || strcmp(fileName, "") == 0)
+        {
+            return;
+        }
         if (this->m_nodeType != NODE_SCALE9SPRITE){
             return;
         }
@@ -757,7 +761,7 @@ namespace cs{
                 ((cocos2d::CCLabelTTF*)(this->m_pRenderNode))->setString(value);
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setString(value);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setString(value);
                 break;
             case NODE_LABELATLAS:
                 ((CCLabelAtlas*)(this->m_pRenderNode))->setString(value);
@@ -776,7 +780,7 @@ namespace cs{
                 res = ((cocos2d::CCLabelTTF*)(this->m_pRenderNode))->getString();
                 break;
             case NODE_TEXTFIELD:
-                res = ((CCTextFieldTTF*)(this->m_pRenderNode))->getString();
+                res = dynamic_cast<CTextField*>(this->m_pRenderNode)->getString();
                 break;
             case NODE_LABELATLAS:
                 res = ((CCLabelAtlas *)(this->m_pRenderNode))->getString();
@@ -795,7 +799,7 @@ namespace cs{
                 ((cocos2d::CCLabelTTF*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setColor(ccc3(r, g, b));
                 break;
             default:
                 break;
@@ -810,7 +814,7 @@ namespace cs{
                 ((cocos2d::CCLabelTTF*)(this->m_pRenderNode))->setFontSize(size);
                 break;
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF*)(this->m_pRenderNode))->setFontSize(size);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setFontSize(size);
                 break;
             default:
                 break;
@@ -825,7 +829,7 @@ namespace cs{
                 return ((cocos2d::CCLabelTTF*)(this->m_pRenderNode))->getFontSize();
                 break;
             case NODE_TEXTFIELD:
-                return ((CCTextFieldTTF*)(this->m_pRenderNode))->getFontSize();
+                return dynamic_cast<CTextField*>(this->m_pRenderNode)->getFontSize();
                 break;
             default:
                 break;
@@ -846,7 +850,7 @@ namespace cs{
                 break;
             
             case NODE_TEXTFIELD:
-                ((CCTextFieldTTF *)(this->m_pRenderNode))->setFontName(name);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setFontName(name);
                 break;
                 
             default:
@@ -864,7 +868,7 @@ namespace cs{
                 break;
                 
             case NODE_TEXTFIELD:
-                return ((CCTextFieldTTF *)(this->m_pRenderNode))->getFontName();
+                return dynamic_cast<CTextField*>(this->m_pRenderNode)->getFontName();
                 break;
                 
             default:
@@ -888,9 +892,9 @@ namespace cs{
     {
         switch (this->m_nodeType) {
             case NODE_TEXTFIELD:
-                ((cocos2d::CCTextFieldTTF*)(this->m_pRenderNode))->setDimensions(CCSizeMake(width, height));
-                ((cocos2d::CCTextFieldTTF*)(this->m_pRenderNode))->setHorizontalAlignment(kCCTextAlignmentCenter);
-                ((cocos2d::CCTextFieldTTF*)(this->m_pRenderNode))->setVerticalAlignment(kCCVerticalTextAlignmentCenter);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setDimensions(CCSizeMake(width, height));
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setHorizontalAlignment(kCCTextAlignmentCenter);
+                dynamic_cast<CTextField*>(this->m_pRenderNode)->setVerticalAlignment(kCCVerticalTextAlignmentCenter);
                 break;
             default:
                 break;
@@ -932,7 +936,7 @@ namespace cs{
         if (this->m_nodeType != NODE_TEXTFIELD){
             return;
         }
-        ((CCTextFieldTTF*)(this->m_pRenderNode))->attachWithIME();
+        dynamic_cast<CTextField*>(this->m_pRenderNode)->openIME();
     }
     
     void CRenderNode::closeIME()
@@ -940,7 +944,7 @@ namespace cs{
         if (this->m_nodeType != NODE_TEXTFIELD){
             return;
         }
-        ((CCTextFieldTTF*)(this->m_pRenderNode))->detachWithIME();
+        dynamic_cast<CTextField*>(this->m_pRenderNode)->closeIME();
     }
     
     void CRenderNode::setPlaceHolder(const char *placeHolder)
@@ -948,7 +952,23 @@ namespace cs{
         if (this->m_nodeType != NODE_TEXTFIELD){
             return;
         }
-        ((CCTextFieldTTF*)(this->m_pRenderNode))->setPlaceHolder(placeHolder);
+        dynamic_cast<CTextField*>(this->m_pRenderNode)->setPlaceHolder(placeHolder);
+    }
+    
+    void CRenderNode::setCharacterLength(int length)
+    {
+        if (this->m_nodeType != NODE_TEXTFIELD){
+            return;
+        }
+        dynamic_cast<CTextField*>(this->m_pRenderNode)->setCharacterLength(length);
+    }
+    
+    void CRenderNode::setIsPassword(bool isPassword)
+    {
+        if (this->m_nodeType != NODE_TEXTFIELD){
+            return;
+        }
+        dynamic_cast<CTextField*>(this->m_pRenderNode)->setIsPassword(isPassword);
     }
     
     void CRenderNode::setScale9Size(float width, float height)
