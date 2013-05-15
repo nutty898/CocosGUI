@@ -30,7 +30,8 @@
 #include "CocoWidget.h"
 #include "CocoButton.h"
 
-namespace cs {
+namespace cs
+{
     typedef void (cocos2d::CCObject::*SEL_PercentChangedEvent)(cocos2d::CCObject*);
     #define coco_percentchangedselector(_SELECTOR) (cs::SEL_PercentChangedEvent)(&_SELECTOR)
     class CocoSlider : public CocoWidget
@@ -55,6 +56,9 @@ namespace cs {
         void setSlidBallPercent(int percent);
         int getClickPercent(float location);
         void checkSlidBoundary();
+        void setShowProgressBar(bool show);
+        void setProgressBarTextureScale9(const char* fileName,float x,float y,float width,float height,bool useSpriteFrame = false);
+        void setProgressBarScale(int percent);
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchMoved(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);
@@ -77,6 +81,8 @@ namespace cs {
         float m_fBarNodeScaleValue;
         float m_fTouchMoveStartLocation;
         bool m_bBarScale9Enable;
+        bool m_bShowProgressBar;
+        UIScale9Sprite* m_pProgressBarNode;
         cocos2d::CCObject*       m_pPercentListener;
         SEL_PushEvent    m_pfnPercentSelector;
     };

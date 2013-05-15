@@ -39,7 +39,8 @@ namespace cs {
     m_pBarNode(NULL),
     m_pPercentListener(NULL),
     m_pfnPercentSelector(NULL),
-    m_bBarScale9Enable(false)
+    m_bBarScale9Enable(false),
+    m_bShowProgressBar(false)
     {
         
     }
@@ -167,6 +168,47 @@ namespace cs {
         }
     }
     
+    void CocoSlider::setShowProgressBar(bool show)
+    {
+        if (this->m_bShowProgressBar == show)
+        {
+            return;
+        }
+        this->m_bShowProgressBar = show;
+        
+        if (this->m_bShowProgressBar)
+        {
+            this->m_pProgressBarNode = new UIScale9Sprite();
+            this->m_pProgressBarNode->init();
+            this->addUIElement(this->m_pProgressBarNode);
+            
+            this->m_pProgressBarNode->getCRenderNode()->setZOrder(this->m_pBarNode->getCRenderNode()->getZOrder() + 1);
+            this->m_pSlidBall->setWidgetZOrder(this->m_pProgressBarNode->getCRenderNode()->getZOrder() + 1);
+        }
+        else
+        {
+            if (this->m_pProgressBarNode != NULL)
+            {
+                this->removeUIElement(this->m_pProgressBarNode, true);
+            }
+        }
+    }
+    
+    void CocoSlider::setProgressBarTextureScale9(const char *fileName, float x, float y, float width, float height, bool useSpriteFrame)
+    {
+        dynamic_cast<UIScale9Sprite*>(this->m_pProgressBarNode)->loadTexture(fileName, x, y, width, height, useSpriteFrame);
+        dynamic_cast<UIScale9Sprite*>(this->m_pProgressBarNode)->setScaleSize(this->m_fBarLength, this->m_pProgressBarNode->getContentSizeHeight());
+        this->m_pProgressBarNode->setAnchorPoint(ccp(0.0, 0.5));
+        this->m_pProgressBarNode->setPosition(ccp(this->m_pBarNode->getPosition().x - this->m_pBarNode->getContentSizeWidth() / 2, this->m_pBarNode->getPosition().y));
+        this->setProgressBarScale(this->m_nBarPercent);
+    }
+    
+    void CocoSlider::setProgressBarScale(int percent)
+    {
+        float width = static_cast<float>(this->m_nBarPercent) / 100 * this->m_fBarLength;
+        this->m_pProgressBarNode->setScaleSize(width, this->m_pProgressBarNode->getContentSizeHeight());
+    }
+    
     bool CocoSlider::onTouchPressed(cocos2d::CCPoint &touchPoint)
     {
         CocoWidget::onTouchPressed(touchPoint);
@@ -175,6 +217,10 @@ namespace cs {
         this->m_pSlidBall->setPressState(1);
         this->m_nBarPercent = this->getPercentWithBallPos(this->m_pSlidBall->getPosition().x,0);
         percentChangedEvent();
+        if (this->m_bShowProgressBar)
+        {
+            this->setProgressBarScale(this->m_nBarPercent);
+        }
         return true;
     }
     
@@ -185,6 +231,10 @@ namespace cs {
         this->checkSlidBoundary();
         this->m_nBarPercent = this->getPercentWithBallPos(this->m_pSlidBall->getPosition().x,0);
         percentChangedEvent();
+        if (this->m_bShowProgressBar)
+        {
+            this->setProgressBarScale(this->m_nBarPercent);
+        }
         return true;
     }
     

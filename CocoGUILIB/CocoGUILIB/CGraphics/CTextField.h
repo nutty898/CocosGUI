@@ -29,29 +29,45 @@
 
 #include "cocos2d.h"
 
-namespace cs {
-    
+namespace cs
+{
     class CTextField: public cocos2d::CCTextFieldTTF, public cocos2d::CCTextFieldDelegate, public cocos2d::CCTouchDelegate
     {
     private:
-        std::string m_pInputText;
+        // cursor sprite
+        CCSprite* m_pCursorSprite;
+        
+        // intput limit character amount
+        CC_SYNTHESIZE(int, m_nCharacterLength, CharacterLength);
+        
+        // whether show with password
+        CC_SYNTHESIZE(bool, m_bIsPassword, IsPassword);
+        
     public:
         CTextField();
         ~CTextField();
+        
+        void onEnter();
         
         // static
         static CTextField* create(const char *placeholder, const char *fontName, float fontSize);
         
         // CCTextFieldDelegate
-        virtual bool onTextFieldAttachWithIME(cocos2d::CCTextFieldTTF *pSender);
-        virtual bool onTextFieldDetachWithIME(cocos2d::CCTextFieldTTF * pSender);
-        virtual bool onTextFieldInsertText(cocos2d::CCTextFieldTTF * pSender, const char * text, int nLen);
-        virtual bool onTextFieldDeleteBackward(cocos2d::CCTextFieldTTF * pSender, const char * delText, int nLen);
+        virtual bool onTextFieldAttachWithIME(CCTextFieldTTF *pSender);
+        virtual bool onTextFieldDetachWithIME(CCTextFieldTTF * pSender);
+        virtual bool onTextFieldInsertText(CCTextFieldTTF * pSender, const char * text, int nLen);
+        virtual bool onTextFieldDeleteBackward(CCTextFieldTTF * pSender, const char * delText, int nLen);
+        
+        void insertText(const char* text, int len);
+        void deleteBackward();
+        
+        // initialize cursor
+        void initCursorSprite(int nHeight);
         
         void openIME();
         void closeIME();
         
-        void onEnter();
+        void setPswText(const char* text);
     };
 }
 

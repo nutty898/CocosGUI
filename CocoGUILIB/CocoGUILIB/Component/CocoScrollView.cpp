@@ -26,7 +26,8 @@
 
 #include "CocoScrollView.h"
 #include "DictionaryHelper.h"
-namespace cs{
+namespace cs
+{
     CocoScrollView::CocoScrollView():
     m_nDirection(0),
     m_fTouchStartLocation(0.0),
@@ -44,6 +45,14 @@ namespace cs{
     m_nMoveDirection(0),
     m_bTopEnd(false),
     m_bBottomEnd(false),
+    m_bLeftEnd(false),
+    m_bRightEnd(false),
+    m_bBerthToTop(false),
+    m_bBerthToBottom(false),
+    m_bBerthToLeft(false),
+    m_bBerthToRight(false),
+    m_bBerthToVerticalCenter(false),
+    m_bBerthToHorizontalCenter(false),
     m_bAutoScroll(false),
     m_fAutoScrollOriginalSpeed(0.0),
     m_fAutoScrollAcceleration(600.0),
@@ -51,7 +60,33 @@ namespace cs{
     m_fSlidTime(0.0),
     m_fChildrenSizeHeight(0.0),
     m_fChildrenSizeWidth(0.0),
-    m_fChildFocusCancelOffset(5.0)
+    m_fChildFocusCancelOffset(5.0),
+    m_eMoveMode(SCROLLVIEW_MOVE_MODE_NORMAL),
+    isRunningAction(false),
+    m_eBerthOrientation(SCROLLVIEW_BERTH_ORI_TOP),
+    m_fDisBoundaryToChild_0(0.0),
+    m_fDisBetweenChild(0.0),
+    m_fDragForce(0.0),
+    m_pScrollToTopListener(NULL),
+    m_pfnScrollToTopSelector(NULL),
+    m_pScrollToBottomListener(NULL),
+    m_pfnScrollToBottomSelector(NULL),
+    m_pScrollToLeftListener(NULL),
+    m_pfnScrollToLeftSelector(NULL),
+    m_pScrollToRightListener(NULL),
+    m_pfnScrollToRightSelector(NULL),
+    m_pBerthToTopListener(NULL),
+    m_pfnBerthToTopSelector(NULL),
+    m_pBerthToBottomListener(NULL),
+    m_pfnBerthToBottomSelector(NULL),
+    m_pBerthToVerticalCenterListener(NULL),
+    m_pfnBerthToVerticalCenterSelector(NULL),
+    m_pBerthToLeftListener(NULL),
+    m_pfnBerthToLeftSelector(NULL),
+    m_pBerthToRightListener(NULL),
+    m_pfnBerthToRightSelector(NULL),
+    m_pBerthToHorizontalCenterListener(NULL),
+    m_pfnBerthToHorizontalCenterSelector(NULL)
     {
         
     }
@@ -65,7 +100,8 @@ namespace cs{
     {
 //        return CocoScrollView::create(NULL);
         CocoScrollView* widget = new CocoScrollView();
-        if (widget && widget->init()) {
+        if (widget && widget->init())
+        {
             return widget;
         }
         CC_SAFE_DELETE(widget);
@@ -74,7 +110,8 @@ namespace cs{
     
     bool CocoScrollView::init()
     {
-        if (CocoPanel::init()) {
+        if (CocoPanel::init())
+        {
             return true;
         }
         return false;
@@ -85,6 +122,17 @@ namespace cs{
         CocoPanel::setColorAndSize(r, g, b, o, width, height);
         this->m_fTopBoundary = height;
         this->m_fRightBoundary = width;
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                m_fDragForce = height / 8 * 5;
+                break;
+                
+            case 1: // horizontal
+                m_fDragForce = width / 8 * 5;
+                break;
+        }
     }
     
     void CocoScrollView::setSize(float width, float height)
@@ -92,26 +140,44 @@ namespace cs{
         CocoPanel::setSize(width, height);
         this->m_fTopBoundary = height;
         this->m_fRightBoundary = width;
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                m_fDragForce = height / 8 * 5;
+                break;
+                
+            case 1: // horizontal
+                m_fDragForce = width / 8 * 5;
+                break;
+        }
     }
     
     bool CocoScrollView::addChild(CocoWidget* widget)
     {
-        if (this->m_children->count() <= 0){
+        if (this->m_children->count() <= 0)
+        {
             this->m_pTopChild = widget;
             this->m_pBottomChild = widget;
             this->m_pLeftChild = widget;
             this->m_pRightChild = widget;
-        }else{
-            if (widget->getRelativeRect().origin.y + widget->getRelativeRect().size.height > this->m_pTopChild->getRelativeRect().origin.y + this->m_pTopChild->getRelativeRect().size.height){
+        }
+        else
+        {
+            if (widget->getRelativeRect().origin.y + widget->getRelativeRect().size.height > this->m_pTopChild->getRelativeRect().origin.y + this->m_pTopChild->getRelativeRect().size.height)
+            {
                 this->m_pTopChild = widget;
             }
-            if (widget->getRelativeRect().origin.y < this->m_pBottomChild->getRelativeRect().origin.y){
+            if (widget->getRelativeRect().origin.y < this->m_pBottomChild->getRelativeRect().origin.y)
+            {
                 this->m_pBottomChild = widget;
             }
-            if (widget->getRelativeRect().origin.x + widget->getRelativeRect().size.width > this->m_pRightChild->getRelativeRect().origin.x + this->m_pRightChild->getRelativeRect().size.width){
+            if (widget->getRelativeRect().origin.x + widget->getRelativeRect().size.width > this->m_pRightChild->getRelativeRect().origin.x + this->m_pRightChild->getRelativeRect().size.width)
+            {
                 this->m_pRightChild = widget;
             }
-            if (widget->getRelativeRect().origin.x < this->m_pLeftChild->getRelativeRect().origin.x){
+            if (widget->getRelativeRect().origin.x < this->m_pLeftChild->getRelativeRect().origin.x)
+            {
                 this->m_pLeftChild = widget;
             }
         }
@@ -119,12 +185,68 @@ namespace cs{
         this->m_fChildrenSizeWidth = this->m_pRightChild->getRelativeRightPos()-this->m_pLeftChild->getRelativeLeftPos();
         CocoPanel::addChild(widget);
         widget->setVisible(widget->checkBeVisibleInParent());
+        
+        switch (m_children->count())
+        {
+            case 1:
+                {
+                    CocoWidget* child_0 = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(0));
+                    
+                    switch (m_nDirection)
+                    {
+                        case 0: // vertical
+                            {
+                                float scroll_top = m_fTopBoundary;
+                                float child_0_top = child_0->getRelativeTopPos();
+                                float offset = scroll_top - child_0_top;
+                                m_fDisBoundaryToChild_0 = (offset > 0) ? offset : 0;
+                            }
+                            break;
+                            
+                        case 1: // horizontal
+                            {
+                                float scroll_left = m_fLeftBoundary;
+                                float child_0_left = child_0->getRelativeLeftPos();
+                                float offset = child_0_left - scroll_left;
+                                m_fDisBoundaryToChild_0 = (offset > 0) ? offset : 0;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                break;
+                
+            case 2:
+                {
+                    CocoWidget* child_0 = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(0));
+                    CocoWidget* child_1 = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(1));
+                    
+                    switch (m_nDirection)
+                    {
+                        case 0: // vertical
+                            m_fDisBetweenChild = child_0->getPosition().y - child_1->getPosition().y;
+                            break;
+                            
+                        case 1: // horizontal
+                            m_fDisBetweenChild = child_1->getPosition().x - child_0->getPosition().x;
+                            break;
+                    }
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
         return true;
     }
     
     void CocoScrollView::removeChildMoveToTrash(CocoWidget* child)
     {
-        if (!child){
+        if (!child)
+        {
             return;
         }
         CocoPanel::removeChildMoveToTrash(child);
@@ -133,7 +255,8 @@ namespace cs{
     
     void CocoScrollView::removeChildReferenceOnly(CocoWidget* child)
     {
-        if (!child){
+        if (!child)
+        {
             return;
         }
         CocoPanel::removeChildReferenceOnly(child);
@@ -151,22 +274,27 @@ namespace cs{
     
     void CocoScrollView::resortChildren()
     {
-        if (!this->m_children || this->m_children->count() <= 0){
+        if (!this->m_children || this->m_children->count() <= 0)
+        {
             return;
         }
         CocoWidget* leftChild = (CocoWidget*)(this->m_children->objectAtIndex(0));
         CocoWidget* rightChild = (CocoWidget*)(this->m_children->objectAtIndex(0));
         CocoWidget* topChild = (CocoWidget*)(this->m_children->objectAtIndex(0));
         CocoWidget* bottomChild = (CocoWidget*)(this->m_children->objectAtIndex(0));
-        for (int i=0;i<this->m_children->count();i++){
+        for (int i = 0; i < this->m_children->count(); i++)
+        {
             CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
-            if (leftChild->getRelativeRect().origin.x > child->getRelativeRect().origin.x){
+            if (leftChild->getRelativeRect().origin.x > child->getRelativeRect().origin.x)
+            {
                 leftChild = child;
             }
-            if (rightChild->getRelativeRect().origin.x + rightChild->getRelativeRect().size.width < child->getRelativeRect().origin.x + child->getRelativeRect().size.width){
+            if (rightChild->getRelativeRect().origin.x + rightChild->getRelativeRect().size.width < child->getRelativeRect().origin.x + child->getRelativeRect().size.width)
+            {
                 rightChild = child;
             }
-            if (topChild->getRelativeRect().origin.y + topChild->getRelativeRect().size.height < child->getRelativeRect().origin.y + child->getRelativeRect().size.height){
+            if (topChild->getRelativeRect().origin.y + topChild->getRelativeRect().size.height < child->getRelativeRect().origin.y + child->getRelativeRect().size.height)
+            {
                 topChild = child;
             }
             if (bottomChild->getRelativeRect().origin.y > child->getRelativeRect().origin.y){
@@ -181,20 +309,23 @@ namespace cs{
     
     void CocoScrollView::moveChildren(float offset)
     {
-        switch (this->m_nDirection){
+        switch (this->m_nDirection)
+        {
             case 0:
-                for (int i=0;i<this->m_children->count();i++){
+                for (int i = 0; i < this->m_children->count(); i++)
+                {
                     CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
                     this->moveChildPoint.x = child->getPosition().x;
-                    this->moveChildPoint.y = child->getPosition().y+offset;
+                    this->moveChildPoint.y = child->getPosition().y + offset;
                     child->setPosition(this->moveChildPoint);
                     child->setVisible(child->checkBeVisibleInParent());
                 }
                 break;
             case 1:
-                for (int i=0;i<this->m_children->count();i++){
+                for (int i=0;i<this->m_children->count();i++)
+                {
                     CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
-                    this->moveChildPoint.x = child->getPosition().x+offset;
+                    this->moveChildPoint.x = child->getPosition().x + offset;
                     this->moveChildPoint.y = child->getPosition().y;
                     child->setPosition(this->moveChildPoint);
                     child->setVisible(child->checkBeVisibleInParent());
@@ -205,60 +336,91 @@ namespace cs{
     
     void CocoScrollView::autoScrollChildren(float dt)
     {
-        switch (this->m_nDirection){
+        switch (this->m_nDirection)
+        {
             case 0:
-                switch (this->m_nMoveDirection){
+                switch (this->m_nMoveDirection)
+                {
                     case 0:
-                    {
-                        float curDis = this->getCurAutoScrollDistance(dt);
-                        if (curDis <= 0){
-                            curDis = 0;
-                            this->stopAutoScrollChildren();
+                        {
+                            float curDis = this->getCurAutoScrollDistance(dt);
+                            if (curDis <= 0)
+                            {
+                                curDis = 0;
+                                this->stopAutoScrollChildren();
+                            }
+                            if (!this->scrollChildren(-curDis))
+                            {
+                                this->stopAutoScrollChildren();
+                                
+                                if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+                                {
+                                    resetPositionWithAction();
+                                }
+                            }
                         }
-                        if (!this->scrollChildren(-curDis)){
-                            this->stopAutoScrollChildren();
-                        }
-                    }
                         break;
                     case 1:
-                    {
-                        float curDis = this->getCurAutoScrollDistance(dt);
-                        if (curDis <= 0){
-                            curDis = 0;
-                            this->stopAutoScrollChildren();
+                        {
+                            float curDis = this->getCurAutoScrollDistance(dt);
+                            if (curDis <= 0)
+                            {
+                                curDis = 0;
+                                this->stopAutoScrollChildren();
+                            }
+                            if (!this->scrollChildren(curDis))
+                            {
+                                this->stopAutoScrollChildren();
+                                
+                                if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+                                {
+                                    resetPositionWithAction();
+                                }
+                            }
                         }
-                        if (!this->scrollChildren(curDis)){
-                            this->stopAutoScrollChildren();
-                        }
-                    }
                         break;
                 }
                 break;
             case 1:
-                switch (this->m_nMoveDirection){
+                switch (this->m_nMoveDirection)
+                {
                     case 0:
-                    {
-                        float curDis = this->getCurAutoScrollDistance(dt);
-                        if (curDis <= 0){
-                            curDis = 0;
-                            this->stopAutoScrollChildren();
+                        {
+                            float curDis = this->getCurAutoScrollDistance(dt);
+                            if (curDis <= 0)
+                            {
+                                curDis = 0;
+                                this->stopAutoScrollChildren();
+                            }
+                            if (!this->scrollChildren(-curDis))
+                            {
+                                this->stopAutoScrollChildren();
+                                
+                                if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+                                {
+                                    resetPositionWithAction();
+                                }
+                            }
                         }
-                        if (!this->scrollChildren(-curDis)){
-                            this->stopAutoScrollChildren();
-                        }
-                    }
                         break;
                     case 1:
-                    {
-                        float curDis = this->getCurAutoScrollDistance(dt);
-                        if (curDis <= 0){
-                            curDis = 0;
-                            this->stopAutoScrollChildren();
+                        {
+                            float curDis = this->getCurAutoScrollDistance(dt);
+                            if (curDis <= 0)
+                            {
+                                curDis = 0;
+                                this->stopAutoScrollChildren();
+                            }
+                            if (!this->scrollChildren(curDis))
+                            {
+                                this->stopAutoScrollChildren();
+                                
+                                if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+                                {
+                                    resetPositionWithAction();
+                                }
+                            }
                         }
-                        if (!this->scrollChildren(curDis)){
-                            this->stopAutoScrollChildren();
-                        }
-                    }
                         break;
                 }
                 break;
@@ -282,7 +444,227 @@ namespace cs{
         float dt = time;
         this->m_fAutoScrollOriginalSpeed -= this->m_fAutoScrollAcceleration*dt;
         float distance = this->m_fAutoScrollOriginalSpeed*dt;
+        distance = MIN(distance, m_fDisBetweenChild);
         return distance;
+    }
+    
+    void CocoScrollView::resetPositionWithAction()
+    {
+        using namespace cocos2d;
+        CCPoint delta = CCPointZero;
+        CocoWidget* child = getCheckPositionChild();
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                {
+                    float child_height = child->getValidNode()->getContentSizeHeight();
+                    
+                    switch (m_nMoveDirection)
+                    {
+                        case 0: // down
+                            delta.y = m_fTopBoundary - m_fDisBoundaryToChild_0 - child_height / 2 - child->getPosition().y;
+                            break;
+                            
+                        case 1: // up
+                            delta.y = m_fBottomBoundary + m_fDisBoundaryToChild_0 + child_height / 2 - child->getPosition().y;
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                break;
+                
+            case 1: // horizontal
+                {
+                    float child_width = child->getValidNode()->getContentSizeWidth();
+                    
+                    switch (m_nMoveDirection)
+                    {
+                        case 0: // left
+                            delta.x = m_fRightBoundary - m_fDisBoundaryToChild_0 - child_width / 2 - child->getPosition().x;
+                            break;
+                            
+                        case 1: // right
+                            delta.x = m_fLeftBoundary + m_fDisBoundaryToChild_0 + child_width / 2 - child->getPosition().x;
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
+        int times = m_children->count();
+        for (int i = 0; i < times - 1; ++i)
+        {
+            CocoWidget* child = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(i));
+            CCMoveBy* moveBy = CCMoveBy::create(0.25, delta);
+            CCEaseOut* ease = CCEaseOut::create(moveBy, 0.5);
+            child->runAction(ease);
+        }
+        
+        CocoWidget* child_last = dynamic_cast<CocoWidget*>(m_children->lastObject());
+        CCMoveBy* moveBy = CCMoveBy::create(0.25, delta);
+        CCEaseOut* ease = CCEaseOut::create(moveBy, 0.5);
+        CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(CocoScrollView::handleScrollActionEvent));
+        CCSequence* seq = CCSequence::create(ease, callFunc, NULL);
+        child_last->runAction(seq);
+        
+        isRunningAction = true;
+    }
+    
+    CocoWidget* CocoScrollView::getCheckPositionChild()
+    {
+        CocoWidget* child = NULL;
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                switch (m_nMoveDirection)
+                {
+                    case 0: // down
+                        child = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(0));
+                        break;
+                        
+                    case 1: // up
+                        child = dynamic_cast<CocoWidget*>(m_children->lastObject());
+                        break;
+                        
+                    default:
+                        break;
+                }
+                break;
+                
+            case 1: // horizontal
+                switch (m_nMoveDirection)
+                {
+                    case 0: // left
+                        child = dynamic_cast<CocoWidget*>(m_children->lastObject());
+                        break;
+                        
+                    case 1: // right
+                        child = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(0));
+                        break;
+                        
+                    default:
+                        break;
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
+        return child;
+    }
+    
+    void CocoScrollView::handleScrollActionEvent()
+    {
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                switch (m_nMoveDirection)
+                {
+                    case 0: // down
+                        scrollToTopEvent();
+                        break;
+                        
+                    case 1: // up
+                        scrollToBottomEvent();
+                        break;
+                }
+                break;
+                
+            case 1: // horizontal
+                switch (m_nMoveDirection)
+                {
+                    case 0: // left
+                        scrollToRightEvent();
+                        break;
+                        
+                    case 1: // right
+                        scrollToLeftEvent();
+                        break;
+                }
+                break;
+        }
+        
+        isRunningAction = false;
+    }
+    
+    float CocoScrollView::calculateOffsetWithDragForce(float moveOffset)
+    {
+        float offset = moveOffset;
+        CocoWidget* child = getCheckPositionChild();
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                switch (m_nMoveDirection)
+                {
+                    case 0: // down
+                        {
+                            float scroll_top = m_fTopBoundary;
+                            float child_top = child->getRelativeTopPos();
+                            
+                            if (child_top < scroll_top)
+                            {
+                                offset -= m_fDragForce * offset / m_fHeight;
+                            }
+                        }
+                        break;
+                        
+                    case 1: // up
+                        {
+                            float scroll_bottom = m_fBottomBoundary;
+                            float child_bottom = child->getRelativeBottomPos();
+                            
+                            if (child_bottom > scroll_bottom)
+                            {
+                                offset -= m_fDragForce * offset / m_fHeight;
+                            }
+                        }
+                        break;
+                }
+                break;
+                
+            case 1: // horizontal
+                switch (m_nMoveDirection)
+                {
+                    case 0: // left
+                        {
+                            float scroll_right = m_fRightBoundary;
+                            float child_right = child->getRelativeRightPos();
+                            
+                            if (child_right < scroll_right)
+                            {
+                                offset -= m_fDragForce * offset / m_fWidth;
+                            }
+                        }
+                        break;
+                        
+                    case 1: // right
+                        {
+                            float scroll_left = m_fLeftBoundary;
+                            float child_left = child->getRelativeLeftPos();
+                            
+                            if (child_left > scroll_left)
+                            {
+                                offset -= m_fDragForce * offset / m_fWidth;
+                            }
+                        }
+                        break;
+                }
+                break;
+        }
+        
+        return offset;
     }
     
     void CocoScrollView::setDirection(int direction)
@@ -295,82 +677,272 @@ namespace cs{
     
     bool CocoScrollView::scrollChildren(float touchOffset)
     {
-        if (this->m_children->count() <= 0){
+        if (m_children->count() <= 0)
+        {
             return false;
         }
         
-        switch (this->m_nDirection){
-            case 0:
-            {
-                if (this->m_fChildrenSizeHeight <= this->m_fHeight){
-                    this->moveChildren(this->m_fTopBoundary - this->m_pTopChild->getRelativeTopPos());
+        float realOffset = touchOffset;
+        
+        switch (m_nDirection)
+        {
+            case 0: // vertical
+                if (m_fChildrenSizeHeight <= m_fHeight)
+                {
+                    switch (m_eBerthOrientation)
+                    {
+                        case SCROLLVIEW_BERTH_ORI_TOP : // berth top
+                            moveChildren(m_fTopBoundary - m_pTopChild->getRelativeTopPos());
+                            
+                            if (!m_bBerthToTop)
+                            {
+                                berthToTopEvent();
+                            }
+                            m_bBerthToTop = true;
+                            break;
+                            
+                        case SCROLLVIEW_BERTH_ORI_BOTTOM: // berth bottom
+                            moveChildren(m_fBottomBoundary - m_pBottomChild->getRelativeBottomPos());
+                            
+                            if (!m_bBerthToBottom)
+                            {
+                                berthToBottomEvent();
+                            }
+                            m_bBerthToBottom = true;
+                            break;
+                            
+                        case SCROLLVIEW_BERTH_ORI_VERTICAL_CENTER: // berth vertical center
+                            {
+                                float offset = (m_fHeight - m_fChildrenSizeHeight) * 0.5;
+                                float distance = (m_fHeight - offset) - m_pTopChild->getRelativeTopPos();
+                                moveChildren(distance);
+                                
+                                if (!m_bBerthToVerticalCenter)
+                                {
+                                    berthToVerticalCenterEvent();
+                                }
+                                m_bBerthToVerticalCenter = true;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
                     return false;
                 }
-                float realOffset = touchOffset;
-                switch (this->m_nMoveDirection){
-                    case 0:
-                        if (!this->m_pTopChild){
+                
+                switch (m_nMoveDirection)
+                {
+                    case 0: // down
+                        if (!m_pTopChild)
+                        {
                             return false;
                         }
-                        if (this->m_pTopChild->getRelativeTopPos() + touchOffset <= this->m_fTopBoundary){
-                            realOffset = this->m_fTopBoundary - this->m_pTopChild->getRelativeTopPos();
-                            this->m_bTopEnd = true;
-                            this->moveChildren(realOffset);
-                            return false;
-                        }
+                        
+                        switch (m_eMoveMode)
+                        {
+                            case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
+                                if (m_pTopChild->getRelativeTopPos() + touchOffset <= m_fTopBoundary)
+                                {
+                                    realOffset = m_fTopBoundary - m_pTopChild->getRelativeTopPos();
+                                    moveChildren(realOffset);
+                                    
+                                    if (!m_bTopEnd)
+                                    {
+                                        scrollToTopEvent();
+                                    }
+                                    m_bTopEnd = true;
+                                    return false;
+                                }
+                                break;
+                                
+                            case SCROLLVIEW_MOVE_MODE_ACTION: // action
+                                if (m_pTopChild->getRelativeTopPos() < m_fTopBoundary)
+                                {
+                                    return false;
+                                }
+                                break;
+                                
+                            default:
+                                break;
+                        }                        
                         break;
-                    case 1:
-                        if (!this->m_pBottomChild){
+                        
+                    case 1: // up
+                        if (!m_pBottomChild)
+                        {
                             return false;
                         }
-                        if (this->m_pBottomChild->getRelativeBottomPos() + touchOffset >= this->m_fBottomBoundary){
-                            realOffset = this->m_fBottomBoundary - this->m_pBottomChild->getRelativeBottomPos();
-                            this->m_bBottomEnd = true;
-                            this->moveChildren(realOffset);
-                            return false;
+                        
+                        switch (m_eMoveMode)
+                        {
+                            case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
+                                if (m_pBottomChild->getRelativeBottomPos() + touchOffset >= m_fBottomBoundary)
+                                {
+                                    realOffset = m_fBottomBoundary - m_pBottomChild->getRelativeBottomPos();
+                                    moveChildren(realOffset);
+                                    
+                                    if (!m_bBottomEnd)
+                                    {
+                                        scrollToBottomEvent();
+                                    }
+                                    m_bBottomEnd = true;
+                                    return false;
+                                }
+                                break;
+                                
+                            case SCROLLVIEW_MOVE_MODE_ACTION: // action
+                                if (m_pBottomChild->getRelativeBottomPos() > m_fBottomBoundary)
+                                {
+                                    return false;
+                                }
+                                break;
+                                
+                            default:
+                                break;
                         }
                         break;
                 }
-                this->moveChildren(realOffset);
-                this->m_bTopEnd = false;
-                this->m_bBottomEnd = false;
+                
+                moveChildren(realOffset);
+                m_bTopEnd = false;
+                m_bBottomEnd = false;
+                m_bBerthToTop = false;
+                m_bBerthToBottom = false;
+                m_bBerthToVerticalCenter = false;
                 return true;
-            }
                 break;
-            case 1:
-            {
-                if (this->m_fChildrenSizeWidth <= this->m_fWidth){
-                    this->moveChildren(this->m_fLeftBoundary - this->m_pLeftChild->getRelativeLeftPos());
+                
+            case 1: // horizontal
+                if (m_fChildrenSizeWidth <= m_fWidth)
+                {
+                    switch (m_eBerthOrientation)
+                    {
+                        case SCROLLVIEW_BERTH_ORI_LEFT: // berth left
+                            moveChildren(m_fLeftBoundary - m_pLeftChild->getRelativeLeftPos());
+                            
+                            if (!m_bBerthToLeft)
+                            {
+                                berthToLeftEvent();
+                            }
+                            m_bBerthToLeft = true;
+                            break;
+                            
+                        case SCROLLVIEW_BERTH_ORI_RIGHT: // berth right
+                            moveChildren(m_fRightBoundary - m_pRightChild->getRelativeRightPos());
+                            
+                            if (!m_bBerthToRight)
+                            {
+                                berthToRightEvent();
+                            }
+                            m_bBerthToRight = true;
+                            break;
+                            
+                        case SCROLLVIEW_BERTH_ORI_HORIZONTAL_CENTER: // berth horizontal center
+                            {
+                                float offset = (m_fWidth - m_fChildrenSizeWidth) * 0.5;
+                                float distance = (m_fWidth - offset) - m_pRightChild->getRelativeRightPos();
+                                moveChildren(distance);
+                                
+                                if (!m_bBerthToHorizontalCenter)
+                                {
+                                    berthToHorizontalCenterEvent();
+                                }
+                                m_bBerthToHorizontalCenter = true;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
                     return false;
                 }
-                float realOffset = touchOffset;
-                switch (this->m_nMoveDirection){
-                    case 0:
-                        if (!this->m_pRightChild){
+                
+                switch (m_nMoveDirection)
+                {
+                    case 0: // left
+                        if (!m_pRightChild)
+                        {
                             return false;
                         }
-                        if (this->m_pRightChild->getRelativeRightPos() + touchOffset <= this->m_fRightBoundary){
-                            realOffset = this->m_fRightBoundary - this->m_pRightChild->getRelativeRightPos();
-                            this->moveChildren(realOffset);
-                            return false;
-                        }
+                        
+                        switch (m_eMoveMode)
+                        {
+                            case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
+                                if (m_pRightChild->getRelativeRightPos() + touchOffset <= m_fRightBoundary)
+                                {
+                                    realOffset = m_fRightBoundary - m_pRightChild->getRelativeRightPos();
+                                    moveChildren(realOffset);
+                                    
+                                    if (!m_bRightEnd)
+                                    {
+                                        scrollToRightEvent();
+                                    }
+                                    m_bRightEnd = true;
+                                    return false;
+                                }
+                                break;
+                                
+                            case SCROLLVIEW_MOVE_MODE_ACTION: // action
+                                if (m_pRightChild->getRelativeRightPos() < m_fRightBoundary)
+                                {
+                                    return false;
+                                }
+                                break;
+                                
+                            default:
+                                break;
+                        }                        
                         break;
-                    case 1:
-                        if (!this->m_pLeftChild){
+                        
+                    case 1: // right
+                        if (!m_pLeftChild)
+                        {
                             return false;
                         }
-                        if (this->m_pLeftChild->getRelativeLeftPos() + touchOffset >= this->m_fLeftBoundary){
-                            realOffset = this->m_fLeftBoundary - this->m_pLeftChild->getRelativeLeftPos();
-                            this->moveChildren(realOffset);
-                            return false;
-                        }
+                        
+                        switch (m_eMoveMode)
+                        {
+                            case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
+                                if (m_pLeftChild->getRelativeLeftPos() + touchOffset >= m_fLeftBoundary)
+                                {
+                                    realOffset = m_fLeftBoundary - m_pLeftChild->getRelativeLeftPos();
+                                    moveChildren(realOffset);
+                                    
+                                    if (!m_bLeftEnd)
+                                    {
+                                        scrollToLeftEvent();
+                                    }
+                                    m_bLeftEnd = true;
+                                    return false;
+                                }
+                                break;
+                                
+                            case SCROLLVIEW_MOVE_MODE_ACTION: // action
+                                if (m_pLeftChild->getRelativeLeftPos() > m_fLeftBoundary)
+                                {
+                                    return false;
+                                }
+                                break;
+                                
+                            default:
+                                break;
+                        }                        
                         break;
                 }
-                this->moveChildren(realOffset);
+                
+                moveChildren(realOffset);
+                m_bLeftEnd = false;
+                m_bRightEnd = false;
+                m_bBerthToLeft = false;
+                m_bBerthToRight = false;
+                m_bBerthToHorizontalCenter = false;
                 return true;
-            }
                 break;
         }
+        
         return false;
     }
     
@@ -393,11 +965,17 @@ namespace cs{
         }
         this->m_bBePressed = true;
         this->m_fSlidTime = 0.0;
+        
+        if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+        {
+            stopAction();
+        }
     }
     
     void CocoScrollView::endRecordSlidAction()
     {
-        if (this->m_fSlidTime <= 0.016f){
+        if (this->m_fSlidTime <= 0.016f)
+        {
             return;
         }
         float totalDis = 0;
@@ -409,7 +987,8 @@ namespace cs{
     void CocoScrollView::handlePressLogic(cocos2d::CCPoint &touchPoint)
     {
         cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
-        switch (this->m_nDirection){
+        switch (this->m_nDirection)
+        {
             case 0:
                 this->m_fTouchMoveStartLocation = nsp.y;
                 this->m_fTouchStartLocation = nsp.y;
@@ -424,33 +1003,58 @@ namespace cs{
     
     void CocoScrollView::handleMoveLogic(cocos2d::CCPoint &touchPoint)
     {
-        cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
-        switch (this->m_nDirection){
+        cocos2d::CCPoint nsp = m_pCContainerNode->convertToNodeSpace(touchPoint);
+        float offset = 0.0;
+        
+        switch (m_nDirection)
+        {
             case 0:
-            {
-                float moveY = nsp.y;
-                float offset = moveY - this->m_fTouchMoveStartLocation;
-                this->m_fTouchMoveStartLocation = moveY;
-                if (offset < 0){
-                    this->m_nMoveDirection = 0;
-                }else if (offset > 0){
-                    this->m_nMoveDirection = 1;
+                {
+                    float moveY = nsp.y;
+                    offset = moveY - m_fTouchMoveStartLocation;
+                    m_fTouchMoveStartLocation = moveY;
+                    
+                    if (offset < 0)
+                    {
+                        m_nMoveDirection = 0;
+                    }
+                    else if (offset > 0)
+                    {
+                        m_nMoveDirection = 1;
+                    }
                 }
-                this->scrollChildren(offset);
-            }
                 break;
+                
             case 1:
-            {
-                float moveX = nsp.x;
-                float offset = moveX - this->m_fTouchMoveStartLocation;
-                this->m_fTouchMoveStartLocation = moveX;
-                if (offset < 0){
-                    this->m_nMoveDirection = 0;
-                }else if (offset > 0){
-                    this->m_nMoveDirection = 1;
+                {
+                    float moveX = nsp.x;
+                    offset = moveX - m_fTouchMoveStartLocation;
+                    m_fTouchMoveStartLocation = moveX;
+                    
+                    if (offset < 0)
+                    {
+                        m_nMoveDirection = 0;
+                    }
+                    else if (offset > 0)
+                    {
+                        m_nMoveDirection = 1;
+                    }
                 }
-                this->scrollChildren(offset);
-            }
+                break;
+        }
+        
+        switch (m_eMoveMode)
+        {
+            case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
+                scrollChildren(offset);
+                break;
+                
+            case SCROLLVIEW_MOVE_MODE_ACTION: // action
+                offset = calculateOffsetWithDragForce(offset);
+                moveChildren(offset);
+                break;
+                
+            default:
                 break;
         }
     }
@@ -458,7 +1062,8 @@ namespace cs{
     void CocoScrollView::handleReleaseLogic(cocos2d::CCPoint &touchPoint)
     {
         cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
-        switch (this->m_nDirection){
+        switch (this->m_nDirection)
+        {
             case 0:
                 this->m_fTouchEndLocation = nsp.y;
                 break;
@@ -502,47 +1107,220 @@ namespace cs{
     
     void CocoScrollView::update(float dt)
     {
-        if (this->m_bAutoScroll){
+        if (this->m_bAutoScroll)
+        {
             this->autoScrollChildren(dt);
         }
         this->recordSlidTime(dt);
+        
+        if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
+        {
+            if (isRunningAction)
+            {
+                int times = m_children->count();
+                
+                for (int i = 0; i < times; ++i)
+                {
+                    CocoWidget* child = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(i));
+                    child->setVisible(child->checkBeVisibleInParent());
+                }
+            }
+        }
     }
     
     void CocoScrollView::recordSlidTime(float dt)
     {
-        if (this->m_bBePressed){
+        if (this->m_bBePressed)
+        {
             this->m_fSlidTime += dt;
         }
     }
     
     void CocoScrollView::checkChildInfo(int handleState,CocoWidget* sender,cocos2d::CCPoint &touchPoint)
     {
-        switch (handleState){
+        switch (handleState)
+        {
             case 0:
                 this->handlePressLogic(touchPoint);
                 break;
+                
             case 1:
-            {
-                float offset = 0;
-                switch (this->m_nDirection) {
-	                case 0:
-                        offset = fabs(sender->getTouchStartPos().y - touchPoint.y);
-		                break;
-		            case 1:
-                        offset = fabs(sender->getTouchStartPos().x - touchPoint.x);
-			            break;
+                {
+                    float offset = 0;
+                    switch (this->m_nDirection)
+                    {
+                        case 0:
+                            offset = fabs(sender->getTouchStartPos().y - touchPoint.y);
+                            break;
+                        case 1:
+                            offset = fabs(sender->getTouchStartPos().x - touchPoint.x);
+                            break;
+                    }
+                    if (offset > this->m_fChildFocusCancelOffset)
+                    {
+                        sender->setBeFocus(false);
+                        this->handleMoveLogic(touchPoint);
+                    }
                 }
-                if (offset > this->m_fChildFocusCancelOffset) {
-                    sender->setBeFocus(false);
-                    this->handleMoveLogic(touchPoint);
-                }
-            }
                 break;
+                
             case 2:
                 this->handleReleaseLogic(touchPoint);
                 break;
+                
             case 3:
                 break;
+        }
+    }
+    
+    void CocoScrollView::scrollToTopEvent()
+    {
+        if (m_pScrollToTopListener && m_pfnScrollToTopSelector)
+        {
+            (m_pScrollToTopListener->*m_pfnScrollToTopSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::scrollToBottomEvent()
+    {
+        if (m_pScrollToBottomListener && m_pfnScrollToBottomSelector)
+        {
+            (m_pScrollToBottomListener->*m_pfnScrollToBottomSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::scrollToLeftEvent()
+    {
+        if (m_pScrollToLeftListener && m_pfnScrollToLeftSelector)
+        {
+            (m_pScrollToLeftListener->*m_pfnScrollToLeftSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::scrollToRightEvent()
+    {
+        if (m_pScrollToRightListener && m_pfnScrollToRightSelector)
+        {
+            (m_pScrollToRightListener->*m_pfnScrollToRightSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::addScrollToTopEvent(cocos2d::CCObject *target, SEL_ScrollToTopEvent selector)
+    {
+        m_pScrollToTopListener = target;
+        m_pfnScrollToTopSelector = selector;
+    }
+    
+    void CocoScrollView::addScrollToBottomEvent(cocos2d::CCObject *target, SEL_ScrollToBottomEvent selector)
+    {
+        m_pScrollToBottomListener = target;
+        m_pfnScrollToBottomSelector = selector;
+    }
+    
+    void CocoScrollView::addScrollToLeftEvent(cocos2d::CCObject *target, SEL_ScrollToLeftEvent selector)
+    {
+        m_pScrollToLeftListener = target;
+        m_pfnScrollToLeftSelector = selector;
+    }
+    
+    void CocoScrollView::addScrollToRightEvent(cocos2d::CCObject *target, SEL_ScrollToRightEvent selector)
+    {
+        m_pScrollToRightListener = target;
+        m_pfnScrollToRightSelector = selector;
+    }
+    
+    void CocoScrollView::berthToTopEvent()
+    {
+        if (m_pBerthToTopListener && m_pfnBerthToTopSelector)
+        {
+            (m_pBerthToTopListener->*m_pfnBerthToTopSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::berthToBottomEvent()
+    {
+        if (m_pBerthToBottomListener && m_pfnBerthToBottomSelector)
+        {
+            (m_pBerthToBottomListener->*m_pfnBerthToBottomSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::berthToVerticalCenterEvent()
+    {
+        if (m_pBerthToVerticalCenterListener && m_pfnBerthToVerticalCenterSelector)
+        {
+            (m_pBerthToVerticalCenterListener->*m_pfnBerthToVerticalCenterSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::berthToLeftEvent()
+    {
+        if (m_pBerthToLeftListener && m_pfnBerthToLeftSelector)
+        {
+            (m_pBerthToLeftListener->*m_pfnBerthToLeftSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::berthToRightEvent()
+    {
+        if (m_pBerthToRightListener && m_pfnBerthToRightSelector)
+        {
+            (m_pBerthToLeftListener->*m_pfnBerthToRightSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::berthToHorizontalCenterEvent()
+    {
+        if (m_pBerthToHorizontalCenterListener && m_pfnBerthToHorizontalCenterSelector)
+        {
+            (m_pBerthToHorizontalCenterListener->*m_pfnBerthToHorizontalCenterSelector)(this);
+        }
+    }
+    
+    void CocoScrollView::addBerthToTopEvent(cocos2d::CCObject *target, SEL_BerthToTopEvent selector)
+    {
+        m_pBerthToTopListener = target;
+        m_pfnBerthToTopSelector = selector;
+    }
+    
+    void CocoScrollView::addBerthToBottomEvent(cocos2d::CCObject *target, SEL_BerthToBottomEvent selector)
+    {
+        m_pBerthToBottomListener = target;
+        m_pfnBerthToBottomSelector = selector;
+    }
+    
+    void CocoScrollView::addBerthToVerticalCenterEvent(cocos2d::CCObject *target, SEL_BerthToVerticalCenterEvent selector)
+    {
+        m_pBerthToVerticalCenterListener = target;
+        m_pfnBerthToVerticalCenterSelector = selector;
+    }
+    
+    void CocoScrollView::addBerthToLeftEvent(cocos2d::CCObject *target, SEL_BerthToLeftEvent selector)
+    {
+        m_pBerthToLeftListener = target;
+        m_pfnBerthToLeftSelector = selector;
+    }
+    
+    void CocoScrollView::addBerthToRightEvent(cocos2d::CCObject *target, SEL_BerthToRightEvent selector)
+    {
+        m_pBerthToRightListener = target;
+        m_pfnBerthToRightSelector = selector;
+    }
+    
+    void CocoScrollView::addBerthToHorizontalCenterEvent(cocos2d::CCObject *target, SEL_BerthToHorizontalCenterEvent selector)
+    {
+        m_pBerthToHorizontalCenterListener = target;
+        m_pfnBerthToHorizontalCenterSelector = selector;
+    }
+    
+    void CocoScrollView::stopAction()
+    {
+        int times = m_children->count();
+        
+        for (int i = 0; i < times; ++i)
+        {
+            CocoWidget* child = dynamic_cast<CocoWidget*>(m_children->objectAtIndex(i));
+            child->stopAllActions();
         }
     }
 }
