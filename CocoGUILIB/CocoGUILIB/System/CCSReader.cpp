@@ -199,12 +199,10 @@ namespace cs {
     {
         const char *des = NULL;
 		std::string jsonpath;
-		std::string doc;
         cs::CSJsonDictionary *jsonDict = NULL;
         jsonpath = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
         unsigned long size = 0;
-        doc = (char*)(cocos2d::CCFileUtils::sharedFileUtils()->getFileData(jsonpath.c_str(),"r" , &size));
-        des = doc.c_str();
+        des = (char*)(cocos2d::CCFileUtils::sharedFileUtils()->getFileData(jsonpath.c_str(),"r" , &size));
         jsonDict = new cs::CSJsonDictionary();
         jsonDict->initWithDescription(des);
 		if(NULL == des || strcmp(des, "") == 0)
@@ -236,6 +234,7 @@ namespace cs {
         cs::CocoWidget* widget = this->widgetFromJsonDictionary(widgetTree);
         delete jsonDict;
         jsonDict = NULL;
+        delete[] des;
         return widget;
     }
     
