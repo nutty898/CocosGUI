@@ -108,6 +108,13 @@ namespace cs {
         return CCSReader::shareReader()->widgetFromJsonFile(fileName);
     }
     
+    CocoWidget* UISystem::createWidgetFromFileWithAdapt_json(const char *fileName,float xProportion, float yProportion, bool scaleAdapt, bool equalProportions)
+    {
+        CocoWidget* widget = this->createWidgetFromFile_json(fileName);
+        this->adjustWidgetProperty(widget, xProportion, yProportion, scaleAdapt, equalProportions);
+        return widget;
+    }
+    
     void UISystem::adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions)
     {
         switch (root->getWidgetType()) {
@@ -133,7 +140,7 @@ namespace cs {
             default:
                 break;
         }
-        if (root->getWidgetParent()->getWidgetType() == 1) {
+        if (!root->getWidgetParent() || root->getWidgetParent()->getWidgetType() == 1) {
             root->setPosition(ccp(root->getPosition().x*xProportion, root->getPosition().y*yProportion));
 
         }

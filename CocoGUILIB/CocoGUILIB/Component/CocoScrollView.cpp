@@ -458,7 +458,7 @@ namespace cs
         {
             case 0: // vertical
                 {
-                    float child_height = child->getValidNode()->getContentSizeHeight();
+                    float child_height = child->getRect().size.height;
                     
                     switch (m_nMoveDirection)
                     {
@@ -478,7 +478,7 @@ namespace cs
                 
             case 1: // horizontal
                 {
-                    float child_width = child->getValidNode()->getContentSizeWidth();
+                    float child_width = child->getRect().size.width;
                     
                     switch (m_nMoveDirection)
                     {
