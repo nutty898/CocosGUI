@@ -26,6 +26,13 @@ public:
     void playUIAnimation(CCObject* pSender);
     
     void cancelTouch(CCObject* pSender);
+    
+    void initListViewChild(CCObject* pSender);
+    void updateListViewChild(CCObject* pSender);
+    
+protected:
+    int count;
+    cocos2d::CCArray* array;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

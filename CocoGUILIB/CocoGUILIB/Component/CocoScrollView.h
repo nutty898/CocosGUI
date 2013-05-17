@@ -86,6 +86,8 @@ namespace cs
         virtual void removeChildMoveToTrash(CocoWidget* child);
         virtual void removeChildReferenceOnly(CocoWidget* child);
         virtual void removeAllChildrenAndCleanUp(bool cleanup);
+        virtual void initProperty();
+        virtual void resetProperty();
         void resortChildren();
         void moveChildren(float offset);
         void autoScrollChildren(float dt);
@@ -97,7 +99,8 @@ namespace cs
         float calculateOffsetWithDragForce(float moveOffset);
         void handleScrollActionEvent();
         void setDirection(int direction);
-        bool scrollChildren(float touchOffset);
+        void berthChildren(int direction);
+        virtual bool scrollChildren(float touchOffset);
         void scrollToBottom();
         void scrollToTop();
         void startRecordSlidAction();
@@ -105,6 +108,7 @@ namespace cs
         void handlePressLogic(cocos2d::CCPoint &touchPoint);
         void handleMoveLogic(cocos2d::CCPoint &touchPoint);
         void handleReleaseLogic(cocos2d::CCPoint &touchPoint);
+        virtual void drag(float offset);
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchMoved(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);
@@ -173,12 +177,12 @@ namespace cs
         bool m_bLeftEnd;
         bool m_bRightEnd;
         
-        bool m_bBerthToTop = false;
-        bool m_bBerthToBottom = false;
-        bool m_bBerthToLeft = false;
-        bool m_bBerthToRight = false;
-        bool m_bBerthToVerticalCenter = false;
-        bool m_bBerthToHorizontalCenter = false;
+        bool m_bBerthToTop;
+        bool m_bBerthToBottom;
+        bool m_bBerthToLeft;
+        bool m_bBerthToRight;
+        bool m_bBerthToVerticalCenter;
+        bool m_bBerthToHorizontalCenter;
         
         bool m_bAutoScroll;
         

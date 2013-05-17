@@ -43,6 +43,41 @@ bool HelloWorld::init()
     cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
     exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
     exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
+    
+    // listview
+    count = 0;
+    array = CCArray::create();
+    array->retain();
+    for (int i = 0; i < 20; ++i)
+    {
+        CCString* ccstr = CCString::createWithFormat("object_%d", i);
+        array->addObject(ccstr);
+    }
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(COCOUISYSTEM->getWidgetByName("listview"));
+    list->setUpdateEnable(true);
+    list->setMoveMode(cs::SCROLLVIEW_MOVE_MODE_ACTION);
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    float x_proportion = winSize.width / COCOUISYSTEM->getFileDesignWidth();
+    float y_proportion = winSize.height / COCOUISYSTEM->getFileDesignHeight();
+    for (int i = 0; i < 4; ++i)
+    {
+        cs::CocoTextButton* tbtn = cs::CocoTextButton::create();
+        tbtn->setTextures("UIRES/backtotoppressed.png", "UIRES/backtotopnormal.png", "");
+        tbtn->setPosition(ccp(75, 80 - i * (tbtn->getValidNode()->getContentSizeHeight() + 5)));
+        list->addChild(tbtn);
+        
+        COCOUISYSTEM->adjustWidgetProperty(tbtn,
+                                           x_proportion,
+                                           y_proportion,
+                                           true,
+                                           true);
+    }
+    list->resetProperty();
+    list->addInitChildEvent(this, coco_InitChildSelector(HelloWorld::initListViewChild));
+    list->addUpdateChildEvent(this, coco_UpdateChildSelector(HelloWorld::updateListViewChild));
+    list->initChildWithDataLength(array->count());
+    
+    
     return true;
 }
 
@@ -86,3 +121,31 @@ void HelloWorld::cancelTouch(cocos2d::CCObject *pSender)
 {
     CCLOG("cancel touch");
 }
+
+// listview
+void HelloWorld::initListViewChild(cocos2d::CCObject *pSender)
+{
+    CCString* ccstr = static_cast<CCString*>(array->objectAtIndex(count));
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(pSender);
+    cs::CocoTextButton* tbtn = dynamic_cast<cs::CocoTextButton*>(list->getUpdateChild());
+    tbtn->setText(ccstr->getCString());
+        
+    count++;
+}
+
+void HelloWorld::updateListViewChild(cocos2d::CCObject *pSender)
+{
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(pSender);
+    int index = list->getUpdateDataIndex();
+    
+    if (index < 0 || index >= list->getDataLength())
+    {
+        list->setUpdateSuccess(false);
+    }
+    
+    CCString* ccstr = static_cast<CCString*>(array->objectAtIndex(index));
+    cs::CocoTextButton* tbtn = dynamic_cast<cs::CocoTextButton*>(list->getUpdateChild());
+    tbtn->setText(ccstr->getCString());
+    list->setUpdateSuccess(true);
+}
+//

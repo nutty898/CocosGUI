@@ -155,6 +155,9 @@ namespace cs {
         }else if (classname && strcmp(classname, "ImageButton") == 0){
             widget = CocoImageButton::create();
             this->setPropsForImageButtonFromJsonDictionary(widget, uiOptions);
+        }else if (classname && strcmp(classname, "ListView") == 0) {
+            widget = CocoListView::create();
+            this->setPropsForListViewFromJsonDictionary(widget, uiOptions);
         }
         int childrenCount = DICTOOL->getArrayCount_json(data, "children");
         for (int i=0;i<childrenCount;i++){
@@ -1041,5 +1044,10 @@ namespace cs {
         GLubyte imageColorG = imageCg ? DICTOOL->getIntValue_json(options, "imageColorG") : 255;
         GLubyte imageColorB = imageCb ? DICTOOL->getIntValue_json(options, "imageColorB") : 255;
         imageButton->setImageColor(imageColorR, imageColorG, imageColorB);
+    }
+    
+    void CCSReader::setPropsForListViewFromJsonDictionary(cs::CocoWidget *widget, cs::CSJsonDictionary *options)
+    {
+        setPropsForScrollViewFromJsonDictionary(widget, options);
     }
 }

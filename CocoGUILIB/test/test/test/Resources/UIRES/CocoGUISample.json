@@ -151,7 +151,35 @@
           }
           ]
         },
-         /* gui mark */
+        /* gui mark */
+        {
+         "classname" : "ListView",
+         "options" :
+         {
+         "x" : 330,
+         "y" : 80,
+         "width" : 150,
+         "height" : 100,
+         "backGroundScale9Enable" : true,
+         "clipAble" : true,
+         "touchAble" : true,
+         "backGroundImage" : "UIRES/scrollviewbg.png",
+         "name" : "listview"
+         },
+         "children" : []
+        },
+         {
+         "classname" : "Label",
+         "options" :
+         {
+         "x" : 405,
+         "y" : 70,
+         "text" : "列表层",
+         "touchAble" : true,
+         "touchSacleEnable" : true
+         },
+         "children" :[]
+         },
          {
          "classname" : "ImageView",
          "options" :
@@ -170,21 +198,7 @@
          "flipY" : false
          },
          "children" :[]
-         },
-         // before
-         /*
-         {
-         "classname" : "ImageView",
-         "options" :
-         {
-         "x" : 30,
-         "y" : 290,
-         "fileName" : "UIRES/ccicon.png"
-         },
-         "children" :[]
-         },
-          */
-         /**/
+         },         
          {
          "classname" : "Label",
          "options" :
@@ -232,8 +246,7 @@
          "name" : "loadingbar"
          },
          "children" :[]
-         },
-         /* gui mark */
+         },         
          {
          "classname" : "Slider",
          "options" :
@@ -250,26 +263,7 @@
          "name" : "slider"
          },
          "children" :[]
-         },
-         // before
-         /*
-         {
-         "classname" : "Slider",
-         "options" :
-         {
-         "x" : 70,
-         "y" : 160,
-         "barFileName" : "UIRES/slidbar.png",
-         "ballNormal" : "UIRES/sliderballnormal.png",
-         "ballPressed" :"UIRES/sliderballpressed.png",
-         "percent" : 50,
-         "touchAble" : true,
-         "name" : "slider"
-         },
-         "children" :[]
-         },
-          */
-         /**/
+         },         
          {
          "classname" : "Label",
          "options" :
@@ -347,7 +341,6 @@
          },
          "children" :[]
          },
-         /* gui mark */
          {
          "classname" : "TextField",
          "options" :
@@ -378,12 +371,12 @@
          "options" : {
          "x" : 240,
          "y" : 96,
-         "scale9Enable" : true,
+         "scale9Enable" : false,
          "normal" : "UIRES/backtotopnormal.png",
          "pressed" : "UIRES/backtotoppressed.png",
          "scale9Width" : 200,
          "scale9Height" : 100,
-         "imageScale9Enable" : true,
+         "imageScale9Enable" : false,
          "imageCapInsetsX" : 0,
          "imageCapInsetsY" : 0,
          "imageCapInsetsWidth" : 0,
@@ -414,14 +407,13 @@
          "touchSacleEnable" : false
          },
          "children" :[]
-         },
-         /**/
+         },         
          {
          "classname" : "Button",
          "options" :
          {
          "x" : 430,
-         "y" : 40,         
+         "y" : 20,
          "touchAble" : true,
          "touchSacleEnable" : true,
          "name" : "exitbutton",

@@ -77,6 +77,7 @@ namespace cs {
         void setPropsForTextFieldFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setPropsForLoadingBarFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setPropsForImageButtonFromJsonDictionary(CocoWidget* widget, cs::CSJsonDictionary* options);
+        void setPropsForListViewFromJsonDictionary(CocoWidget* widget, cs::CSJsonDictionary* options);
         
     protected:
     };
