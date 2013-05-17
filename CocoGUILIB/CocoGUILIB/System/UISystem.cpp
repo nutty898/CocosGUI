@@ -108,10 +108,11 @@ namespace cs {
         return CCSReader::shareReader()->widgetFromJsonFile(fileName);
     }
     
-    CocoWidget* UISystem::createWidgetFromFileWithAdapt_json(const char *fileName,float xProportion, float yProportion, bool scaleAdapt, bool equalProportions)
+    CocoWidget* UISystem::createWidgetFromFileWithAdapt_json(const char *fileName, bool scaleAdapt, bool equalProportions)
     {
         CocoWidget* widget = this->createWidgetFromFile_json(fileName);
-        this->adjustWidgetProperty(widget, xProportion, yProportion, scaleAdapt, equalProportions);
+        cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
+        this->adjustWidgetProperty(widget, winSize.width/this->getFileDesignWidth(),winSize.height/this->getFileDesignHeight(), scaleAdapt, equalProportions);
         return widget;
     }
     

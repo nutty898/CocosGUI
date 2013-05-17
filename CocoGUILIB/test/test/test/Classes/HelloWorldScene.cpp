@@ -28,7 +28,7 @@ bool HelloWorld::init()
     
 //    COCOUISYSTEM->replaceUISceneWithFile(this, "UIRES/CocoGUISample.json", 1, true,true,true);
     
-    COCOUISYSTEM->getCurScene()->addWidget(COCOUISYSTEM->createWidgetFromFileWithAdapt_json("UIRES/CocoGUISample.json", 1024.0/480.0, 768.0/320.0, true, false));
+    COCOUISYSTEM->getCurScene()->addWidget(COCOUISYSTEM->createWidgetFromFileWithAdapt_json("UIRES/CocoGUISample.json", true, true));
     
     cs::CocoScrollView* sc = (cs::CocoScrollView*)(COCOUISYSTEM->getWidgetByName("scrollview"));
     sc->setUpdateEnable(true);
