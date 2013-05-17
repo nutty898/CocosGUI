@@ -29,6 +29,6 @@
 namespace cs {
     const char* CocoStudioVersion()
     {
-        return "CocoStudio v0.1.2";
+        return "CocoStudio v0.1.3";
     }
 }
