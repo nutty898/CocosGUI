@@ -173,12 +173,12 @@ namespace cs
         bool m_bLeftEnd;
         bool m_bRightEnd;
         
-        bool m_bBerthToTop = false;
-        bool m_bBerthToBottom = false;
-        bool m_bBerthToLeft = false;
-        bool m_bBerthToRight = false;
-        bool m_bBerthToVerticalCenter = false;
-        bool m_bBerthToHorizontalCenter = false;
+        bool m_bBerthToTop;
+        bool m_bBerthToBottom;
+        bool m_bBerthToLeft;
+        bool m_bBerthToRight;
+        bool m_bBerthToVerticalCenter;
+        bool m_bBerthToHorizontalCenter;
         
         bool m_bAutoScroll;
         

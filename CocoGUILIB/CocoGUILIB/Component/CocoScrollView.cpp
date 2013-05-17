@@ -968,7 +968,10 @@ namespace cs
         
         if (m_eMoveMode == SCROLLVIEW_MOVE_MODE_ACTION)
         {
-            stopAction();
+            if (isRunningAction)
+            {
+                stopAction();
+            }
         }
     }
     

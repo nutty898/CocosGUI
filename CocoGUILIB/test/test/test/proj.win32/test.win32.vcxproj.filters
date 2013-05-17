@@ -235,6 +235,9 @@
     <ClInclude Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.h">
       <Filter>CocoGUILIB\UIElements</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -365,6 +368,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CocoGUILIB\UIElements\UITextField.cpp">
       <Filter>CocoGUILIB\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -148,6 +148,7 @@
     <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.h" />
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoButton.h" />
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.h" />
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.h" />
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.h" />
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.h" />
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\GUINodeRGBA.cpp" />
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoButton.cpp" />
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoCheckBox.cpp" />
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.cpp" />
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageView.cpp" />
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabel.cpp" />
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoLabelAtlas.cpp" />
