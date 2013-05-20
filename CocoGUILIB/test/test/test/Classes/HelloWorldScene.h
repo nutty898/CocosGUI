@@ -31,8 +31,6 @@ public:
     void updateListViewChild(CCObject* pSender);
     
 protected:
-    int count;
-    cocos2d::CCArray* array;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

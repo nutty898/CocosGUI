@@ -21,6 +21,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../../../CocoGUILIB/CGraphics/CTextField.cpp \
                    ../../../../../CocoGUILIB/CGraphics/GUINodeRGBA.cpp \
                    ../../../../../CocoGUILIB/Component/CocoButton.cpp \
+                   ../../../../../CocoGUILIB/Component/CocoImageButton.cpp \
+                   ../../../../../CocoGUILIB/Component/CocoListView.cpp \
                    ../../../../../CocoGUILIB/Component/CocoCheckBox.cpp \
                    ../../../../../CocoGUILIB/Component/CocoImageView.cpp \
                    ../../../../../CocoGUILIB/Component/CocoLabel.cpp \
@@ -39,6 +41,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 		   ../../../../../CocoGUILIB/System/UIInputManager.cpp \
 		   ../../../../../CocoGUILIB/System/UIScene.cpp \
 		   ../../../../../CocoGUILIB/System/UISystem.cpp \
+                  ../../../../../CocoGUILIB/System/UIWidgetPool.cpp \
                    ../../../../../CocoGUILIB/System/Json/CSContentJsonDictionary.cpp \
                    ../../../../../CocoGUILIB/System/Json/lib_json/json_value.cpp \
                    ../../../../../CocoGUILIB/System/Json/lib_json/json_reader.cpp \

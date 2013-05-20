@@ -152,6 +152,7 @@
           ]
         },
         /* gui mark */
+         /*
         {
          "classname" : "ListView",
          "options" :
@@ -180,6 +181,7 @@
          },
          "children" :[]
          },
+          */
          {
          "classname" : "ImageView",
          "options" :
