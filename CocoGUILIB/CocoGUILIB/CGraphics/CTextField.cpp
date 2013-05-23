@@ -36,7 +36,7 @@ namespace cs
     
     CTextField::~CTextField()
     {
-        delete m_pCursorSprite;
+//        delete m_pCursorSprite;
 	}
     
     CTextField * CTextField::create(const char *placeholder, const char *fontName, float fontSize)
