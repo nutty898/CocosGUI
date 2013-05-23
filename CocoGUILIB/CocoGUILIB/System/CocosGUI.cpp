@@ -27,8 +27,8 @@
 #include "CocosGUI.h"
 
 namespace cs {
-    const char* CocoStudioVersion()
+    const char* CocosGUIVersion()
     {
-        return "CocoStudio v0.1.3";
+        return "CocosGUI v0.1.3";
     }
 }

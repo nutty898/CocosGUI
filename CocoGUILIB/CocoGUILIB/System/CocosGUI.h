@@ -23,8 +23,8 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef __CocoStudioGUITest__CocoStudio__
-#define __CocoStudioGUITest__CocoStudio__
+#ifndef __CocosGUITest__Cocos__
+#define __CocosGUITest__Cocos__
 
 
 #include "CocoWidget.h"
@@ -47,7 +47,7 @@
 #include "CCSReader.h"
     
 namespace cs {
-const char* CocoStudioVersion();
+const char* CocosGUIVersion();
 }
 
-#endif /* defined(__CocoStudioGUITest__CocoStudio__) */
+#endif /* defined(__CocosGUITest__Cocos__) */

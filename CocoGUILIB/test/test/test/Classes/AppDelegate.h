@@ -1,6 +1,6 @@
 //
-//  CocoStudioTestCPP_iosAppDelegate.h
-//  CocoStudioTestCPP_ios
+//  CocosGUITestCPP_iosAppDelegate.h
+//  CocosGUITestCPP_ios
 //
 //  Created by cai wenzhi on 13-4-27.
 //  Copyright __MyCompanyName__ 2013年. All rights reserved.

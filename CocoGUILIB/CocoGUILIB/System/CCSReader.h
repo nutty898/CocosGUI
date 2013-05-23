@@ -24,8 +24,8 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __CocoStudioGUITest__CCSReader__
-#define __CocoStudioGUITest__CCSReader__
+#ifndef __CocosGUITest__CCSReader__
+#define __CocosGUITest__CCSReader__
 
 #include "CocoWidget.h"
 #include "CSContentJsonDictionary.h"
@@ -83,4 +83,4 @@ namespace cs {
 }
 
 
-#endif /* defined(__CocoStudioGUITest__CCSReader__) */
+#endif /* defined(__CocosGUITest__CCSReader__) */
