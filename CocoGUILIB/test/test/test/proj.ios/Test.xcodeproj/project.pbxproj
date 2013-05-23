@@ -56,7 +56,7 @@
 		38B6452117409B8800A681C0 /* CocoTextButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644D617409B8800A681C0 /* CocoTextButton.cpp */; };
 		38B6452217409B8800A681C0 /* CocoTextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644D817409B8800A681C0 /* CocoTextField.cpp */; };
 		38B6452317409B8800A681C0 /* CCSReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644DB17409B8800A681C0 /* CCSReader.cpp */; };
-		38B6452417409B8800A681C0 /* CocoStudioGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644DD17409B8800A681C0 /* CocoStudioGUI.cpp */; };
+		38B6452417409B8800A681C0 /* CocosGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644DD17409B8800A681C0 /* CocosGUI.cpp */; };
 		38B6452517409B8800A681C0 /* DictionaryHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644DF17409B8800A681C0 /* DictionaryHelper.cpp */; };
 		38B6452617409B8800A681C0 /* InputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644E117409B8800A681C0 /* InputLayer.cpp */; };
 		38B6452717409B8800A681C0 /* CSContentJsonDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644E417409B8800A681C0 /* CSContentJsonDictionary.cpp */; };
@@ -207,8 +207,8 @@
 		38B644D917409B8800A681C0 /* CocoTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoTextField.h; sourceTree = "<group>"; };
 		38B644DB17409B8800A681C0 /* CCSReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSReader.cpp; sourceTree = "<group>"; };
 		38B644DC17409B8800A681C0 /* CCSReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSReader.h; sourceTree = "<group>"; };
-		38B644DD17409B8800A681C0 /* CocoStudioGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoStudioGUI.cpp; sourceTree = "<group>"; };
-		38B644DE17409B8800A681C0 /* CocoStudioGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoStudioGUI.h; sourceTree = "<group>"; };
+		38B644DD17409B8800A681C0 /* CocosGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocosGUI.cpp; sourceTree = "<group>"; };
+		38B644DE17409B8800A681C0 /* CocosGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosGUI.h; sourceTree = "<group>"; };
 		38B644DF17409B8800A681C0 /* DictionaryHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DictionaryHelper.cpp; sourceTree = "<group>"; };
 		38B644E017409B8800A681C0 /* DictionaryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryHelper.h; sourceTree = "<group>"; };
 		38B644E117409B8800A681C0 /* InputLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputLayer.cpp; sourceTree = "<group>"; };
@@ -554,8 +554,8 @@
 			children = (
 				38B644DB17409B8800A681C0 /* CCSReader.cpp */,
 				38B644DC17409B8800A681C0 /* CCSReader.h */,
-				38B644DD17409B8800A681C0 /* CocoStudioGUI.cpp */,
-				38B644DE17409B8800A681C0 /* CocoStudioGUI.h */,
+				38B644DD17409B8800A681C0 /* CocosGUI.cpp */,
+				38B644DE17409B8800A681C0 /* CocosGUI.h */,
 				38B644DF17409B8800A681C0 /* DictionaryHelper.cpp */,
 				38B644E017409B8800A681C0 /* DictionaryHelper.h */,
 				38B644E117409B8800A681C0 /* InputLayer.cpp */,
@@ -806,7 +806,7 @@
 				38B6452117409B8800A681C0 /* CocoTextButton.cpp in Sources */,
 				38B6452217409B8800A681C0 /* CocoTextField.cpp in Sources */,
 				38B6452317409B8800A681C0 /* CCSReader.cpp in Sources */,
-				38B6452417409B8800A681C0 /* CocoStudioGUI.cpp in Sources */,
+				38B6452417409B8800A681C0 /* CocosGUI.cpp in Sources */,
 				38B6452517409B8800A681C0 /* DictionaryHelper.cpp in Sources */,
 				38B6452617409B8800A681C0 /* InputLayer.cpp in Sources */,
 				38B6452717409B8800A681C0 /* CSContentJsonDictionary.cpp in Sources */,

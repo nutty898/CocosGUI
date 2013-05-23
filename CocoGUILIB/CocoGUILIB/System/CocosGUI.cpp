@@ -24,7 +24,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "CocoStudioGUI.h"
+#include "CocosGUI.h"
 
 namespace cs {
     const char* CocoStudioVersion()
