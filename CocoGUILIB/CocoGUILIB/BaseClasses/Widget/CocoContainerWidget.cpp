@@ -53,6 +53,11 @@ namespace cs {
         return NULL;
     }
     
+    void CocoContainerWidget::setLayoutParameter(/*LayoutParameter * parmeter*/)
+    {
+        
+    }
+    
     bool CocoContainerWidget::init()
     {
         if (CocoWidget::init()) {

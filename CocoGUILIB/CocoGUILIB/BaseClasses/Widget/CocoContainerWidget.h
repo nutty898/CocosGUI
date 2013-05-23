@@ -36,6 +36,8 @@ namespace cs {
         CocoContainerWidget();
         virtual ~CocoContainerWidget();
         static CocoContainerWidget* create();
+        //Only containerWidget can use the LayoutParameter for do layout to child widget
+        virtual void setLayoutParameter(/*LayoutParameter * parmeter*/);
 //        static CocoContainerWidget* create(cocos2d::CCDictionary* options);
 //        static CocoContainerWidget* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
