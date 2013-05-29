@@ -29,8 +29,8 @@
 #include "CClipAbleSprite.h"
 #include "CClipAbleLayerColor.h"
 #include "CLabelAtlas.h"
-#include "CCScale9Sprite.h"
 #include "GUINodeRGBA.h"
+#include "GUIScale9Sprite.h"
 
 using namespace cocos2d;
 
@@ -88,7 +88,7 @@ namespace cs{
                 this->m_pRenderNode = CLabelAtlas::create();
                 break;
             case NODE_SCALE9SPRITE://10
-                this->m_pRenderNode = cocos2d::extension::CCScale9Sprite::create();
+                this->m_pRenderNode = GUIScale9Sprite::create();
                 break;
             case NODE_TEXTAREA://11
                 this->m_pRenderNode = cocos2d::CCLabelTTF::create("", "Thonburi", 20, CCSizeMake(0, 0), kCCTextAlignmentCenter, kCCVerticalTextAlignmentCenter);
