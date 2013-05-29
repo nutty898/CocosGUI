@@ -45,6 +45,16 @@ bool HelloWorld::init()
     cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
     exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
     exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
+    
+    
+    cs::CocoLabel* cleanUI = cs::CocoLabel::create();
+    cleanUI->setTouchScaleChangeAble(true);
+    cleanUI->setPosition(ccp(200, 40));
+    cleanUI->setText("Click to clean UI Scene!");
+    cleanUI->setBeTouchAble(true);
+    cleanUI->addReleaseEvent(this, coco_releaseselector(HelloWorld::cleanUIWidgets));
+    COCOUISYSTEM->getCurScene()->addWidget(cleanUI);
+    
     return true;
 }
 
@@ -87,4 +97,9 @@ void HelloWorld::playUIAnimation(cocos2d::CCObject *pSender)
 void HelloWorld::cancelTouch(cocos2d::CCObject *pSender)
 {
     CCLOG("cancel touch");
+}
+
+void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
+{
+    COCOUISYSTEM->cleanUIScene();
 }

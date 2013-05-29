@@ -26,6 +26,8 @@ public:
     void playUIAnimation(CCObject* pSender);
     
     void cancelTouch(CCObject* pSender);
+  
+    void cleanUIWidgets(CCObject* pSender);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
