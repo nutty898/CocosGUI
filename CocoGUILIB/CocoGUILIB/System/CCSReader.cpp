@@ -220,9 +220,9 @@ namespace cs {
         std::string pPath = jsonpath.substr(0,pos+1);
         for (int i=0; i<texturesCount; i++) {
             const char* file = DICTOOL->getStringValueFromArray_json(jsonDict, "textures", i);
-            std::string pp = pPath;
-            pp.append(file);
-            COCOUISYSTEM->addSpriteFrame(file);
+            std::string tp = pPath;
+            tp.append(file);
+            COCOUISYSTEM->addSpriteFrame(tp.c_str());
         }
         float fileDesignWidth = DICTOOL->getFloatValue_json(jsonDict, "designWidth");
         float fileDesignHeight = DICTOOL->getFloatValue_json(jsonDict, "designHeight");
