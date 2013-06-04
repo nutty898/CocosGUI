@@ -166,9 +166,6 @@
     <ClInclude Include="..\..\..\..\CocoGUILIB\System\CCSReader.h">
       <Filter>CocoGUILIB\System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.h">
-      <Filter>CocoGUILIB\System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.h">
       <Filter>CocoGUILIB\System</Filter>
     </ClInclude>
@@ -237,6 +234,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.h">
       <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\System\CocosGUI.h">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\Component\CocoNodeContainer.h">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CocoGUILIB\CGraphics\GUIScale9Sprite.h">
+      <Filter>CocoGUILIB\CGraphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -321,9 +327,6 @@
     <ClCompile Include="..\..\..\..\CocoGUILIB\System\CCSReader.cpp">
       <Filter>CocoGUILIB\System</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CocoStudioGUI.cpp">
-      <Filter>CocoGUILIB\System</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\CocoGUILIB\System\DictionaryHelper.cpp">
       <Filter>CocoGUILIB\System</Filter>
     </ClCompile>
@@ -371,6 +374,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoImageButton.cpp">
       <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\System\CocosGUI.cpp">
+      <Filter>CocoGUILIB\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\Component\CocoNodeContainer.cpp">
+      <Filter>CocoGUILIB\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CocoGUILIB\CGraphics\GUIScale9Sprite.cpp">
+      <Filter>CocoGUILIB\CGraphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "cs::CCSReader::widgetFromJsonFile(char const*):CCSReader.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "jsonpath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
