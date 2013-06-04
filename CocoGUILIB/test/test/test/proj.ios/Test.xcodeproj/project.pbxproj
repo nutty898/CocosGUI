@@ -86,6 +86,7 @@
 		38B6455F17409DCC00A681C0 /* UIRES in Resources */ = {isa = PBXBuildFile; fileRef = 38B6455A17409DCC00A681C0 /* UIRES */; };
 		38B6B3421742378000CF4C07 /* CocoImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B6B3401742377F00CF4C07 /* CocoImageButton.cpp */; };
 		38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38F780C6174320E600D5F228 /* CocoListView.cpp */; };
+		509CDEB7175C7A610068E8E9 /* CocoNodeContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */; };
 		50ACC84017560320007CAF48 /* GUIScale9Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
@@ -260,6 +261,8 @@
 		38B6B3411742377F00CF4C07 /* CocoImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoImageButton.h; sourceTree = "<group>"; };
 		38F780C6174320E600D5F228 /* CocoListView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoListView.cpp; sourceTree = "<group>"; };
 		38F780C7174320E600D5F228 /* CocoListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoListView.h; sourceTree = "<group>"; };
+		509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoNodeContainer.cpp; sourceTree = "<group>"; };
+		509CDEB6175C7A610068E8E9 /* CocoNodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoNodeContainer.h; sourceTree = "<group>"; };
 		50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIScale9Sprite.cpp; sourceTree = "<group>"; };
 		50ACC83F1756031F007CAF48 /* GUIScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIScale9Sprite.h; sourceTree = "<group>"; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -550,6 +553,8 @@
 				38B6B3411742377F00CF4C07 /* CocoImageButton.h */,
 				38F780C6174320E600D5F228 /* CocoListView.cpp */,
 				38F780C7174320E600D5F228 /* CocoListView.h */,
+				509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */,
+				509CDEB6175C7A610068E8E9 /* CocoNodeContainer.h */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -830,6 +835,7 @@
 				38B6B3421742378000CF4C07 /* CocoImageButton.cpp in Sources */,
 				38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */,
 				50ACC84017560320007CAF48 /* GUIScale9Sprite.cpp in Sources */,
+				509CDEB7175C7A610068E8E9 /* CocoNodeContainer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

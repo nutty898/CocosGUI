@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "CCEditBox.h"
 using namespace cocos2d;
 
 CCScene* HelloWorld::scene()
@@ -54,6 +55,13 @@ bool HelloWorld::init()
     cleanUI->setBeTouchAble(true);
     cleanUI->addReleaseEvent(this, coco_releaseselector(HelloWorld::cleanUIWidgets));
     COCOUISYSTEM->getCurScene()->addWidget(cleanUI);
+    
+    cs::CocoNodeContainer* container = cs::CocoNodeContainer::create();
+    extension::CCEditBox* eb = extension::CCEditBox::create(CCSizeMake(200, 50), extension::CCScale9Sprite::create("UIRES/sliderballnormal.png"));
+    eb->setText("I'm a EditBox");
+    container->addCCNode(eb);
+    container->setPosition(ccp(330, 150));
+    COCOUISYSTEM->getCurScene()->addWidget(container);
     
     return true;
 }

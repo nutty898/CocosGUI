@@ -201,6 +201,7 @@ namespace cs {
 		std::string jsonpath;
         cs::CSJsonDictionary *jsonDict = NULL;
         jsonpath = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
+        
         unsigned long size = 0;
         des = (char*)(cocos2d::CCFileUtils::sharedFileUtils()->getFileData(jsonpath.c_str(),"r" , &size));
         jsonDict = new cs::CSJsonDictionary();
@@ -209,14 +210,18 @@ namespace cs {
 		{
 			printf("read json file[%s] error!\n", fileName);
 		}
-        float fileVersion = DICTOOL->getFloatValue_json(jsonDict, "version");
-        if (fileVersion != kCCSVersion) {
-            printf("WARNING! Incompatible json file version (file: %f reader: %f)\n", fileVersion, kCCSVersion);
-            return NULL;
-        }
+//        float fileVersion = DICTOOL->getFloatValue_json(jsonDict, "version");
+//        if (fileVersion != kCCSVersion) {
+//            printf("WARNING! Incompatible json file version (file: %f reader: %f)\n", fileVersion, kCCSVersion);
+//            return NULL;
+//        }
         int texturesCount = DICTOOL->getArrayCount_json(jsonDict, "textures");
+        int pos = jsonpath.find_last_of('/');
+        std::string pPath = jsonpath.substr(0,pos+1);
         for (int i=0; i<texturesCount; i++) {
             const char* file = DICTOOL->getStringValueFromArray_json(jsonDict, "textures", i);
+            std::string pp = pPath;
+            pp.append(file);
             COCOUISYSTEM->addSpriteFrame(file);
         }
         float fileDesignWidth = DICTOOL->getFloatValue_json(jsonDict, "designWidth");

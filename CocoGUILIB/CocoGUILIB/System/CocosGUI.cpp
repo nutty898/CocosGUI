@@ -29,6 +29,6 @@
 namespace cs {
     const char* CocosGUIVersion()
     {
-        return "CocosGUI v0.1.3";
+        return "CocosGUI v0.1.5";
     }
 }

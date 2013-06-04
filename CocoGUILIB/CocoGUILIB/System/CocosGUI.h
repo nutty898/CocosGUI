@@ -43,6 +43,7 @@
 #include "CocoTextButton.h"
 #include "CocoTextField.h"
 #include "CocoImageButton.h"
+#include "CocoNodeContainer.h"
 #include "UISystem.h"
 #include "CCSReader.h"
     
