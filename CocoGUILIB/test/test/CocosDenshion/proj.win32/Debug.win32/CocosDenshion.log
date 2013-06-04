@@ -1,25 +1,9 @@
-﻿生成启动时间为 2013/6/4 15:47:26。
-     1>项目“C:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\CocosDenshion.vcxproj”在节点 3 上(build 个目标)。
-     1>InitializeBuildStatus:
-         正在创建“Debug.win32\libCocosDenshion.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-       ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\include" /I..\Include /IC:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\..\..\cocos2dx /IC:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\..\..\cocos2dx\include /IC:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\..\..\cocos2dx\kazmath\include /IC:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\..\..\cocos2dx\platform\win32 /IC:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\..\..\cocos2dx\platform\third_party\win32\OGLES /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D COCOSDENSHIONWIN32_EXPORTS /D _EXPORT_DLL_ /D _WINDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4251 /analyze- /errorReport:prompt ..\win32\MciPlayer.cpp ..\win32\SimpleAudioEngine.cpp
-         SimpleAudioEngine.cpp
-         MciPlayer.cpp
-         正在生成代码...
-       Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\ winmm.lib libcocos2d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\libCocosDenshion.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.lib" /MACHINE:X86 /DLL Debug.win32\MciPlayer.obj
-         Debug.win32\SimpleAudioEngine.obj
-     1>MciPlayer.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/INCREMENTAL:NO”规范)
-            正在创建库 C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.lib 和对象 C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.exp
-         CocosDenshion.vcxproj -> C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.dll
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Administrator\Desktop\CocoGUILIB\test\test\Debug.win32\libCocosDenshion.dll;#2" /manifest Debug.win32\libCocosDenshion.dll.intermediate.manifest
-       FinalizeBuildStatus:
-         正在删除文件“Debug.win32\libCocosDenshion.unsuccessfulbuild”。
-         正在对“Debug.win32\libCocosDenshion.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“C:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\CocosDenshion.vcxproj”(build 个目标)的操作。
+﻿生成启动时间为 2013/6/4 16:20:16。
+     1>项目“C:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\CocosDenshion.vcxproj”在节点 3 上(clean 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Debug.win32\libCocosDenshion.lastbuildstate”。
+     1>已完成生成项目“C:\Users\Administrator\Desktop\CocoGUILIB\test\test\CocosDenshion\proj.win32\CocosDenshion.vcxproj”(clean 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:06.58
+已用时间 00:00:00.23
