@@ -20,12 +20,15 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../../../CocoGUILIB/CGraphics/CRenderNode.cpp \
                    ../../../../../CocoGUILIB/CGraphics/CTextField.cpp \
                    ../../../../../CocoGUILIB/CGraphics/GUINodeRGBA.cpp \
+		   ../../../../../CocoGUILIB/CGraphics/GUIScale9Sprite.cpp \
                    ../../../../../CocoGUILIB/Component/CocoButton.cpp \
                    ../../../../../CocoGUILIB/Component/CocoCheckBox.cpp \
+		   ../../../../../CocoGUILIB/Component/CocoImageButton.cpp \
                    ../../../../../CocoGUILIB/Component/CocoImageView.cpp \
                    ../../../../../CocoGUILIB/Component/CocoLabel.cpp \
                    ../../../../../CocoGUILIB/Component/CocoLabelAtlas.cpp \
                    ../../../../../CocoGUILIB/Component/CocoLoadingBar.cpp \
+		   ../../../../../CocoGUILIB/Component/CocoNodeContainer.cpp \
                    ../../../../../CocoGUILIB/Component/CocoPanel.cpp \
                    ../../../../../CocoGUILIB/Component/CocoScrollView.cpp \
                    ../../../../../CocoGUILIB/Component/CocoSlider.cpp \
@@ -33,7 +36,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../../../CocoGUILIB/Component/CocoTextButton.cpp \
                    ../../../../../CocoGUILIB/Component/CocoTextField.cpp \
                    ../../../../../CocoGUILIB/System/CCSReader.cpp \
-                   ../../../../../CocoGUILIB/System/CocoStudioGUI.cpp \
+                   ../../../../../CocoGUILIB/System/CocosGUI.cpp \
                    ../../../../../CocoGUILIB/System/DictionaryHelper.cpp \
                    ../../../../../CocoGUILIB/System/InputLayer.cpp \
 		   ../../../../../CocoGUILIB/System/UIInputManager.cpp \
@@ -60,6 +63,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
                     $(LOCAL_PATH)/../../../../../CocoGUILIB/System/Json \
                     $(LOCAL_PATH)/../../../../../CocoGUILIB/System/Json/lib_json \
                     $(LOCAL_PATH)/../../../../../CocoGUILIB/UIElements \
+		     $(LOCAL_PATH)/../../../extensions/GUI/CCEditBox \
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos_extension_static
 
