@@ -21,6 +21,20 @@ GUINodeRGBA * GUINodeRGBA::create(void)
     }
 	return pRet;
 }
+    
+    /* gui mark */
+    bool GUINodeRGBA::init()
+    {
+        if (CCNodeRGBA::init())
+        {
+            setCascadeOpacityEnabled(true);
+            setCascadeColorEnabled(true);
+            
+            return true;
+        }
+        return false;
+    }
+    /**/
 
 void GUINodeRGBA::addChild(cocos2d::CCNode *child)
 {

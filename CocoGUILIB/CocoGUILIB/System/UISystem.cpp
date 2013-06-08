@@ -163,6 +163,7 @@ namespace cs {
             this->m_pInputLayer = NULL;
         }
         this->m_pInputLayer = InputLayer::createWithUISystem(this);
+        this->m_pInputLayer->setTag(10000);
         this->m_pInputLayer->retain();
         this->m_pInputLayer->setTouchEnabled(true);
         cocos2d::CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this->m_pInputLayer, nPriority, false);

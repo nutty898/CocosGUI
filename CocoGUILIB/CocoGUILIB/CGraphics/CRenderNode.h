@@ -119,6 +119,16 @@ namespace cs {
         void setTextFieldSize(float width,float height);
         void setCharacterLength(int length);
         void setIsPassword(bool isPassword);
+        /* gui mark */
+        bool getTextFieldAttachWithIME();
+        void setTextFieldAttachWithIME(bool attach);
+        bool getTextFieldDetachWithIME();
+        void setTextFieldDetachWithIME(bool detach);
+        bool getTextFieldInsertText();
+        void setTextFieldInsertText(bool insertText);
+        bool getTextFieldDeleteBackward();
+        void setTextFieldDeleteBackward(bool deleteBackward);
+        /**/
         //clipsprite
         void setClipAble(bool able);
         void setClipRect(float x,float y,float width,float height);
@@ -148,7 +158,12 @@ namespace cs {
         NodeType m_nodeType;
         
         //ccsprite
-        std::string m_strTextureName;
+        /* gui mark */
+        CC_SYNTHESIZE_READONLY_PASS_BY_REF(bool, m_bUseSpriteFrame, UseSpriteFrame);
+        CC_SYNTHESIZE_READONLY_PASS_BY_REF(std::string, m_strTextureName, TextureName);
+        // before
+//        std::string m_strTextureName;
+        /**/
         //cclabel
         std::string m_strTextValue;
         

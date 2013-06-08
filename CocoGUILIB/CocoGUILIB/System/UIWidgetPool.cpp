@@ -24,57 +24,64 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "CLabelAtlas.h"
+#include "UIWidgetPool.h"
 
-using namespace cocos2d;
-
-namespace cs {
-    
-    CLabelAtlas::CLabelAtlas()
+namespace cs
+{
+    UIWidgetPool::UIWidgetPool()
     {
-        
+        m_widgets = cocos2d::CCArray::create();
+        m_widgets->retain();
     }
     
-    CLabelAtlas::~CLabelAtlas()
+    UIWidgetPool::~UIWidgetPool()
     {
-        
+        m_widgets->release();
+        delete m_widgets;
     }
     
-    CLabelAtlas* CLabelAtlas::create()
+    void UIWidgetPool::push_back(cs::CocoWidget *widget)
     {
-        // && pRet->initWithString(string, charMapFile, itemWidth, itemHeight, startCharMap)
-        CLabelAtlas *pRet = new CLabelAtlas();
-        if(pRet)
-        {
-            //        pRet->initWithString("122223.12", "gui/New/labelatlasimg.png", 12, 32, '.');
-            pRet->autorelease();
-            return pRet;
-        }
-        CC_SAFE_DELETE(pRet);
-        
-        return NULL;
+        m_widgets->addObject(widget);
     }
     
-    void CLabelAtlas::setProperty(const char *string, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap)
+    void UIWidgetPool::pop_back()
     {
-        this->initWithString(string, charMapFile, itemWidth, itemHeight, startCharMap);
+        m_widgets->removeLastObject();
     }
     
-    void CLabelAtlas::setProperty(const char *string, cocos2d::CCTexture2D *texture, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap)
+    void UIWidgetPool::push_front(cs::CocoWidget *widget)
     {
-        this->initWithString(string, texture, itemWidth, itemHeight, startCharMap);
+        m_widgets->insertObject(widget, 0);
     }
     
-    /* gui mark */
-    void CLabelAtlas::draw()
+    void UIWidgetPool::pop_front()
     {
-        if (strcmp("", getString()) == 0)
-        {
-            return;
-        }
-        
-        CCAtlasNode::draw();
+        m_widgets->removeObjectAtIndex(0);
     }
-    /**/
-
+    
+    CocoWidget* UIWidgetPool::begin()
+    {
+        return dynamic_cast<CocoWidget*>(m_widgets->objectAtIndex(0));
+    }
+    
+    CocoWidget* UIWidgetPool::rbegin()
+    {
+        return dynamic_cast<CocoWidget*>(m_widgets->lastObject());
+    }
+    
+    bool UIWidgetPool::empty()
+    {
+        return m_widgets->count() == 0;
+    }
+    
+    int UIWidgetPool::size()
+    {
+        return m_widgets->count();
+    }
+    
+    void UIWidgetPool::clear()
+    {
+        m_widgets->removeAllObjects();
+    }
 }

@@ -28,6 +28,26 @@ public:
     void cancelTouch(CCObject* pSender);
   
     void cleanUIWidgets(CCObject* pSender);
+    
+    /* gui mark */
+    void initListViewChild(CCObject* pSender);
+    void updateListViewChild(CCObject* pSender);
+    
+    void textFieldAttachWithIME(CCObject* pSender);
+    void textFieldDetachWithIME(CCObject* pSender);
+    void textFieldInsertText(CCObject* pSender);
+    void textFieldDeleteBackward(CCObject* pSender);
+    /**/
+    
+    void removeWidget(CCObject* pSender);
+    
+    void toPageViewScene(CCObject* pSender);
+    
+protected:
+    /* gui mark */
+    int count;
+    cocos2d::CCArray* array;
+    /**/
 };
 
 #endif // __HELLOWORLD_SCENE_H__

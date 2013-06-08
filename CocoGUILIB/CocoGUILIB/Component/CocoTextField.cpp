@@ -59,6 +59,10 @@ namespace cs {
             this->uiTextField = new UITextField();
             this->uiTextField->init();
             this->addUIElement(this->uiTextField);
+            
+            /* gui mark */
+            setUpdateEnable(true);
+            /**/
             return true;
         }
         return false;
@@ -166,4 +170,126 @@ namespace cs {
     {
         this->uiTextField->setIsPassWord(isPassword);
     }
+    
+    /* gui mark */
+    void CocoTextField::update(float dt)
+    {
+        if (getAttachWithIME())
+        {
+            attachWithIMEEvent();
+            setAttachWithIME(false);
+        }
+        if (getDetachWithIME())
+        {
+            detachWithIMEEvent();
+            setDetachWithIME(false);
+        }
+        if (getInsertText())
+        {
+            insertTextEvent();
+            setInsertText(false);
+        }
+        if (getDeleteBackward())
+        {
+            deleteBackwardEvent();
+            setDeleteBackward(false);
+        }
+    }
+    
+    bool CocoTextField::getAttachWithIME()
+    {
+        return uiTextField->getAttachWithIME();
+    }
+    
+    void CocoTextField::setAttachWithIME(bool attach)
+    {
+        uiTextField->setAttachWithIME(attach);
+    }
+    
+    bool CocoTextField::getDetachWithIME()
+    {
+        return uiTextField->getDetachWithIME();
+    }
+    
+    void CocoTextField::setDetachWithIME(bool detach)
+    {
+        uiTextField->setDetachWithIME(detach);
+    }
+    
+    bool CocoTextField::getInsertText()
+    {
+        return uiTextField->getInsertText();
+    }
+    
+    void CocoTextField::setInsertText(bool insertText)
+    {
+        uiTextField->setInsertText(insertText);
+    }
+    
+    bool CocoTextField::getDeleteBackward()
+    {
+        return uiTextField->getDeleteBackward();
+    }
+    
+    void CocoTextField::setDeleteBackward(bool deleteBackward)
+    {
+        uiTextField->setDeleteBackward(deleteBackward);
+    }
+    
+    void CocoTextField::attachWithIMEEvent()
+    {
+        if (m_pAttachWithIMEListener && m_pfnAttachWithIMESelector)
+        {
+            (m_pAttachWithIMEListener->*m_pfnAttachWithIMESelector)(this);
+        }
+    }
+    
+    void CocoTextField::detachWithIMEEvent()
+    {
+        if (m_pDetachWithIMEListener && m_pfnDetachWithIMESelector)
+        {
+            (m_pDetachWithIMEListener->*m_pfnDetachWithIMESelector)(this);
+        }
+    }
+    
+    void CocoTextField::insertTextEvent()
+    {
+        if (m_pInsertTextListener && m_pfnInsertTextSelector)
+        {
+            (m_pInsertTextListener->*m_pfnInsertTextSelector)(this);
+        }
+    }
+    
+    void CocoTextField::deleteBackwardEvent()
+    {
+        if (m_pDeleteBackwardListener && m_pfnDeleteBackwardSelector)
+        {
+            (m_pDeleteBackwardListener->*m_pfnDeleteBackwardSelector)(this);
+        }
+    }
+    
+    void CocoTextField::addAttachWithIMEEvent(cocos2d::CCObject *target, SEL_TextFieldAttachWithIMEEvent selecor)
+    {
+        m_pAttachWithIMEListener = target;
+        m_pfnAttachWithIMESelector = selecor;
+    }
+    
+    void CocoTextField::addDetachWithIMEEvent(cocos2d::CCObject *target, SEL_TextFieldDetachWithIMEEvent selecor)
+    {
+        m_pDetachWithIMEListener = target;
+        m_pfnDetachWithIMESelector = selecor;
+    }
+    
+    void CocoTextField::addInsertTextEvent(cocos2d::CCObject *target, SEL_TextFieldInsertTextEvent selecor)
+    {
+        m_pInsertTextListener = target;
+        m_pfnInsertTextSelector = selecor;
+    }
+    
+    void CocoTextField::addDeleteBackwardEvent(cocos2d::CCObject *target, SEL_TextFieldDeleteBackwardEvent selecor)
+    {
+        m_pDeleteBackwardListener = target;
+        m_pfnDeleteBackwardSelector = selecor;
+    }
+    /**/
 }

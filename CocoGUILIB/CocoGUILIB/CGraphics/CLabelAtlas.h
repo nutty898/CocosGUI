@@ -39,6 +39,10 @@ namespace cs {
         static CLabelAtlas* create();
         void setProperty(const char *string, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
         void setProperty(const char *string, cocos2d::CCTexture2D *texture, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
+        
+        /* gui mark */
+        virtual void draw(void);
+        /**/
 	};
 }
 

@@ -29,20 +29,11 @@
 
 #include "cocos2d.h"
 
+/* gui mark */
 namespace cs
 {
     class CTextField: public cocos2d::CCTextFieldTTF, public cocos2d::CCTextFieldDelegate, public cocos2d::CCTouchDelegate
     {
-    private:
-        // cursor sprite
-        CCSprite* m_pCursorSprite;
-        
-        // intput limit character amount
-        CC_SYNTHESIZE(int, m_nCharacterLength, CharacterLength);
-        
-        // whether show with password
-        CC_SYNTHESIZE(bool, m_bIsPassword, IsPassword);
-        
     public:
         CTextField();
         ~CTextField();
@@ -61,14 +52,26 @@ namespace cs
         void insertText(const char* text, int len);
         void deleteBackward();
         
-        // initialize cursor
-        void initCursorSprite(int nHeight);
-        
         void openIME();
         void closeIME();
         
         void setPswText(const char* text);
+        
+    protected:
+        // intput limit character amount
+        CC_SYNTHESIZE(int, m_nCharacterLength, CharacterLength);
+        
+        // whether show with password
+        CC_SYNTHESIZE(bool, m_bIsPassword, IsPassword);
+        
+        CC_SYNTHESIZE(bool, m_bAttachWithIME, AttachWithIME);
+        CC_SYNTHESIZE(bool, m_bDetachWithIME, DetachWithIME);
+        CC_SYNTHESIZE(bool, m_bInsertText, InsertText);
+        CC_SYNTHESIZE(bool, m_bDeleteBackward, DeleteBackward);
+        
+        int m_nTextTotalLength;
     };
 }
+/**/
 
 #endif

@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "CCEditBox.h"
+#include "PageViewScene.h"
 using namespace cocos2d;
 
 CCScene* HelloWorld::scene()
@@ -7,7 +8,7 @@ CCScene* HelloWorld::scene()
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
     
-    // 'layer' is an autorelease object
+    // 'layer' is an autorelease object    
     HelloWorld *layer = HelloWorld::create();
     
     // add layer as a child to scene
@@ -24,29 +25,79 @@ bool HelloWorld::init()
     if ( !CCLayer::init() )
     {
         return false;
-    }
+    }    
     COCOUISYSTEM->resetSystem(this);
     
 //    COCOUISYSTEM->replaceUISceneWithFile(this, "UIRES/CocoGUISample.json", 1, true,true,true);
     
     COCOUISYSTEM->getCurScene()->addWidget(COCOUISYSTEM->createWidgetFromFileWithAdapt_json("UIRES/CocoGUISample.json", true, true));
     
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    float x_proportion = winSize.width / COCOUISYSTEM->getFileDesignWidth();
+    float y_proportion = winSize.height / COCOUISYSTEM->getFileDesignHeight();
+    
     cs::CocoScrollView* sc = (cs::CocoScrollView*)(COCOUISYSTEM->getWidgetByName("scrollview"));
     sc->setUpdateEnable(true);
     sc->setMoveMode(cs::SCROLLVIEW_MOVE_MODE_ACTION);
+    sc->setWidgetTag(10000);
+    /* gui mark */
+    CCFadeOut* fadeOut = CCFadeOut::create(2);
+    CCFadeIn* fadeIn = CCFadeIn::create(1);
+    /*
+    CCDelayTime* delayTime = CCDelayTime::create(1);
+    CCCallFuncO* callFunc0 = CCCallFuncO::create(this, callfuncO_selector(HelloWorld::removeWidget), sc);
+     */
+    CCSequence* seq = CCSequence::create(fadeOut, fadeIn, /*delayTime, callFunc0,*/ NULL);
+    sc->runAction(seq);
+    /**/
     cs::CocoTextButton* bt = (cs::CocoTextButton*)(COCOUISYSTEM->getWidgetByName("backtotopbutton"));
     bt->addReleaseEvent(this, coco_releaseselector(HelloWorld::backToTop));
+    
     cs::CocoSlider* sld = (cs::CocoSlider*)(COCOUISYSTEM->getWidgetByName("slider"));
     sld->addPercentChangedEvent(this, coco_percentchangedselector(HelloWorld::sliderPercentChanged));
+    
     cs::CocoButton* anib = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("animationbutton"));
     anib->addReleaseEvent(this, coco_releaseselector(HelloWorld::playUIAnimation));
+    
     cs::CocoTextField* tfd = dynamic_cast<cs::CocoTextField*>(COCOUISYSTEM->getWidgetByName("textfield"));
     tfd->setCharacterLength(4);
-    tfd->setIsPassWord(true);
-    cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
-    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
-    exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
+    /* gui mark */
+//    tfd->setIsPassWord(true);
+    /**/
+    /* gui mark */
+    tfd->addAttachWithIMEEvent(this, coco_TextFieldAttachWithIMESelector(HelloWorld::textFieldAttachWithIME));
+    tfd->addDetachWithIMEEvent(this, coco_TextFieldDetachWithIMESelector(HelloWorld::textFieldDetachWithIME));
+    tfd->addInsertTextEvent(this, coco_TextFieldInsertTextSelector(HelloWorld::textFieldInsertText));
+    tfd->addDeleteBackwardEvent(this, coco_TextFieldDeleteBackwardSelector(HelloWorld::textFieldDeleteBackward));
+    /**/        
     
+    /* gui mark */
+    // listview
+    count = 0;
+    array = CCArray::create();
+    array->retain();
+    for (int i = 0; i < 20; ++i)
+    {
+        CCString* ccstr = CCString::createWithFormat("object_%d", i);
+        array->addObject(ccstr);
+    }
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(COCOUISYSTEM->getWidgetByName("listview"));    
+    list->setUpdateEnable(true);
+    list->setMoveMode(cs::SCROLLVIEW_MOVE_MODE_ACTION);    
+    for (int i = 0; i < 4; ++i)
+    {
+        cs::CocoTextButton* tbtn = cs::CocoTextButton::create();
+        tbtn->setTextures("UIRES/backtotoppressed.png", "UIRES/backtotopnormal.png", "");
+        tbtn->setPosition(ccp(75, 80 - i * (tbtn->getRect().size.height + 5)));
+        list->addChild(tbtn);
+        
+        COCOUISYSTEM->adjustWidgetProperty(tbtn, x_proportion, y_proportion, true, true);
+    }
+    list->resetProperty();
+    list->addInitChildEvent(this, coco_InitChildSelector(HelloWorld::initListViewChild));
+    list->addUpdateChildEvent(this, coco_UpdateChildSelector(HelloWorld::updateListViewChild));
+    list->initChildWithDataLength(array->count());
+    /**/
     
     cs::CocoLabel* cleanUI = cs::CocoLabel::create();
     cleanUI->setTouchScaleChangeAble(true);
@@ -57,11 +108,17 @@ bool HelloWorld::init()
     COCOUISYSTEM->getCurScene()->addWidget(cleanUI);
     
     cs::CocoNodeContainer* container = cs::CocoNodeContainer::create();
-    extension::CCEditBox* eb = extension::CCEditBox::create(CCSizeMake(200, 50), extension::CCScale9Sprite::create("UIRES/sliderballnormal.png"));
-    eb->setText("I'm a EditBox");
+    extension::CCEditBox* eb = extension::CCEditBox::create(CCSizeMake(150, 50), extension::CCScale9Sprite::create("UIRES/sliderballnormal.png")); // 200 50
+    eb->setPlaceHolder("EditBox");
     container->addCCNode(eb);
-    container->setPosition(ccp(330, 150));
+    container->setPosition(ccp(240, 195)); // 330 150
     COCOUISYSTEM->getCurScene()->addWidget(container);
+    COCOUISYSTEM->adjustWidgetProperty(container, x_proportion, y_proportion, true, true);
+    
+    cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
+    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::toPageViewScene));
+//    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
+    exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
     
     return true;
 }
@@ -110,4 +167,68 @@ void HelloWorld::cancelTouch(cocos2d::CCObject *pSender)
 void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
 {
     COCOUISYSTEM->cleanUIScene();
+}
+
+/* gui mark */
+// listview
+void HelloWorld::initListViewChild(cocos2d::CCObject *pSender)
+{
+    CCString* ccstr = static_cast<CCString*>(array->objectAtIndex(count));
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(pSender);
+    cs::CocoTextButton* tbtn = dynamic_cast<cs::CocoTextButton*>(list->getUpdateChild());
+    tbtn->setText(ccstr->getCString());
+    
+    count++;
+}
+
+void HelloWorld::updateListViewChild(cocos2d::CCObject *pSender)
+{
+    cs::CocoListView* list = dynamic_cast<cs::CocoListView*>(pSender);
+    int index = list->getUpdateDataIndex();
+    
+    if (index < 0 || index >= list->getDataLength())
+    {
+        list->setUpdateSuccess(false);
+    }
+    
+    CCString* ccstr = static_cast<CCString*>(array->objectAtIndex(index));
+    cs::CocoTextButton* tbtn = dynamic_cast<cs::CocoTextButton*>(list->getUpdateChild());
+    tbtn->setText(ccstr->getCString());
+    list->setUpdateSuccess(true);
+}
+//
+
+// textfield
+void HelloWorld::textFieldAttachWithIME(cocos2d::CCObject *pSender)
+{
+    CCLog("textfield AttachWithIME !");
+}
+
+void HelloWorld::textFieldDetachWithIME(cocos2d::CCObject *pSender)
+{
+    CCLog("textfield DetachWithIME !");
+}
+
+void HelloWorld::textFieldInsertText(cocos2d::CCObject *pSender)
+{
+    cs::CocoTextField* tfd = dynamic_cast<cs::CocoTextField*>(pSender);
+    CCLog("textfield InsertText, text: %s", tfd->getStringValue());
+}
+
+void HelloWorld::textFieldDeleteBackward(cocos2d::CCObject *pSender)
+{
+    CCLog("textfield DeletBackward !");
+}
+//
+
+void HelloWorld::removeWidget(CCObject* pSender)
+{
+    cs::CocoScrollView* sc = dynamic_cast<cs::CocoScrollView*>(pSender);
+    sc->removeFromParentAndCleanup(true);
+}
+
+void HelloWorld::toPageViewScene(cocos2d::CCObject *pSender)
+{
+    COCOUISYSTEM->cleanUIScene();
+    CCDirector::sharedDirector()->replaceScene(PageView::scene());
 }

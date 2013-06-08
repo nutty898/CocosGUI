@@ -46,6 +46,17 @@ namespace cs {
         const char* getStringValue();
         void setCharacterLength(int length);
         void setIsPassWord(bool isPassword);
+        
+        /* gui mark */
+        bool getAttachWithIME();
+        void setAttachWithIME(bool attach);
+        bool getDetachWithIME();
+        void setDetachWithIME(bool detach);
+        bool getInsertText();
+        void setInsertText(bool insertText);
+        bool getDeleteBackward();
+        void setDeleteBackward(bool deleteBackward);
+        /**/
     protected:
     };
 }

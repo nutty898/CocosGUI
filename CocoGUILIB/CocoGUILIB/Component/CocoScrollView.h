@@ -31,6 +31,22 @@
 
 namespace cs
 {
+    enum SCROLLVIEW_DIR
+    {
+        SCROLLVIEW_DIR_NONE,
+        SCROLLVIEW_DIR_VERTICAL,
+        SCROLLVIEW_DIR_HORIZONTAL
+    };
+    
+    enum SCROLLVIEW_MOVE_DIR
+    {
+        SCROLLVIEW_MOVE_DIR_NONE,
+        SCROLLVIEW_MOVE_DIR_UP,
+        SCROLLVIEW_MOVE_DIR_DOWN,
+        SCROLLVIEW_MOVE_DIR_LEFT,
+        SCROLLVIEW_MOVE_DIR_RIGHT,
+    };
+    
     enum SCROLLVIEW_MOVE_MODE
     {
         SCROLLVIEW_MOVE_MODE_NONE,
@@ -86,6 +102,10 @@ namespace cs
         virtual void removeChildMoveToTrash(CocoWidget* child);
         virtual void removeChildReferenceOnly(CocoWidget* child);
         virtual void removeAllChildrenAndCleanUp(bool cleanup);
+        /* gui mark */
+        virtual void initProperty();
+        virtual void resetProperty();
+        /**/
         void resortChildren();
         void moveChildren(float offset);
         void autoScrollChildren(float dt);
@@ -96,12 +116,22 @@ namespace cs
         virtual CocoWidget* getCheckPositionChild();
         float calculateOffsetWithDragForce(float moveOffset);
         void handleScrollActionEvent();
-        void setDirection(int direction);
-        bool scrollChildren(float touchOffset);
+        /* gui mark */
+//        void setDirection(int direction);
+        /**/
+        /* gui mark */
+        void berthChildren(int direction);
+        /**/
+        virtual bool scrollChildren(float touchOffset);
         void scrollToBottom();
         void scrollToTop();
+        /* gui mark */
+        virtual void drag(float offset);
+        /**/
         void startRecordSlidAction();
-        void endRecordSlidAction();
+        /* gui mark */
+        virtual void endRecordSlidAction();
+        /**/
         void handlePressLogic(cocos2d::CCPoint &touchPoint);
         void handleMoveLogic(cocos2d::CCPoint &touchPoint);
         void handleReleaseLogic(cocos2d::CCPoint &touchPoint);
@@ -144,6 +174,8 @@ namespace cs
         void stopAction();
         
     protected:
+        CC_SYNTHESIZE(SCROLLVIEW_DIR, m_eDirection, Direction);
+        CC_SYNTHESIZE(SCROLLVIEW_MOVE_DIR, m_eMoveDirection, MoveDirection);
         int m_nDirection;
         float m_fTouchStartLocation;
         float m_fTouchEndLocation;

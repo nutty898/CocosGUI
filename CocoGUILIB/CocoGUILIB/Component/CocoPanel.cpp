@@ -130,13 +130,25 @@ namespace cs {
     
     void CocoPanel::setColor(int r, int g, int b)
     {
+        /* gui mark */
         CocoContainerWidget::setColor(r, g, b);
-        this->m_pBackGroundImage->setColor(r, g, b);
+        // before
+        /*
+         CocoContainerWidget::setColor(r, g, b);
+         this->m_pBackGroundImage->setColor(r, g, b);
+         */
+        /**/
     }
     
     void CocoPanel::setOpacity(int opcity)
     {
-        CocoContainerWidget::setOpcity(opcity);
-        this->m_pBackGroundImage->setOpacity(opcity);
+        /* gui mark */
+        CocoContainerWidget::setOpacity(opcity);
+        // before
+        /*
+         CocoContainerWidget::setOpcity(opcity);
+         this->m_pBackGroundImage->setOpacity(opcity);
+         */
+        /**/
     }
 }
