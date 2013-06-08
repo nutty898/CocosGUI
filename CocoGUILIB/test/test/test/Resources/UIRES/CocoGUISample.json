@@ -153,6 +153,36 @@
         },
          /* gui mark */
          {
+         "classname" : "ListView",
+         "options" :
+         {
+         "x" : 330,
+         "y" : 80,
+         "width" : 150,
+         "height" : 100,
+         "backGroundScale9Enable" : true,
+         "clipAble" : true,
+         "touchAble" : true,
+         "backGroundImage" : "UIRES/scrollviewbg.png",
+         "name" : "listview"
+         },
+         "children" : []
+         },
+         {
+         "classname" : "Label",
+         "options" :
+         {
+         "x" : 405,
+         "y" : 70,
+         "text" : "列表层",
+         "touchAble" : true,
+         "touchSacleEnable" : true
+         },
+         "children" :[]
+         },
+         /**/
+         /* gui mark */
+         {
          "classname" : "ImageView",
          "options" :
          {
@@ -352,10 +382,10 @@
          "classname" : "TextField",
          "options" :
          {
-         "x" : 190,
-         "y" : 200,
+         "x" : 240,
+         "y" : 150,
          "fontSize" : 20,
-         "placeHolder" : "tap to input",
+         "placeHolder" : "TextField",
          "touchAble" : true,
          "name" : "textfield"
          },
@@ -365,9 +395,9 @@
          "classname" : "Label",
          "options" :
          {
-         "x" : 190,
-         "y" : 185,
-         "text" : "输入框",
+         "x" : 240,
+         "y" : 130,
+         "text" : "", // 输入框
          "touchAble" : false,
          "touchSacleEnable" : false
          },

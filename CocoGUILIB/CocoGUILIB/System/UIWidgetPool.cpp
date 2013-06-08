@@ -24,40 +24,64 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef SPII_CClipAbleLayerColor_h
-#define SPII_CClipAbleLayerColor_h
+#include "UIWidgetPool.h"
 
-#include "cocos2d.h"
-
-
-namespace cs {
+namespace cs
+{
+    UIWidgetPool::UIWidgetPool()
+    {
+        m_widgets = cocos2d::CCArray::create();
+        m_widgets->retain();
+    }
     
-    class CClipAbleLayerColor : public cocos2d::CCLayerColor {
-    public:
-        CClipAbleLayerColor():m_bClipAble(false),m_fScissorX(0.0),m_fScissorY(0.0),m_fScissorWidth(0.0),m_fScissorHeight(0.0),m_bEnableCustomArea(false),m_bColorEnable(false){};
-        virtual ~CClipAbleLayerColor(){};
-        static CClipAbleLayerColor* create(cocos2d::ccColor4B color,float width ,float height);
-        static CClipAbleLayerColor* create();
-        /* gui mark */
-        bool init();
-        /**/
-        virtual void visit();
-        void setClipAble(bool able);
-        void setColorEnable(bool enable);
-        bool getColorEnable();
-        void setClipRect(float x,float y,float width,float height);
-        void setClipSize(float width,float height);
-        virtual void draw();
-    protected:
-        bool m_bClipAble;
-        float m_fScissorX;
-        float m_fScissorY;
-        float m_fScissorWidth;
-        float m_fScissorHeight;
-        bool m_bEnableCustomArea;
-        bool m_bColorEnable;
-    };
+    UIWidgetPool::~UIWidgetPool()
+    {
+        m_widgets->release();
+        delete m_widgets;
+    }
+    
+    void UIWidgetPool::push_back(cs::CocoWidget *widget)
+    {
+        m_widgets->addObject(widget);
+    }
+    
+    void UIWidgetPool::pop_back()
+    {
+        m_widgets->removeLastObject();
+    }
+    
+    void UIWidgetPool::push_front(cs::CocoWidget *widget)
+    {
+        m_widgets->insertObject(widget, 0);
+    }
+    
+    void UIWidgetPool::pop_front()
+    {
+        m_widgets->removeObjectAtIndex(0);
+    }
+    
+    CocoWidget* UIWidgetPool::begin()
+    {
+        return dynamic_cast<CocoWidget*>(m_widgets->objectAtIndex(0));
+    }
+    
+    CocoWidget* UIWidgetPool::rbegin()
+    {
+        return dynamic_cast<CocoWidget*>(m_widgets->lastObject());
+    }
+    
+    bool UIWidgetPool::empty()
+    {
+        return m_widgets->count() == 0;
+    }
+    
+    int UIWidgetPool::size()
+    {
+        return m_widgets->count();
+    }
+    
+    void UIWidgetPool::clear()
+    {
+        m_widgets->removeAllObjects();
+    }
 }
-
-
-#endif

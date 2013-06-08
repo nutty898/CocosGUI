@@ -27,8 +27,8 @@
 #ifndef __Test__CocoListView__
 #define __Test__CocoListView__
 
-#include <iostream>
 #include "CocoScrollView.h"
+#include "UIWidgetPool.h"
 
 namespace cs
 {
@@ -45,16 +45,57 @@ namespace cs
         static CocoListView* create();
         virtual bool init();
         virtual bool addChild(CocoWidget* widget);
-//        virtual void removeChildMoveToTrash(CocoWidget* child);
-//        virtual void removeChildReferenceOnly(CocoWidget* child);
-//        virtual void removeAllChildrenAndCleanUp(bool cleanup);
-//        CocoWidget* getCheckPositionChild();
+        virtual void removeChildMoveToTrash(CocoWidget* child);
+        virtual void removeChildReferenceOnly(CocoWidget* child);
+        virtual void removeAllChildrenAndCleanUp(bool cleanup);
+        bool scrollChildren(float touchOffset);
+        void drag(float offset);        
+        CocoWidget* getCheckPositionChild();
+        
+        void initChildWithDataLength(int length);        
+        CocoWidget* getChildFromUpdatePool();
+        void pushChildToPool();
+        void getAndCallback();
+        int getDataLength();        
+        CocoWidget* getUpdateChild();
+        void setUpdateChild(CocoWidget* child);
+        int getUpdateDataIndex();
+        void setUpdateDataIndex(int index);
+        bool getUpdateSuccess();
+        void setUpdateSuccess(bool sucess);
+        void collectOverTopChild();
+        void collectOverBottomChild();
+        void collectOverLeftChild();
+        void collectOverRightChild();
+        void setLoopPosition();
+        void updateChild();
+        
+        void initChildEvent();
+        void updateChildEvent();
+        
+        void addInitChildEvent(cocos2d::CCObject* target, SEL_InitChildEvent seletor);
+        void addUpdateChildEvent(cocos2d::CCObject* target, SEL_UpdateChildEvent selector);
         
     protected:
         cocos2d::CCObject* m_pInitChildListener;
         SEL_InitChildEvent m_pfnInitChildSelector;
         cocos2d::CCObject* m_pUpdateChildListener;
         SEL_UpdateChildEvent m_pfnUpdateChildSelector;
+        
+        UIWidgetPool* m_pChildPool;
+        UIWidgetPool* m_pUpdatePool;
+        
+        int m_nDataLength;
+        int m_nBegin;
+        int m_nEnd;
+        CocoWidget* m_pUpdateChild;
+        int m_nUpdateDataIndex;
+        bool m_bUpdateSuccess;
+        
+        cocos2d::CCArray* m_overTopArray;
+        cocos2d::CCArray* m_overBottomArray;
+        cocos2d::CCArray* m_overLeftArray;
+        cocos2d::CCArray* m_overRightArray;
     };
 }
 

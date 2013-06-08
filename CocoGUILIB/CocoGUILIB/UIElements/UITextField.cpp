@@ -92,4 +92,46 @@ namespace cs {
     {
         this->m_pCRenderNode->setIsPassword(isPassword);
     }
+    
+    /* gui mark */
+    bool UITextField::getAttachWithIME()
+    {
+        return m_pCRenderNode->getTextFieldAttachWithIME();
+    }
+    
+    void UITextField::setAttachWithIME(bool attach)
+    {
+        m_pCRenderNode->setTextFieldAttachWithIME(attach);
+    }
+    
+    bool UITextField::getDetachWithIME()
+    {
+        return m_pCRenderNode->getTextFieldDetachWithIME();
+    }
+    
+    void UITextField::setDetachWithIME(bool detach)
+    {
+        m_pCRenderNode->setTextFieldDetachWithIME(detach);
+    }
+    
+    bool UITextField::getInsertText()
+    {
+        return m_pCRenderNode->getTextFieldInsertText();
+    }
+    
+    void UITextField::setInsertText(bool insertText)
+    {
+        m_pCRenderNode->setTextFieldInsertText(insertText);
+    }
+    
+    bool UITextField::getDeleteBackward()
+    {
+        return m_pCRenderNode->getTextFieldDeleteBackward();
+    }
+    
+    void UITextField::setDeleteBackward(bool deleteBackward)
+    {
+        m_pCRenderNode->setTextFieldDeleteBackward(deleteBackward);
+    }
+    /**/
 }
