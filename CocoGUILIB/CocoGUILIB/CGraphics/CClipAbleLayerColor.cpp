@@ -52,7 +52,6 @@ namespace cs {
         return NULL;
     }
     
-    /* gui mark */
     bool CClipAbleLayerColor::init()
     {
         if (CCLayerColor::init())
@@ -65,7 +64,6 @@ namespace cs {
         
         return false;
     }
-    /**/
     
     void CClipAbleLayerColor::visit(){
         if (this->m_bClipAble) {

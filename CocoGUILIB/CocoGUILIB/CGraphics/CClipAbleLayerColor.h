@@ -38,9 +38,7 @@ namespace cs {
         virtual ~CClipAbleLayerColor(){};
         static CClipAbleLayerColor* create(cocos2d::ccColor4B color,float width ,float height);
         static CClipAbleLayerColor* create();
-        /* gui mark */
         bool init();
-        /**/
         virtual void visit();
         void setClipAble(bool able);
         void setColorEnable(bool enable);

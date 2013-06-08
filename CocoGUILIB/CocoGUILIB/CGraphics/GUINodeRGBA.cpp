@@ -22,7 +22,6 @@ GUINodeRGBA * GUINodeRGBA::create(void)
 	return pRet;
 }
     
-    /* gui mark */
     bool GUINodeRGBA::init()
     {
         if (CCNodeRGBA::init())
@@ -34,7 +33,6 @@ GUINodeRGBA * GUINodeRGBA::create(void)
         }
         return false;
     }
-    /**/
 
 void GUINodeRGBA::addChild(cocos2d::CCNode *child)
 {

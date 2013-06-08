@@ -101,12 +101,10 @@ namespace cs {
             widget = CocoListView::create();
             this->setPropsForListViewFromCCDictionary(widget, uiOptions);
         }
-        /* gui mark */
         else if (classname && strcmp(classname, "PageView") == 0){
             widget = CocoPageView::create();
             this->setPropsForPageViewFromCCDictionary(widget, uiOptions);
         }
-        /**/
         cocos2d::CCArray* arr = DICTOOL->getArrayValue(data, "children");
         if (arr) {
             for (int i=0;i<arr->count();i++){
@@ -168,12 +166,10 @@ namespace cs {
             widget = CocoListView::create();
             this->setPropsForListViewFromJsonDictionary(widget, uiOptions);
         }
-        /* gui mark */
         else if (classname && strcmp(classname, "PageView") == 0) {
             widget = CocoPageView::create();
             this->setPropsForPageViewFromJsonDictionary(widget, uiOptions);
         }
-        /**/
         int childrenCount = DICTOOL->getArrayCount_json(data, "children");
         for (int i=0;i<childrenCount;i++){
             cs::CSJsonDictionary* subData = DICTOOL->getDictionaryFromArray_json(data, "children", i);
@@ -464,12 +460,10 @@ namespace cs {
         int co = DICTOOL->getIntValue(options, "colorO");
         float w = DICTOOL->getFloatValue(options, "width");
         float h = DICTOOL->getFloatValue(options, "height");
-        /* gui mark */
         if (co == 0)
         {
             co = 255;
         }
-        /**/
         panel->setColorAndSize(cr, cg, cb, co, w, h);
         if (backGroundScale9Enable) {
             float cx = DICTOOL->getFloatValue(options, "capInsetsX");
@@ -668,7 +662,6 @@ namespace cs {
         imageButton->setImageColor(imageColorR, imageColorG, imageColorB);
     }
     
-    /* gui mark */
     void CCSReader::setPropsForListViewFromCCDictionary(cs::CocoWidget *widget, cocos2d::CCDictionary *options)
     {
         setPropsForScrollViewFromCCDictionary(widget, options);
@@ -680,7 +673,6 @@ namespace cs {
         this->setPropsForPanelFromCCDictionary(widget, options);
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
     }
-    /**/
     
     /****************************************************json**************************************************/
     
@@ -887,12 +879,10 @@ namespace cs {
         int co = DICTOOL->getIntValue_json(options, "colorO");
         float w = DICTOOL->getFloatValue_json(options, "width");
         float h = DICTOOL->getFloatValue_json(options, "height");
-        /* gui mark */
         if (co == 0)
         {
             co = 255;
         }
-        /**/
         panel->setColorAndSize(cr, cg, cb, co, w, h);
         if (backGroundScale9Enable) {
             float cx = DICTOOL->getFloatValue_json(options, "capInsetsX");

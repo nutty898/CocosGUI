@@ -29,7 +29,6 @@
 
 #include "cocos2d.h"
 
-/* gui mark */
 namespace cs
 {
     class CTextField: public cocos2d::CCTextFieldTTF, public cocos2d::CCTextFieldDelegate, public cocos2d::CCTouchDelegate
@@ -72,6 +71,5 @@ namespace cs
         int m_nTextTotalLength;
     };
 }
-/**/
 
 #endif

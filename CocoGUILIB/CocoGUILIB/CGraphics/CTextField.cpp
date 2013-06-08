@@ -25,8 +25,6 @@
  */
 #include "CTextField.h"
 
-/* gui mark */
-
 namespace cs
 {
     CTextField::CTextField()
@@ -126,68 +124,7 @@ namespace cs
             }
             closeIME();
         }
-    }
-    
-    /*
-     void CTextField::insertText(const char * text, int len)
-     {
-     //
-     //        int count = CCTextFieldTTF::getCharCount();
-     //        if (count > m_nCharacterLength)
-     //        {
-     //            return;
-     //        }
-     //
-     
-     CCTextFieldTTF::insertText(text, len);
-     
-     int str_len = strlen(CCTextFieldTTF::getString());
-     m_nTextTotalLength += str_len;
-     if (str_len > m_nCharacterLength)
-     {
-     int end = 0;
-     
-     switch (str_len % 3)
-     {
-     case 0:
-     end = m_nCharacterLength;
-     break;
-     
-     case 1:
-     end = m_nCharacterLength - 2;
-     break;
-     
-     case 2:
-     end = m_nCharacterLength - 1;
-     break;
-     
-     default:
-     break;
-     }
-     
-     std::string str = m_pInputText->substr(0, end);
-     //            std::string str = m_pInputText->substr(0, m_nCharacterLength);
-     CCTextFieldTTF::setString(str.c_str());
-     CCLOG("text = %s", CCTextFieldTTF::getString());
-     }
-     
-     // password
-     if (m_bIsPassword)
-     {
-     setPswText(m_pInputText->c_str());
-     }
-     
-     // return
-     if (strcmp(text, "\n") == 0)
-     {
-     if (CCTextFieldTTF::getCharCount() == 0)
-     {
-     CCTextFieldTTF::setPlaceHolder(m_pPlaceHolder->c_str());
-     }
-     closeIME();
-     }
-     }
-     */
+    }        
     
     void CTextField::deleteBackward()
     {
@@ -226,4 +163,3 @@ namespace cs
         CCLabelTTF::setString(tempStr.c_str());
     }
 }
-/**/

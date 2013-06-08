@@ -6,8 +6,6 @@
 //
 //
 
-/* gui mark */
-
 #include "GUIScale9Sprite.h"
 
 namespace cs

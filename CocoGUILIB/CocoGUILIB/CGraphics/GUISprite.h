@@ -6,8 +6,6 @@
 //
 //
 
-/* gui mark */
-
 #ifndef __Test__GUISprite__
 #define __Test__GUISprite__
 
@@ -26,4 +24,3 @@ namespace cs
 }
 
 #endif /* defined(__Test__GUISprite__) */
-/**/

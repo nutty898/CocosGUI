@@ -476,17 +476,13 @@ namespace cs {
     
     bool CocoWidget::onTouchMoved(cocos2d::CCPoint &touchPoint)
     {
-        /* gui mark */
         this->m_touchMovePos.x = touchPoint.x;
         this->m_touchMovePos.y = touchPoint.y;
-        /**/
         this->setBeFocus(this->pointAtSelfBody(touchPoint));
         if (this->m_pWidgetParent){
             this->m_pWidgetParent->checkChildInfo(1,this,touchPoint);
         }
-        /* gui mark */
         this->moveEvent();
-        /**/
         return true;
     }
     
@@ -526,7 +522,6 @@ namespace cs {
         }
     }
     
-    /* gui mark */
     void CocoWidget::moveEvent()
     {
         if (m_pMoveListener && m_pfnMoveSelector)
@@ -534,7 +529,6 @@ namespace cs {
             (m_pMoveListener->*m_pfnMoveSelector)(this);
         }
     }
-    /**/
     
     void CocoWidget::releaseUpEvent()
     {
@@ -945,7 +939,6 @@ namespace cs {
         }
     }
     
-    /* gui mark */
     void CocoWidget::updateChildrenOpacityDirty(bool dirty)
     {
         for (int i = 0; i < this->getChildren()->count(); ++i)
@@ -954,8 +947,7 @@ namespace cs {
             child->m_bOpacityDirty = dirty;
             child->updateChildrenOpacityDirty(dirty);
         }
-    }
-    /**/
+    }    
     
     void CocoWidget::adaptSize(float xProportion,float yProportion)
     {

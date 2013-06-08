@@ -126,7 +126,6 @@ namespace cs {
         this->m_nPercent = percent;
         float res = this->m_nPercent/100.0;
         
-		/* gui mark */
         int x = 0, y = 0;                        
         if (this->m_pRenderBar->getCRenderNode()->getUseSpriteFrame())
         {
@@ -141,9 +140,6 @@ namespace cs {
         }
         
         this->m_pRenderBar->setRect(x, y, this->m_fTotalLength * res, this->m_fBarHeight);
-        // before
-//        this->m_pRenderBar->setRect(0,0,this->m_fTotalLength*res,this->m_fBarHeight);
-        /**/
     }
     
     int CocoLoadingBar::getPercent()

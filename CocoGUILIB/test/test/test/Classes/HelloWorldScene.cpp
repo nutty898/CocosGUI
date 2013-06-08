@@ -40,7 +40,6 @@ bool HelloWorld::init()
     sc->setUpdateEnable(true);
     sc->setMoveMode(cs::SCROLLVIEW_MOVE_MODE_ACTION);
     sc->setWidgetTag(10000);
-    /* gui mark */
     CCFadeOut* fadeOut = CCFadeOut::create(2);
     CCFadeIn* fadeIn = CCFadeIn::create(1);
     /*
@@ -49,7 +48,7 @@ bool HelloWorld::init()
      */
     CCSequence* seq = CCSequence::create(fadeOut, fadeIn, /*delayTime, callFunc0,*/ NULL);
     sc->runAction(seq);
-    /**/
+
     cs::CocoTextButton* bt = (cs::CocoTextButton*)(COCOUISYSTEM->getWidgetByName("backtotopbutton"));
     bt->addReleaseEvent(this, coco_releaseselector(HelloWorld::backToTop));
     
@@ -61,17 +60,12 @@ bool HelloWorld::init()
     
     cs::CocoTextField* tfd = dynamic_cast<cs::CocoTextField*>(COCOUISYSTEM->getWidgetByName("textfield"));
     tfd->setCharacterLength(4);
-    /* gui mark */
 //    tfd->setIsPassWord(true);
-    /**/
-    /* gui mark */
     tfd->addAttachWithIMEEvent(this, coco_TextFieldAttachWithIMESelector(HelloWorld::textFieldAttachWithIME));
     tfd->addDetachWithIMEEvent(this, coco_TextFieldDetachWithIMESelector(HelloWorld::textFieldDetachWithIME));
     tfd->addInsertTextEvent(this, coco_TextFieldInsertTextSelector(HelloWorld::textFieldInsertText));
     tfd->addDeleteBackwardEvent(this, coco_TextFieldDeleteBackwardSelector(HelloWorld::textFieldDeleteBackward));
-    /**/        
     
-    /* gui mark */
     // listview
     count = 0;
     array = CCArray::create();
@@ -201,7 +195,6 @@ void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
     p->setBackGroundColorEnable(false);
 }
 
-/* gui mark */
 // listview
 void HelloWorld::initListViewChild(cocos2d::CCObject *pSender)
 {

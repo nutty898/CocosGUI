@@ -60,9 +60,7 @@ namespace cs {
             this->uiTextField->init();
             this->addUIElement(this->uiTextField);
             
-            /* gui mark */
             setUpdateEnable(true);
-            /**/
             return true;
         }
         return false;
@@ -171,7 +169,6 @@ namespace cs {
         this->uiTextField->setIsPassWord(isPassword);
     }
     
-    /* gui mark */
     void CocoTextField::update(float dt)
     {
         if (getAttachWithIME())
@@ -291,5 +288,4 @@ namespace cs {
         m_pDeleteBackwardListener = target;
         m_pfnDeleteBackwardSelector = selecor;
     }
-    /**/
 }

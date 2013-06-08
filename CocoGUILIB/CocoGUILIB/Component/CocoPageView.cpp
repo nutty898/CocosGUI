@@ -69,9 +69,7 @@ namespace cs
     {
         resetProperty();
     }
-    /**/
     
-    /* gui mark */
     void CocoPageView::resetProperty()
     {
         float scroll_top = getRect().size.height;

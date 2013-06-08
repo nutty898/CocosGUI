@@ -6,7 +6,6 @@
 //
 //
 
-/* gui mark */
 
 #include "GUISprite.h"
 
@@ -39,4 +38,3 @@ namespace cs
     }
 }
 
-/**/

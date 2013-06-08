@@ -114,9 +114,7 @@ namespace cs{
         CocoWidget* getChildByTag(int tag);
         //event
         void pushDownEvent();
-        /* gui mark */
         void moveEvent();
-        /**/
         void releaseUpEvent();
         void cancelUpEvent();
         void longClickEvent();
@@ -157,9 +155,7 @@ namespace cs{
         virtual void updateChildrenScaleYDirty(bool dirty);
         virtual bool getAbsoluteVisible();
         virtual void updateChildrenVisibleDirty(bool dirty);
-        /* gui mark */
         virtual void updateChildrenOpacityDirty(bool dirty);
-        /**/
         virtual void adaptSize(float xProportion,float yProportion);
         
         
@@ -243,9 +239,7 @@ namespace cs{
         bool m_bVisibleTouch;
         CC_SYNTHESIZE_READONLY(cocos2d::CCArray*, m_children, Children);
         CC_SYNTHESIZE_READONLY(cocos2d::CCPoint,m_touchStartPos,TouchStartPos)
-        /* gui mark */
         CC_SYNTHESIZE_READONLY(cocos2d::CCPoint,m_touchMovePos,TouchMovePos)
-        /**/
         CC_SYNTHESIZE_READONLY(cocos2d::CCPoint,m_touchEndPos,TouchEndPos)
         CC_SYNTHESIZE(int, m_nWidgetTag, WidgetTag)
         CC_SYNTHESIZE(std::string, m_strName, Name)
@@ -265,9 +259,7 @@ namespace cs{
         bool m_bScaleXDirty;
         bool m_bScaleYDirty;
         bool m_bVisibleDirty;
-        /* gui mark */
         bool m_bOpacityDirty;
-        /**/
         float m_fAdaptScaleX;
         float m_fAdaptScaleY;
     };

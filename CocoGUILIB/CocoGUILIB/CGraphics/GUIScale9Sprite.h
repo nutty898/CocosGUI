@@ -6,7 +6,6 @@
 //
 //
 
-/* gui mark */
 #ifndef __Test__GUIScale9Sprite__
 #define __Test__GUIScale9Sprite__
 
@@ -34,4 +33,3 @@ namespace cs
 }
 
 #endif /* defined(__Test__GUIScale9Sprite__) */
-/**/

@@ -47,7 +47,6 @@ namespace cs {
         void setCharacterLength(int length);
         void setIsPassWord(bool isPassword);
         
-        /* gui mark */
         bool getAttachWithIME();
         void setAttachWithIME(bool attach);
         bool getDetachWithIME();
@@ -56,7 +55,6 @@ namespace cs {
         void setInsertText(bool insertText);
         bool getDeleteBackward();
         void setDeleteBackward(bool deleteBackward);
-        /**/
     protected:
     };
 }

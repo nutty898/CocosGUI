@@ -194,9 +194,7 @@ namespace cs
         CocoPanel::addChild(widget);
         widget->setVisible(widget->checkBeVisibleInParent());
         
-        /* gui mark */
         this->initProperty();
-        /**/
         
         return true;
     }
@@ -230,7 +228,6 @@ namespace cs
         this->m_pRightChild = NULL;
     }
     
-    /* gui mark */
     void CocoScrollView::initProperty()
     {
         switch (m_children->count())
@@ -270,9 +267,7 @@ namespace cs
                 break;
         }
     }
-    /**/
     
-    /* gui mark */
     void CocoScrollView::resetProperty()
     {
         float scroll_top = m_fTopBoundary;
@@ -534,7 +529,6 @@ namespace cs
         return distance;
     }
     
-    /* gui mark */
     void CocoScrollView::resetPositionWithAction()
     {
         using namespace cocos2d;
@@ -597,7 +591,6 @@ namespace cs
         
         isRunningAction = true;
     }
-    /**/
     
     CocoWidget* CocoScrollView::getCheckPositionChild()
     {
@@ -762,32 +755,16 @@ namespace cs
                 break;
         }
         
-        /* gui mark */
         offset = MIN(offset, m_fDisBetweenChild);
-        /**/
         
         return offset;
     }
     
-    /* gui mark */
-    // before
-    /*
-    void CocoScrollView::setDirection(int direction)
-    {
-        if (this->m_nDirection == direction){
-            return;
-        }
-        this->m_nDirection = direction;
-    }
-     */
-    /**/
-    
-    /* gui mark */
-    void CocoScrollView::berthChildren(int direction)
+    void CocoScrollView::berthChildren(SCROLLVIEW_DIR direction)
     {
         switch (direction)
         {
-            case 0: // vertical
+            case SCROLLVIEW_DIR_VERTICAL: // vertical
                 switch (m_eBerthOrientation)
                 {
                     case SCROLLVIEW_BERTH_ORI_TOP : // berth top
@@ -832,7 +809,7 @@ namespace cs
                 m_bBerthToVerticalCenter = false;
                 break;
                 
-            case 1: // horizontal
+            case SCROLLVIEW_DIR_HORIZONTAL: // horizontal
                 switch (m_eBerthOrientation)
                 {
                     case SCROLLVIEW_BERTH_ORI_LEFT: // berth left
@@ -881,7 +858,6 @@ namespace cs
                 break;
         }
     }
-    /**/
     
     bool CocoScrollView::scrollChildren(float touchOffset)
     {
@@ -897,9 +873,7 @@ namespace cs
             case SCROLLVIEW_DIR_VERTICAL: // vertical
                 if (m_fChildrenSizeHeight <= m_fHeight)
                 {
-                    /* gui mark */
                     berthChildren(m_eDirection);
-                    /**/
                     
                     return false;
                 }
@@ -989,9 +963,7 @@ namespace cs
             case SCROLLVIEW_DIR_HORIZONTAL: // horizontal
                 if (m_fChildrenSizeWidth <= m_fWidth)
                 {
-                    /* gui mark */
                     berthChildren(m_eDirection);
-                    /**/
                     
                     return false;
                 }
@@ -1001,9 +973,8 @@ namespace cs
                     case SCROLLVIEW_MOVE_DIR_LEFT: // left
                         if (!m_pRightChild)
                         {
-                            /* gui mark */
                             berthChildren(m_eDirection);
-                            /**/
+                            
                             return false;
                         }
                         
@@ -1039,9 +1010,8 @@ namespace cs
                     case SCROLLVIEW_MOVE_DIR_RIGHT: // right
                         if (!m_pLeftChild)
                         {
-                            /* gui mark */
                             berthChildren(m_eDirection);
-                            /**/
+
                             return false;
                         }
                         
@@ -1103,7 +1073,6 @@ namespace cs
         this->scrollChildren(-this->m_fChildrenSizeHeight);
     }
     
-    /* gui mark */
     void CocoScrollView::drag(float offset)
     {
         switch (m_eMoveMode)
@@ -1121,7 +1090,6 @@ namespace cs
                 break;
         }
     }
-    /**/
     
     void CocoScrollView::startRecordSlidAction()
     {
@@ -1152,10 +1120,8 @@ namespace cs
         float orSpeed = fabs(totalDis)/(this->m_fSlidTime);
         this->startAutoScrollChildren(orSpeed);
         
-        /* gui mark */
         this->m_bBePressed = false;
         this->m_fSlidTime = 0.0;
-        /**/
     }
     
     void CocoScrollView::handlePressLogic(cocos2d::CCPoint &touchPoint)
@@ -1224,9 +1190,7 @@ namespace cs
                 break;
         }
         
-        /* gui mark */
         this->drag(offset);
-        /**/
     }
     
     void CocoScrollView::handleReleaseLogic(cocos2d::CCPoint &touchPoint)

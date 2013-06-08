@@ -152,7 +152,6 @@ namespace cs {
     
     void CocoPanel::setColor(int r, int g, int b)
     {
-        /* gui mark */
         CocoContainerWidget::setColor(r, g, b);
     }
     

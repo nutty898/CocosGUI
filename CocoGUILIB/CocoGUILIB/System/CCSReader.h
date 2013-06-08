@@ -60,10 +60,8 @@ namespace cs {
         void setPropsForTextFieldFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
         void setPropsForLoadingBarFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
         void setPropsForImageButtonFromCCDictionary(CocoWidget* widget, cocos2d::CCDictionary* options);
-        /* gui mark */
         void setPropsForListViewFromCCDictionary(CocoWidget* widget, cocos2d::CCDictionary* options);
         void setPropsForPageViewFromCCDictionary(CocoWidget*widget,cocos2d::CCDictionary* options);
-        /**/
         
         void setPropsForWidgetFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setColorPropsForWidgetFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
@@ -82,9 +80,7 @@ namespace cs {
         void setPropsForLoadingBarFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
         void setPropsForImageButtonFromJsonDictionary(CocoWidget* widget, cs::CSJsonDictionary* options);
         void setPropsForListViewFromJsonDictionary(CocoWidget* widget, cs::CSJsonDictionary* options);
-        /* gui mark */
         void setPropsForPageViewFromJsonDictionary(CocoWidget*widget,cs::CSJsonDictionary* options);
-        /**/
         
     protected:
     };

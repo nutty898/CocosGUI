@@ -17,22 +17,12 @@ class GUINodeRGBA  : public cocos2d::CCNodeRGBA{
 
 public:
     static GUINodeRGBA * create(void);
-    /* gui mark */
     bool init();
-    /**/
     virtual void addChild(CCNode * child);
     virtual void setColor(const cocos2d::ccColor3B& color3);
-    /* gui mark */
-    // before
-//    virtual void updateDisplayedColor(const cocos2d::ccColor3B& parentColor){};
-    /**/
     virtual void setOpacity(GLubyte opacity);
     virtual void setOpacityModifyRGB(bool modify){};
     virtual bool isOpacityModifyRGB(void){return false;};
-    /* gui mark */
-    // before
-//    virtual void updateDisplayedOpacity(GLubyte parentOpacity){};
-    /**/
 };
 }
 

@@ -93,7 +93,6 @@ namespace cs {
         this->m_pCRenderNode->setIsPassword(isPassword);
     }
     
-    /* gui mark */
     bool UITextField::getAttachWithIME()
     {
         return m_pCRenderNode->getTextFieldAttachWithIME();
@@ -133,5 +132,4 @@ namespace cs {
     {
         m_pCRenderNode->setTextFieldDeleteBackward(deleteBackward);
     }
-    /**/
 }

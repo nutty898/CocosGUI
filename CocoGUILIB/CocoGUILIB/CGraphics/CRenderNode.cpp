@@ -30,10 +30,8 @@
 #include "CClipAbleLayerColor.h"
 #include "CLabelAtlas.h"
 #include "GUINodeRGBA.h"
-/* gui mark */
 #include "GUIScale9Sprite.h"
 #include "GUISprite.h"
-/**/
 
 using namespace cocos2d;
 
@@ -230,11 +228,7 @@ namespace cs{
                 ((CCLabelAtlas*)(this->m_pRenderNode))->setOpacity(opacity);
                 break;
             case NODE_SCALE9SPRITE:
-                /* gui mark */
                 dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->setOpacity(opacity);
-                // before
-//                ((extension::CCScale9Sprite*)(this->m_pRenderNode))->setOpacity(opacity);
-                /**/
                 break;
             case NODE_EDITBOX:
                 break;
@@ -276,11 +270,7 @@ namespace cs{
                 opacity = ((CCLabelAtlas*)(this->m_pRenderNode))->getOpacity();
                 break;
             case NODE_SCALE9SPRITE:
-                /* gui mark */
                 opacity = dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->getOpacity();
-                // before
-//                opacity = ((extension::CCScale9Sprite*)(this->m_pRenderNode))->getOpacity();
-                /**/
                 break;
             case NODE_EDITBOX:
                 break;
@@ -558,10 +548,9 @@ namespace cs{
         {
             return;
         }
-        /* gui mark */
         m_bUseSpriteFrame = useSpriteFrame;
-        /**/
         m_strTextureName = fileName;
+        
         switch (this->m_nodeType) {
             case NODE_CCSPRITE:
                 if (useSpriteFrame) {
@@ -605,17 +594,11 @@ namespace cs{
                 ((CCLabelTTF*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
                 break;
             case NODE_SCALE9SPRITE:
-                /* gui mark */
                 dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->setColor(ccc3(r, g, b));
-                // before
-//                ((extension::CCScale9Sprite*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
-                /**/
                 break;
             case NODE_TEXTFIELD:
                 dynamic_cast<CTextField*>(this->m_pRenderNode)->setColor(ccc3(r, g, b));
-                /* gui mark */
                 break;
-                /**/
             case NODE_CLIPSPRITE:
                 ((CClipAbleSprite*)(this->m_pRenderNode))->setColor(ccc3(r, g, b));
                 break;
@@ -651,17 +634,11 @@ namespace cs{
                 color = ((CCLabelTTF*)(this->m_pRenderNode))->getColor();
                 break;
             case NODE_SCALE9SPRITE:
-                /* gui mark */
                 color = dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->getColor();
-                // before
-//                color = ((extension::CCScale9Sprite*)(this->m_pRenderNode))->getColor();
-                /**/
                 break;
             case NODE_TEXTFIELD:
                 color = dynamic_cast<CTextField*>(this->m_pRenderNode)->getColor();
-                /* gui mark */
                 break;
-                /**/
             case NODE_CLIPSPRITE:
                 color = ((CClipAbleSprite*)(this->m_pRenderNode))->getColor();
                 break;
@@ -688,21 +665,12 @@ namespace cs{
         if (this->m_nodeType != NODE_SCALE9SPRITE){
             return;
         }
-        /* gui mark */
         m_bUseSpriteFrame = useSpriteFrame;
-        /**/
+        
         if (useSpriteFrame) {
-            /* gui mark */
             dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->initWithSpriteFrameName(fileName, CCRectMake(x, y, width, height));
-            // before
-//            ((cocos2d::extension::CCScale9Sprite*)(this->m_pRenderNode))->initWithSpriteFrameName(fileName, CCRectMake(x, y, width, height));
-            /**/
         }else{
-            /* gui mark */
             dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->initWithFile(fileName, CCRectZero, CCRectMake(x, y, width, height));
-            // before
-//            ((cocos2d::extension::CCScale9Sprite*)(this->m_pRenderNode))->initWithFile(fileName, CCRectZero, CCRectMake(x, y, width, height));
-            /**/
         }
     }
     
@@ -783,19 +751,15 @@ namespace cs{
         if (this->m_nodeType != NODE_LABELATLAS) {
             return;
         }
-        /* gui mark */
         m_bUseSpriteFrame = useSpriteFrame;
-        /**/
+
         if (useSpriteFrame) {
-            /* gui mark */
             GUISprite* sprite = GUISprite::createWithSpriteFrameName(charMapFile);
             if (sprite == NULL)
             {
                 return;
             }
-            // before
 //            CCSprite* sprite = CCSprite::createWithSpriteFrameName(charMapFile);
-            /**/
             ((CLabelAtlas*)(this->m_pRenderNode))->setProperty(string, sprite->getTexture(), itemWidth, itemHeight, (int)(startCharMap[0]));    
         }else{
             ((CLabelAtlas*)(this->m_pRenderNode))->setProperty(string, charMapFile, itemWidth, itemHeight, (int)(startCharMap[0]));    
@@ -900,19 +864,11 @@ namespace cs{
     
     void CRenderNode::setFontName(const char *name)
     {
-        /* gui mark */
         if (!name || strcmp(name, "") == 0)
         {
             return;
         }
-        // before
-        /*
-         if (!name || strcmp(name, ""))
-         {
-            return;
-         }
-         */
-        /**/
+        
         switch (this->m_nodeType)
         {
             case NODE_TEXT:
@@ -1042,7 +998,6 @@ namespace cs{
         dynamic_cast<CTextField*>(this->m_pRenderNode)->setIsPassword(isPassword);
     }
     
-    /* gui mark */
     bool CRenderNode::getTextFieldAttachWithIME()
     {
         return dynamic_cast<CTextField*>(m_pRenderNode)->getAttachWithIME();
@@ -1082,18 +1037,13 @@ namespace cs{
     {
         dynamic_cast<CTextField*>(m_pRenderNode)->setDeleteBackward(deleteBackward);
     }
-    /**/
     
     void CRenderNode::setScale9Size(float width, float height)
     {
         if (this->m_nodeType != NODE_SCALE9SPRITE){
             return;
         }
-        /* gui mark */
         dynamic_cast<GUIScale9Sprite*>(m_pRenderNode)->setContentSize(CCSizeMake(width, height));
-        // before
-//        ((cocos2d::extension::CCScale9Sprite*)(this->m_pRenderNode))->setContentSize(CCSizeMake(width, height));
-        /**/
     }
     
     bool CRenderNode::hitTest(cocos2d::CCPoint &pt)

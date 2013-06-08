@@ -37,7 +37,6 @@ namespace cs
     UIWidgetPool::~UIWidgetPool()
     {
         m_widgets->release();
-        delete m_widgets;
     }
     
     void UIWidgetPool::push_back(cs::CocoWidget *widget)

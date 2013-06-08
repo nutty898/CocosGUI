@@ -65,7 +65,6 @@ namespace cs {
         this->initWithString(string, texture, itemWidth, itemHeight, startCharMap);
     }
     
-    /* gui mark */
     void CLabelAtlas::draw()
     {
         if (strcmp("", getString()) == 0)
@@ -75,6 +74,5 @@ namespace cs {
         
         CCAtlasNode::draw();
     }
-    /**/
 
 }

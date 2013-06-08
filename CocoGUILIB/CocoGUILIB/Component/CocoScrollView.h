@@ -102,10 +102,8 @@ namespace cs
         virtual void removeChildMoveToTrash(CocoWidget* child);
         virtual void removeChildReferenceOnly(CocoWidget* child);
         virtual void removeAllChildrenAndCleanUp(bool cleanup);
-        /* gui mark */
         virtual void initProperty();
         virtual void resetProperty();
-        /**/
         void resortChildren();
         void moveChildren(float offset);
         void autoScrollChildren(float dt);
@@ -116,22 +114,13 @@ namespace cs
         virtual CocoWidget* getCheckPositionChild();
         float calculateOffsetWithDragForce(float moveOffset);
         void handleScrollActionEvent();
-        /* gui mark */
-//        void setDirection(int direction);
-        /**/
-        /* gui mark */
-        void berthChildren(int direction);
-        /**/
+        void berthChildren(SCROLLVIEW_DIR direction);
         virtual bool scrollChildren(float touchOffset);
         void scrollToBottom();
         void scrollToTop();
-        /* gui mark */
         virtual void drag(float offset);
-        /**/
         void startRecordSlidAction();
-        /* gui mark */
         virtual void endRecordSlidAction();
-        /**/
         void handlePressLogic(cocos2d::CCPoint &touchPoint);
         void handleMoveLogic(cocos2d::CCPoint &touchPoint);
         void handleReleaseLogic(cocos2d::CCPoint &touchPoint);
