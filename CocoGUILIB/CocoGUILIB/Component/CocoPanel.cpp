@@ -152,17 +152,12 @@ namespace cs {
     
     void CocoPanel::setColor(int r, int g, int b)
     {
+        /* gui mark */
         CocoContainerWidget::setColor(r, g, b);
-        if (this->m_bBackGroundInited) {
-            this->m_pBackGroundImage->setColor(r, g, b);
-        }
     }
     
     void CocoPanel::setOpacity(int opcity)
     {
-        CocoContainerWidget::setOpcity(opcity);
-        if (this->m_bBackGroundInited) {
-            this->m_pBackGroundImage->setOpacity(opcity);
-        }
+        CocoContainerWidget::setOpacity(opcity);
     }
 }

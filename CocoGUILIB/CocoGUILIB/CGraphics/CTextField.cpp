@@ -25,18 +25,19 @@
  */
 #include "CTextField.h"
 
+/* gui mark */
+
 namespace cs
 {
-    CTextField::CTextField() :
-    m_nCharacterLength(3),
-    m_pCursorSprite(NULL),
-    m_bIsPassword(false)
+    CTextField::CTextField()
+    : m_nTextTotalLength(0)
+    , m_nCharacterLength(3)
+    , m_bIsPassword(false)
     {
     }
     
     CTextField::~CTextField()
     {
-//        delete m_pCursorSprite;
 	}
     
     CTextField * CTextField::create(const char *placeholder, const char *fontName, float fontSize)
@@ -50,53 +51,11 @@ namespace cs
             {
                 pRet->setPlaceHolder(placeholder);
             }
-            
-            pRet->initCursorSprite(fontSize);
-            
             return pRet;
         }
-        
         CC_SAFE_DELETE(pRet);
         
         return NULL;
-    }
-    
-    void CTextField::initCursorSprite(int nHeight)
-    {
-        using namespace cocos2d;
-        
-        int column = 4;
-        //  int pixels[nHeight][column];
-		int (*pixels)[4] = new int[nHeight][4];
-        
-        for (int i = 0; i < nHeight; ++i)
-        {
-            for (int j = 0; j < column; ++j)
-            {
-                pixels[i][j] = 0xff696969;
-            }
-        }
-        
-        CCTexture2D * texture = new CCTexture2D();
-        texture->initWithData(pixels, kCCTexture2DPixelFormat_RGB888, 1, 1, CCSizeMake(column, nHeight));
-        
-        m_pCursorSprite = CCSprite::createWithTexture(texture);
-        CCSize parentSize = getContentSize();
-        m_pCursorSprite->setPosition(ccp(0, parentSize.height / 2));
-        addChild(m_pCursorSprite);
-        
-        /*
-         CCFadeOut * fadeOut = CCFadeOut::create(0.25f);
-         CCFadeIn * fadeIn = CCFadeIn::create(0.25f);
-         CCSequence * seq = CCSequence::create(fadeOut, fadeIn, NULL);
-         CCRepeatForever * forever = CCRepeatForever::create(seq);
-         m_pCursorSprite->runAction(forever);
-         */
-        
-        m_pCursorSprite->setVisible(false);
-        
-		delete []pixels;
-		pixels = NULL;
     }
     
     void CTextField::onEnter()
@@ -107,11 +66,13 @@ namespace cs
     
     bool CTextField::onTextFieldAttachWithIME(cocos2d::CCTextFieldTTF *pSender)
     {
+        setAttachWithIME(true);
         return false;
     }
     
     bool CTextField::onTextFieldInsertText(cocos2d::CCTextFieldTTF *pSender, const char *text, int nLen)
     {
+        setInsertText(true);
         if (CCTextFieldTTF::getCharCount() >= m_nCharacterLength)
         {
             return true;
@@ -122,17 +83,33 @@ namespace cs
     
     bool CTextField::onTextFieldDeleteBackward(cocos2d::CCTextFieldTTF *pSender, const char *delText, int nLen)
     {
+        setDeleteBackward(true);
         return false;
     }
     
     bool CTextField::onTextFieldDetachWithIME(cocos2d::CCTextFieldTTF *pSender)
     {
+        setDetachWithIME(true);
         return false;
     }
     
     void CTextField::insertText(const char * text, int len)
     {
-        CCTextFieldTTF::insertText(text, len);
+        std::string str_text = text;
+        int str_len = strlen(CCTextFieldTTF::getString());
+        
+        if (strcmp(text, "\n") != 0)
+        {
+            if (str_len + len > m_nCharacterLength)
+            {
+                int mod = str_len % 3;
+                int offset = (mod == 0) ? 0 : (3 - mod);
+                int amount = str_len + offset;
+                str_text = str_text.substr(0, m_nCharacterLength - amount);
+                CCLOG("str_test = %s", str_text.c_str());
+            }
+        }
+        CCTextFieldTTF::insertText(str_text.c_str(), len);
         
         // password
         if (m_bIsPassword)
@@ -149,10 +126,68 @@ namespace cs
             }
             closeIME();
         }
-        
-        // cursor
-        m_pCursorSprite->setPositionX(getContentSize().width);
     }
+    
+    /*
+     void CTextField::insertText(const char * text, int len)
+     {
+     //
+     //        int count = CCTextFieldTTF::getCharCount();
+     //        if (count > m_nCharacterLength)
+     //        {
+     //            return;
+     //        }
+     //
+     
+     CCTextFieldTTF::insertText(text, len);
+     
+     int str_len = strlen(CCTextFieldTTF::getString());
+     m_nTextTotalLength += str_len;
+     if (str_len > m_nCharacterLength)
+     {
+     int end = 0;
+     
+     switch (str_len % 3)
+     {
+     case 0:
+     end = m_nCharacterLength;
+     break;
+     
+     case 1:
+     end = m_nCharacterLength - 2;
+     break;
+     
+     case 2:
+     end = m_nCharacterLength - 1;
+     break;
+     
+     default:
+     break;
+     }
+     
+     std::string str = m_pInputText->substr(0, end);
+     //            std::string str = m_pInputText->substr(0, m_nCharacterLength);
+     CCTextFieldTTF::setString(str.c_str());
+     CCLOG("text = %s", CCTextFieldTTF::getString());
+     }
+     
+     // password
+     if (m_bIsPassword)
+     {
+     setPswText(m_pInputText->c_str());
+     }
+     
+     // return
+     if (strcmp(text, "\n") == 0)
+     {
+     if (CCTextFieldTTF::getCharCount() == 0)
+     {
+     CCTextFieldTTF::setPlaceHolder(m_pPlaceHolder->c_str());
+     }
+     closeIME();
+     }
+     }
+     */
     
     void CTextField::deleteBackward()
     {
@@ -167,24 +202,17 @@ namespace cs
             }
         }
         
-        // cursor
-        m_pCursorSprite->setPositionX(getContentSize().width);
-        
-        if (CCTextFieldTTF::getCharCount() == 0)
-        {
-            m_pCursorSprite->setPositionX(0);
-        }
+        int str_len = strlen(CCTextFieldTTF::getString());
+        m_nTextTotalLength = str_len;
     }
     
     void CTextField::openIME()
     {
-        //        m_pCursorSprite->setVisible(true);
         CCTextFieldTTF::attachWithIME();
     }
     
     void CTextField::closeIME()
     {
-        m_pCursorSprite->setVisible(false);
         CCTextFieldTTF::detachWithIME();
     }
     
@@ -198,3 +226,4 @@ namespace cs
         CCLabelTTF::setString(tempStr.c_str());
     }
 }
+/**/

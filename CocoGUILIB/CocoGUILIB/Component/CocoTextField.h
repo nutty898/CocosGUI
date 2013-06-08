@@ -30,7 +30,18 @@
 #include "CocoWidget.h"
 #include "UITextField.h"
 
-namespace cs {
+namespace cs
+{
+    /* gui mark */
+    typedef void (cocos2d::CCObject::*SEL_TextFieldAttachWithIMEEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_TextFieldDetachWithIMEEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_TextFieldInsertTextEvent)(cocos2d::CCObject*);
+    typedef void (cocos2d::CCObject::*SEL_TextFieldDeleteBackwardEvent)(cocos2d::CCObject*);
+    #define coco_TextFieldAttachWithIMESelector(_SELECTOR) (cs::SEL_TextFieldAttachWithIMEEvent)(&_SELECTOR)
+    #define coco_TextFieldDetachWithIMESelector(_SELECTOR) (cs::SEL_TextFieldDetachWithIMEEvent)(&_SELECTOR)
+    #define coco_TextFieldInsertTextSelector(_SELECTOR) (cs::SEL_TextFieldInsertTextEvent)(&_SELECTOR)
+    #define coco_TextFieldDeleteBackwardSelector(_SELECTOR) (cs::SEL_TextFieldDeleteBackwardEvent)(&_SELECTOR)
+    /**/
     class CocoTextField : public CocoWidget
     {
     public:
@@ -58,11 +69,46 @@ namespace cs {
         virtual void setOpacity(int opcity);
         void setCharacterLength(int length);
         void setIsPassWord(bool isPassword);
+        /* gui mark */
+        void update(float dt);
+        
+        bool getAttachWithIME();
+        void setAttachWithIME(bool attach);
+        bool getDetachWithIME();
+        void setDetachWithIME(bool detach);
+        bool getInsertText();
+        void setInsertText(bool insertText);
+        bool getDeleteBackward();
+        void setDeleteBackward(bool deleteBackward);
+        
+        // event
+        void attachWithIMEEvent();
+        void detachWithIMEEvent();
+        void insertTextEvent();
+        void deleteBackwardEvent();
+        
+        void addAttachWithIMEEvent(cocos2d::CCObject* target, SEL_TextFieldAttachWithIMEEvent selecor);
+        void addDetachWithIMEEvent(cocos2d::CCObject* target, SEL_TextFieldDetachWithIMEEvent selecor);
+        void addInsertTextEvent(cocos2d::CCObject* target, SEL_TextFieldInsertTextEvent selecor);
+        void addDeleteBackwardEvent(cocos2d::CCObject* target, SEL_TextFieldDeleteBackwardEvent selecor);
+        /**/
     protected:
         UITextField* uiTextField;
         float m_fTouchWidth;
         float m_fTouchHeight;
         bool m_bUseTouchArea;
+        
+        /* gui mark */
+        cocos2d::CCObject* m_pAttachWithIMEListener;
+        cocos2d::CCObject* m_pDetachWithIMEListener;
+        cocos2d::CCObject* m_pInsertTextListener;
+        cocos2d::CCObject* m_pDeleteBackwardListener;
+        
+        SEL_TextFieldAttachWithIMEEvent m_pfnAttachWithIMESelector;
+        SEL_TextFieldDetachWithIMEEvent m_pfnDetachWithIMESelector;
+        SEL_TextFieldInsertTextEvent m_pfnInsertTextSelector;
+        SEL_TextFieldDeleteBackwardEvent m_pfnDeleteBackwardSelector;
+        /**/
     };
 }
 

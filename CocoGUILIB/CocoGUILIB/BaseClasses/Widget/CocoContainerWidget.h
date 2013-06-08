@@ -56,7 +56,7 @@ namespace cs {
         virtual void setHeight(float height);
         virtual float getHeight();
         virtual void setColor(int r,int g,int b);
-        virtual void setOpcity(int opcity);
+        virtual void setOpacity(int opacity);
 //        virtual cocos2d::CCRect getRect();
 //        virtual cocos2d::CCRect getRelativeRect();
         virtual bool getClipAble();

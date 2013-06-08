@@ -165,10 +165,21 @@ namespace cs {
         this->m_pCContainerNode->setColor(r, g, b);
     }
     
-    void CocoContainerWidget::setOpcity(int opcity)
+    /* gui mark */
+    void CocoContainerWidget::setOpacity(int opacity)
     {
-        this->m_pCContainerNode->setOpacity(opcity);
+        this->m_pCContainerNode->setOpacity(opacity);
+        this->m_bOpacityDirty = true;
+        this->updateChildrenOpacityDirty(this->m_bOpacityDirty);
     }
+    // before
+    /*
+     void CocoContainerWidget::setOpcity(int opcity)
+     {
+          this->m_pCContainerNode->setOpacity(opcity);
+     }
+     */
+    /**/
 
     bool CocoContainerWidget::pointAtSelfBody(cocos2d::CCPoint &pt)
     {

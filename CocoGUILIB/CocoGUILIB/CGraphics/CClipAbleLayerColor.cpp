@@ -52,6 +52,21 @@ namespace cs {
         return NULL;
     }
     
+    /* gui mark */
+    bool CClipAbleLayerColor::init()
+    {
+        if (CCLayerColor::init())
+        {
+            this->setCascadeOpacityEnabled(true);
+            this->setCascadeColorEnabled(true);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    /**/
+    
     void CClipAbleLayerColor::visit(){
         if (this->m_bClipAble) {
             glEnable(GL_SCISSOR_TEST);
