@@ -166,7 +166,39 @@ void HelloWorld::cancelTouch(cocos2d::CCObject *pSender)
 
 void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
 {
-    COCOUISYSTEM->cleanUIScene();
+    COCOUISYSTEM->getCurScene()->getRootWidget()->removeAllChildrenAndCleanUp(true);
+//    cs::CocoControlButton* cb = cs::CocoControlButton::create();
+//    cb->setTexture("CloseNormal.png");
+//    cb->setTitle("ControlButton");
+//    cb->setPosition(ccp(100, 100));
+//    cb->setBeTouchAble(true);
+//    COCOUISYSTEM->getCurScene()->addWidget(cb);
+//    
+//    CCLabelTTF* lttf = CCLabelTTF::create();
+//    lttf->setString("ControlButton");
+//    extension::CCControlButton* cbc = extension::CCControlButton::create(lttf, extension::CCScale9Sprite::create("CloseNormal.png"));
+//    this->addChild(cbc);
+//    cbc->setPosition(ccp(200, 200));
+//    
+//    CCLabelBMFont* lbbmf = CCLabelBMFont::create("dasjio", "arial-14.fnt");
+//    lbbmf->setPosition(ccp(300, 300));
+//    this->addChild(lbbmf);
+//
+    cs::CocoLabelBMFont* lb = cs::CocoLabelBMFont::create();
+    lb->setFntFile("arial-14.fnt");
+    lb->setText("abcd");
+    lb->setPosition(ccp(100, 100));
+    COCOUISYSTEM->getCurScene()->addWidget(lb);
+    
+    return;
+    COCOUISYSTEM->resetSystem(this);
+    cs::CocoPanel* p = cs::CocoPanel::create();
+    p->setSize(100, 100);
+    p->setBackGroundColorEnable(true);
+    p->setColor(0, 255, 0);
+    p->setOpacity(255);
+    COCOUISYSTEM->getCurScene()->addWidget(p);
+    p->setBackGroundColorEnable(false);
 }
 
 /* gui mark */

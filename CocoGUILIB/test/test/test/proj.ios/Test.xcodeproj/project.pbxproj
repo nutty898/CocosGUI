@@ -88,6 +88,10 @@
 		38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38F780C6174320E600D5F228 /* CocoListView.cpp */; };
 		509CDEB7175C7A610068E8E9 /* CocoNodeContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */; };
 		50ACC84017560320007CAF48 /* GUIScale9Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */; };
+		50F1F4171761D0A00002F715 /* arial-14.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50F1F4161761D0A00002F715 /* arial-14.fnt */; };
+		50F1F4191761D16B0002F715 /* arial-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F1F4181761D16B0002F715 /* arial-14.png */; };
+		50F1F41C1761D6370002F715 /* CocoLabelBMFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F1F41A1761D6370002F715 /* CocoLabelBMFont.cpp */; };
+		50F38EFF1761DE6600A7C720 /* CocoControlButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F38EFD1761DE6600A7C720 /* CocoControlButton.cpp */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
 		BF1373F1128A899E00D9F789 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492B6912891AC600A09262 /* libz.dylib */; };
@@ -265,6 +269,12 @@
 		509CDEB6175C7A610068E8E9 /* CocoNodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoNodeContainer.h; sourceTree = "<group>"; };
 		50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIScale9Sprite.cpp; sourceTree = "<group>"; };
 		50ACC83F1756031F007CAF48 /* GUIScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIScale9Sprite.h; sourceTree = "<group>"; };
+		50F1F4161761D0A00002F715 /* arial-14.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "arial-14.fnt"; sourceTree = "<group>"; };
+		50F1F4181761D16B0002F715 /* arial-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arial-14.png"; sourceTree = "<group>"; };
+		50F1F41A1761D6370002F715 /* CocoLabelBMFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoLabelBMFont.cpp; sourceTree = "<group>"; };
+		50F1F41B1761D6370002F715 /* CocoLabelBMFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoLabelBMFont.h; sourceTree = "<group>"; };
+		50F38EFD1761DE6600A7C720 /* CocoControlButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoControlButton.cpp; sourceTree = "<group>"; };
+		50F38EFE1761DE6600A7C720 /* CocoControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoControlButton.h; sourceTree = "<group>"; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		781C33B31547F06B00633F88 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		781C33B51547F06B00633F88 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -555,6 +565,10 @@
 				38F780C7174320E600D5F228 /* CocoListView.h */,
 				509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */,
 				509CDEB6175C7A610068E8E9 /* CocoNodeContainer.h */,
+				50F38EFD1761DE6600A7C720 /* CocoControlButton.cpp */,
+				50F38EFE1761DE6600A7C720 /* CocoControlButton.h */,
+				50F1F41A1761D6370002F715 /* CocoLabelBMFont.cpp */,
+				50F1F41B1761D6370002F715 /* CocoLabelBMFont.h */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -645,6 +659,8 @@
 		784521C214EBA449009D533B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50F1F4181761D16B0002F715 /* arial-14.png */,
+				50F1F4161761D0A00002F715 /* arial-14.fnt */,
 				38B6455617409DCC00A681C0 /* bg.jpg */,
 				38B6455717409DCC00A681C0 /* CloseNormal.png */,
 				38B6455817409DCC00A681C0 /* CloseSelected.png */,
@@ -756,6 +772,8 @@
 				38B6455D17409DCC00A681C0 /* CloseSelected.png in Resources */,
 				38B6455E17409DCC00A681C0 /* HelloWorld.png in Resources */,
 				38B6455F17409DCC00A681C0 /* UIRES in Resources */,
+				50F1F4171761D0A00002F715 /* arial-14.fnt in Resources */,
+				50F1F4191761D16B0002F715 /* arial-14.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +854,8 @@
 				38F780C8174320E600D5F228 /* CocoListView.cpp in Sources */,
 				50ACC84017560320007CAF48 /* GUIScale9Sprite.cpp in Sources */,
 				509CDEB7175C7A610068E8E9 /* CocoNodeContainer.cpp in Sources */,
+				50F38EFF1761DE6600A7C720 /* CocoControlButton.cpp in Sources */,
+				50F1F41C1761D6370002F715 /* CocoLabelBMFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -135,9 +135,10 @@ namespace cs {
         void setClipSize(float width,float height);
         //cliplayercolor
         void setColorAndSize(int r,int g,int b,int o,float width,float height);
-                void setSize(float width,float height);
+        void setSize(float width,float height);
         cocos2d::CCPoint convertToWorldSpace();
         cocos2d::CCPoint convertToNodeSpace(cocos2d::CCPoint& pt);
+        void setColorEnable(bool enable);
         //cclabelatlas
         void setLabelAtlasProperty(const char *string, const char *charMapFile,  int itemWidth,  int itemHeight,  const char* startCharMap,bool useSpriteFrame);
         //scale9sprite

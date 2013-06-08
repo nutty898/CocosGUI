@@ -47,6 +47,7 @@ namespace cs {
         CocoWidget* createWidget_json(cs::CSJsonDictionary* data);
         CocoWidget* createWidgetFromFile_json(const char* fileName);
         CocoWidget* createWidgetFromFileWithAdapt_json(const char* fileName, bool scaleAdapt, bool equalProportions);
+        CocoWidget* createWidgetFromCCBFile(const char* fileName);
         void adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions);
         
         bool replaceUISceneWithFile(cocos2d::CCNode* container,const char* fileName,int fileType,bool enableAdapt,bool scaleAdapt,bool equalProportions,int nPriority = -1);

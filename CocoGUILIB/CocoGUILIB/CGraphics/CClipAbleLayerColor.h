@@ -34,7 +34,7 @@ namespace cs {
     
     class CClipAbleLayerColor : public cocos2d::CCLayerColor {
     public:
-        CClipAbleLayerColor():m_bClipAble(false),m_fScissorX(0.0),m_fScissorY(0.0),m_fScissorWidth(0.0),m_fScissorHeight(0.0),m_bEnableCustomArea(false){};
+        CClipAbleLayerColor():m_bClipAble(false),m_fScissorX(0.0),m_fScissorY(0.0),m_fScissorWidth(0.0),m_fScissorHeight(0.0),m_bEnableCustomArea(false),m_bColorEnable(false){};
         virtual ~CClipAbleLayerColor(){};
         static CClipAbleLayerColor* create(cocos2d::ccColor4B color,float width ,float height);
         static CClipAbleLayerColor* create();
@@ -43,6 +43,8 @@ namespace cs {
         /**/
         virtual void visit();
         void setClipAble(bool able);
+        void setColorEnable(bool enable);
+        bool getColorEnable();
         void setClipRect(float x,float y,float width,float height);
         void setClipSize(float width,float height);
         virtual void draw();
@@ -53,6 +55,7 @@ namespace cs {
         float m_fScissorWidth;
         float m_fScissorHeight;
         bool m_bEnableCustomArea;
+        bool m_bColorEnable;
     };
 }
 

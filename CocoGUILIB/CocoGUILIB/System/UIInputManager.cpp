@@ -127,8 +127,8 @@ namespace cs
                 if (i != this->m_manageredWidget->count()-1){
                     int j = i+1;
                     for (;j < this->m_manageredWidget->count();j++){
-                        CocoWidget* widget = (CocoWidget*)(m_manageredWidget->objectAtIndex(j));
-                        widget->didNotSelectSelf();
+                        CocoWidget* wid = (CocoWidget*)(m_manageredWidget->objectAtIndex(j));
+                        wid->didNotSelectSelf();
                     }
                 }
                 return widget;

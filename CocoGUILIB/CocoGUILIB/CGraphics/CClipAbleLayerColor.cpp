@@ -91,6 +91,16 @@ namespace cs {
         this->m_bClipAble = able;
     }
     
+    void CClipAbleLayerColor::setColorEnable(bool enable)
+    {
+        this->m_bColorEnable = enable;
+    }
+    
+    bool CClipAbleLayerColor::getColorEnable()
+    {
+        return this->m_bColorEnable;
+    }
+    
     void CClipAbleLayerColor::setClipRect(float x, float y, float width, float height)
     {
         
@@ -106,6 +116,8 @@ namespace cs {
     void CClipAbleLayerColor::draw()
     {
 //        to head off the draw call
-//        CCLayerColor::draw();
+        if (this->m_bColorEnable) {
+            CCLayerColor::draw();
+        }
     }
 }
