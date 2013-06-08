@@ -728,6 +728,17 @@ namespace cs{
         }
     }
     
+    void CRenderNode::setColorEnable(bool enable)
+    {
+        switch (this->m_nodeType) {
+            case NODE_CLIPLAYERCOLOR:
+                ((CClipAbleLayerColor*)(this->m_pRenderNode))->setColorEnable(enable);
+                break;
+            default:
+                break;
+        }
+    }
+    
     void CRenderNode::setLabelAtlasProperty(const char *string, const char *charMapFile, int itemWidth, int itemHeight, const char* startCharMap,bool useSpriteFrame)
     {
         if (this->m_nodeType != NODE_LABELATLAS) {

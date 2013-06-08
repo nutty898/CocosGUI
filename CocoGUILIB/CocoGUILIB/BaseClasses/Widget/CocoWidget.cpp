@@ -100,6 +100,7 @@ namespace cs {
     
     void CocoWidget::releaseResoures()
     {
+        this->setUpdateEnable(false);
         this->removeAllChildrenAndCleanUp(true);
         this->removeAllUIElementsAndCleanUp(true);
         this->m_pCContainerNode->removeFromParentAndCleanUp(true);

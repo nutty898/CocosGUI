@@ -44,6 +44,8 @@
 #include "CocoTextField.h"
 #include "CocoImageButton.h"
 #include "CocoNodeContainer.h"
+#include "CocoControlButton.h"
+#include "CocoLabelBMFont.h"
 #include "UISystem.h"
 #include "CCSReader.h"
     

@@ -116,6 +116,11 @@ namespace cs {
         return widget;
     }
     
+    CocoWidget* UISystem::createWidgetFromCCBFile(const char *fileName)
+    {
+        
+    }
+    
     void UISystem::adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions)
     {
         switch (root->getWidgetType()) {
