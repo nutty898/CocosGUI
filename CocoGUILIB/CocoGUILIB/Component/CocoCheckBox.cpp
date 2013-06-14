@@ -50,7 +50,6 @@ namespace cs {
 
     CocoCheckBox* CocoCheckBox::create()
     {
-//        return CocoCheckBox::create(NULL);
         CocoCheckBox* widget = new CocoCheckBox();
         if (widget && widget->init()) {
             return widget;
@@ -62,26 +61,26 @@ namespace cs {
     bool CocoCheckBox::init()
     {
         if (CocoWidget::init()) {
-            this->m_pBackGroundBox = new UISprite();
-            this->m_pBackGroundBox->init();
-            this->m_pBackGroundSelectedBox = new UISprite();
-            this->m_pBackGroundSelectedBox->init();
-            this->m_pFrontCross = new UISprite();
-            this->m_pFrontCross->init();
-            this->m_pBackGroundBoxDisabled = new UISprite();
-            this->m_pBackGroundBoxDisabled->init();
-            this->m_pFrontCrossDisabled = new UISprite();
-            this->m_pFrontCrossDisabled->init();
-            this->addUIElement(m_pBackGroundBox);
-            this->addUIElement(m_pBackGroundSelectedBox);
-            this->addUIElement(m_pFrontCross);
-            this->addUIElement(m_pBackGroundBoxDisabled);
-            this->addUIElement(m_pFrontCrossDisabled);
             this->setPressState(0);
             this->setSelectedState(false);
             return true;
         }
         return false;
+    }
+    
+    void CocoCheckBox::initNodes()
+    {
+        CocoWidget::initNodes();
+        this->m_pBackGroundBox = cocos2d::CCSprite::create();
+        this->m_pBackGroundSelectedBox = cocos2d::CCSprite::create();
+        this->m_pFrontCross = cocos2d::CCSprite::create();
+        this->m_pBackGroundBoxDisabled = cocos2d::CCSprite::create();
+        this->m_pFrontCrossDisabled = cocos2d::CCSprite::create();
+        this->m_pCCRenderNode->addChild(m_pBackGroundBox);
+        this->m_pCCRenderNode->addChild(m_pBackGroundSelectedBox);
+        this->m_pCCRenderNode->addChild(m_pFrontCross);
+        this->m_pCCRenderNode->addChild(m_pBackGroundBoxDisabled);
+        this->m_pCCRenderNode->addChild(m_pFrontCrossDisabled);
     }
     
     void CocoCheckBox::setTextures(const char *backGround, const char *backGroundSelected, const char *cross,const char* backGroundDisabled,const char* frontCrossDisabled,bool useSpriteFrame)
@@ -95,27 +94,47 @@ namespace cs {
     
     void CocoCheckBox::setBackGroundTexture(const char *backGround,bool useSpriteFrame)
     {
-        this->m_pBackGroundBox->loadTexture(backGround,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pBackGroundBox->initWithSpriteFrameName(backGround);
+        }else{
+            this->m_pBackGroundBox->initWithFile(backGround);
+        }
     }
     
     void CocoCheckBox::setBackGroundSelectedTexture(const char *backGroundSelected,bool useSpriteFrame)
     {
-        this->m_pBackGroundSelectedBox->loadTexture(backGroundSelected,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pBackGroundSelectedBox->initWithSpriteFrameName(backGroundSelected);
+        }else{
+            this->m_pBackGroundSelectedBox->initWithFile(backGroundSelected);
+        }
     }
     
     void CocoCheckBox::setFrontCrossTexture(const char *cross,bool useSpriteFrame)
     {
-        this->m_pFrontCross->loadTexture(cross,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pFrontCross->initWithSpriteFrameName(cross);
+        }else{
+            this->m_pFrontCross->initWithFile(cross);
+        }
     }
     
     void CocoCheckBox::setBackGroundDisabledTexture(const char *backGroundDisabled,bool useSpriteFrame)
     {
-        this->m_pBackGroundBoxDisabled->loadTexture(backGroundDisabled,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pBackGroundBoxDisabled->initWithSpriteFrameName(backGroundDisabled);
+        }else{
+            this->m_pBackGroundBoxDisabled->initWithFile(backGroundDisabled);
+        }
     }
     
     void CocoCheckBox::setFrontCrossDisabledTexture(const char *frontCrossDisabled,bool useSpriteFrame)
     {
-        this->m_pFrontCrossDisabled->loadTexture(frontCrossDisabled,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pFrontCrossDisabled->initWithSpriteFrameName(frontCrossDisabled);
+        }else{
+            this->m_pFrontCrossDisabled->initWithFile(frontCrossDisabled);
+        }
     }
     
     bool CocoCheckBox::onTouchReleased(cocos2d::CCPoint &touchPoint)
@@ -190,9 +209,9 @@ namespace cs {
         }
     }
     
-    CRenderNode* CocoCheckBox::getValidNode()
+    cocos2d::CCNode* CocoCheckBox::getValidNode()
     {
-        return this->m_pBackGroundBox->getCRenderNode();
+        return this->m_pBackGroundBox;
     }
     
     void CocoCheckBox::addSelectEvent(cocos2d::CCObject *target, SEL_SelectEvent selector)
@@ -205,24 +224,6 @@ namespace cs {
     {
         this->m_pUnSelectListener = target;
         this->m_pfnUnSelectSelector = selector;
-    }
-    
-    void CocoCheckBox::setColor(int r, int g, int b)
-    {
-        this->m_pBackGroundBox->setColor(r, g, b);
-        this->m_pBackGroundSelectedBox->setColor(r, g, b);
-        this->m_pFrontCross->setColor(r, g, b);
-        this->m_pBackGroundBoxDisabled->setColor(r, g, b);
-        this->m_pFrontCrossDisabled->setColor(r, g, b);
-    }
-    
-    void CocoCheckBox::setOpacity(int opcity)
-    {
-        this->m_pBackGroundBox->setOpacity(opcity);
-        this->m_pBackGroundSelectedBox->setOpacity(opcity);
-        this->m_pFrontCross->setOpacity(opcity);
-        this->m_pBackGroundBoxDisabled->setOpacity(opcity);
-        this->m_pFrontCrossDisabled->setOpacity(opcity);
     }
     
     void CocoCheckBox::setFlipX(bool flipX)

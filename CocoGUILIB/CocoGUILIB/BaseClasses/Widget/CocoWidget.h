@@ -27,9 +27,37 @@
 #ifndef __CocoGUI__CocoWidget__
 #define __CocoGUI__CocoWidget__
 
-#include "CRenderNode.h"
-#include "UIElement.h"
 #include "CSContentJsonDictionary.h"
+#include "cocos2d.h"
+#include "GUINodeRGBA.h"
+
+
+#define DYNAMIC_CAST_CCRGBAPROTOCOL dynamic_cast<cocos2d::CCRGBAProtocol*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCNODE dynamic_cast<cocos2d::CCNode*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_GUINODERGBA dynamic_cast<GUINodeRGBA*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCLAYER dynamic_cast<cocos2d::CCLayer*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCSPRITE dynamic_cast<cocos2d::CCSprite*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCLAYERCOLOR dynamic_cast<CCLayerColor*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCLABELTTF dynamic_cast<cocos2d::CCLabelTTF*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CTEXTFIELD dynamic_cast<cocos2d::CTextfield*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CLIPSPRITE dynamic_cast<cocos2d::CClipSprite*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CLABELATLAS dynamic_cast<CLabelAtlas*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_SCALE9SPRITE dynamic_cast<GUIScale9Sprite*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCLABELBMFONT dynamic_cast<cocos2d::CCLabelBMFont*>(this->m_pCCRenderNode)
+
 
 
 namespace cs{
@@ -47,15 +75,10 @@ namespace cs{
         virtual ~CocoWidget();
         virtual void releaseResoures();
         static CocoWidget* create();
-//        static CocoWidget* create(cocos2d::CCDictionary* options);
-//        static CocoWidget* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         virtual void initNodes();
         virtual bool addChild(CocoWidget* child);
         virtual void addChildNode(CocoWidget* child);
-        virtual void addElementNode(UIElement* element);
         virtual void activeToUIInputManager();
         virtual void cleanFromUIInputManager();
         virtual void setWidgetZOrder(int z);
@@ -63,14 +86,11 @@ namespace cs{
         virtual void reorderChild(CocoWidget* child);
         virtual void setNeedCheckVisibleDepandParent(bool need);
         virtual void setVisibleTouch(bool visible);
-        virtual void addUIElement(UIElement* element);
         virtual bool removeChild(CocoWidget* child,bool cleanup);
         virtual void removeChildMoveToTrash(CocoWidget* child);
         virtual void removeChildReferenceOnly(CocoWidget* child);
         virtual void removeFromParentAndCleanup(bool cleanup);
         virtual void removeAllChildrenAndCleanUp(bool cleanup);
-        virtual void removeAllUIElementsAndCleanUp(bool cleanup);
-        void removeUIElement(cs::UIElement *uiElement, bool cleanup);
         int checkContainedChild(CocoWidget* child);
         void setBeTouchAble(bool able);
         bool getBeTouchAble();
@@ -94,9 +114,10 @@ namespace cs{
         virtual cocos2d::CCRect getRect();
         virtual cocos2d::CCRect getRelativeRect();
         void getLocationInWindow();
-        virtual CRenderNode* getValidNode();
-        CRenderNode* getContainerNode();
+        virtual cocos2d::CCNode* getValidNode();
+        cocos2d::CCNode* getContainerNode();
         virtual bool pointAtSelfBody(cocos2d::CCPoint &pt);
+        virtual bool hitTest(cocos2d::CCNode* node, cocos2d::CCPoint &pt);
         bool checkVisibleDependParent(cocos2d::CCPoint &pt);
         bool checkBeVisibleInParent();
         virtual void checkChildInfo(int handleState,CocoWidget* sender,cocos2d::CCPoint &touchPoint);
@@ -139,14 +160,14 @@ namespace cs{
         float getScaleY();
         void setRotation(float rotation);
         float getRotation();
-        virtual void setFlipX(bool flipX){this->m_pCContainerNode->setFlipX(flipX);};
-        virtual bool isFlipX(){return this->getValidNode()->isFlipX();};
-        virtual void setFlipY(bool flipY){this->m_pCContainerNode->setFlipY(flipY);};
-        virtual bool isFlipY(){return this->getValidNode()->isFlipY();};
-        virtual void setColor(int r,int g,int b){this->m_pCContainerNode->setColor(r, g, b);};
-        virtual cocos2d::ccColor3B getColor(){return this->getValidNode()->getColor();};
-        virtual void setOpacity(int opacity){this->m_pCContainerNode->setOpacity(opacity);};
-        virtual int getOpacity(){return this->getValidNode()->getOpacity();};
+        virtual void setFlipX(bool flipX){};
+        virtual bool isFlipX(){return false;};
+        virtual void setFlipY(bool flipY){};
+        virtual bool isFlipY(){return false;};
+        virtual void setColor(const cocos2d::ccColor3B &color);
+        virtual const cocos2d::ccColor3B& getColor();
+        virtual void setOpacity(int opacity);
+        virtual int getOpacity();
         
         //widget prop
         virtual float getAbsoluteScaleX();
@@ -224,7 +245,7 @@ namespace cs{
         int m_nCurPressState;
         int m_nPrevPressstate;
         bool m_bUpdateAble;
-        CRenderNode* m_pCContainerNode;
+        cocos2d::CCNode* m_pCCRenderNode;
         float m_fContentSizeWidth;
         float m_fContentSizeHeight;
         
@@ -234,7 +255,6 @@ namespace cs{
         cocos2d::CCRect m_rect;
         cocos2d::CCRect m_relativeRect;
         
-        cocos2d::CCArray* m_UIElements;
         bool m_bNeedCheckVisibleDependParent;
         bool m_bVisibleTouch;
         CC_SYNTHESIZE_READONLY(cocos2d::CCArray*, m_children, Children);

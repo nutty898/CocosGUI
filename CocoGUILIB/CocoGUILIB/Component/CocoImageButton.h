@@ -29,8 +29,6 @@
 
 #include <iostream>
 #include "CocoButton.h"
-#include "UISprite.h"
-#include "UIScale9Sprite.h"
 
 namespace cs
 {
@@ -63,7 +61,7 @@ namespace cs
         void setImageOpacity(GLubyte opacity);
         void setImageFlipX(bool flipX);
         void setImageFlipY(bool flipY);
-        CRenderNode* getImageValidNode();
+        cocos2d::CCNode* getImageValidNode();
         
         // override
         void setScale9Enable(bool able);
@@ -86,9 +84,9 @@ namespace cs
         void onPressStateChangedToDisabled();
         
     protected:
-        UIElement* m_pImageNormal;
-        UIElement* m_pImageClicked;
-        UIElement* m_pImageDisable;
+        cocos2d::CCNode* m_pImageNormal;
+        cocos2d::CCNode* m_pImageClicked;
+        cocos2d::CCNode* m_pImageDisable;
         
         bool m_bScale9Enable;
     };

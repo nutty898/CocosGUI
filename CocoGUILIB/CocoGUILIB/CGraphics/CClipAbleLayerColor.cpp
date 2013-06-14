@@ -56,8 +56,8 @@ namespace cs {
     {
         if (CCLayerColor::init())
         {
-            this->setCascadeOpacityEnabled(true);
-            this->setCascadeColorEnabled(true);
+//            this->setCascadeOpacityEnabled(true);
+//            this->setCascadeColorEnabled(true);
             
             return true;
         }
@@ -68,7 +68,7 @@ namespace cs {
     void CClipAbleLayerColor::visit(){
         if (this->m_bClipAble) {
             glEnable(GL_SCISSOR_TEST);
-            CCPoint local = this->convertToWorldSpace(ccp(0,0));
+            CCPoint local = this->convertToWorldSpace(CCPointZero);
             
             if (this->m_bEnableCustomArea) {
                 CCEGLView::sharedOpenGLView()->setScissorInPoints(local.x, local.y, this->m_fScissorWidth, this->m_fScissorHeight);

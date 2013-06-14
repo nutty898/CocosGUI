@@ -28,7 +28,6 @@
 #define __CocoGUI__Label__
 
 #include "CocoWidget.h"
-#include "UIText.h"
 
 namespace cs {
     class CocoLabel : public CocoWidget
@@ -37,15 +36,11 @@ namespace cs {
         CocoLabel();
         virtual ~CocoLabel();
         static CocoLabel* create();
-//        static CocoLabel* create(cocos2d::CCDictionary* options);
-//        static CocoLabel* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setText(const char* text);
         const char* getStringValue();
         int getStringLength();
-        void setTextColor(int r,int g,int b);
         void setFontSize(int size);
         void setFontName(const char* name);
         void setTouchScaleChangeAble(bool able);
@@ -54,18 +49,13 @@ namespace cs {
         virtual void onPressStateChangedToPressed();
         virtual void onPressStateChangedToDisabled();
         void clickScale(float scale);
-        virtual CRenderNode* getValidNode();
-        virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
         void setGravity(int gravity);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void adaptSize(float xProportion,float yProportion);
     protected:
         bool m_bTouchScaleChangeAble;
         float m_fNormalScaleValue;
-        UIText* m_pTextLable;
         int m_nGravity;
         std::string m_sFontName;
         int m_nFontSize;

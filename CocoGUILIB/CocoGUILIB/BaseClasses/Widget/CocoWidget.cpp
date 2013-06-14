@@ -41,10 +41,9 @@ namespace cs {
     m_bBeTouchEnabled(false),
     m_nWidgetTag(-1),
     m_bUpdateAble(false),
-    m_pCContainerNode(NULL),
+    m_pCCRenderNode(NULL),
     m_strName("default"),
     m_children(NULL),
-    m_UIElements(NULL),
     m_nWidgetType(0),
     m_bVisible(true),
     m_bNeedCheckVisibleDependParent(false),
@@ -92,9 +91,9 @@ namespace cs {
     {
         this->m_children = cocos2d::CCArray::create();
         this->m_children->retain();
-        this->m_UIElements = cocos2d::CCArray::create();
-        this->m_UIElements->retain();
         this->initNodes();
+        this->m_pCCRenderNode->retain();
+        this->m_pCCRenderNode->setZOrder(this->m_nWidgetZOrder);
         return true;
     }
     
@@ -102,17 +101,16 @@ namespace cs {
     {
         this->setUpdateEnable(false);
         this->removeAllChildrenAndCleanUp(true);
-        this->removeAllUIElementsAndCleanUp(true);
-        this->m_pCContainerNode->removeFromParentAndCleanUp(true);
+//        this->removeAllUIElementsAndCleanUp(true);
+        this->m_pCCRenderNode->removeAllChildrenWithCleanup(true);
+        this->m_pCCRenderNode->removeFromParentAndCleanup(true);
+        this->m_pCCRenderNode->release();
         this->m_children->release();
-        this->m_UIElements->release();
     }
     
     void CocoWidget::initNodes()
     {
-        this->m_pCContainerNode = new CRenderNode();
-        this->m_pCContainerNode->initNode(1);
-        this->m_pCContainerNode->setZOrder(this->m_nWidgetZOrder);
+        this->m_pCCRenderNode = GUINodeRGBA::create();
     }
     
     bool CocoWidget::addChild(CocoWidget *child)
@@ -154,8 +152,8 @@ namespace cs {
     
     void CocoWidget::addChildNode(cs::CocoWidget *child)
     {
-        child->m_pCContainerNode->setZOrder(child->getWidgetZOrder());
-        this->m_pCContainerNode->addRenderNode(child->m_pCContainerNode);
+        child->m_pCCRenderNode->setZOrder(child->getWidgetZOrder());
+        this->m_pCCRenderNode->addChild(child->m_pCCRenderNode);
     }
     
     bool CocoWidget::removeChild(CocoWidget *child, bool cleanup)
@@ -196,7 +194,7 @@ namespace cs {
         }
         if (this->m_children->containsObject(child)){
             child->cleanFromUIInputManager();
-            this->m_pCContainerNode->removeRenderNodeAndCleanUp(child->m_pCContainerNode,false);
+            this->m_pCCRenderNode->removeChild(child->m_pCCRenderNode, false);
             child->setNeedCheckVisibleDepandParent(false);
             this->m_children->removeObject(child);
             child->m_pWidgetParent = NULL;
@@ -223,29 +221,6 @@ namespace cs {
         }
     }
     
-    void CocoWidget::removeAllUIElementsAndCleanUp(bool cleanup)
-    {
-        int times = this->m_UIElements->count();
-        for (int i=0;i<times;i++){
-            UIElement* element = (UIElement*)(this->m_UIElements->lastObject());
-            this->m_UIElements->removeObject(element);
-            element->releaseResoures();
-            delete element;
-            element = NULL;
-        }
-    }
-    
-    void CocoWidget::removeUIElement(cs::UIElement *uiElement, bool cleanup)
-    {
-        if (this->m_UIElements->containsObject(uiElement))
-        {
-            this->m_UIElements->removeObject(uiElement);
-            uiElement->releaseResoures();
-            delete uiElement;
-            uiElement = NULL;
-        }
-    }
-    
     void CocoWidget::activeToUIInputManager()
     {
         COCOUISYSTEM->getUIInputManager()->uiSceneHasChanged();
@@ -260,7 +235,7 @@ namespace cs {
     void CocoWidget::setWidgetZOrder(int z)
     {
         this->m_nWidgetZOrder = z;
-        this->m_pCContainerNode->setZOrder(z);
+        this->m_pCCRenderNode->setZOrder(z);
         if (this->m_pWidgetParent) {
             this->m_pWidgetParent->reorderChild(this);
         }
@@ -322,23 +297,6 @@ namespace cs {
                 child->setVisibleTouch(visible);
             }
         }
-    }
-    
-    void CocoWidget::addUIElement(UIElement* element)
-    {
-        if (!element) {
-            return;
-        }
-        if (this->m_UIElements->containsObject(element)) {
-            return;
-        }
-        this->m_UIElements->addObject(element);
-        this->addElementNode(element);
-    }
-    
-    void CocoWidget::addElementNode(cs::UIElement *element)
-    {
-        this->m_pCContainerNode->addRenderNode(element->getCRenderNode());
     }
     
     int CocoWidget::checkContainedChild(CocoWidget* child)
@@ -575,21 +533,23 @@ namespace cs {
     
     void CocoWidget::getLocationInWindow()
     {
-        this->m_locationInWindow = this->m_pCContainerNode->convertToWorldSpace();
+        this->m_locationInWindow = this->m_pCCRenderNode->convertToWorldSpace(cocos2d::CCPointZero);
     }
     
     cocos2d::CCRect CocoWidget::getRect()
     {
-        CRenderNode* validNode = this->getValidNode();
+        cocos2d::CCNode* validNode = this->getValidNode();
         float width = 0.0;
         float height = 0.0;
         float anchorPointX = 0.0;
         float anchorPointY = 0.0;
         this->getLocationInWindow();
-        width = validNode->getContentSizeWidth()*this->getAbsoluteScaleX();
-        height = validNode->getContentSizeHeight()*this->getAbsoluteScaleY();
-        anchorPointX = validNode->getAnchorPoint().x;
-        anchorPointY = validNode->getAnchorPoint().y;
+        cocos2d::CCSize nodeSize = validNode->getContentSize();
+        width = nodeSize.width*this->getAbsoluteScaleX();
+        height = nodeSize.height*this->getAbsoluteScaleY();
+        cocos2d::CCPoint nodeAnchorPoint = validNode->getAnchorPoint();
+        anchorPointX = nodeAnchorPoint.x;
+        anchorPointY = nodeAnchorPoint.y;
         switch (this->m_nWidgetType){
             case 0:
                 this->m_rect.origin.x = this->m_locationInWindow.x - width * anchorPointX;
@@ -608,15 +568,17 @@ namespace cs {
     
     cocos2d::CCRect CocoWidget::getRelativeRect()
     {
-        CRenderNode* validNode = this->getValidNode();
+        cocos2d::CCNode* validNode = this->getValidNode();
         float width = 0.0;
         float height = 0.0;
         float anchorPointX = 0.0;
         float anchorPointY = 0.0;
-        width = validNode->getContentSizeWidth()*this->getScaleX();
-        height = validNode->getContentSizeHeight()*this->getScaleY();
-        anchorPointX = validNode->getAnchorPoint().x;
-        anchorPointY = validNode->getAnchorPoint().y;
+        cocos2d::CCSize nodeSize = validNode->getContentSize();
+        width = nodeSize.width*this->getScaleX();
+        height = nodeSize.height*this->getScaleY();
+        cocos2d::CCPoint nodeAnchorPoint = validNode->getAnchorPoint();
+        anchorPointX = nodeAnchorPoint.x;
+        anchorPointY = nodeAnchorPoint.y;
         switch (this->m_nWidgetType){
             case 0:
                 this->m_relativeRect.origin.x = this->getPosition().x - width * anchorPointX;
@@ -632,14 +594,14 @@ namespace cs {
         return this->m_relativeRect;
     }
     
-    CRenderNode* CocoWidget::getValidNode()
+    cocos2d::CCNode* CocoWidget::getValidNode()
     {
-        return this->m_pCContainerNode;
+        return this->m_pCCRenderNode;
     }
     
-    CRenderNode* CocoWidget::getContainerNode()
+    cocos2d::CCNode* CocoWidget::getContainerNode()
     {
-        return this->m_pCContainerNode;
+        return this->m_pCCRenderNode;
     }
     
     bool CocoWidget::pointAtSelfBody(cocos2d::CCPoint &pt)
@@ -647,8 +609,17 @@ namespace cs {
         if (!this->getAbsoluteVisible()) {
             return false;
         }
-        CRenderNode* validNode = this->getValidNode();
-        return validNode->hitTest(pt);
+        return this->hitTest(this->getValidNode(),pt);
+    }
+    
+    bool CocoWidget::hitTest(cocos2d::CCNode* node, cocos2d::CCPoint &pt)
+    {
+        cocos2d::CCPoint nsp = node->convertToNodeSpace(pt);
+        cocos2d::CCRect bb = node->boundingBox();
+        if (nsp.x >= 0 && nsp.x <= bb.size.width && nsp.y > 0 && nsp.y <= bb.size.height) {
+            return true;
+        }
+        return false;
     }
     
     bool CocoWidget::checkVisibleDependParent(cocos2d::CCPoint &pt)
@@ -673,13 +644,6 @@ namespace cs {
     {   
         cocos2d::CCRect parentRect = this->m_pWidgetParent->getRect();
         cocos2d::CCRect selfRect = this->getRect();
-//        printf("parent rect x %f y %f w %f h %f \n",parentRect.origin.x,parentRect.origin.y,parentRect.size.width,parentRect.size.height);
-//        printf("self rect x %f y %f w %f h %f \n",selfRect.origin.x,selfRect.origin.y,selfRect.size.width,selfRect.size.height);
-        
-//        cocos2d::CCAffineTransform t = this->getContainerNode()->getRenderNode()->nodeToParentTransform();
-        
-//        printf(" scalex: %f  scaleY: %f\n", t.a, t.d);
-        
         bool res = !((selfRect.origin.x+selfRect.size.width) < parentRect.origin.x ||
                     (parentRect.origin.x+parentRect.size.width) <   selfRect.origin.x ||
                     (selfRect.origin.y+selfRect.size.height) < parentRect.origin.y ||
@@ -696,13 +660,13 @@ namespace cs {
     
     void CocoWidget::setPosition(const cocos2d::CCPoint &pos)
     {
-        this->m_pCContainerNode->setPosition(pos);
+        this->m_pCCRenderNode->setPosition(pos);
     }
     
     void CocoWidget::setAnchorPoint(const cocos2d::CCPoint &pt)
     {
         this->m_anchorPoint = pt;
-        this->m_pCContainerNode->setAnchorPoint(pt);
+        this->m_pCCRenderNode->setAnchorPoint(pt);
     }
     
     void CocoWidget::updateAnchorPoint()
@@ -712,7 +676,7 @@ namespace cs {
     
     cocos2d::CCPoint CocoWidget::getPosition()
     {
-        return this->m_pCContainerNode->getPosition();
+        return this->m_pCCRenderNode->getPosition();
     }
     
     cocos2d::CCPoint CocoWidget::getAnchorPoint()
@@ -725,46 +689,46 @@ namespace cs {
         this->m_bScaleXDirty = this->m_bScaleYDirty = true;
         this->updateChildrenScaleXDirty(this->m_bScaleXDirty);
         this->updateChildrenScaleYDirty(this->m_bScaleYDirty);
-        this->m_pCContainerNode->setScale(scale);
+        this->m_pCCRenderNode->setScale(scale);
     }
     
     float CocoWidget::getScale()
     {
-        return this->m_pCContainerNode->getScale();
+        return this->m_pCCRenderNode->getScale();
     }
     
     void CocoWidget::setScaleX(float scaleX)
     {
         this->m_bScaleXDirty = true;
         this->updateChildrenScaleXDirty(this->m_bScaleXDirty);
-        this->m_pCContainerNode->setScaleX(scaleX);
+        this->m_pCCRenderNode->setScaleX(scaleX);
     }
     
     float CocoWidget::getScaleX()
     {
-        return this->m_pCContainerNode->getScaleX();
+        return this->m_pCCRenderNode->getScaleX();
     }
     
     void CocoWidget::setScaleY(float scaleY)
     {
         this->m_bScaleYDirty = true;
         this->updateChildrenScaleYDirty(this->m_bScaleYDirty);
-        this->m_pCContainerNode->setScaleY(scaleY);
+        this->m_pCCRenderNode->setScaleY(scaleY);
     }
     
     float CocoWidget::getScaleY()
     {
-        return this->m_pCContainerNode->getScaleY();
+        return this->m_pCCRenderNode->getScaleY();
     }
     
     void CocoWidget::setRotation(float rotation)
     {
-        this->m_pCContainerNode->setRotation(rotation);
+        this->m_pCCRenderNode->setRotation(rotation);
     }
     
     float CocoWidget::getRotation()
     {
-        return this->m_pCContainerNode->getRotation();
+        return this->m_pCCRenderNode->getRotation();
     }
     
     void CocoWidget::setVisible(bool visible)
@@ -772,7 +736,7 @@ namespace cs {
         this->m_bVisibleDirty = true;
         this->updateChildrenVisibleDirty(this->m_bVisibleDirty);
         this->m_bVisible = visible;
-        this->m_pCContainerNode->setVisible(visible);
+        this->m_pCCRenderNode->setVisible(visible);
     }
     
     bool CocoWidget::getVisible()
@@ -831,37 +795,37 @@ namespace cs {
     
     cocos2d::CCAction* CocoWidget::runAction(cocos2d::CCAction *action)
     {
-        return this->m_pCContainerNode->getRenderNode()->runAction(action);
+        return this->m_pCCRenderNode->runAction(action);
     }
     
     void CocoWidget::setActionManager(cocos2d::CCActionManager *actionManager)
     {
-        this->m_pCContainerNode->getRenderNode()->setActionManager(actionManager);
+        this->m_pCCRenderNode->setActionManager(actionManager);
     }
     
     cocos2d::CCActionManager* CocoWidget::getActionManager()
     {
-        return this->m_pCContainerNode->getRenderNode()->getActionManager();
+        return this->m_pCCRenderNode->getActionManager();
     }
     
     void CocoWidget::stopAllActions()
     {
-        this->m_pCContainerNode->getRenderNode()->stopAllActions();
+        this->m_pCCRenderNode->stopAllActions();
     }
     
     void CocoWidget::stopAction(cocos2d::CCAction *action)
     {
-        this->m_pCContainerNode->getRenderNode()->stopAction(action);
+        this->m_pCCRenderNode->stopAction(action);
     }
     
     void CocoWidget::stopActionByTag(int tag)
     {
-        this->m_pCContainerNode->getRenderNode()->stopActionByTag(tag);
+        this->m_pCCRenderNode->stopActionByTag(tag);
     }
     
     cocos2d::CCAction* CocoWidget::getActionByTag(int tag)
     {
-        return this->m_pCContainerNode->getRenderNode()->getActionByTag(tag);
+        return this->m_pCCRenderNode->getActionByTag(tag);
     }
     
     float CocoWidget::getAbsoluteScaleX()
@@ -955,5 +919,41 @@ namespace cs {
         this->m_fAdaptScaleY = yProportion;
         this->setScaleX(m_fAdaptScaleX*this->getScaleX());
         this->setScaleY(m_fAdaptScaleY*this->getScaleY());
+    }
+    
+    void CocoWidget::setColor(const cocos2d::ccColor3B &color)
+    {
+        GUINodeRGBA * guiNode = DYNAMIC_CAST_GUINODERGBA;
+        if (guiNode) {
+            guiNode->setColor(color);
+            return;
+        }
+        cocos2d::CCRGBAProtocol* rgbap = DYNAMIC_CAST_CCRGBAPROTOCOL;
+        if (rgbap) {
+            rgbap->setColor(color);
+        }
+    }
+    
+    const cocos2d::ccColor3B& CocoWidget::getColor()
+    {
+        return DYNAMIC_CAST_CCRGBAPROTOCOL->getColor();
+    }
+    
+    void CocoWidget::setOpacity(int opacity)
+    {
+        GUINodeRGBA * guiNode = DYNAMIC_CAST_GUINODERGBA;
+        if (guiNode) {
+            guiNode->setOpacity(opacity);
+            return;
+        }
+        cocos2d::CCRGBAProtocol* rgbap = DYNAMIC_CAST_CCRGBAPROTOCOL;
+        if (rgbap) {
+            rgbap->setOpacity(opacity);
+        }
+    }
+    
+    int CocoWidget::getOpacity()
+    {
+        return DYNAMIC_CAST_CCRGBAPROTOCOL->getOpacity();
     }
 }

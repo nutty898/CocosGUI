@@ -300,7 +300,7 @@ namespace cs {
         int colorR = cr ? DICTOOL->objectToIntValue(cr) : 255;
         int colorG = cg ? DICTOOL->objectToIntValue(cg) : 255;
         int colorB = cb ? DICTOOL->objectToIntValue(cb) : 255;
-        widget->setColor(colorR, colorG, colorB);
+        widget->setColor(ccc3(colorR, colorG, colorB));
         CCObject * apx = DICTOOL->checkObjectExist(options, "anchorPointX");
         float apxf = apx ? DICTOOL->objectToFloatValue(apx) : 0.5f;
         CCObject * apy = DICTOOL->checkObjectExist(options, "anchorPointY");
@@ -417,7 +417,8 @@ namespace cs {
         int cr = cro?DICTOOL->objectToIntValue(cro):255;
         int cg = cgo?DICTOOL->objectToIntValue(cgo):255;
         int cb = cbo?DICTOOL->objectToIntValue(cbo):255;
-        label->setTextColor(cr, cg, cb);
+        ccColor3B tc = ccc3(cr, cg, cb);
+        label->setColor(tc);
         label->setFlipX(DICTOOL->getBooleanValue(options, "flipX"));
         label->setFlipY(DICTOOL->getBooleanValue(options, "flipY"));
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
@@ -536,15 +537,16 @@ namespace cs {
         CCObject* aw = DICTOOL->checkObjectExist(options, "areaWidth");
         CCObject* ah = DICTOOL->checkObjectExist(options, "areaHeight");
         if (aw && ah) {
-            textArea->setTextAreaSize(DICTOOL->objectToFloatValue(aw),DICTOOL->objectToFloatValue(ah));
+            CCSize size = cocos2d::CCSize(DICTOOL->objectToFloatValue(aw),DICTOOL->objectToFloatValue(ah));
+            textArea->setTextAreaSize(size);
         }
         CCObject* ha = DICTOOL->checkObjectExist(options, "hAlignment");
         if (ha) {
-            textArea->setTextHorizontalAlignment(DICTOOL->objectToIntValue(ha));
+            textArea->setTextHorizontalAlignment((cocos2d::CCTextAlignment)DICTOOL->objectToIntValue(ha));
         }
         CCObject* va = DICTOOL->checkObjectExist(options, "vAlignment");
         if (va) {
-            textArea->setTextVerticalAlignment(DICTOOL->objectToIntValue(va));
+            textArea->setTextVerticalAlignment((cocos2d::CCVerticalTextAlignment)DICTOOL->objectToIntValue(va));
         }
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
     }
@@ -589,11 +591,6 @@ namespace cs {
         if (tsw && tsh) {
             textField->setTouchSize(DICTOOL->objectToFloatValue(tsw), DICTOOL->objectToFloatValue(tsh));
         }
-        
-        int cr = DICTOOL->getIntValue(options, "colorR");
-        int cg = DICTOOL->getIntValue(options, "colorG");
-        int cb = DICTOOL->getIntValue(options, "colorB");
-        textField->setTextColor(cr,cg,cb);
         this->setColorPropsForWidgetFromCCDictionary(widget, options);
     }
     
@@ -719,7 +716,7 @@ namespace cs {
         int colorR = cr ? DICTOOL->getIntValue_json(options, "colorR") : 255;
         int colorG = cg ? DICTOOL->getIntValue_json(options, "colorG") : 255;
         int colorB = cb ? DICTOOL->getIntValue_json(options, "colorB") : 255;
-        widget->setColor(colorR, colorG, colorB);
+        widget->setColor(ccc3(colorR, colorG, colorB));
         bool apx = DICTOOL->checkObjectExist_json(options, "anchorPointX");
         float apxf = apx ? DICTOOL->getFloatValue_json(options, "anchorPointX") : 0.5f;
         bool apy = DICTOOL->checkObjectExist_json(options, "anchorPointY");
@@ -836,7 +833,8 @@ namespace cs {
         int cr = cro?DICTOOL->getIntValue_json(options, "colorR"):255;
         int cg = cgo?DICTOOL->getIntValue_json(options, "colorG"):255;
         int cb = cbo?DICTOOL->getIntValue_json(options, "colorB"):255;
-        label->setTextColor(cr, cg, cb);
+        ccColor3B tc = ccc3(cr, cg, cb);
+        label->setColor(tc);
         label->setFlipX(DICTOOL->getBooleanValue_json(options, "flipX"));
         label->setFlipY(DICTOOL->getBooleanValue_json(options, "flipY"));
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
@@ -955,15 +953,16 @@ namespace cs {
         bool aw = DICTOOL->checkObjectExist_json(options, "areaWidth");
         bool ah = DICTOOL->checkObjectExist_json(options, "areaHeight");
         if (aw && ah) {
-            textArea->setTextAreaSize(DICTOOL->getFloatValue_json(options, "areaWidth"),DICTOOL->getFloatValue_json(options,"areaHeight"));
+            CCSize size = CCSize(DICTOOL->getFloatValue_json(options, "areaWidth"),DICTOOL->getFloatValue_json(options,"areaHeight"));
+            textArea->setTextAreaSize(size);
         }
         bool ha = DICTOOL->checkObjectExist_json(options, "hAlignment");
         if (ha) {
-            textArea->setTextHorizontalAlignment(DICTOOL->getIntValue_json(options, "hAlignment"));
+            textArea->setTextHorizontalAlignment((cocos2d::CCTextAlignment)DICTOOL->getIntValue_json(options, "hAlignment"));
         }
         bool va = DICTOOL->checkObjectExist_json(options, "vAlignment");
         if (va) {
-            textArea->setTextVerticalAlignment(DICTOOL->getIntValue_json(options, "vAlignment"));
+            textArea->setTextVerticalAlignment((cocos2d::CCVerticalTextAlignment)DICTOOL->getIntValue_json(options, "vAlignment"));
         }
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
     }
@@ -1009,10 +1008,6 @@ namespace cs {
             textField->setTouchSize(DICTOOL->getFloatValue_json(options, "touchSizeWidth"), DICTOOL->getFloatValue_json(options,"touchSizeHeight"));
         }
         
-        int cr = DICTOOL->getIntValue_json(options, "colorR");
-        int cg = DICTOOL->getIntValue_json(options, "colorG");
-        int cb = DICTOOL->getIntValue_json(options, "colorB");
-        textField->setTextColor(cr,cg,cb);
         this->setColorPropsForWidgetFromJsonDictionary(widget,options);
     }
     

@@ -25,6 +25,7 @@
  */
 
 #include "CocoButton.h"
+#include "GUIScale9Sprite.h"
 #include "DictionaryHelper.h"
 
 namespace cs {
@@ -46,7 +47,6 @@ namespace cs {
     
     CocoButton* CocoButton::create()
     {
-//        return CocoButton::create(NULL);
         CocoButton* widget = new CocoButton();
         if (widget && widget->init()) {
             return widget;
@@ -58,29 +58,28 @@ namespace cs {
     bool CocoButton::init()
     {
         if (CocoWidget::init()) {
-            if (this->m_bScale9Enable) {
-                this->m_pButtonNormal = new UIScale9Sprite();
-                this->m_pButtonNormal->init();
-                this->m_pButtonClicked = new UIScale9Sprite();
-                this->m_pButtonClicked->init();
-                this->m_pButtonDisable = new UIScale9Sprite();
-                this->m_pButtonDisable->init();
-            }else{
-                this->m_pButtonNormal = new UISprite();
-                this->m_pButtonNormal->init();
-                this->m_pButtonClicked = new UISprite();
-                this->m_pButtonClicked->init();
-                this->m_pButtonDisable = new UISprite();
-                this->m_pButtonDisable->init();
-            }
             
-            this->addUIElement(m_pButtonNormal);
-            this->addUIElement(m_pButtonClicked);
-            this->addUIElement(m_pButtonDisable);
             this->initPressState(0);
             return true;
         }
         return false;
+    }
+    
+    void CocoButton::initNodes()
+    {
+        CocoWidget::initNodes();
+        if (this->m_bScale9Enable) {
+            this->m_pButtonNormal = GUIScale9Sprite::create();
+            this->m_pButtonClicked = GUIScale9Sprite::create();
+            this->m_pButtonDisable = GUIScale9Sprite::create();
+        }else{
+            this->m_pButtonNormal = cocos2d::CCSprite::create();
+            this->m_pButtonClicked = cocos2d::CCSprite::create();
+            this->m_pButtonDisable = cocos2d::CCSprite::create();
+        }
+        this->m_pCCRenderNode->addChild(this->m_pButtonNormal);
+        this->m_pCCRenderNode->addChild(this->m_pButtonClicked);
+        this->m_pCCRenderNode->addChild(this->m_pButtonDisable);
     }
     
     void CocoButton::initPressState(int state)
@@ -100,28 +99,26 @@ namespace cs {
         this->m_nPrevPressstate = -1;
         this->m_nCurPressState = -1;
         this->m_bScale9Enable = able;
-        this->removeAllUIElementsAndCleanUp(true);
+        
+        this->m_pCCRenderNode->removeChild(this->m_pButtonNormal, true);
+        this->m_pCCRenderNode->removeChild(this->m_pButtonClicked, true);
+        this->m_pCCRenderNode->removeChild(this->m_pButtonDisable, true);
+        
         this->m_pButtonNormal = NULL;
         this->m_pButtonClicked = NULL;
         this->m_pButtonDisable = NULL;
         if (this->m_bScale9Enable) {
-            this->m_pButtonNormal = new UIScale9Sprite();
-            this->m_pButtonNormal->init();
-            this->m_pButtonClicked = new UIScale9Sprite();
-            this->m_pButtonClicked->init();
-            this->m_pButtonDisable = new UIScale9Sprite();
-            this->m_pButtonDisable->init();
+            this->m_pButtonNormal = GUIScale9Sprite::create();
+            this->m_pButtonClicked = GUIScale9Sprite::create();
+            this->m_pButtonDisable = GUIScale9Sprite::create();
         }else{
-            this->m_pButtonNormal = new UISprite();
-            this->m_pButtonNormal->init();
-            this->m_pButtonClicked = new UISprite();
-            this->m_pButtonClicked->init();
-            this->m_pButtonDisable = new UISprite();
-            this->m_pButtonDisable->init();
+            this->m_pButtonNormal = cocos2d::CCSprite::create();
+            this->m_pButtonClicked = cocos2d::CCSprite::create();
+            this->m_pButtonDisable = cocos2d::CCSprite::create();
         }
-        this->addUIElement(m_pButtonNormal);
-        this->addUIElement(m_pButtonClicked);
-        this->addUIElement(m_pButtonDisable);
+        this->m_pCCRenderNode->addChild(this->m_pButtonNormal);
+        this->m_pCCRenderNode->addChild(this->m_pButtonClicked);
+        this->m_pCCRenderNode->addChild(this->m_pButtonDisable);
         this->initPressState(0);
     }
     
@@ -130,9 +127,10 @@ namespace cs {
         if (!this->m_bScale9Enable) {
             return;
         }
-        ((UIScale9Sprite*)(this->m_pButtonNormal))->setScaleSize(width,height);
-        ((UIScale9Sprite*)(this->m_pButtonClicked))->setScaleSize(width,height);
-        ((UIScale9Sprite*)(this->m_pButtonDisable))->setScaleSize(width,height);
+        cocos2d::CCSize size = cocos2d::CCSize(width,height);
+        dynamic_cast<GUIScale9Sprite*>(this->m_pButtonNormal)->setContentSize(size);
+        dynamic_cast<GUIScale9Sprite*>(this->m_pButtonClicked)->setContentSize(size);
+        dynamic_cast<GUIScale9Sprite*>(this->m_pButtonDisable)->setContentSize(size);
     }
     
     void CocoButton::setTextures(const char* normal,const char* selected,const char* disabled,bool useSpriteFrame)
@@ -151,37 +149,79 @@ namespace cs {
     
     void CocoButton::setNormalTexture(const char* normal,bool useSpriteFrame)
     {
-        ((UISprite*)(this->m_pButtonNormal))->loadTexture(normal,useSpriteFrame);
+        if (!normal || strcmp(normal, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonNormal)->initWithSpriteFrameName(normal);
+        }else{
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonNormal)->initWithFile(normal);
+        }
         this->updateAnchorPoint();
     }
     
     void CocoButton::setPressedTexture(const char* selected,bool useSpriteFrame)
     {
-        ((UISprite*)(this->m_pButtonClicked))->loadTexture(selected,useSpriteFrame);
+        if (!selected || strcmp(selected, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonClicked)->initWithSpriteFrameName(selected);
+        }else{
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonClicked)->initWithFile(selected);
+        }
         this->updateAnchorPoint();
     }
     
     void CocoButton::setDisabledTexture(const char* disabled,bool useSpriteFrame)
     {
-        ((UISprite*)(this->m_pButtonDisable))->loadTexture(disabled,useSpriteFrame);
+        if (!disabled || strcmp(disabled, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonDisable)->initWithSpriteFrameName(disabled);
+        }else{
+            dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonDisable)->initWithFile(disabled);
+        }
         this->updateAnchorPoint();
     }
     
     void CocoButton::setNormalTextureScale9(const char* normal,cocos2d::CCRect capInsets,bool useSpriteFrame)
     {
-        ((UIScale9Sprite*)(this->m_pButtonNormal))->loadTexture(normal,capInsets.origin.x,capInsets.origin.y,capInsets.size.width,capInsets.size.height,useSpriteFrame);
+        if (!normal || strcmp(normal, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonNormal)->initWithSpriteFrameName(normal,capInsets);
+        }else{
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonNormal)->initWithFile(normal,capInsets);
+        }
         this->updateAnchorPoint();
     }
     
     void CocoButton::setPressedTextureScale9(const char* selected,cocos2d::CCRect capInsets,bool useSpriteFrame)
     {
-        ((UIScale9Sprite*)(this->m_pButtonClicked))->loadTexture(selected,capInsets.origin.x,capInsets.origin.y,capInsets.size.width,capInsets.size.height,useSpriteFrame);
+        if (!selected || strcmp(selected, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonClicked)->initWithSpriteFrameName(selected,capInsets);
+        }else{
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonClicked)->initWithFile(selected,capInsets);
+        }
         this->updateAnchorPoint();
     }
     
     void CocoButton::setDisabledTextureScale9(const char* disabled,cocos2d::CCRect capInsets,bool useSpriteFrame)
     {
-        ((UIScale9Sprite*)(this->m_pButtonDisable))->loadTexture(disabled,capInsets.origin.x,capInsets.origin.y,capInsets.size.width,capInsets.size.height,useSpriteFrame);
+        if (!disabled || strcmp(disabled, "") == 0) {
+            return;
+        }
+        if (useSpriteFrame) {
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonDisable)->initWithSpriteFrameName(disabled,capInsets);
+        }else{
+            dynamic_cast<GUIScale9Sprite*>(this->m_pButtonDisable)->initWithFile(disabled,capInsets);
+        }
         this->updateAnchorPoint();
     }
     
@@ -206,18 +246,18 @@ namespace cs {
         this->m_pButtonDisable->setVisible(true);
     }
     
-    CRenderNode* CocoButton::getValidNode()
+    cocos2d::CCNode* CocoButton::getValidNode()
     {
-        CRenderNode* res = NULL;
+        cocos2d::CCNode* res = NULL;
         switch (this->m_nCurPressState) {
             case 0:
-                res = this->m_pButtonNormal->getCRenderNode();
+                res = this->m_pButtonNormal;
                 break;
             case 1:
-                res = this->m_pButtonClicked->getCRenderNode();
+                res = this->m_pButtonClicked;
                 break;
             case 2:
-                res = this->m_pButtonDisable->getCRenderNode();
+                res = this->m_pButtonDisable;
                 break;
             default:
                 break;
@@ -225,32 +265,18 @@ namespace cs {
         return res;
     }
     
-    void CocoButton::setColor(int r, int g, int b)
-    {
-        this->m_pButtonNormal->setColor(r, g, b);
-        this->m_pButtonClicked->setColor(r, g, b);
-        this->m_pButtonDisable->setColor(r, g, b);
-    }
-
-    void CocoButton::setOpacity(int opcity)
-    {
-        this->m_pButtonNormal->setOpacity(opcity);
-        this->m_pButtonClicked->setOpacity(opcity);
-        this->m_pButtonDisable->setOpacity(opcity);
-    }
-    
     void CocoButton::setFlipX(bool flipX)
     {
-        this->m_pButtonNormal->setFlipX(flipX);
-        this->m_pButtonClicked->setFlipX(flipX);
-        this->m_pButtonDisable->setFlipX(flipX);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonNormal)->setFlipX(flipX);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonClicked)->setFlipX(flipX);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonDisable)->setFlipX(flipX);
     }
     
     void CocoButton::setFlipY(bool flipY)
     {
-        this->m_pButtonNormal->setFlipY(flipY);
-        this->m_pButtonClicked->setFlipY(flipY);
-        this->m_pButtonDisable->setFlipY(flipY);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonNormal)->setFlipY(flipY);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonClicked)->setFlipY(flipY);
+        dynamic_cast<cocos2d::CCSprite*>(this->m_pButtonDisable)->setFlipY(flipY);
     }
     
     void CocoButton::setAnchorPoint(const cocos2d::CCPoint &pt)

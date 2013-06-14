@@ -40,11 +40,7 @@ namespace cs
         CocoSlider();
         virtual ~CocoSlider();
         static CocoSlider* create();
-//        static CocoSlider* create(cocos2d::CCDictionary* options);
-//        static CocoSlider* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         void setBarTexture(const char* fileName,bool useSpriteFrame = false);
         void setBarTextureScale9(const char* fileName,float x,float y,float width,float height,bool useSpriteFrame = false);
         void setBarTextureScale9Enable(bool able);
@@ -65,14 +61,12 @@ namespace cs
         virtual bool onTouchCanceled(cocos2d::CCPoint &touchPoint);
         float getPercentWithBallPos(float px,float py);
         virtual bool pointAtSelfBody(cocos2d::CCPoint &pt);
-        virtual CRenderNode* getValidNode();
+        virtual cocos2d::CCNode* getValidNode();
         virtual void addPercentChangedEvent(cocos2d::CCObject* target,SEL_PushEvent selector);
         void percentChangedEvent();
         int getPercent();
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
     protected:
-        UIElement*  m_pBarNode;
+        cocos2d::CCNode*  m_pBarNode;
         float m_fMinLength;
         float m_fBarLength;
         int m_nDirection;
@@ -82,7 +76,7 @@ namespace cs
         float m_fTouchMoveStartLocation;
         bool m_bBarScale9Enable;
         bool m_bShowProgressBar;
-        UIScale9Sprite* m_pProgressBarNode;
+        cocos2d::CCNode* m_pProgressBarNode;
         cocos2d::CCObject*       m_pPercentListener;
         SEL_PushEvent    m_pfnPercentSelector;
     };

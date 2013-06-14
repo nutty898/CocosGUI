@@ -10,8 +10,8 @@
 #define __Test__CocoControlButton__
 
 #include "CocoWidget.h"
-#include "UIScale9Sprite.h"
-#include "UIText.h"
+#include "cocos2d.h"
+#include "CCScale9Sprite.h"
 
 namespace cs {
     class CocoControlButton : public CocoWidget
@@ -20,21 +20,19 @@ namespace cs {
         CocoControlButton();
         virtual ~CocoControlButton();
         static CocoControlButton* create();
-        virtual bool init();
+        virtual void initNodes();
         void setTexture(const char* background);
         void setTitle(const char* title);
         virtual void onPressStateChangedToNormal();
         virtual void onPressStateChangedToPressed();
         virtual void onPressStateChangedToDisabled();
-        virtual CRenderNode* getValidNode();
+        virtual cocos2d::CCNode* getValidNode();
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
     protected:
-        UIScale9Sprite* m_pBackGround;
-        UIText* m_pTitle;
+        cocos2d::extension::CCScale9Sprite* m_pBackGround;
+        cocos2d::CCLabelTTF* m_pTitle;
     };
 }
 

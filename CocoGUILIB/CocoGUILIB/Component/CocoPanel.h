@@ -28,8 +28,6 @@
 #define __CocoGUI__CocoPanel__
 
 #include "CocoContainerWidget.h"
-#include "UISprite.h"
-#include "UIScale9Sprite.h"
 
 namespace cs {
     class CocoPanel : public CocoContainerWidget
@@ -38,25 +36,17 @@ namespace cs {
         CocoPanel();
         virtual ~CocoPanel();
         static CocoPanel* create();
-//        static CocoPanel* create(cocos2d::CCDictionary* options);
-//        static CocoPanel* createWithJson(sp::SPJsonDictionary* options);
-        virtual bool init();
         virtual void initBackGround(bool scale9);
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         void setBackGroundImage(const char* fileName,bool useSpriteFrame = false);
         void setBackGroundImageScale9(const char* fileName,cocos2d::CCRect capInsets,bool useSpriteFrame = false);
         void setBackGroundColorEnable(bool able);
-//        virtual CRenderNode* getValidNode();
         virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(float width,float height);
         void setBackGroundImageScale9Enable(bool able);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
     protected:
         bool m_bBackGroundInited;
         bool m_bBackGroundScale9Enable;
-        UIElement* m_pBackGroundImage;
+        cocos2d::CCNode* m_pBackGroundImage;
     };
 }
 

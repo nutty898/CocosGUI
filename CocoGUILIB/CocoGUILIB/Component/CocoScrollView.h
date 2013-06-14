@@ -93,11 +93,7 @@ namespace cs
         CocoScrollView();
         virtual ~CocoScrollView();
         static CocoScrollView* create();
-//        static CocoScrollView* create(cocos2d::CCDictionary* options);
-//        static CocoScrollView* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         virtual bool addChild(CocoWidget* widget);
         virtual void removeChildMoveToTrash(CocoWidget* child);
         virtual void removeChildReferenceOnly(CocoWidget* child);
@@ -132,7 +128,6 @@ namespace cs
         virtual void update(float dt);
         void recordSlidTime(float dt);
         virtual void checkChildInfo(int handleState,CocoWidget* sender,cocos2d::CCPoint &touchPoint);
-//        virtual CRenderNode* getValidNode();
         virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(float width,float height);
         

@@ -27,8 +27,7 @@
 #include "DictionaryHelper.h"
 
 namespace cs {
-    CocoTextArea::CocoTextArea():
-    m_pArea(NULL)
+    CocoTextArea::CocoTextArea()
     {
         
     }
@@ -40,7 +39,6 @@ namespace cs {
 
     CocoTextArea* CocoTextArea::create()
     {
-//        return CocoTextArea::create(NULL);
         CocoTextArea* widget = new CocoTextArea();
         if (widget && widget->init()) {
             return widget;
@@ -48,93 +46,65 @@ namespace cs {
         CC_SAFE_DELETE(widget);
         return NULL;
     }
-    
-    bool CocoTextArea::init()
+
+    void CocoTextArea::initNodes()
     {
-        if (CocoWidget::init()) {
-            this->m_pArea = new UITextArea();
-            this->m_pArea->init();
-            this->addUIElement(this->m_pArea);
-            return true;
-        }
-        return false;
+        this->m_pCCRenderNode = cocos2d::CCLabelTTF::create();
     }
     
     void CocoTextArea::setText(const char* text)
     {
-        this->m_pArea->setStringValue(text);
+        DYNAMIC_CAST_CCLABELTTF->setString(text);
     }
     
-    void CocoTextArea::setTextAreaSize(float width,float height)
+    void CocoTextArea::setTextAreaSize(const cocos2d::CCSize &size)
     {
-        this->m_pArea->setTextAreaSize(width,height);
+        DYNAMIC_CAST_CCLABELTTF->setDimensions(size);
     }
     
-    void CocoTextArea::setTextHorizontalAlignment(int alignment)
+    void CocoTextArea::setTextHorizontalAlignment(cocos2d::CCTextAlignment alignment)
     {
-        this->m_pArea->setTextHorizontalAlignment(alignment);
+        DYNAMIC_CAST_CCLABELTTF->setHorizontalAlignment(alignment);
     }
     
-    void CocoTextArea::setTextVerticalAlignment(int alignment)
+    void CocoTextArea::setTextVerticalAlignment(cocos2d::CCVerticalTextAlignment alignment)
     {
-        this->m_pArea->setTextVerticalAlignment(alignment);
+        DYNAMIC_CAST_CCLABELTTF->setVerticalAlignment(alignment);
     }
     
     int CocoTextArea::getStringLength()
     {
-        return this->m_pArea->getStringLength();
+        const char* str = DYNAMIC_CAST_CCLABELTTF->getString();
+        return strlen(str);
     }
     
     const char* CocoTextArea::getStringValue()
     {
-        return this->m_pArea->getStringValue();
+        return DYNAMIC_CAST_CCLABELTTF->getString();
     }
     
     void CocoTextArea::setTextColor(int r,int g,int b)
     {
-        this->m_pArea->setTextColor(r,g,b);
+        DYNAMIC_CAST_CCLABELTTF->setColor(cocos2d::ccc3(r, g, b));
     }
     
     void CocoTextArea::setFontSize(int size)
     {
-        this->m_pArea->setFontSize(size);
+        DYNAMIC_CAST_CCLABELTTF->setFontSize(size);
     }
     
     void CocoTextArea::setFontName(const char *fontName)
     {
-        this->m_pArea->setFontName(fontName);
-    }
-    
-    CRenderNode* CocoTextArea::getValidNode()
-    {
-        return this->m_pArea->getCRenderNode();
-    }
-    
-    void CocoTextArea::setColor(int r, int g, int b)
-    {
-        this->m_pArea->setColor(r, g, b);
-    }
-    
-    void CocoTextArea::setOpacity(int opcity)
-    {
-        this->m_pArea->setOpacity(opcity);
+        DYNAMIC_CAST_CCLABELTTF->setFontName(fontName);
     }
     
     void CocoTextArea::setFlipX(bool flipX)
     {
-        CocoWidget::setFlipX(flipX);
-        this->m_pArea->getCRenderNode()->setFlipX(flipX);
+        DYNAMIC_CAST_CCLABELTTF->setFlipX(flipX);
     }
     
     void CocoTextArea::setFlipY(bool flipY)
     {
-        CocoWidget::setFlipY(flipY);
-        this->m_pArea->getCRenderNode()->setFlipY(flipY);
-    }
-    
-    void CocoTextArea::setAnchorPoint(const cocos2d::CCPoint &pt)
-    {
-        CocoWidget::setAnchorPoint(pt);
-        this->m_pArea->setAnchorPoint(pt);
+        DYNAMIC_CAST_CCLABELTTF->setFlipY(flipY);
     }
 }

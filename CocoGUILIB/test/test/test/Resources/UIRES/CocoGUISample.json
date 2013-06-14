@@ -194,7 +194,8 @@
          "scale9Width" : 120,
          "scale9Height" : 80,
          "flipX" : false,
-         "flipY" : false
+         "flipY" : false,
+         "name" : "imageview"
          },
          "children" :[]
          },         
@@ -298,7 +299,8 @@
          "frontCross" : "UIRES/check_box_active.png",
          "backGroundBoxDisabled" : "UIRES/check_box_normal_disable.png",
          "frontCrossDisabled" : "UIRES/check_box_active_disable.png",
-         "touchAble" : true
+         "touchAble" : true,
+         "name" : "checkbox"
          },
          "children" :[]
          },

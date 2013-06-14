@@ -318,7 +318,7 @@ namespace cs
     {
         CocoPanel::onTouchPressed(touchPoint);
         
-        cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         m_fTouchMoveStartLocation = nsp.x;
         m_fTouchStartLocation = nsp.x;
         
@@ -338,7 +338,7 @@ namespace cs
     {
         CocoPanel::onTouchMoved(touchPoint);
         
-        cocos2d::CCPoint nsp = m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = m_pCCRenderNode->convertToNodeSpace(touchPoint);
         float moveX = nsp.x;
         float distance = moveX - m_fTouchMoveStartLocation;
         m_fTouchMoveStartLocation = moveX;
@@ -379,7 +379,7 @@ namespace cs
     {
         CocoPanel::onTouchReleased(touchPoint);
         
-        cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         m_fTouchEndLocation = nsp.x;
         
         int selectedPage = currentScreen_;

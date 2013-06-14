@@ -34,7 +34,7 @@ namespace cs {
     {
         if (CocoWidget::init()) {
             this->m_pLabelBMFont = cocos2d::CCLabelBMFont::create();
-            this->m_pCContainerNode->getRenderNode()->addChild(this->m_pLabelBMFont);
+            this->m_pCCRenderNode->addChild(this->m_pLabelBMFont);
             return true;
         }
         return false;
@@ -54,5 +54,4 @@ namespace cs {
     {
         return this->m_pLabelBMFont->getString();
     }
-    
 }

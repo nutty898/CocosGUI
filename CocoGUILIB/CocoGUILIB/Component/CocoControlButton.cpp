@@ -31,30 +31,24 @@ namespace cs {
         return NULL;
     }
     
-    bool CocoControlButton::init()
+    void CocoControlButton::initNodes()
     {
-        if (CocoWidget::init()) {
-            this->m_pTitle = new UIText();
-            this->m_pTitle->init();
-            this->m_pBackGround = new UIScale9Sprite();
-            this->m_pBackGround->init();
-            this->addUIElement(this->m_pBackGround);
-            this->addUIElement(m_pTitle);
-            return true;
-        }
-        return false;
+        this->m_pTitle = cocos2d::CCLabelTTF::create();
+        this->m_pBackGround = cocos2d::extension::CCScale9Sprite::create();
+        this->m_pCCRenderNode->addChild(this->m_pBackGround);
+        this->m_pCCRenderNode->addChild(m_pTitle);
     }
     
     void CocoControlButton::setTexture(const char* background)
     {
-        this->m_pBackGround->loadTexture(background, 0, 0, 0, 0, false);
-        m_pBackGround->setScaleSize(this->m_pTitle->getCRenderNode()->getRenderNode()->boundingBox().size.width+8*2,this->m_pTitle->getCRenderNode()->getRenderNode()->boundingBox().size.height+2*2);
+        this->m_pBackGround->initWithFile(background);
+        m_pBackGround->setContentSize(cocos2d::CCSize(this->m_pTitle->boundingBox().size.width+8*2,this->m_pTitle->boundingBox().size.height+2*2));
     }
     
     void CocoControlButton::setTitle(const char* title)
     {
-        this->m_pTitle->setStringValue(title);
-        m_pBackGround->setScaleSize(this->m_pTitle->getCRenderNode()->getRenderNode()->boundingBox().size.width+8*2,this->m_pTitle->getCRenderNode()->getRenderNode()->boundingBox().size.height+2*2);
+        this->m_pTitle->setString(title);
+        m_pBackGround->setContentSize(cocos2d::CCSize(this->m_pTitle->boundingBox().size.width+8*2,this->m_pTitle->boundingBox().size.height+2*2));
     }
     
     void CocoControlButton::onPressStateChangedToNormal()
@@ -74,34 +68,26 @@ namespace cs {
         
     }
     
-    CRenderNode* CocoControlButton::getValidNode()
+    cocos2d::CCNode* CocoControlButton::getValidNode()
     {
-        return this->m_pBackGround->getCRenderNode();
+        return this->m_pBackGround;
     }
     
     void CocoControlButton::setAnchorPoint(const cocos2d::CCPoint &pt)
     {
-        
-    }
-    
-    void CocoControlButton::setColor(int r,int g,int b)
-    {
-        
-    }
-    
-    void CocoControlButton::setOpacity(int opcity)
-    {
-        
+        CocoWidget::setAnchorPoint(pt);
+        this->m_pBackGround->setAnchorPoint(pt);
+        this->m_pTitle->setPosition(ccp(this->m_pBackGround->getContentSize().width*(0.5f-this->m_pBackGround->getAnchorPoint().x), this->m_pBackGround->getContentSize().height*(0.5f-this->m_pBackGround->getAnchorPoint().y)));
     }
     
     void CocoControlButton::setFlipX(bool flipX)
     {
-        
+        this->m_pTitle->setFlipX(flipX);
     }
     
     void CocoControlButton::setFlipY(bool flipY)
     {
-        
+        this->m_pTitle->setFlipY(flipY);
     }
 }
 

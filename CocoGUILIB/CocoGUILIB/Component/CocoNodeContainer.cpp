@@ -22,6 +22,7 @@ namespace cs {
     
     void CocoNodeContainer::releaseResoures()
     {
+        CocoWidget::releaseResoures();
         if (this->m_pCCNode) {
             this->m_pCCNode->removeFromParentAndCleanup(true);
             this->m_pCCNode->release();
@@ -45,7 +46,7 @@ namespace cs {
         }
         this->m_pCCNode = node;
         this->m_pCCNode->retain();
-        this->m_pCContainerNode->getRenderNode()->addChild(node);
+        this->m_pCCRenderNode->addChild(node);
     }
     
     void CocoNodeContainer::removeCCNode(bool cleanup)
@@ -54,7 +55,7 @@ namespace cs {
             return;
         }
         this->m_pCCNode->release();
-        this->m_pCContainerNode->getRenderNode()->removeChild(m_pCCNode,cleanup);
+        this->m_pCCRenderNode->removeChild(m_pCCNode,cleanup);
         this->m_pCCNode = NULL;
     }
     

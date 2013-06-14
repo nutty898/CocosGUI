@@ -28,7 +28,7 @@
 #define __CocoGUI__CocoTextArea__
 
 #include "CocoWidget.h"
-#include "UITextArea.h"
+
 
 namespace cs{
     class CocoTextArea : public CocoWidget
@@ -37,28 +37,19 @@ namespace cs{
         CocoTextArea();
         virtual ~CocoTextArea();
         static CocoTextArea* create();
-//        static CocoTextArea* create(cocos2d::CCDictionary* options);
-//        static CocoTextArea* createWithJson(sp::SPJsonDictionary* options);
-        virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setText(const char* text);
-        void setTextAreaSize(float width,float height);
-        void setTextHorizontalAlignment(int alignment);
-        void setTextVerticalAlignment(int alignment);
+        void setTextAreaSize(const cocos2d::CCSize &size);
+        void setTextHorizontalAlignment(cocos2d::CCTextAlignment alignment);
+        void setTextVerticalAlignment(cocos2d::CCVerticalTextAlignment alignment);
         int getStringLength();
         const char* getStringValue();
         void setTextColor(int r,int g,int b);
         void setFontSize(int size);
         void setFontName(const char* fontName);
-        virtual CRenderNode* getValidNode();
-        virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
     protected:
-        UITextArea* m_pArea;
     };
 }
 

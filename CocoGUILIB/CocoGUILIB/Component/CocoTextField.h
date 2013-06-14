@@ -28,7 +28,8 @@
 #define __CocoGUI__CocoTextField__
 
 #include "CocoWidget.h"
-#include "UITextField.h"
+#include "CTextField.h"
+
 
 namespace cs
 {
@@ -47,25 +48,17 @@ namespace cs
         CocoTextField();
         virtual ~CocoTextField();
         static CocoTextField* create();
-//        static CocoTextField* create(cocos2d::CCDictionary* options);
-//        static CocoTextField* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setTouchSize(float width,float height);
         void setText(const char* text);
-        void setSize(float width,float height);
+        void setSize(cocos2d::CCSize &size);
         void setPlaceHolder(const char* value);
         void setFontSize(int size);
-        void setTextColor(int r,int g,int b);
         virtual void didNotSelectSelf();
         const char* getStringValue();
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool pointAtSelfBody(cocos2d::CCPoint &pt);
-        virtual CRenderNode* getValidNode();
-        virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         void setCharacterLength(int length);
         void setIsPassWord(bool isPassword);
         void update(float dt);
@@ -91,7 +84,7 @@ namespace cs
         void addDeleteBackwardEvent(cocos2d::CCObject* target, SEL_TextFieldDeleteBackwardEvent selecor);
         
     protected:
-        UITextField* uiTextField;
+//        CTextField* uiTextField;
         float m_fTouchWidth;
         float m_fTouchHeight;
         bool m_bUseTouchArea;

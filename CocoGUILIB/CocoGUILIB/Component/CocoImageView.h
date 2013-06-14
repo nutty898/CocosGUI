@@ -28,8 +28,6 @@
 #define __CocoGUI__CocoImageView__
 
 #include "CocoWidget.h"
-#include "UISprite.h"
-#include "UIScale9Sprite.h"
 
 namespace cs {
     class CocoImageView : public CocoWidget
@@ -38,15 +36,9 @@ namespace cs {
         CocoImageView();
         virtual ~CocoImageView();
         static CocoImageView* create();
-//        static CocoImageView* create(cocos2d::CCDictionary* options);
-//        static CocoImageView* createWithJson(sp::SPJsonDictionary* options);
-        virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setTexture(const char* fileName,bool useSpriteFrame = false);
-        void setTextureRect(float x,float y,float width,float height);
-        virtual CRenderNode* getValidNode();
-        virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
+        void setTextureRect(cocos2d::CCRect &rect);
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);
         void doubleClickEvent();
@@ -54,14 +46,11 @@ namespace cs {
         void setDoubleClickEnable(bool able);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         void setScale9Enable(bool able);
         void setScale9Size(float width,float height);
         void setTexturesScale9(const char* fileName, cocos2d::CCRect capInsets, bool useSpriteFrame = false);
     protected:
         int m_nViewType;
-        UIElement* m_pImage;
         int m_nClickCount;
         float m_fClickTimeInterval;
         bool m_bStartCheckDoubleClick;

@@ -28,7 +28,7 @@
 #define __CocoGUI__CocoLabelAtlas__
 
 #include "CocoWidget.h"
-#include "UILabelAtlas.h"
+#include "CLabelAtlas.h"
 
 namespace cs {
     class CocoLabelAtlas : public CocoWidget
@@ -37,20 +37,12 @@ namespace cs {
         CocoLabelAtlas();
         virtual ~CocoLabelAtlas();
         static CocoLabelAtlas* create();
-//        static CocoLabelAtlas* create(cocos2d::CCDictionary* options);
-//        static CocoLabelAtlas* createWithJson(sp::SPJsonDictionary* options);
-        virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setProperty(const char* stringValue,const char* charMapFile, int itemWidth, int itemHeight, const char* startCharMap,bool useSpriteFrame = false);
         void setStringValue(const char* value);
         const char* getStringValue();
-        virtual CRenderNode* getValidNode();
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
     protected:
-        UILabelAtlas* uiLabelAtlas;
     };
 }
 

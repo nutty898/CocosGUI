@@ -1126,7 +1126,7 @@ namespace cs
     
     void CocoScrollView::handlePressLogic(cocos2d::CCPoint &touchPoint)
     {
-        cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         switch (this->m_eDirection)
         {
             case SCROLLVIEW_DIR_VERTICAL: // vertical
@@ -1147,7 +1147,7 @@ namespace cs
     
     void CocoScrollView::handleMoveLogic(cocos2d::CCPoint &touchPoint)
     {
-        cocos2d::CCPoint nsp = m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         float offset = 0.0;
         
         switch (m_eDirection)
@@ -1195,7 +1195,7 @@ namespace cs
     
     void CocoScrollView::handleReleaseLogic(cocos2d::CCPoint &touchPoint)
     {
-        cocos2d::CCPoint nsp = this->m_pCContainerNode->convertToNodeSpace(touchPoint);
+        cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         switch (this->m_eDirection)
         {
             case SCROLLVIEW_DIR_VERTICAL: // vertical

@@ -144,7 +144,7 @@ void HelloWorld::playUIAnimation(cocos2d::CCObject *pSender)
 {
     cs::CocoWidget* widget = (cs::CocoWidget*)pSender;
     widget->stopAllActions();
-    widget->setColor(0, 0, 255);
+    widget->setColor(ccc3(0, 0, 255));
     CCTintTo* tt = CCTintTo::create(0.5f, 0, 255, 0);
     CCTintTo* tt2 = CCTintTo::create(0.5f, 255, 255, 255);
     CCFadeOut* fo = CCFadeOut::create(0.5f);
@@ -189,7 +189,7 @@ void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
     cs::CocoPanel* p = cs::CocoPanel::create();
     p->setSize(100, 100);
     p->setBackGroundColorEnable(true);
-    p->setColor(0, 255, 0);
+    p->setColor(ccc3(0, 255, 0));
     p->setOpacity(255);
     COCOUISYSTEM->getCurScene()->addWidget(p);
     p->setBackGroundColorEnable(false);

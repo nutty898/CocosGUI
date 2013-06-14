@@ -27,8 +27,7 @@
 #include "DictionaryHelper.h"
 
 namespace cs {
-    CocoLabelAtlas::CocoLabelAtlas():
-    uiLabelAtlas(NULL)
+    CocoLabelAtlas::CocoLabelAtlas()
     {
 
     }
@@ -40,7 +39,6 @@ namespace cs {
     
     CocoLabelAtlas* CocoLabelAtlas::create()
     {
-//        return CocoLabelAtlas::create(NULL);
         CocoLabelAtlas* widget = new CocoLabelAtlas();
         if (widget && widget->init()) {
             return widget;
@@ -49,50 +47,28 @@ namespace cs {
         return NULL;
     }
     
-    bool CocoLabelAtlas::init()
+    void CocoLabelAtlas::initNodes()
     {
-        if (CocoWidget::init()) {
-            uiLabelAtlas = new UILabelAtlas();
-            uiLabelAtlas->init();
-            this->addUIElement(this->uiLabelAtlas);
-            return true;
-        }
-        return false;
+        this->m_pCCRenderNode = CLabelAtlas::create();
     }
-     
+    
     void CocoLabelAtlas::setProperty(const char *stringValue, const char *charMapFile, int itemWidth, int itemHeight, const char *startCharMap,bool useSpriteFrame)
     {
-        this->uiLabelAtlas->setProperty(stringValue, charMapFile, itemWidth, itemHeight, startCharMap,useSpriteFrame);
+        DYNAMIC_CAST_CLABELATLAS->setProperty(stringValue, charMapFile, itemWidth, itemHeight, (int)(startCharMap[0]));
     }
     
     void CocoLabelAtlas::setStringValue(const char *value)
     {
-        this->uiLabelAtlas->setStringValue(value);
+        DYNAMIC_CAST_CLABELATLAS->setString(value);
     }
     
     const char* CocoLabelAtlas::getStringValue()
     {
-        return this->uiLabelAtlas->getStringValue();
-    }
-    
-    CRenderNode* CocoLabelAtlas::getValidNode()
-    {
-        return this->uiLabelAtlas->getCRenderNode();
-    }
-    
-    void CocoLabelAtlas::setColor(int r, int g, int b)
-    {
-        this->uiLabelAtlas->setColor(r, g, b);
-    }
-    
-    void CocoLabelAtlas::setOpacity(int opcity)
-    {
-        this->uiLabelAtlas->setOpacity(opcity);
+        return DYNAMIC_CAST_CLABELATLAS->getString();
     }
     
     void CocoLabelAtlas::setAnchorPoint(const cocos2d::CCPoint &pt)
     {
-        CocoWidget::setAnchorPoint(pt);
-        this->uiLabelAtlas->setAnchorPoint(ccp(pt.x, pt.y-0.25f));
+        this->m_pCCRenderNode->setAnchorPoint(ccp(pt.x, pt.y-0.25f));
     }
 }

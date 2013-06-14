@@ -36,7 +36,6 @@ namespace cs {
     m_fBarHeight(0),
     m_pRenderBar(NULL)
     {
-		//this->m_nWidgetType = 2;
     }
     
     CocoLoadingBar::~CocoLoadingBar()
@@ -46,7 +45,6 @@ namespace cs {
     
     CocoLoadingBar* CocoLoadingBar::create()
     {
-//        return CocoLoadingBar::create(NULL);
         CocoLoadingBar* widget = new CocoLoadingBar();
         if (widget && widget->init()) {
             return widget;
@@ -55,16 +53,12 @@ namespace cs {
         return NULL;
     }
     
-    bool CocoLoadingBar::init()
+    void CocoLoadingBar::initNodes()
     {
-        if (CocoWidget::init()) {
-            this->m_pRenderBar = new UISprite();
-            this->m_pRenderBar->init();
-            this->addUIElement(this->m_pRenderBar);
-            this->m_pRenderBar->setAnchorPoint(ccp(0.0,0.5));
-            return true;
-        }
-        return false;
+        CocoWidget::initNodes();
+        this->m_pRenderBar = cocos2d::CCSprite::create();
+        this->m_pCCRenderNode->addChild(m_pRenderBar);
+        this->m_pRenderBar->setAnchorPoint(ccp(0.0,0.5));
     }
     
     void CocoLoadingBar::setDirection(int dir)
@@ -97,7 +91,11 @@ namespace cs {
     
     void CocoLoadingBar::setTexture(const char* texture,bool useSpriteFrame)
     {
-        this->m_pRenderBar->loadTexture(texture,useSpriteFrame);
+        if (useSpriteFrame) {
+            this->m_pRenderBar->initWithSpriteFrameName(texture);
+        }else{
+            this->m_pRenderBar->initWithFile(texture);
+        }
         this->m_fTotalLength = this->m_pRenderBar->getContentSize().width;
         this->m_fBarHeight = this->m_pRenderBar->getContentSize().height;
 
@@ -127,19 +125,19 @@ namespace cs {
         float res = this->m_nPercent/100.0;
         
         int x = 0, y = 0;                        
-        if (this->m_pRenderBar->getCRenderNode()->getUseSpriteFrame())
-        {
-            using namespace cocos2d;
-            CCSprite* barNode = dynamic_cast<CCSprite*>(m_pRenderBar->getCRenderNode()->getRenderNode());
-            if (barNode)
-            {
-                CCPoint to = barNode->getTextureRect().origin;
-                x = to.x;
-                y = to.y;
-            }
-        }
+//        if (this->m_pRenderBar->getCRenderNode()->getUseSpriteFrame())
+//        {
+//            using namespace cocos2d;
+//            CCSprite* barNode = dynamic_cast<CCSprite*>(m_pRenderBar->getCRenderNode()->getRenderNode());
+//            if (barNode)
+//            {
+//                CCPoint to = barNode->getTextureRect().origin;
+//                x = to.x;
+//                y = to.y;
+//            }
+//        }
         
-        this->m_pRenderBar->setRect(x, y, this->m_fTotalLength * res, this->m_fBarHeight);
+        this->m_pRenderBar->setTextureRect(cocos2d::CCRect(x, y, this->m_fTotalLength * res, this->m_fBarHeight));
     }
     
     int CocoLoadingBar::getPercent()
@@ -147,19 +145,9 @@ namespace cs {
         return this->m_nPercent;
     }
     
-    CRenderNode* CocoLoadingBar::getValidNode()
+    cocos2d::CCNode* CocoLoadingBar::getValidNode()
     {
-        return this->m_pRenderBar->getCRenderNode();
-    }
-    
-    void CocoLoadingBar::setColor(int r, int g, int b)
-    {
-        this->m_pRenderBar->setColor(r, g, b);
-    }
-    
-    void CocoLoadingBar::setOpacity(int opcity)
-    {
-        this->m_pRenderBar->setOpacity(opcity);
+        return this->m_pRenderBar;
     }
 
 	float CocoLoadingBar::getTotalWidth()

@@ -41,7 +41,6 @@ namespace cs {
     
     CocoTextButton* CocoTextButton::create()
     {
-//        return CocoTextButton::create(NULL);
         CocoTextButton* widget = new CocoTextButton();
         if (widget && widget->init()) {
             return widget;
@@ -53,9 +52,8 @@ namespace cs {
     bool CocoTextButton::init()
     {
         if (CocoButton::init()) {
-            this->m_pTextLable = new UIText();
-            this->m_pTextLable->init();
-            this->addUIElement(this->m_pTextLable);
+            this->m_pTextLable = cocos2d::CCLabelTTF::create();
+            this->m_pCCRenderNode->addChild(this->m_pTextLable);
             return true;
         }
         return false;
@@ -63,12 +61,12 @@ namespace cs {
     
     void CocoTextButton::setText(const char* text)
     {
-        this->m_pTextLable->setStringValue(text);
+        this->m_pTextLable->setString(text);
     }
     
     void CocoTextButton::setTextColor(int r,int g,int b)
     {
-        this->m_pTextLable->setTextColor(r,g,b);
+        this->m_pTextLable->setColor(cocos2d::ccc3(r, g, b));
     }
     
     void CocoTextButton::setFontSize(int size)
@@ -93,22 +91,9 @@ namespace cs {
         this->m_pTextLable->setFlipY(flipY);
     }
     
-    void CocoTextButton::setColor(int r, int g, int b)
-    {
-        CocoButton::setColor(r, g, b);
-        this->m_pTextLable->setColor(r, g, b);
-    }
-    
-    void CocoTextButton::setOpacity(int opcity)
-    {
-        CocoButton::setOpacity(opcity);
-        this->m_pTextLable->setOpacity(opcity);
-    }
-    
     void CocoTextButton::setAnchorPoint(const cocos2d::CCPoint &pt)
     {
         CocoButton::setAnchorPoint(pt);
-        this->m_pTextLable->setPosition(ccp(this->m_pButtonNormal->getContentSizeWidth()*(0.5f-this->m_pButtonNormal->getAnchorPoint().x), this->m_pButtonNormal->getContentSizeHeight()*(0.5f-this->m_pButtonNormal->getAnchorPoint().y)));
-//        this->m_pTextLable->setAnchorPoint(pt);
+        this->m_pTextLable->setPosition(ccp(this->m_pButtonNormal->getContentSize().width*(0.5f-this->m_pButtonNormal->getAnchorPoint().x), this->m_pButtonNormal->getContentSize().height*(0.5f-this->m_pButtonNormal->getAnchorPoint().y)));
     }
 }

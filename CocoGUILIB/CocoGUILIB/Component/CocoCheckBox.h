@@ -28,7 +28,6 @@
 #define __CocoGUI__CocoCheckBox__
 
 #include "CocoWidget.h"
-#include "UISprite.h"
 
 namespace cs {
     typedef void (cocos2d::CCObject::*SEL_SelectEvent)(cocos2d::CCObject*);
@@ -41,11 +40,8 @@ namespace cs {
         CocoCheckBox();
         virtual ~CocoCheckBox();
         static CocoCheckBox* create();
-//        static CocoCheckBox* create(cocos2d::CCDictionary* options);
-//        static CocoCheckBox* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setTextures(const char* backGround,const char* backGroundSelected,const char* cross,const char* backGroundDisabled,const char* frontCrossDisabled,bool useSpriteFrame = false);
         void setBackGroundTexture(const char* backGround,bool useSpriteFrame = false);
         void setBackGroundSelectedTexture(const char* backGroundSelected,bool useSpriteFrame = false);
@@ -61,20 +57,18 @@ namespace cs {
         bool getSelectedState();
         void selectedEvent();
         void unSelectedEvent();
-        virtual CRenderNode* getValidNode();
+        virtual cocos2d::CCNode* getValidNode();
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void addSelectEvent(cocos2d::CCObject* target,SEL_SelectEvent selector);
         virtual void addUnSelectEvent(cocos2d::CCObject* target,SEL_UnSelectEvent selector);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
     protected:
-        UISprite* m_pBackGroundBox;
-        UISprite* m_pBackGroundSelectedBox;
-        UISprite* m_pFrontCross;
-        UISprite* m_pBackGroundBoxDisabled;
-        UISprite* m_pFrontCrossDisabled;
+        cocos2d::CCSprite* m_pBackGroundBox;
+        cocos2d::CCSprite* m_pBackGroundSelectedBox;
+        cocos2d::CCSprite* m_pFrontCross;
+        cocos2d::CCSprite* m_pBackGroundBoxDisabled;
+        cocos2d::CCSprite* m_pFrontCrossDisabled;
         bool m_bIsSelected;
         cocos2d::CCObject*       m_pSelectListener;
         SEL_SelectEvent    m_pfnSelectSelector;

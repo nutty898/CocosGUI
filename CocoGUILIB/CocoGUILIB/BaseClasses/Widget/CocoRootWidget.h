@@ -37,11 +37,7 @@ namespace cs {
         CocoRootWidget();
         virtual ~CocoRootWidget();
         static CocoRootWidget* create();
-//        static RootWidget* create(cocos2d::CCDictionary* options);
-//        static RootWidget* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
     protected:
         CC_SYNTHESIZE(UIScene*, m_pUIScene, UIScene);
     };

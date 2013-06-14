@@ -28,7 +28,6 @@
 #define __CocoGUI__CocoLoadingBar__
 
 #include "CocoWidget.h"
-#include "UISprite.h"
 namespace cs {
     class CocoLoadingBar : public CocoWidget
     {
@@ -36,11 +35,7 @@ namespace cs {
         CocoLoadingBar();
         virtual ~CocoLoadingBar();
         static CocoLoadingBar* create();
-//        static CocoLoadingBar* create(cocos2d::CCDictionary* options);
-//        static CocoLoadingBar* createWithJson(sp::SPJsonDictionary* options);
-        virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void setDirection(int dir);
         int getDirection();
         void setTexture(const char* texture,bool useSpriteFrame = false);
@@ -48,15 +43,13 @@ namespace cs {
         int getPercent();
 		float getTotalWidth();
 		float getTotalHeight();
-        virtual CRenderNode* getValidNode();
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
+        virtual cocos2d::CCNode* getValidNode();
     protected:
         int m_nBarType;
         int m_nPercent;
         float m_fTotalLength;
         float m_fBarHeight;
-        UISprite* m_pRenderBar;
+        cocos2d::CCSprite* m_pRenderBar;
 
     };
 }

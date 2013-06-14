@@ -175,7 +175,7 @@ namespace cs {
         container->addChild(this->m_pInputLayer);
         this->cleanUIScene();
         this->m_pCurScene->init();
-        container->addChild(this->m_pCurScene->getRootWidget()->getContainerNode()->getRenderNode());
+        container->addChild(this->m_pCurScene->getRootWidget()->getContainerNode());
 #endif
     }
     

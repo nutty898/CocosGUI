@@ -30,7 +30,6 @@
 namespace cs{
     CocoLabel::CocoLabel():
     m_bTouchScaleChangeAble(false),
-    m_pTextLable(NULL),
     m_nGravity(0),
     m_sFontName("Thonburi"),
     m_nFontSize(10),
@@ -47,7 +46,6 @@ namespace cs{
     
     CocoLabel* CocoLabel::create()
     {
-//        return CocoLabel::create(NULL);
         CocoLabel* widget = new CocoLabel();
         if (widget && widget->init()) {
             return widget;
@@ -59,44 +57,41 @@ namespace cs{
     bool CocoLabel::init()
     {
         if (CocoWidget::init()) {
-            this->m_pTextLable = new UIText();
-            this->m_pTextLable->init();
-            this->m_pTextLable->setAnchorPoint(ccp(0.5, 0.5));
-            this->addUIElement(this->m_pTextLable);
             this->setPressState(0);
             return true;
         }
         return false;
     }
     
+    void CocoLabel::initNodes()
+    {
+        this->m_pCCRenderNode = cocos2d::CCLabelTTF::create();
+    }
+    
     void CocoLabel::setText(const char* text)
     {
-        this->m_pTextLable->setStringValue(text);
+        DYNAMIC_CAST_CCLABELTTF->setString(text);
     }
     
     const char* CocoLabel::getStringValue()
     {
-        return this->m_pTextLable->getStringValue();
+        return DYNAMIC_CAST_CCLABELTTF->getString();
     }
     
     int CocoLabel::getStringLength()
     {
-        return this->m_pTextLable->getStringLength();
-    }
-    
-    void CocoLabel::setTextColor(int r,int g,int b)
-    {
-        this->m_pTextLable->setTextColor(r,g,b);
+        const char* str = DYNAMIC_CAST_CCLABELTTF->getString();
+        return strlen(str);
     }
     
     void CocoLabel::setFontSize(int size)
     {
-        this->m_pTextLable->setFontSize(size);
+        DYNAMIC_CAST_CCLABELTTF->setFontSize(size);
     }
     
     void CocoLabel::setFontName(const char* name)
     {
-        this->m_pTextLable->setFontName(name);
+        DYNAMIC_CAST_CCLABELTTF->setFontName(name);
     }
     
     void CocoLabel::setTouchScaleChangeAble(bool able)
@@ -133,24 +128,17 @@ namespace cs{
     
     void CocoLabel::clickScale(float scale)
     {
-        this->m_pCContainerNode->setScale(scale);
-    }
-    
-    CRenderNode* CocoLabel::getValidNode()
-    {
-        return this->m_pTextLable->getCRenderNode();
+        this->m_pCCRenderNode->setScale(scale);
     }
     
     void CocoLabel::setFlipX(bool flipX)
     {
-        CocoWidget::setFlipX(flipX);
-        this->m_pTextLable->setFlipX(flipX);
+        DYNAMIC_CAST_CCLABELTTF->setFlipX(flipX);
     }
     
     void CocoLabel::setFlipY(bool flipY)
     {
-        CocoWidget::setFlipY(flipY);
-        this->m_pTextLable->setFlipY(flipY);
+        DYNAMIC_CAST_CCLABELTTF->setFlipY(flipY);
     }
     
     void CocoLabel::setGravity(int gravity)
@@ -158,38 +146,22 @@ namespace cs{
         this->m_nGravity = gravity;
         switch (this->m_nGravity) {
             case 0:
-                this->m_pTextLable->setAnchorPoint(ccp(0.5, 0.5));
+                DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(0.5, 0.5));
                 break;
             case 1:
-                this->m_pTextLable->setAnchorPoint(ccp(0.0, 0.5));
+                DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(0.0, 0.5));
                 break;
             case 2:
-                this->m_pTextLable->setAnchorPoint(ccp(1.0, 0.5));
+                DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(1.0, 0.5));
                 break;
             default:
                 break;
         }
     }
     
-    void CocoLabel::setColor(int r, int g, int b)
-    {
-        this->m_pTextLable->setColor(r, g, b);
-    }
-    
-    void CocoLabel::setOpacity(int opcity)
-    {
-        this->m_pTextLable->setOpacity(opcity);
-    }
-    
     void CocoLabel::adaptSize(float xProportion, float yProportion)
     {
         float res = xProportion > yProportion ? xProportion : yProportion;
-        this->m_pTextLable->setFontSize(this->m_pTextLable->getFontSize()*res);
-    }
-    
-    void CocoLabel::setAnchorPoint(const cocos2d::CCPoint &pt)
-    {
-        CocoWidget::setAnchorPoint(pt);
-        this->m_pTextLable->setAnchorPoint(pt);
+        DYNAMIC_CAST_CCLABELTTF->setFontSize(DYNAMIC_CAST_CCLABELTTF->getFontSize()*res);
     }
 }

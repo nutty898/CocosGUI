@@ -38,11 +38,7 @@ namespace cs {
         static CocoContainerWidget* create();
         //Only containerWidget can use the LayoutParameter for do layout to child widget
         virtual void setLayoutParameter(/*LayoutParameter * parmeter*/);
-//        static CocoContainerWidget* create(cocos2d::CCDictionary* options);
-//        static CocoContainerWidget* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         virtual void initNodes();
         virtual bool addChild(CocoWidget* child);
         virtual void setClipAble(bool able);
@@ -55,12 +51,8 @@ namespace cs {
         virtual float getWidth();
         virtual void setHeight(float height);
         virtual float getHeight();
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opacity);
-//        virtual cocos2d::CCRect getRect();
-//        virtual cocos2d::CCRect getRelativeRect();
         virtual bool getClipAble();
-        virtual bool pointAtSelfBody(cocos2d::CCPoint &pt);
+        virtual bool hitTest(cocos2d::CCPoint &pt);
         virtual void updateChildrenScaleXDirty(bool dirty);
         virtual void updateChildrenScaleYDirty(bool dirty);
         virtual void setScale(float scale);

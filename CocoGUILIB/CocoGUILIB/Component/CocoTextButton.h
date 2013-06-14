@@ -28,7 +28,6 @@
 #define __CocoGUI__TextButton__
 
 #include "CocoButton.h"
-#include "UIText.h"
 
 namespace cs {
     class CocoTextButton : public CocoButton
@@ -37,22 +36,16 @@ namespace cs {
         CocoTextButton();
         virtual ~CocoTextButton();
         static CocoTextButton* create();
-//        static CocoTextButton* create(cocos2d::CCDictionary* options);
-//        static CocoTextButton* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
         void setText(const char* text);
         void setTextColor(int r,int g,int b);
         void setFontSize(int size);
         void setFontName(const char* fontName);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
     protected:
-        UIText * m_pTextLable;
+        cocos2d::CCLabelTTF* m_pTextLable;
         
     };
 }

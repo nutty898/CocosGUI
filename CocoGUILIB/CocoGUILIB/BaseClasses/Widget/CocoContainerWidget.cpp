@@ -25,6 +25,7 @@
  */
 
 #include "CocoContainerWidget.h"
+#include "CClipAbleLayerColor.h"
 #include "DictionaryHelper.h"
 
 namespace cs {
@@ -44,7 +45,6 @@ namespace cs {
     
     CocoContainerWidget* CocoContainerWidget::create()
     {
-//        return CocoContainerWidget::create(NULL);
         CocoContainerWidget* widget = new CocoContainerWidget();
         if (widget && widget->init()) {
             return widget;
@@ -68,9 +68,7 @@ namespace cs {
     
     void CocoContainerWidget::initNodes()
     {
-        this->m_pCContainerNode = new CRenderNode();
-        this->m_pCContainerNode->initNode(8);
-        this->m_pCContainerNode->setZOrder(this->m_nWidgetZOrder);
+        this->m_pCCRenderNode = CClipAbleLayerColor::create();
     }
     
     bool CocoContainerWidget::getClipAble()
@@ -100,7 +98,7 @@ namespace cs {
     void CocoContainerWidget::setClipAble(bool able)
     {
         this->m_bClipAble = able;
-        this->m_pCContainerNode->setClipAble(able);
+        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipAble(able);
         for (int i=0; i<this->m_children->count(); i++) {
             CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
             child->setNeedCheckVisibleDepandParent(able);
@@ -109,7 +107,7 @@ namespace cs {
     
     void CocoContainerWidget::setClipRect(cocos2d::CCRect rect)
     {
-        this->m_pCContainerNode->setClipRect(rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
+        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipRect(rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
     }
     
     void CocoContainerWidget::updateWidth()
@@ -124,7 +122,7 @@ namespace cs {
     
     void CocoContainerWidget::setColorAndSize(int r,int g,int b,int o,float width,float height)
     {
-        this->m_pCContainerNode->setColorAndSize(r,g,b,o,width,height);
+        DYNAMIC_CAST_CLIPLAYERCOLOR->initWithColor(cocos2d::ccc4(r, g, b, o), width, height);
         this->m_fWidth = width;
         this->m_fHeight = height;
         this->updateClipSize();
@@ -132,7 +130,7 @@ namespace cs {
     
     void CocoContainerWidget::setSize(float width,float height)
     {
-        this->m_pCContainerNode->setSize(width,height);
+        DYNAMIC_CAST_CLIPLAYERCOLOR->setContentSize(cocos2d::CCSize(width,height));
         this->m_fWidth = width;
         this->m_fHeight = height;
         this->updateClipSize();
@@ -160,25 +158,15 @@ namespace cs {
         return this->m_fHeight;
     }
     
-    void CocoContainerWidget::setColor(int r, int g, int b)
+    bool CocoContainerWidget::hitTest(cocos2d::CCPoint &pt)
     {
-        this->m_pCContainerNode->setColor(r, g, b);
-    }
-    
-    void CocoContainerWidget::setOpacity(int opacity)
-    {
-        this->m_pCContainerNode->setOpacity(opacity);
-        this->m_bOpacityDirty = true;
-        this->updateChildrenOpacityDirty(this->m_bOpacityDirty);
-    }    
-
-    bool CocoContainerWidget::pointAtSelfBody(cocos2d::CCPoint &pt)
-    {
-        if (!this->getAbsoluteVisible()) {
-            return false;
+        cocos2d::CCNode* validNode = this->getValidNode();
+        cocos2d::CCPoint nsp = validNode->convertToNodeSpace(pt);
+        cocos2d::CCSize bb = validNode->getContentSize();
+        if (nsp.x >= 0 && nsp.x <= bb.width && nsp.y > 0 && nsp.y <= bb.height) {
+            return true;
         }
-        CRenderNode* validNode = this->getValidNode();
-        return validNode->hitTest2(pt);
+        return false;
     }
     
     void CocoContainerWidget::setScale(float scale)
@@ -215,7 +203,7 @@ namespace cs {
     {
         float asx = this->getAbsoluteScaleX();
         float asy = this->getAbsoluteScaleY();
-        cocos2d::CCSize size = this->m_pCContainerNode->getContentSize();
-        this->m_pCContainerNode->setClipSize(size.width*asx, size.height*asy);
+        cocos2d::CCSize size = DYNAMIC_CAST_CLIPLAYERCOLOR->getContentSize();
+        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipSize(size.width*asx, size.height*asy);
     }
 }

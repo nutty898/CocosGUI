@@ -38,7 +38,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // create a scene. it's an autorelease object
     /* pipu test */
-    CCScene *pScene = PageView::scene();
+    CCScene *pScene = HelloWorld::scene();
     // before
 //    CCScene *pScene = HelloWorld::scene();
     /**/

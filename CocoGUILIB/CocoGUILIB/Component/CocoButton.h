@@ -28,8 +28,6 @@
 #define __CocoGUI__CocoButton__
 
 #include "CocoWidget.h"
-#include "UISprite.h"
-#include "UIScale9Sprite.h"
 
 namespace cs {
     class CocoButton : public CocoWidget
@@ -38,11 +36,8 @@ namespace cs {
         CocoButton();
         virtual ~CocoButton();
         static CocoButton* create();
-//        static CocoButton* create(cocos2d::CCDictionary* options);
-//        static CocoButton* createWithJson(sp::SPJsonDictionary* options);
         virtual bool init();
-//        virtual bool initWithOptions(cocos2d::CCDictionary* options);
-//        virtual bool initWithOptions_json(sp::SPJsonDictionary* options);
+        virtual void initNodes();
         void initPressState(int state);
         
         virtual void setTextures(const char* normal,const char* selected,const char* disabled,bool useSpriteFrame = false);
@@ -56,18 +51,16 @@ namespace cs {
         virtual void onPressStateChangedToNormal();
         virtual void onPressStateChangedToPressed();
         virtual void onPressStateChangedToDisabled();
-        virtual CRenderNode* getValidNode();
+        virtual cocos2d::CCNode* getValidNode();
         virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
         virtual void setScale9Enable(bool able);
         virtual void setScale9Size(float width,float height);
-        virtual void setColor(int r,int g,int b);
-        virtual void setOpacity(int opcity);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
     protected:
-        UIElement* m_pButtonNormal;
-        UIElement* m_pButtonClicked;
-        UIElement* m_pButtonDisable;
+        cocos2d::CCNode* m_pButtonNormal;
+        cocos2d::CCNode* m_pButtonClicked;
+        cocos2d::CCNode* m_pButtonDisable;
         
         bool m_bScale9Enable;
     };

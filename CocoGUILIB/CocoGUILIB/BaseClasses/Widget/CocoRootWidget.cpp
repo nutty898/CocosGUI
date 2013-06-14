@@ -39,7 +39,6 @@ namespace cs {
 
     CocoRootWidget* CocoRootWidget::create()
     {
-//        return RootWidget::create(NULL);
         CocoRootWidget* widget = new CocoRootWidget();
         if (widget && widget->init()) {
             return widget;
