@@ -58,5 +58,4 @@ namespace cs {
         this->m_pCCRenderNode->removeChild(m_pCCNode,cleanup);
         this->m_pCCNode = NULL;
     }
-    
 }

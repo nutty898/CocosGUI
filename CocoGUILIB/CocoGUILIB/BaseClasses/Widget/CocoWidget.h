@@ -158,6 +158,9 @@ namespace cs{
         float getScaleX();
         virtual void setScaleY(float scaleY);
         float getScaleY();
+        virtual void onScaleDirtyChanged();
+        virtual void onScaleXDirtyChanged();
+        virtual void onScaleYDirtyChanged();
         void setRotation(float rotation);
         float getRotation();
         virtual void setFlipX(bool flipX){};
@@ -172,8 +175,6 @@ namespace cs{
         //widget prop
         virtual float getAbsoluteScaleX();
         virtual float getAbsoluteScaleY();
-        virtual void updateChildrenScaleXDirty(bool dirty);
-        virtual void updateChildrenScaleYDirty(bool dirty);
         virtual bool getAbsoluteVisible();
         virtual void updateChildrenVisibleDirty(bool dirty);
         virtual void updateChildrenOpacityDirty(bool dirty);

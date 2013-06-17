@@ -616,7 +616,7 @@ namespace cs {
     {
         cocos2d::CCPoint nsp = node->convertToNodeSpace(pt);
         cocos2d::CCRect bb = node->boundingBox();
-        if (nsp.x >= 0 && nsp.x <= bb.size.width && nsp.y > 0 && nsp.y <= bb.size.height) {
+        if (nsp.x >= 0 && nsp.x <= bb.size.width && nsp.y >= 0 && nsp.y <= bb.size.height) {
             return true;
         }
         return false;
@@ -686,10 +686,35 @@ namespace cs {
     
     void CocoWidget::setScale(float scale)
     {
-        this->m_bScaleXDirty = this->m_bScaleYDirty = true;
-        this->updateChildrenScaleXDirty(this->m_bScaleXDirty);
-        this->updateChildrenScaleYDirty(this->m_bScaleYDirty);
         this->m_pCCRenderNode->setScale(scale);
+        this->onScaleDirtyChanged();
+    }
+    
+    void CocoWidget::onScaleDirtyChanged()
+    {
+        this->m_bScaleXDirty = this->m_bScaleYDirty = true;
+        for (int i=0; i<this->getChildren()->count(); i++) {
+            CocoWidget* child = (CocoWidget*)(this->getChildren()->objectAtIndex(i));
+            child->onScaleDirtyChanged();
+        }
+    }
+    
+    void CocoWidget::onScaleXDirtyChanged()
+    {
+        this->m_bScaleXDirty = true;
+        for (int i=0; i<this->getChildren()->count(); i++) {
+            CocoWidget* child = (CocoWidget*)(this->getChildren()->objectAtIndex(i));
+            child->onScaleXDirtyChanged();
+        }
+    }
+    
+    void CocoWidget::onScaleYDirtyChanged()
+    {
+        this->m_bScaleYDirty = true;
+        for (int i=0; i<this->getChildren()->count(); i++) {
+            CocoWidget* child = (CocoWidget*)(this->getChildren()->objectAtIndex(i));
+            child->onScaleYDirtyChanged();
+        }
     }
     
     float CocoWidget::getScale()
@@ -699,9 +724,8 @@ namespace cs {
     
     void CocoWidget::setScaleX(float scaleX)
     {
-        this->m_bScaleXDirty = true;
-        this->updateChildrenScaleXDirty(this->m_bScaleXDirty);
         this->m_pCCRenderNode->setScaleX(scaleX);
+        this->onScaleXDirtyChanged();
     }
     
     float CocoWidget::getScaleX()
@@ -711,9 +735,8 @@ namespace cs {
     
     void CocoWidget::setScaleY(float scaleY)
     {
-        this->m_bScaleYDirty = true;
-        this->updateChildrenScaleYDirty(this->m_bScaleYDirty);
         this->m_pCCRenderNode->setScaleY(scaleY);
+        this->onScaleYDirtyChanged();
     }
     
     float CocoWidget::getScaleY()
@@ -857,25 +880,7 @@ namespace cs {
         }
         return this->m_fAbsoluteScaleY;
     }
-    
-    void CocoWidget::updateChildrenScaleXDirty(bool dirty)
-    {
-        for (int i=0; i<this->getChildren()->count(); i++) {
-            CocoWidget* child = (CocoWidget*)(this->getChildren()->objectAtIndex(i));
-            child->m_bScaleXDirty = dirty;
-            child->updateChildrenScaleXDirty(dirty);
-        }
-    }
-    
-    void CocoWidget::updateChildrenScaleYDirty(bool dirty)
-    {
-        for (int i=0; i<this->getChildren()->count(); i++) {
-            CocoWidget* child = (CocoWidget*)(this->getChildren()->objectAtIndex(i));
-            child->m_bScaleYDirty = dirty;
-            child->updateChildrenScaleYDirty(dirty);
-        }
-    }
-    
+
     bool CocoWidget::getAbsoluteVisible()
     {
         if (this->m_bVisibleDirty) {

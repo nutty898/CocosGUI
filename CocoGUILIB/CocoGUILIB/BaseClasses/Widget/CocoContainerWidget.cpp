@@ -158,44 +158,31 @@ namespace cs {
         return this->m_fHeight;
     }
     
-    bool CocoContainerWidget::hitTest(cocos2d::CCPoint &pt)
+    bool CocoContainerWidget::hitTest(cocos2d::CCNode *node, cocos2d::CCPoint &pt)
     {
-        cocos2d::CCNode* validNode = this->getValidNode();
-        cocos2d::CCPoint nsp = validNode->convertToNodeSpace(pt);
-        cocos2d::CCSize bb = validNode->getContentSize();
-        if (nsp.x >= 0 && nsp.x <= bb.width && nsp.y > 0 && nsp.y <= bb.height) {
+        cocos2d::CCPoint nsp = node->convertToNodeSpace(pt);
+        cocos2d::CCSize bb = node->getContentSize();
+        if (nsp.x >= 0 && nsp.x <= bb.width && nsp.y >= 0 && nsp.y <= bb.height) {
             return true;
         }
         return false;
     }
     
-    void CocoContainerWidget::setScale(float scale)
+    void CocoContainerWidget::onScaleDirtyChanged()
     {
-        CocoWidget::setScale(scale);
+        CocoWidget::onScaleDirtyChanged();
         this->updateClipSize();
     }
     
-    void CocoContainerWidget::setScaleX(float scaleX)
+    void CocoContainerWidget::onScaleXDirtyChanged()
     {
-        CocoWidget::setScaleX(scaleX);
+        CocoWidget::onScaleXDirtyChanged();
         this->updateClipSize();
     }
     
-    void CocoContainerWidget::setScaleY(float scaleY)
+    void CocoContainerWidget::onScaleYDirtyChanged()
     {
-        CocoWidget::setScaleY(scaleY);
-        this->updateClipSize();
-    }
-    
-    void CocoContainerWidget::updateChildrenScaleXDirty(bool dirty)
-    {
-        CocoWidget::updateChildrenScaleXDirty(dirty);
-        this->updateClipSize();
-    }
-    
-    void CocoContainerWidget::updateChildrenScaleYDirty(bool dirty)
-    {
-        CocoWidget::updateChildrenScaleYDirty(dirty);
+        CocoWidget::onScaleYDirtyChanged();
         this->updateClipSize();
     }
     

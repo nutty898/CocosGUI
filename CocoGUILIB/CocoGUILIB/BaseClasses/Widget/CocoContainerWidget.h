@@ -52,13 +52,11 @@ namespace cs {
         virtual void setHeight(float height);
         virtual float getHeight();
         virtual bool getClipAble();
-        virtual bool hitTest(cocos2d::CCPoint &pt);
-        virtual void updateChildrenScaleXDirty(bool dirty);
-        virtual void updateChildrenScaleYDirty(bool dirty);
-        virtual void setScale(float scale);
-        virtual void setScaleX(float scaleX);
-        virtual void setScaleY(float scaleY);
+        virtual bool hitTest(cocos2d::CCNode*node, cocos2d::CCPoint &pt);
         virtual void updateClipSize();
+        virtual void onScaleDirtyChanged();
+        virtual void onScaleXDirtyChanged();
+        virtual void onScaleYDirtyChanged();
     protected:
         float m_fWidth;
         float m_fHeight;
