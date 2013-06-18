@@ -1075,6 +1075,11 @@ namespace cs
     
     void CocoScrollView::drag(float offset)
     {
+        if (m_children->count() <= 0)
+        {
+            return;
+        }
+        
         switch (m_eMoveMode)
         {
             case SCROLLVIEW_MOVE_MODE_NORMAL: // normal
@@ -1125,7 +1130,7 @@ namespace cs
     }
     
     void CocoScrollView::handlePressLogic(cocos2d::CCPoint &touchPoint)
-    {
+    {        
         cocos2d::CCPoint nsp = this->m_pCCRenderNode->convertToNodeSpace(touchPoint);
         switch (this->m_eDirection)
         {

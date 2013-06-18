@@ -754,6 +754,46 @@ namespace cs {
         return this->m_pCCRenderNode->getRotation();
     }
     
+    void CocoWidget::setRotationX(float rotationX)
+    {
+        this->m_pCCRenderNode->setRotationX(rotationX);
+    }
+    
+    float CocoWidget::getRotationX()
+    {
+        return this->m_pCCRenderNode->getRotationX();
+    }
+    
+    void CocoWidget::setRotationY(float rotationY)
+    {
+        this->m_pCCRenderNode->setRotationY(rotationY);
+    }
+    
+    float CocoWidget::getRotationY()
+    {
+        return this->m_pCCRenderNode->getRotationY();
+    }
+    
+    void CocoWidget::setSkewX(float skewX)
+    {
+        this->m_pCCRenderNode->setSkewX(skewX);
+    }
+    
+    float CocoWidget::getSkewX()
+    {
+        return this->m_pCCRenderNode->getSkewX();
+    }
+    
+    void CocoWidget::setSkewY(float skewY)
+    {
+        this->m_pCCRenderNode->setSkewY(skewY);
+    }
+    
+    float CocoWidget::getSkewY()
+    {
+        return this->m_pCCRenderNode->getSkewY();
+    }
+    
     void CocoWidget::setVisible(bool visible)
     {
         this->m_bVisibleDirty = true;
@@ -961,4 +1001,19 @@ namespace cs {
     {
         return DYNAMIC_CAST_CCRGBAPROTOCOL->getOpacity();
     }
+    
+    /* gui mark */
+    void CocoWidget::setBlendFunc(cocos2d::ccBlendFunc blendFunc)
+    {
+        cocos2d::CCBlendProtocol * blendNode = DYNAMIC_CAST_CCBLENDPROTOCOL;
+        if (blendNode) {
+            blendNode->setBlendFunc(blendFunc);
+        }
+    }
+    
+    void CocoWidget::ignoreAnchorPointForPosition(bool ignore)
+    {
+        m_pCCRenderNode->ignoreAnchorPointForPosition(ignore);
+    }
+    /**/
 }

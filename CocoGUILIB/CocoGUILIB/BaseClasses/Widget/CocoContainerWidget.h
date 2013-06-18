@@ -56,7 +56,7 @@ namespace cs {
         virtual void updateClipSize();
         virtual void onScaleDirtyChanged();
         virtual void onScaleXDirtyChanged();
-        virtual void onScaleYDirtyChanged();
+        virtual void onScaleYDirtyChanged();        
     protected:
         float m_fWidth;
         float m_fHeight;

@@ -37,8 +37,13 @@ namespace cs {
         virtual ~CocoImageView();
         static CocoImageView* create();
         virtual void initNodes();
-        void setTexture(const char* fileName,bool useSpriteFrame = false);
-        void setTextureRect(cocos2d::CCRect &rect);
+        /* gui mark */
+        virtual void setTexture(const char* fileName,bool useSpriteFrame = false);
+        virtual void setTextureRect(const cocos2d::CCRect& rect);
+        // before
+        //        void setTexture(const char* fileName,bool useSpriteFrame = false);
+        //        void setTextureRect(float x,float y,float width,float height);
+        /**/
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);
         void doubleClickEvent();
@@ -49,6 +54,7 @@ namespace cs {
         void setScale9Enable(bool able);
         void setScale9Size(float width,float height);
         void setTexturesScale9(const char* fileName, cocos2d::CCRect capInsets, bool useSpriteFrame = false);
+        void setDisplayFrame(cocos2d::CCSpriteFrame *pNewFrame);
     protected:
         int m_nViewType;
         int m_nClickCount;

@@ -32,6 +32,8 @@
 #include "GUINodeRGBA.h"
 
 
+#define DYNAMIC_CAST_CCBLENDPROTOCOL dynamic_cast<cocos2d::CCBlendProtocol*>(this->m_pCCRenderNode)
+
 #define DYNAMIC_CAST_CCRGBAPROTOCOL dynamic_cast<cocos2d::CCRGBAProtocol*>(this->m_pCCRenderNode)
 
 #define DYNAMIC_CAST_CCNODE dynamic_cast<cocos2d::CCNode*>(this->m_pCCRenderNode)
@@ -163,6 +165,16 @@ namespace cs{
         virtual void onScaleYDirtyChanged();
         void setRotation(float rotation);
         float getRotation();
+        /* gui mark */
+        void setRotationX(float rotationX);
+        float getRotationX();
+        void setRotationY(float rotationY);
+        float getRotationY();
+        virtual void setSkewX(float skewX);
+        virtual float getSkewX();
+        virtual void setSkewY(float skewY);
+        virtual float getSkewY();
+        /**/
         virtual void setFlipX(bool flipX){};
         virtual bool isFlipX(){return false;};
         virtual void setFlipY(bool flipY){};
@@ -171,6 +183,10 @@ namespace cs{
         virtual const cocos2d::ccColor3B& getColor();
         virtual void setOpacity(int opacity);
         virtual int getOpacity();
+        /* gui mark */
+        void setBlendFunc(cocos2d::ccBlendFunc blendFunc);
+        void ignoreAnchorPointForPosition(bool ignore);
+        /**/
         
         //widget prop
         virtual float getAbsoluteScaleX();

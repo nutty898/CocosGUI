@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "CCEditBox.h"
 #include "PageViewScene.h"
+#include "CCBTestScene.h"
 using namespace cocos2d;
 
 CCScene* HelloWorld::scene()
@@ -110,19 +111,20 @@ bool HelloWorld::init()
     COCOUISYSTEM->adjustWidgetProperty(container, x_proportion, y_proportion, true, true);
     
     cs::CocoButton* exit = (cs::CocoButton*)(COCOUISYSTEM->getWidgetByName("exitbutton"));
-    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::toPageViewScene));
-//    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
-    exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
+//    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::toPageViewScene));
+    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
+//    exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
     
     return true;
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
-    CCDirector::sharedDirector()->end();
+    CCDirector::sharedDirector()->replaceScene(CCBTest::scene());
+//    CCDirector::sharedDirector()->end();
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+//    exit(0);
 #endif
 }
 
@@ -160,7 +162,10 @@ void HelloWorld::cancelTouch(cocos2d::CCObject *pSender)
 
 void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
 {
+    COCOUISYSTEM->getCurScene()->getRootWidget()->setScaleY(0.5);
+    return;
     COCOUISYSTEM->getCurScene()->getRootWidget()->removeAllChildrenAndCleanUp(true);
+    
 //    cs::CocoControlButton* cb = cs::CocoControlButton::create();
 //    cb->setTexture("CloseNormal.png");
 //    cb->setTitle("ControlButton");

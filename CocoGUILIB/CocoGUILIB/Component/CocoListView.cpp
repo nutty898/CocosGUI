@@ -368,6 +368,11 @@ namespace cs
     
     void CocoListView::drag(float offset)
     {
+        if (m_children->count() <= 0)
+        {
+            return;
+        }
+        
         switch (m_eMoveMode)
         {
             case SCROLLVIEW_MOVE_MODE_NORMAL: // normal

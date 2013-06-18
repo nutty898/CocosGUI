@@ -287,4 +287,42 @@ namespace cs {
         this->m_pButtonDisable->setAnchorPoint(pt);
         
     }
+    
+    /* gui mark */
+    void CocoButton::setNormalSpriteFrame(cocos2d::CCSpriteFrame *frame)
+    {
+        if (m_bScale9Enable)
+        {
+            dynamic_cast<GUIScale9Sprite*>(m_pButtonNormal)->setSpriteFrame(frame);
+        }
+        else
+        {
+            dynamic_cast<cocos2d::CCSprite*>(m_pButtonNormal)->setDisplayFrame(frame);
+        }
+    }
+    
+    void CocoButton::setPressedSpriteFrame(cocos2d::CCSpriteFrame *frame)
+    {
+        if (m_bScale9Enable)
+        {
+            dynamic_cast<GUIScale9Sprite*>(m_pButtonClicked)->setSpriteFrame(frame);
+        }
+        else
+        {
+            dynamic_cast<cocos2d::CCSprite*>(m_pButtonClicked)->setDisplayFrame(frame);
+        }
+    }
+    
+    void CocoButton::setDisabledSpriteFrame(cocos2d::CCSpriteFrame *frame)
+    {
+        if (m_bScale9Enable)
+        {
+            dynamic_cast<GUIScale9Sprite*>(m_pButtonDisable)->setSpriteFrame(frame);
+        }
+        else
+        {
+            dynamic_cast<cocos2d::CCSprite*>(m_pButtonDisable)->setDisplayFrame(frame);
+        }
+    }
+    /**/
 }

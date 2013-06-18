@@ -192,5 +192,5 @@ namespace cs {
         float asy = this->getAbsoluteScaleY();
         cocos2d::CCSize size = DYNAMIC_CAST_CLIPLAYERCOLOR->getContentSize();
         DYNAMIC_CAST_CLIPLAYERCOLOR->setClipSize(size.width*asx, size.height*asy);
-    }
+    }        
 }

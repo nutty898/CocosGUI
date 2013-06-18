@@ -80,7 +80,7 @@ namespace cs {
         
     }
     
-    void CocoImageView::setTextureRect(cocos2d::CCRect &rect)
+    void CocoImageView::setTextureRect(const cocos2d::CCRect &rect)
     {
         if (this->m_bScale9Enable) {
 //            dynamic_cast<GUIScale9Sprite*>(this->m_pImage)->setTextureRect(rect);
@@ -220,4 +220,11 @@ namespace cs {
         }
         
     }
+    
+    /* gui mark */
+    void CocoImageView::setDisplayFrame(cocos2d::CCSpriteFrame *pNewFrame)
+    {
+        DYNAMIC_CAST_CCSPRITE->setDisplayFrame(pNewFrame);
+    }
+    /**/
 }

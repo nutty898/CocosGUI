@@ -60,7 +60,10 @@ namespace cs {
     m_pUIInputManager(NULL),
     uiSystemInited(false),
     m_pInputLayer(NULL),
-    m_textureFiles(NULL)
+    m_textureFiles(NULL),
+    /**/
+    m_classTypeDic(NULL)
+    /**/
     {
         cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
         this->m_fFileDesignWidth = winSize.width;
@@ -84,6 +87,10 @@ namespace cs {
         this->m_pCurScene->init();
         this->m_textureFiles = cocos2d::CCArray::create();
         this->m_textureFiles->retain();
+        /* gui mark */
+        this->m_classTypeDic = CCDictionary::create();
+        this->m_classTypeDic->retain();
+        /**/
 #endif
         this->uiSystemInited = true;
     }
@@ -116,10 +123,29 @@ namespace cs {
         return widget;
     }
     
-    CocoWidget* UISystem::createWidgetFromCCBFile(const char *fileName)
+    /* gui mark */
+    CocoWidget* UISystem::createWidgetFromCCBFile(const char *fileName, cs::GUICCNodeLoaderLibrary *ccNodeLoaderLibrary)
     {
+        CocoWidget* widget = NULL;
         
+        /* Create an autorelease GUICCBReader. */
+        GUICCBReader* guiCCBReader = new GUICCBReader(ccNodeLoaderLibrary);
+        widget = guiCCBReader->widgetFromCCBFile(fileName);
+        CC_SAFE_DELETE(guiCCBReader);
+        return widget;
     }
+    
+    CocoWidget* UISystem::createWidgetFromCCBFileWithAdapt(const char *fileName, cs::GUICCNodeLoaderLibrary *ccNodeLoaderLibrary, bool scaleAdapt, bool equalProportions)
+    {
+        CocoWidget* widget = this->createWidgetFromCCBFile(fileName, ccNodeLoaderLibrary);
+        //        cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
+        //        float compare_width = 480;
+        //        float compare_height = 320;
+        //        this->adjustWidgetProperty(widget, winSize.width / compare_width, winSize.height / compare_height, scaleAdapt, equalProportions);
+        
+        return widget;
+    }
+    /**/
     
     void UISystem::adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions)
     {
@@ -176,6 +202,10 @@ namespace cs {
         this->cleanUIScene();
         this->m_pCurScene->init();
         container->addChild(this->m_pCurScene->getRootWidget()->getContainerNode());
+        
+        /* gui mark */
+        initClassType();
+        /**/
 #endif
     }
     
@@ -223,6 +253,9 @@ namespace cs {
 #if VERSIONFORCOCOS2DX
         this->m_pCurScene->cleanScene();
         this->removeAllSpriteFrame();
+        /* gui mark */
+        this->removeAllClassType();
+        /**/
 #endif
     }
     
@@ -342,4 +375,63 @@ namespace cs {
         }
         this->m_textureFiles->removeAllObjects();
     }
+    
+    /* gui mark */
+    void UISystem::initClassType()
+    {
+        setClassType(CCString::create("CCNode"), "CCNode");
+        setClassType(CCString::create("CCLayer"), "CCLayer");
+        setClassType(CCString::create("CCLayerColor"), "CCLayerColor");
+        setClassType(CCString::create("CCLayerGradient"), "CCLayerGradient");
+        setClassType(CCString::create("CCSprite"), "CCSprite");
+        setClassType(CCString::create("CCLabelBMFont"), "CCLabelBMFont");
+        setClassType(CCString::create("CCLabelTTF"), "CCLabelTTF");
+        setClassType(CCString::create("CCScale9Sprite"), "CCScale9Sprite");
+        setClassType(CCString::create("CCScrollView"), "CCScrollView");
+        setClassType(CCString::create("CCMenu"), "CCMenu");
+        setClassType(CCString::create("CCMenuItemImage"), "CCMenuItemImage");
+        setClassType(CCString::create("CCControlButton"), "CCControlButton");
+    }
+    
+    void UISystem::removeClassType(const char *key)
+    {
+        if (!key || strcmp("", key) == 0)
+        {
+            return;
+        }
+        this->m_classTypeDic->removeObjectForKey(key);
+    }
+    
+    void UISystem::removeAllClassType()
+    {
+        this->m_classTypeDic->removeAllObjects();
+    }
+    
+    void UISystem::registerClassType(CCString *classType, const char *key)
+    {
+        if (!key || strcmp("", key) == 0 || !classType)
+        {
+            return;
+        }
+        this->m_classTypeDic->setObject(classType, key);
+    }
+    
+    void UISystem::setClassType(CCString* classType, const char *key)
+    {
+        if (!key || strcmp("", key) == 0 || !classType)
+        {
+            return;
+        }
+        this->m_classTypeDic->setObject(classType, key);
+    }
+    
+    CCString* UISystem::getClassType(const char *key)
+    {
+        if (!key || strcmp("", key) == 0)
+        {
+            return NULL;
+        }
+        return dynamic_cast<CCString*>(this->m_classTypeDic->objectForKey(key));
+    }
+    /**/
 }
