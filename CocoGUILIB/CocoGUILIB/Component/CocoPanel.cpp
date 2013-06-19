@@ -73,18 +73,7 @@ namespace cs {
         this->m_pBackGroundImage = NULL;
         this->m_bBackGroundScale9Enable = able;
     }
-    
-//    void CocoPanel::setColorAndSize(int r,int g,int b,int o,float width,float height)
-//    {
-//        CocoContainerWidget::setColorAndSize(r, g, b, o, width, height);
-//        if (this->m_bBackGroundInited) {
-//            this->m_pBackGroundImage->setPosition(ccp(this->m_pCCRenderNode->getContentSize().width/2, this->m_pCCRenderNode->getContentSize().height/2));
-//            if (this->m_bBackGroundScale9Enable) {
-//                dynamic_cast<cocos2d::extension::CCScale9Sprite*>(this->m_pBackGroundImage)->setContentSize(this->m_pCCRenderNode->getContentSize());
-//            }
-//        }
-//    }
-    
+        
     void CocoPanel::setSize(const cocos2d::CCSize &size)
     {
         CocoContainerWidget::setSize(size);

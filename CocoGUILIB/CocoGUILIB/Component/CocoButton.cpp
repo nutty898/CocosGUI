@@ -288,7 +288,6 @@ namespace cs {
         
     }
     
-    /* gui mark */
     void CocoButton::setNormalSpriteFrame(cocos2d::CCSpriteFrame *frame)
     {
         if (m_bScale9Enable)
@@ -324,5 +323,4 @@ namespace cs {
             dynamic_cast<cocos2d::CCSprite*>(m_pButtonDisable)->setDisplayFrame(frame);
         }
     }
-    /**/
 }

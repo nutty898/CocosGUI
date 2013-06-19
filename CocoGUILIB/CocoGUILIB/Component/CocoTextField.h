@@ -84,7 +84,6 @@ namespace cs
         void addDeleteBackwardEvent(cocos2d::CCObject* target, SEL_TextFieldDeleteBackwardEvent selecor);
         
     protected:
-//        CTextField* uiTextField;
         float m_fTouchWidth;
         float m_fTouchHeight;
         bool m_bUseTouchArea;

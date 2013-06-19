@@ -53,7 +53,6 @@ namespace cs {
     
     CocoSlider* CocoSlider::create()
     {
-//        return CocoSlider::create(NULL);
         CocoSlider* widget = new CocoSlider();
         if (widget && widget->init()) {
             return widget;

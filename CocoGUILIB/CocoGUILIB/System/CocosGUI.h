@@ -33,9 +33,7 @@
 #include "CocoButton.h"
 #include "CocoCheckBox.h"
 #include "CocoImageView.h"
-/* gui mark */
 #include "CocoImageViewScale9.h"
-/**/
 #include "CocoLabel.h"
 #include "CocoLabelAtlas.h"
 #include "CocoLoadingBar.h"

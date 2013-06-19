@@ -128,7 +128,6 @@ namespace cs
         virtual void update(float dt);
         void recordSlidTime(float dt);
         virtual void checkChildInfo(int handleState,CocoWidget* sender,cocos2d::CCPoint &touchPoint);
-//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(const cocos2d::CCSize &size);
         
         void scrollToTopEvent();

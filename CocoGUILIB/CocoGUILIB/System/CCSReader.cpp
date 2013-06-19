@@ -632,7 +632,7 @@ namespace cs {
             {
                 float imageSwf = DICTOOL->getFloatValue(options, "imageScale9Width");
                 float imageShf = DICTOOL->getFloatValue(options, "imageScale9Height");
-                imageButton->setImageScale9Size(imageSwf, imageShf);
+                imageButton->setImageScale9Size(cocos2d::CCSize(imageSwf, imageShf));
             }
         }
         else
@@ -1050,7 +1050,7 @@ namespace cs {
             {
                 float imageSwf = DICTOOL->getFloatValue_json(options, "imageScale9Width");
                 float imageShf = DICTOOL->getFloatValue_json(options, "imageScale9Height");
-                imageButton->setImageScale9Size(imageSwf, imageShf);
+                imageButton->setImageScale9Size(cocos2d::CCSize(imageSwf, imageShf));
             }
         }
         else

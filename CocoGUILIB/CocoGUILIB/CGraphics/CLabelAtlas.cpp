@@ -42,11 +42,9 @@ namespace cs {
     
     CLabelAtlas* CLabelAtlas::create()
     {
-        // && pRet->initWithString(string, charMapFile, itemWidth, itemHeight, startCharMap)
         CLabelAtlas *pRet = new CLabelAtlas();
         if(pRet)
         {
-            //        pRet->initWithString("122223.12", "gui/New/labelatlasimg.png", 12, 32, '.');
             pRet->autorelease();
             return pRet;
         }

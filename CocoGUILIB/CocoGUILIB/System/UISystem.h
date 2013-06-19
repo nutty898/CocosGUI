@@ -48,10 +48,8 @@ namespace cs {
         CocoWidget* createWidget_json(cs::CSJsonDictionary* data);
         CocoWidget* createWidgetFromFile_json(const char* fileName);
         CocoWidget* createWidgetFromFileWithAdapt_json(const char* fileName, bool scaleAdapt, bool equalProportions);
-        /* gui mark */
         CocoWidget* createWidgetFromCCBFile(const char* fileName, GUICCNodeLoaderLibrary* ccNodeLoaderLibrary);
         CocoWidget* createWidgetFromCCBFileWithAdapt(const char* fileName, GUICCNodeLoaderLibrary* ccNodeLoaderLibrary, bool scaleAdapt, bool equalProportions);
-        /**/
         void adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions);
         
         bool replaceUISceneWithFile(cocos2d::CCNode* container,const char* fileName,int fileType,bool enableAdapt,bool scaleAdapt,bool equalProportions,int nPriority = -1);
@@ -76,7 +74,6 @@ namespace cs {
         void removeSpriteFrame(const char* fileName);
         void removeAllSpriteFrame();
         
-        /* gui mark */
     private:
         void initClassType();
         void removeAllClassType();
@@ -85,7 +82,6 @@ namespace cs {
         void registerClassType(CCString* classType, const char* key);
         void setClassType(CCString* classType, const char* key);
         cocos2d::CCString* getClassType(const char* key);
-        /**/
         
     protected:
         CC_SYNTHESIZE(UIScene*, m_pCurScene, CurScene)
@@ -97,9 +93,7 @@ namespace cs {
         //texture
         cocos2d::CCArray* m_textureFiles;
         
-        /* gui mark */
         cocos2d::CCDictionary* m_classTypeDic;
-        /**/
     };
 }
 

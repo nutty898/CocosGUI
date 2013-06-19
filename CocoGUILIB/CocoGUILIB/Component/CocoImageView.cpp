@@ -220,11 +220,9 @@ namespace cs {
         }
         
     }
-    
-    /* gui mark */
+
     void CocoImageView::setDisplayFrame(cocos2d::CCSpriteFrame *pNewFrame)
     {
         DYNAMIC_CAST_CCSPRITE->setDisplayFrame(pNewFrame);
     }
-    /**/
 }

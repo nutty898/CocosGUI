@@ -18,7 +18,6 @@ namespace cs {
         virtual ~CClipAbleLayerGradient(){};
         static CClipAbleLayerGradient* create(const cocos2d::ccColor4B &colorStart,const cocos2d::ccColor4B &colorEnd);
         static CClipAbleLayerGradient* create();
-        bool init();
         virtual void visit();
         void setClipAble(bool able);
         void setColorEnable(bool enable);

@@ -38,7 +38,6 @@ namespace cs {
         virtual ~CClipAbleLayerColor(){};
         static CClipAbleLayerColor* create(const cocos2d::ccColor4B &color,float width ,float height);
         static CClipAbleLayerColor* create();
-        bool init();
         virtual void visit();
         void setClipAble(bool able);
         void setColorEnable(bool enable);

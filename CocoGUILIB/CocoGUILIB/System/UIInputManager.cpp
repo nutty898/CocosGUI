@@ -65,18 +65,7 @@ namespace cs
     
     void UIInputManager::sortWidgets()
     {
-//        int count = this->m_manageredWidget->count();
-//        for ( int i = 0; i < count; ++i) {
-//            for ( int j = 0; j < count - 1; ++j) {
-//                CocoWidget* jWidget = (CocoWidget*)(this->m_manageredWidget->objectAtIndex(j));
-//                CocoWidget* j1Widget = (CocoWidget*)(this->m_manageredWidget->objectAtIndex(j+1));
-//                if (jWidget->getWidgetZOrder() < j1Widget->getWidgetZOrder())
-//                {
-//                    this->m_manageredWidget->exchangeObjectAtIndex(j, j+1);
-//                }
-//            }
-//        }
-//        
+
         this->m_manageredWidget->removeAllObjects();
 #if VERSIONFORCOCOS2DX
         this->sortRootWidgets(COCOUISYSTEM->getCurScene()->getRootWidget());
@@ -111,11 +100,6 @@ namespace cs
         if (!this->m_bWidgetBeSorted){
             this->sortWidgets();
         }
-        
-//        for (int i=0;i<this->m_manageredWidget->count();i++) {
-//            CocoWidget* widget = (CocoWidget*)(this->m_manageredWidget->objectAtIndex(i));
-//            printf("widget name == [%s] z == [%d]\n",widget->getName().c_str(),widget->getWidgetZOrder());
-//        }
         
         for (int i=0;i<this->m_manageredWidget->count();i++){
             CocoWidget* widget = (CocoWidget*)(this->m_manageredWidget->objectAtIndex(i));
@@ -162,7 +146,6 @@ namespace cs
             if (!widget->getVisible()){
                 continue;
             }
-//            widget->checkDoubleClick(dt);
         }
     }
     

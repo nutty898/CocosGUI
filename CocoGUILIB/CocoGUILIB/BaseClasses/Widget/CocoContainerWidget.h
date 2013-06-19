@@ -44,7 +44,7 @@ namespace cs {
         CocoContainerWidget();
         virtual ~CocoContainerWidget();
         static CocoContainerWidget* create();
-        //Only containerWidget can use the LayoutParameter for do layout to child widget
+        //Only containerWidget can use the LayoutParameter for doing layout to child widget
         virtual void setLayoutParameter(/*LayoutParameter * parmeter*/);
         virtual bool init();
         virtual void initNodes();
@@ -53,7 +53,6 @@ namespace cs {
         virtual void setClipRect(const cocos2d::CCRect &rect);
         virtual void updateWidth();
         virtual void updateHeight();
-//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(const cocos2d::CCSize &size);
         virtual void setWidth(float width);
         virtual float getWidth();

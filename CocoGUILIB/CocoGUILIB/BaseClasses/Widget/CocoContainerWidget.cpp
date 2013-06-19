@@ -139,15 +139,7 @@ namespace cs {
     {
         
     }
-    
-//    void CocoContainerWidget::setColorAndSize(int r,int g,int b,int o,float width,float height)
-//    {
-//        DYNAMIC_CAST_CLIPLAYERCOLOR->initWithColor(cocos2d::ccc4(r, g, b, o), width, height);
-//        this->m_fWidth = width;
-//        this->m_fHeight = height;
-//        this->updateClipSize();
-//    }
-    
+
     void CocoContainerWidget::setSize(const cocos2d::CCSize &size)
     {
         switch (m_renderType) {

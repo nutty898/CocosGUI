@@ -146,7 +146,6 @@
 		50F38EFF1761DE6600A7C720 /* CocoControlButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F38EFD1761DE6600A7C720 /* CocoControlButton.cpp */; };
 		50F6F80217636CDB001A92F2 /* UIWidgetPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F80017636CDB001A92F2 /* UIWidgetPool.cpp */; };
 		50F6F80517636CDB001A92F2 /* CocoPageView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F80317636CDB001A92F2 /* CocoPageView.cpp */; };
-		50F6F80817636CDB001A92F2 /* GUISprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F80617636CDB001A92F2 /* GUISprite.cpp */; };
 		50F6F80B17636CDB001A92F2 /* PageViewScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F80917636CDB001A92F2 /* PageViewScene.cpp */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
@@ -467,8 +466,6 @@
 		50F6F80117636CDB001A92F2 /* UIWidgetPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWidgetPool.h; sourceTree = "<group>"; };
 		50F6F80317636CDB001A92F2 /* CocoPageView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoPageView.cpp; sourceTree = "<group>"; };
 		50F6F80417636CDB001A92F2 /* CocoPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoPageView.h; sourceTree = "<group>"; };
-		50F6F80617636CDB001A92F2 /* GUISprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUISprite.cpp; sourceTree = "<group>"; };
-		50F6F80717636CDB001A92F2 /* GUISprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUISprite.h; sourceTree = "<group>"; };
 		50F6F80917636CDB001A92F2 /* PageViewScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PageViewScene.cpp; sourceTree = "<group>"; };
 		50F6F80A17636CDB001A92F2 /* PageViewScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewScene.h; sourceTree = "<group>"; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -709,8 +706,6 @@
 		38B644B217409B8800A681C0 /* CGraphics */ = {
 			isa = PBXGroup;
 			children = (
-				50F6F80617636CDB001A92F2 /* GUISprite.cpp */,
-				50F6F80717636CDB001A92F2 /* GUISprite.h */,
 				50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */,
 				50ACC83F1756031F007CAF48 /* GUIScale9Sprite.h */,
 				38B644B317409B8800A681C0 /* CClipAbleLayerColor.cpp */,
@@ -1345,7 +1340,6 @@
 				50F1F41C1761D6370002F715 /* CocoLabelBMFont.cpp in Sources */,
 				50F6F80217636CDB001A92F2 /* UIWidgetPool.cpp in Sources */,
 				50F6F80517636CDB001A92F2 /* CocoPageView.cpp in Sources */,
-				50F6F80817636CDB001A92F2 /* GUISprite.cpp in Sources */,
 				50F6F80B17636CDB001A92F2 /* PageViewScene.cpp in Sources */,
 				50EE80BD1769C598008EFB72 /* CocoLoadingBar.cpp in Sources */,
 				503DEDCA176EEA7E0087D7E8 /* GUICCBFileLoader.cpp in Sources */,

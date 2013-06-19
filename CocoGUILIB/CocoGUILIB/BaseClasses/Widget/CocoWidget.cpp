@@ -78,7 +78,6 @@ namespace cs {
     
     CocoWidget* CocoWidget::create()
     {
-//        return CocoWidget::create(NULL);
         CocoWidget* widget = new CocoWidget();
         if (widget && widget->init()) {
             return widget;
@@ -101,7 +100,6 @@ namespace cs {
     {
         this->setUpdateEnable(false);
         this->removeAllChildrenAndCleanUp(true);
-//        this->removeAllUIElementsAndCleanUp(true);
         this->m_pCCRenderNode->removeAllChildrenWithCleanup(true);
         this->m_pCCRenderNode->removeFromParentAndCleanup(true);
         this->m_pCCRenderNode->release();
@@ -1002,7 +1000,6 @@ namespace cs {
         return DYNAMIC_CAST_CCRGBAPROTOCOL->getOpacity();
     }
     
-    /* gui mark */
     void CocoWidget::setBlendFunc(cocos2d::ccBlendFunc blendFunc)
     {
         cocos2d::CCBlendProtocol * blendNode = DYNAMIC_CAST_CCBLENDPROTOCOL;
@@ -1015,5 +1012,4 @@ namespace cs {
     {
         m_pCCRenderNode->ignoreAnchorPointForPosition(ignore);
     }
-    /**/
 }

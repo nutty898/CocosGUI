@@ -87,10 +87,8 @@ namespace cs {
         this->m_pCurScene->init();
         this->m_textureFiles = cocos2d::CCArray::create();
         this->m_textureFiles->retain();
-        /* gui mark */
         this->m_classTypeDic = CCDictionary::create();
         this->m_classTypeDic->retain();
-        /**/
 #endif
         this->uiSystemInited = true;
     }
@@ -123,7 +121,6 @@ namespace cs {
         return widget;
     }
     
-    /* gui mark */
     CocoWidget* UISystem::createWidgetFromCCBFile(const char *fileName, cs::GUICCNodeLoaderLibrary *ccNodeLoaderLibrary)
     {
         CocoWidget* widget = NULL;
@@ -145,7 +142,6 @@ namespace cs {
         
         return widget;
     }
-    /**/
     
     void UISystem::adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions)
     {
@@ -203,9 +199,7 @@ namespace cs {
         this->m_pCurScene->init();
         container->addChild(this->m_pCurScene->getRootWidget()->getContainerNode());
         
-        /* gui mark */
         initClassType();
-        /**/
 #endif
     }
     
@@ -253,9 +247,7 @@ namespace cs {
 #if VERSIONFORCOCOS2DX
         this->m_pCurScene->cleanScene();
         this->removeAllSpriteFrame();
-        /* gui mark */
         this->removeAllClassType();
-        /**/
 #endif
     }
     
@@ -376,7 +368,6 @@ namespace cs {
         this->m_textureFiles->removeAllObjects();
     }
     
-    /* gui mark */
     void UISystem::initClassType()
     {
         setClassType(CCString::create("CCNode"), "CCNode");
@@ -433,5 +424,4 @@ namespace cs {
         }
         return dynamic_cast<CCString*>(this->m_classTypeDic->objectForKey(key));
     }
-    /**/
 }

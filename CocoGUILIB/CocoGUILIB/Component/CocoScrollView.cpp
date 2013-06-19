@@ -100,7 +100,6 @@ namespace cs
     
     CocoScrollView* CocoScrollView::create()
     {
-//        return CocoScrollView::create(NULL);
         CocoScrollView* widget = new CocoScrollView();
         if (widget && widget->init())
         {
@@ -118,27 +117,6 @@ namespace cs
         }
         return false;
     }
-
-//    void CocoScrollView::setColorAndSize(int r, int g, int b, int o, float width, float height)
-//    {
-//        CocoPanel::setColorAndSize(r, g, b, o, width, height);
-//        this->m_fTopBoundary = height;
-//        this->m_fRightBoundary = width;
-//        
-//        switch (m_eDirection)
-//        {
-//            case SCROLLVIEW_DIR_VERTICAL: // vertical
-//                m_fDragForce = height / 8 * 5;
-//                break;
-//                
-//            case SCROLLVIEW_DIR_HORIZONTAL: // horizontal
-//                m_fDragForce = width / 8 * 5;
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//    }
     
     void CocoScrollView::setSize(const cocos2d::CCSize &size)
     {
@@ -335,7 +313,6 @@ namespace cs
                 break;
         }
     }
-    /**/
     
     void CocoScrollView::resortChildren()
     {

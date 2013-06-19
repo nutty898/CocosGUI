@@ -57,11 +57,9 @@ namespace cs {
         virtual void setScale9Size(float width,float height);
         virtual void setFlipX(bool flipX);
         virtual void setFlipY(bool flipY);
-        /* gui mark */
         virtual void setNormalSpriteFrame(cocos2d::CCSpriteFrame* frame);
         virtual void setPressedSpriteFrame(cocos2d::CCSpriteFrame* frame);
         virtual void setDisabledSpriteFrame(cocos2d::CCSpriteFrame* frame);
-        /**/
     protected:
         cocos2d::CCNode* m_pButtonNormal;
         cocos2d::CCNode* m_pButtonClicked;

@@ -46,7 +46,7 @@ namespace cs
         void initPressState(int state);
         
         void setImageScale9Enable(bool able);
-        void setImageScale9Size(float width, float height);
+        void setImageScale9Size(const cocos2d::CCSize &size);
         void setImageTextures(const char* normal, const char* selected, const char* disabled, bool useSpriteFrame = false);
         void setImageTexturesScale9(const char* normal, const char* selected, const char* disabled,
                                     cocos2d::CCRect capInsets,

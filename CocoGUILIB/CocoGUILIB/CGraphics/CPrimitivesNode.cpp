@@ -32,8 +32,7 @@ using namespace cocos2d;
 namespace cs {
     
     void CPrimitivesNode::setRect(CCRect rect){
-//        this->point1 = ccp(rect);
-//        this->point2 = ccp(rect->v[0]+rect->v[2],rect->v[1]+rect->v[3]);
+
     }
     void CPrimitivesNode::draw()
     {

@@ -24,8 +24,6 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* gui mark */
-
 #include "CocoImageViewScale9.h"
 #include "GUIScale9Sprite.h"
 
@@ -126,4 +124,3 @@ namespace cs
         DYNAMIC_CAST_SCALE9SPRITE->setInsetBottom(insetBottom);
     }
 }
-/**/

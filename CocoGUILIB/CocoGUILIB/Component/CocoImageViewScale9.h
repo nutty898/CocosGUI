@@ -27,8 +27,6 @@
 #ifndef __GUI_CCBI__CocoImageViewScale9__
 #define __GUI_CCBI__CocoImageViewScale9__
 
-/* gui mark */
-
 #include "CocoImageView.h"
 
 namespace cs
@@ -55,5 +53,4 @@ namespace cs
         void setInsetBottom(float insetBottom);
     };
 }
-/**/
 #endif /* defined(__GUI_CCBI__CocoImageViewScale9__) */

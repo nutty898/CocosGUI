@@ -34,7 +34,8 @@ namespace cs {
     m_nPercent(100),
     m_fTotalLength(0),
     m_fBarHeight(0),
-    m_pRenderBar(NULL)
+    m_pRenderBar(NULL),
+    m_bUseSpriteFrame(false)
     {
     }
     
@@ -91,6 +92,7 @@ namespace cs {
     
     void CocoLoadingBar::setTexture(const char* texture,bool useSpriteFrame)
     {
+        this->m_bUseSpriteFrame = useSpriteFrame;
         if (useSpriteFrame) {
             this->m_pRenderBar->initWithSpriteFrameName(texture);
         }else{
@@ -125,17 +127,16 @@ namespace cs {
         float res = this->m_nPercent/100.0;
         
         int x = 0, y = 0;                        
-//        if (this->m_pRenderBar->getCRenderNode()->getUseSpriteFrame())
-//        {
-//            using namespace cocos2d;
-//            CCSprite* barNode = dynamic_cast<CCSprite*>(m_pRenderBar->getCRenderNode()->getRenderNode());
-//            if (barNode)
-//            {
-//                CCPoint to = barNode->getTextureRect().origin;
-//                x = to.x;
-//                y = to.y;
-//            }
-//        }
+        if (this->m_bUseSpriteFrame)
+        {
+            cocos2d::CCSprite* barNode = DYNAMIC_CAST_CCSPRITE;
+            if (barNode)
+            {
+                cocos2d::CCPoint to = barNode->getTextureRect().origin;
+                x = to.x;
+                y = to.y;
+            }
+        }
         
         this->m_pRenderBar->setTextureRect(cocos2d::CCRect(x, y, this->m_fTotalLength * res, this->m_fBarHeight));
     }

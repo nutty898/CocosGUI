@@ -40,7 +40,6 @@ namespace cs {
         void setBackGroundImage(const char* fileName,bool useSpriteFrame = false);
         void setBackGroundImageScale9(const char* fileName,const cocos2d::CCRect &capInsets,bool useSpriteFrame = false);
         virtual void setBackGroundColorEnable(bool able);
-//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
         virtual void setSize(const cocos2d::CCSize &size);
         void setBackGroundImageScale9Enable(bool able);
     protected:

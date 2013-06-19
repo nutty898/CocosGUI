@@ -1,16 +1,33 @@
-//
-//  CocoControlButton.cpp
-//  Test
-//
-//  Created by cai wenzhi on 13-6-7.
-//
-//
+/*
+ * Copyright (c) 2012 Chukong Technologies, Inc.
+ *
+ * http://www.sweetpome.com
+ * http://tools.cocoachina.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 #include "CocoControlButton.h"
 
 namespace cs {
     CocoControlButton::CocoControlButton():
-    /* gui mark */
     m_pNormalBackGround(NULL),
     m_pPressedBackGround(NULL),
     m_pDisabledBackGround(NULL),
@@ -18,7 +35,6 @@ namespace cs {
     m_pPressedTitle(NULL),
     m_pDisabledTitle(NULL),
     m_bZoomOnTouchDown(true)
-    /**/
     {
         
     }
@@ -56,7 +72,6 @@ namespace cs {
     void CocoControlButton::initNodes()
     {
         CocoWidget::initNodes();
-        /* gui mark */
         this->m_pNormalTitle = cocos2d::CCLabelTTF::create();
         this->m_pPressedTitle = cocos2d::CCLabelTTF::create();
         this->m_pDisabledTitle = cocos2d::CCLabelTTF::create();
@@ -64,7 +79,6 @@ namespace cs {
         this->m_pNormalBackGround = GUIScale9Sprite::create();
         this->m_pPressedBackGround = GUIScale9Sprite::create();
         this->m_pDisabledBackGround = GUIScale9Sprite::create();
-        /**/
     }
     
     void CocoControlButton::setTextures(const char* backgroundNormal,const char* backgroundPressed,const char* backgroundDisabled)
@@ -91,24 +105,20 @@ namespace cs {
     
     void CocoControlButton::onPressStateChangedToNormal()
     {
-        /* gui mark */
         if (!m_bZoomOnTouchDown)
         {
             return;
         }
-        /**/
         cocos2d::CCAction *zoomAction = cocos2d::CCScaleTo::create(0.05f, 1.0f);
         runAction(zoomAction);
     }
     
     void CocoControlButton::onPressStateChangedToPressed()
     {
-        /* gui mark */
         if (!m_bZoomOnTouchDown)
         {
             return;
         }
-        /**/
         cocos2d::CCAction *zoomAction = cocos2d::CCScaleTo::create(0.05f, 1.1f);
         runAction(zoomAction);
     }
@@ -140,11 +150,9 @@ namespace cs {
     void CocoControlButton::setAnchorPoint(const cocos2d::CCPoint &pt)
     {
         CocoWidget::setAnchorPoint(pt);
-        /* gui mark */
         m_pNormalBackGround->setAnchorPoint(pt);
         m_pPressedBackGround->setAnchorPoint(pt);
         m_pDisabledBackGround->setAnchorPoint(pt);
-        /**/
     }
     
     void CocoControlButton::setColor(int r,int g,int b)
@@ -167,7 +175,6 @@ namespace cs {
         
     }
     
-    /* gui mark */
     void CocoControlButton::setNormalTitle(const char *title)
     {
         m_pNormalTitle->setString(title);
@@ -256,6 +263,5 @@ namespace cs {
     {
         m_pDisabledBackGround->setSpriteFrame(spriteFrame);
     }
-    /**/
 }
 

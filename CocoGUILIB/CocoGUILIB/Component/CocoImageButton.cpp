@@ -1,10 +1,28 @@
-//
-//  CocoImageButton.cpp
-//  Test
-//
-//  Created by pipu on 13-5-14.
-//
-//
+/*
+ * Copyright (c) 2012 Chukong Technologies, Inc.
+ *
+ * http://www.sweetpome.com
+ * http://tools.cocoachina.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 #include "CocoImageButton.h"
 #include "GUIScale9Sprite.h"
@@ -109,16 +127,15 @@ namespace cs
         m_pImageDisable->setVisible(false);
     }
     
-    void CocoImageButton::setImageScale9Size(float width, float height)
+    void CocoImageButton::setImageScale9Size(const cocos2d::CCSize &size)
     {
         if (!m_bScale9Enable)
         {
             return;
         }
-        
-//        dynamic_cast<UIScale9Sprite*>(m_pImageNormal)->setScaleSize(width, height);
-//        dynamic_cast<UIScale9Sprite*>(m_pImageClicked)->setScaleSize(width, height);
-//        dynamic_cast<UIScale9Sprite*>(m_pImageDisable)->setScaleSize(width, height);
+        dynamic_cast<GUIScale9Sprite*>(m_pImageNormal)->setContentSize(size);
+        dynamic_cast<GUIScale9Sprite*>(m_pImageClicked)->setContentSize(size);
+        dynamic_cast<GUIScale9Sprite*>(m_pImageDisable)->setContentSize(size);
     }
     
     void CocoImageButton::setImageTextures(const char *normal, const char *selected, const char *disabled, bool useSpriteFrame)
@@ -137,7 +154,7 @@ namespace cs
     
     void CocoImageButton::setImageNormalTexture(const char *normal, bool useSpriteFrame)
     {
-//        dynamic_cast<UISprite*>(m_pImageNormal)->loadTexture(normal, useSpriteFrame);
+//        dynamic_cast<cocos2d::CCSprite*>(m_pImageNormal)->initWithFile(<#const char *pszFilename#>)(normal, useSpriteFrame);
     }
     
     void CocoImageButton::setImagePressedTexture(const char *selected, bool useSpriteFrame)
@@ -238,7 +255,7 @@ namespace cs
         }
         
         CocoButton::setScale9Size(buttonWidth, buttonHeight);
-        setImageScale9Size(imageWidth, imageHeight);
+        setImageScale9Size(cocos2d::CCSize(imageWidth,imageHeight));
     }
     
     void CocoImageButton::setTextures(const char *buttonNormal, const char *buttonSelected, const char *buttonDisabled,

@@ -34,19 +34,6 @@ namespace cs {
         return NULL;
     }
     
-    bool CClipAbleLayerGradient::init()
-    {
-        if (CCLayerGradient::init())
-        {
-            //            this->setCascadeOpacityEnabled(true);
-            //            this->setCascadeColorEnabled(true);
-            
-            return true;
-        }
-        
-        return false;
-    }
-    
     void CClipAbleLayerGradient::visit(){
         if (this->m_bClipAble) {
             glEnable(GL_SCISSOR_TEST);
