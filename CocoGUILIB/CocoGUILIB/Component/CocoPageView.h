@@ -57,8 +57,8 @@ namespace cs
         virtual bool addChild(CocoWidget* widget);
         virtual void initProperty();
         virtual void resetProperty();
-        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
-        virtual void setSize(float width,float height);
+//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
+        virtual void setSize(const CCSize &size);
         virtual bool onTouchPressed(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchMoved(cocos2d::CCPoint &touchPoint);
         virtual bool onTouchReleased(cocos2d::CCPoint &touchPoint);

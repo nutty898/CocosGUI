@@ -166,7 +166,7 @@ namespace cs {
             case 1:
             {
                 CocoContainerWidget* cRoot = (CocoContainerWidget*)root;
-                cRoot->setSize(cRoot->getWidth()*xProportion,cRoot->getHeight()*yProportion);
+                cRoot->setSize(cocos2d::CCSize(cRoot->getWidth()*xProportion,cRoot->getHeight()*yProportion));
             }
                 break;
             default:

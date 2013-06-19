@@ -30,7 +30,7 @@ using namespace cocos2d;
 
 namespace cs {
     
-    CClipAbleLayerColor* CClipAbleLayerColor::create(ccColor4B color, float width, float height){
+    CClipAbleLayerColor* CClipAbleLayerColor::create(const cocos2d::ccColor4B &color,float width,float height){
         CClipAbleLayerColor * pLayer = new CClipAbleLayerColor();
         if( pLayer && pLayer->initWithColor(color,width,height))
         {
@@ -99,7 +99,7 @@ namespace cs {
         return this->m_bColorEnable;
     }
     
-    void CClipAbleLayerColor::setClipRect(float x, float y, float width, float height)
+    void CClipAbleLayerColor::setClipRect(const cocos2d::CCRect &rect)
     {
         
     }

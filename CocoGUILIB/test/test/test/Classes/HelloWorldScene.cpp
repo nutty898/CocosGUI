@@ -2,6 +2,8 @@
 #include "CCEditBox.h"
 #include "PageViewScene.h"
 #include "CCBTestScene.h"
+
+#include "CClipAbleLayerGradient.h"
 using namespace cocos2d;
 
 CCScene* HelloWorld::scene()
@@ -85,9 +87,9 @@ bool HelloWorld::init()
         tbtn->setTextures("UIRES/backtotoppressed.png", "UIRES/backtotopnormal.png", "");
         tbtn->setPosition(ccp(75, 80 - i * (tbtn->getRect().size.height + 5)));
         list->addChild(tbtn);
-        
         COCOUISYSTEM->adjustWidgetProperty(tbtn, x_proportion, y_proportion, true, true);
     }
+//    COCOUISYSTEM->adjustWidgetProperty(list, x_proportion, y_proportion, true, true);
     list->resetProperty();
     list->addInitChildEvent(this, coco_InitChildSelector(HelloWorld::initListViewChild));
     list->addUpdateChildEvent(this, coco_UpdateChildSelector(HelloWorld::updateListViewChild));
@@ -114,6 +116,29 @@ bool HelloWorld::init()
 //    exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::toPageViewScene));
     exit->addReleaseEvent(this, coco_releaseselector(HelloWorld::menuCloseCallback));
 //    exit->addCancelEvent(this, coco_cancelselector(HelloWorld::cancelTouch));
+    
+    
+    cs::CocoGradientPanel * gp = cs::CocoGradientPanel::create();
+    COCOUISYSTEM->getCurScene()->addWidget(gp);
+    gp->setBackGroundColorEnable(true);
+    gp->setSize(CCSizeMake(100, 100));
+    gp->setStartColor(ccc3(0, 255, 0));
+    gp->setEndColor(ccc3(0, 0, 255));
+    gp->setOpacity(255);
+
+//    CCLayerGradient* lg = CCLayerGradient::create();
+//    this->addChild(lg);
+//    lg->setContentSize(CCSizeMake(100, 100));
+//    lg->setStartColor(ccc3(0, 255, 0));
+//    lg->setEndColor(ccc3(0, 0, 255));
+//    lg->setPosition(ccp(100, 0));
+    
+//    cs::CClipAbleLayerGradient* c = cs::CClipAbleLayerGradient::create();
+//    this->addChild(c);
+//    c->setContentSize(CCSizeMake(100, 100));
+//    c->setStartColor(ccc3(0, 255, 0));
+//    c->setEndColor(ccc3(0, 0, 255));
+//    c->setPosition(ccp(200, 0));
     
     return true;
 }
@@ -192,7 +217,7 @@ void HelloWorld::cleanUIWidgets(cocos2d::CCObject *pSender)
     return;
     COCOUISYSTEM->resetSystem(this);
     cs::CocoPanel* p = cs::CocoPanel::create();
-    p->setSize(100, 100);
+    p->setSize(CCSizeMake(100, 100));
     p->setBackGroundColorEnable(true);
     p->setColor(ccc3(0, 255, 0));
     p->setOpacity(255);

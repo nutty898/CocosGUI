@@ -40,6 +40,7 @@
 #include "CocoLabelAtlas.h"
 #include "CocoLoadingBar.h"
 #include "CocoPanel.h"
+#include "CocoGradientPanel.h"
 #include "CocoScrollView.h"
 #include "CocoSlider.h"
 #include "CocoTextArea.h"

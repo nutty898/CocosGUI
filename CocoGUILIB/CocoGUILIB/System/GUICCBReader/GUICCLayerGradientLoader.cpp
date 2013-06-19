@@ -1,5 +1,5 @@
 #include "GUICCLayerGradientLoader.h"
-#include "CocoContainerWidget.h"
+#include "CocoGradientPanel.h"
 
 
 #define PROPERTY_STARTCOLOR "startColor"
@@ -15,16 +15,16 @@ namespace cs
         if(strcmp(pPropertyName, PROPERTY_STARTCOLOR) == 0) {
             /**/
 //            ((CCLayerGradient *)pNode)->setStartColor(pCCColor3B);
-//            dynamic_cast<CocoContainerWidget*>(pWidget)->setStartColor(pCCColor3B);
-//            dynamic_cast<CocoContainerWidget*>(pWidget)->setStartOpacity(255);
-            dynamic_cast<CocoContainerWidget*>(pWidget)->setOpacity(255);
+            dynamic_cast<CocoGradientPanel*>(pWidget)->setStartColor(pCCColor3B);
+            dynamic_cast<CocoGradientPanel*>(pWidget)->setStartOpacity(255);
+//            dynamic_cast<CocoContainerWidget*>(pWidget)->setOpacity(255);
             /**/
         } else if(strcmp(pPropertyName, PROPERTY_ENDCOLOR) == 0) {
             /**/
 //            ((CCLayerGradient *)pNode)->setEndColor(pCCColor3B);
-//            dynamic_cast<CocoContainerWidget*>(pWidget)->setEndColor(pCCColor3B);
-//            dynamic_cast<CocoContainerWidget*>(pWidget)->setEndOpacity(255);
-            dynamic_cast<CocoContainerWidget*>(pWidget)->setOpacity(255);
+            dynamic_cast<CocoGradientPanel*>(pWidget)->setEndColor(pCCColor3B);
+            dynamic_cast<CocoGradientPanel*>(pWidget)->setEndOpacity(255);
+//            dynamic_cast<CocoContainerWidget*>(pWidget)->setOpacity(255);
             /**/
         } else {
             GUICCLayerLoader::onHandlePropTypeColor3(pWidget, pNode, pParent, pPropertyName, pCCColor3B, pCCBReader);

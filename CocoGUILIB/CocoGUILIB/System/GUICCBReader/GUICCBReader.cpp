@@ -1060,10 +1060,13 @@ namespace cs
         }
         else if (strcmp(className.c_str(), "CCLayer") == 0
                  || strcmp(className.c_str(), "CCLayerColor") == 0
-                 || strcmp(className.c_str(), "CCLayerGradient") == 0
                  || strcmp(className.c_str(), "CCMenu") == 0)
         {
             widget = CocoPanel::create();
+        }
+        else if (strcmp(className.c_str(), "CCLayerGradient") == 0)
+        {
+            widget = CocoGradientPanel::create();
         }
         else if (strcmp(className.c_str(), "CCScrollView") == 0)
         {
@@ -1179,10 +1182,13 @@ namespace cs
         /* set widget property (must call behind CCNode create) */
         if (strcmp(className.c_str(), "CCLayer") == 0
             || strcmp(className.c_str(), "CCLayerColor") == 0
-            || strcmp(className.c_str(), "CCLayerGradient") == 0
             || strcmp(className.c_str(), "CCMenu") == 0)
         {
             setPropsForPanelFromCCBFile(widget);
+        }
+        else if (strcmp(className.c_str(), "CCLayerGradient") == 0)
+        {
+            setPropsForGradientPanelFromCCBFile(widget);
         }
         else if (strcmp(className.c_str(), "CCScrollView") == 0)
         {
@@ -1372,9 +1378,17 @@ namespace cs
                 
         float w = widget->getRect().size.width;
         float h = widget->getRect().size.height;
-        panel->setSize(w, h);
+        panel->setSize(CCSizeMake(w, h));
         
         panel->setBackGroundColorEnable(true);
+    }
+    
+    void GUICCBReader::setPropsForGradientPanelFromCCBFile(cs::CocoWidget *widget)
+    {
+        setPropsForPanelFromCCBFile(widget);
+//        CocoGradientPanel* panel = dynamic_cast<CocoGradientPanel*>(widget);
+//        panel->setStartColor(ccc3(0, 255, 0));
+//        panel->setEndColor(ccc3(0, 0, 255));
     }
     
     void GUICCBReader::setPropsForScrollViewCCBFile(CocoWidget *widget)

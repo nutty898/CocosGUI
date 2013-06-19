@@ -54,6 +54,8 @@
 
 #define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
 
+#define DYNAMIC_CAST_CLIPLAYERGRADIENT dynamic_cast<CClipAbleLayerGradient*>(this->m_pCCRenderNode)
+
 #define DYNAMIC_CAST_CLABELATLAS dynamic_cast<CLabelAtlas*>(this->m_pCCRenderNode)
 
 #define DYNAMIC_CAST_SCALE9SPRITE dynamic_cast<GUIScale9Sprite*>(this->m_pCCRenderNode)

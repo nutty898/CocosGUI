@@ -26,6 +26,7 @@
 
 #include "CocoContainerWidget.h"
 #include "CClipAbleLayerColor.h"
+#include "CClipAbleLayerGradient.h"
 #include "DictionaryHelper.h"
 
 namespace cs {
@@ -33,7 +34,8 @@ namespace cs {
     CocoContainerWidget::CocoContainerWidget():
     m_fWidth(0.0),
     m_fHeight(0.0),
-    m_bClipAble(false)
+    m_bClipAble(false),
+    m_renderType(RENDER_TYPE_LAYERCOLOR)
     {
         this->m_nWidgetType = 1;
     }
@@ -98,16 +100,34 @@ namespace cs {
     void CocoContainerWidget::setClipAble(bool able)
     {
         this->m_bClipAble = able;
-        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipAble(able);
+        switch (m_renderType) {
+            case RENDER_TYPE_LAYERCOLOR:
+                DYNAMIC_CAST_CLIPLAYERCOLOR->setClipAble(able);
+                break;
+            case RENDER_TYPE_LAYERGRADIENT:
+                DYNAMIC_CAST_CLIPLAYERGRADIENT->setClipAble(able);
+                break;
+            default:
+                break;
+        }
         for (int i=0; i<this->m_children->count(); i++) {
             CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
             child->setNeedCheckVisibleDepandParent(able);
         }
     }
     
-    void CocoContainerWidget::setClipRect(cocos2d::CCRect rect)
+    void CocoContainerWidget::setClipRect(const cocos2d::CCRect &rect)
     {
-        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipRect(rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
+        switch (m_renderType) {
+            case RENDER_TYPE_LAYERCOLOR:
+                DYNAMIC_CAST_CLIPLAYERCOLOR->setClipRect(rect);
+                break;
+            case RENDER_TYPE_LAYERGRADIENT:
+                DYNAMIC_CAST_CLIPLAYERGRADIENT->setClipRect(rect);
+                break;
+            default:
+                break;
+        }
     }
     
     void CocoContainerWidget::updateWidth()
@@ -120,26 +140,35 @@ namespace cs {
         
     }
     
-    void CocoContainerWidget::setColorAndSize(int r,int g,int b,int o,float width,float height)
-    {
-        DYNAMIC_CAST_CLIPLAYERCOLOR->initWithColor(cocos2d::ccc4(r, g, b, o), width, height);
-        this->m_fWidth = width;
-        this->m_fHeight = height;
-        this->updateClipSize();
-    }
+//    void CocoContainerWidget::setColorAndSize(int r,int g,int b,int o,float width,float height)
+//    {
+//        DYNAMIC_CAST_CLIPLAYERCOLOR->initWithColor(cocos2d::ccc4(r, g, b, o), width, height);
+//        this->m_fWidth = width;
+//        this->m_fHeight = height;
+//        this->updateClipSize();
+//    }
     
-    void CocoContainerWidget::setSize(float width,float height)
+    void CocoContainerWidget::setSize(const cocos2d::CCSize &size)
     {
-        DYNAMIC_CAST_CLIPLAYERCOLOR->setContentSize(cocos2d::CCSize(width,height));
-        this->m_fWidth = width;
-        this->m_fHeight = height;
+        switch (m_renderType) {
+            case RENDER_TYPE_LAYERCOLOR:
+                DYNAMIC_CAST_CLIPLAYERCOLOR->setContentSize(size);
+                break;
+            case RENDER_TYPE_LAYERGRADIENT:
+                DYNAMIC_CAST_CLIPLAYERGRADIENT->setContentSize(size);
+                break;
+            default:
+                break;
+        }
+        this->m_fWidth = size.width;
+        this->m_fHeight = size.height;
         this->updateClipSize();
     }
     
     void CocoContainerWidget::setWidth(float width)
     {
         this->m_fWidth = width;
-        this->setSize(this->m_fWidth,this->m_fHeight);
+        this->setSize(cocos2d::CCSize(width,this->m_fHeight));
     }
     
     float CocoContainerWidget::getWidth()
@@ -150,7 +179,7 @@ namespace cs {
     void CocoContainerWidget::setHeight(float height)
     {
         this->m_fHeight = height;
-        this->setSize(this->m_fWidth,this->m_fHeight);
+        this->setSize(cocos2d::CCSize(this->m_fWidth,height));
     }
     
     float CocoContainerWidget::getHeight()
@@ -190,7 +219,22 @@ namespace cs {
     {
         float asx = this->getAbsoluteScaleX();
         float asy = this->getAbsoluteScaleY();
-        cocos2d::CCSize size = DYNAMIC_CAST_CLIPLAYERCOLOR->getContentSize();
-        DYNAMIC_CAST_CLIPLAYERCOLOR->setClipSize(size.width*asx, size.height*asy);
+        
+        switch (m_renderType) {
+            case RENDER_TYPE_LAYERCOLOR:
+            {
+                cocos2d::CCSize size = DYNAMIC_CAST_CLIPLAYERCOLOR->getContentSize();
+                DYNAMIC_CAST_CLIPLAYERCOLOR->setClipSize(size.width*asx, size.height*asy);
+                break;
+            }
+            case RENDER_TYPE_LAYERGRADIENT:
+            {
+                cocos2d::CCSize size = DYNAMIC_CAST_CLIPLAYERGRADIENT->getContentSize();
+                DYNAMIC_CAST_CLIPLAYERGRADIENT->setClipSize(size.width*asx, size.height*asy);
+                break;
+            }
+            default:
+                break;
+        }
     }        
 }

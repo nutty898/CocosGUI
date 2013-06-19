@@ -47,6 +47,7 @@ namespace cs {
             this->m_pCCRenderNode->addChild(this->m_pNormalTitle);
             this->m_pCCRenderNode->addChild(this->m_pPressedTitle);
             this->m_pCCRenderNode->addChild(this->m_pDisabledTitle);
+            this->setPressState(0);
             return true;
         }
         return false;

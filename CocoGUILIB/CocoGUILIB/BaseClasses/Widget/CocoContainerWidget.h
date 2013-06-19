@@ -30,6 +30,14 @@
 #include "CocoWidget.h"
 
 namespace cs {
+    
+    typedef enum 
+    {
+        RENDER_TYPE_LAYERCOLOR,
+        RENDER_TYPE_LAYERGRADIENT
+    }RenderType;
+    
+    
     class CocoContainerWidget : public CocoWidget
     {
     public:
@@ -42,11 +50,11 @@ namespace cs {
         virtual void initNodes();
         virtual bool addChild(CocoWidget* child);
         virtual void setClipAble(bool able);
-        virtual void setClipRect(cocos2d::CCRect rect);
+        virtual void setClipRect(const cocos2d::CCRect &rect);
         virtual void updateWidth();
         virtual void updateHeight();
-        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
-        virtual void setSize(float width,float height);
+//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
+        virtual void setSize(const cocos2d::CCSize &size);
         virtual void setWidth(float width);
         virtual float getWidth();
         virtual void setHeight(float height);
@@ -61,6 +69,7 @@ namespace cs {
         float m_fWidth;
         float m_fHeight;
         bool m_bClipAble;
+        RenderType m_renderType;
     };
 }
 

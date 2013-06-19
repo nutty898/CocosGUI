@@ -38,10 +38,10 @@ namespace cs {
         static CocoPanel* create();
         virtual void initBackGround(bool scale9);
         void setBackGroundImage(const char* fileName,bool useSpriteFrame = false);
-        void setBackGroundImageScale9(const char* fileName,cocos2d::CCRect capInsets,bool useSpriteFrame = false);
-        void setBackGroundColorEnable(bool able);
-        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
-        virtual void setSize(float width,float height);
+        void setBackGroundImageScale9(const char* fileName,const cocos2d::CCRect &capInsets,bool useSpriteFrame = false);
+        virtual void setBackGroundColorEnable(bool able);
+//        virtual void setColorAndSize(int r,int g,int b,int o,float width,float height);
+        virtual void setSize(const cocos2d::CCSize &size);
         void setBackGroundImageScale9Enable(bool able);
     protected:
         bool m_bBackGroundInited;

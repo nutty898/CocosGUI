@@ -14,7 +14,7 @@ namespace cs
     void GUICCScrollViewLoader::onHandlePropTypeSize(CocoWidget* pWidget, CCNode * pNode, CCNode * pParent, const char * pPropertyName, CCSize pSize, GUICCBReader * pCCBReader) {
         if(strcmp(pPropertyName, PROPERTY_CONTENTSIZE) == 0) {
             ((CCScrollView *)pNode)->setViewSize(pSize);
-            dynamic_cast<CocoScrollView*>(pWidget)->setSize(pSize.width, pSize.height);
+            dynamic_cast<CocoScrollView*>(pWidget)->setSize(pSize);
         } else {
             GUICCNodeLoader::onHandlePropTypeSize(pWidget, pNode, pParent, pPropertyName, pSize, pCCBReader);
         }

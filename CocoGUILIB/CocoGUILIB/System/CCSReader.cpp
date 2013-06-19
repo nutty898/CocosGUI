@@ -465,7 +465,8 @@ namespace cs {
         {
             co = 255;
         }
-        panel->setColorAndSize(cr, cg, cb, co, w, h);
+        panel->setColor(cocos2d::ccc3(cr, cg, cb));
+        panel->setSize(CCSizeMake(w, h));
         if (backGroundScale9Enable) {
             float cx = DICTOOL->getFloatValue(options, "capInsetsX");
             float cy = DICTOOL->getFloatValue(options, "capInsetsY");
@@ -881,7 +882,8 @@ namespace cs {
         {
             co = 255;
         }
-        panel->setColorAndSize(cr, cg, cb, co, w, h);
+        panel->setColor(cocos2d::ccc3(cr, cg, cb));
+        panel->setSize(CCSizeMake(w, h));
         if (backGroundScale9Enable) {
             float cx = DICTOOL->getFloatValue_json(options, "capInsetsX");
             float cy = DICTOOL->getFloatValue_json(options, "capInsetsY");

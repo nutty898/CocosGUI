@@ -40,7 +40,7 @@ namespace cs
     
     void GUICCLayerLoader::onHandlePropTypeSize(CocoWidget* pWidget, CCNode * pNode, CCNode * pParent, const char * pPropertyName, CCSize pSize, GUICCBReader * pCCBReader) {
         if(strcmp(pPropertyName, PROPERTY_CONTENTSIZE) == 0) {
-            dynamic_cast<CocoContainerWidget*>(pWidget)->setSize(pSize.width, pSize.height);
+            dynamic_cast<CocoContainerWidget*>(pWidget)->setSize(pSize);
         } else {
             GUICCNodeLoader::onHandlePropTypeSize(pWidget, pNode, pParent, pPropertyName, pSize, pCCBReader);
         }

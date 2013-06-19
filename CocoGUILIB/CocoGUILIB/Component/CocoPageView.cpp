@@ -138,19 +138,19 @@ namespace cs
         }
     }
     
-    void CocoPageView::setColorAndSize(int r, int g, int b, int o, float width, float height)
-    {
-        CocoPanel::setColorAndSize(r, g, b, o, width, height);
-        marginOffset = width / 8 * 5;
-        m_fDragForce = width / 8 * 5;
-//        marginOffset = m_fWidth;
-    }
+//    void CocoPageView::setColorAndSize(int r, int g, int b, int o, float width, float height)
+//    {
+//        CocoPanel::setColorAndSize(r, g, b, o, width, height);
+//        marginOffset = width / 8 * 5;
+//        m_fDragForce = width / 8 * 5;
+////        marginOffset = m_fWidth;
+//    }
     
-    void CocoPageView::setSize(float width, float height)
+    void CocoPageView::setSize(const CCSize &size)
     {
-        CocoPanel::setSize(width, height);
-        marginOffset = width / 8 * 5;
-        m_fDragForce = width / 8 * 5;
+        CocoPanel::setSize(size);
+        marginOffset = size.width / 8 * 5;
+        m_fDragForce = size.width / 8 * 5;
 //        marginOffset = m_fWidth;
     }
     

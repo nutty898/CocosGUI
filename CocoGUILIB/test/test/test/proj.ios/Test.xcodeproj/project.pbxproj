@@ -135,6 +135,8 @@
 		503DEF21176F10FE0087D7E8 /* SimpleAudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503DEEC4176F10FD0087D7E8 /* SimpleAudioEngine.mm */; };
 		503DEF22176F10FE0087D7E8 /* SimpleAudioEngine_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 503DEEC6176F10FD0087D7E8 /* SimpleAudioEngine_objc.m */; };
 		503DEF41176F23FF0087D7E8 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 503DEF40176F23FF0087D7E8 /* ccb */; };
+		503DEF4417700DF90087D7E8 /* CocoGradientPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503DEF4217700DF10087D7E8 /* CocoGradientPanel.cpp */; };
+		503DEF4717700E250087D7E8 /* CClipAbleLayerGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503DEF4517700E240087D7E8 /* CClipAbleLayerGradient.cpp */; };
 		509CDEB7175C7A610068E8E9 /* CocoNodeContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */; };
 		50ACC84017560320007CAF48 /* GUIScale9Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */; };
 		50EE80BD1769C598008EFB72 /* CocoLoadingBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B644CC17409B8800A681C0 /* CocoLoadingBar.cpp */; };
@@ -447,6 +449,10 @@
 		503DEEC6176F10FD0087D7E8 /* SimpleAudioEngine_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine_objc.m; sourceTree = "<group>"; };
 		503DEEE0176F10FD0087D7E8 /* CocosDenshion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CocosDenshion.xcodeproj; sourceTree = "<group>"; };
 		503DEF40176F23FF0087D7E8 /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
+		503DEF4217700DF10087D7E8 /* CocoGradientPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoGradientPanel.cpp; sourceTree = "<group>"; };
+		503DEF4317700DF50087D7E8 /* CocoGradientPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoGradientPanel.h; sourceTree = "<group>"; };
+		503DEF4517700E240087D7E8 /* CClipAbleLayerGradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CClipAbleLayerGradient.cpp; sourceTree = "<group>"; };
+		503DEF4617700E240087D7E8 /* CClipAbleLayerGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CClipAbleLayerGradient.h; sourceTree = "<group>"; };
 		509CDEB5175C7A610068E8E9 /* CocoNodeContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoNodeContainer.cpp; sourceTree = "<group>"; };
 		509CDEB6175C7A610068E8E9 /* CocoNodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoNodeContainer.h; sourceTree = "<group>"; };
 		50ACC83E1756031F007CAF48 /* GUIScale9Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIScale9Sprite.cpp; sourceTree = "<group>"; };
@@ -709,6 +715,8 @@
 				50ACC83F1756031F007CAF48 /* GUIScale9Sprite.h */,
 				38B644B317409B8800A681C0 /* CClipAbleLayerColor.cpp */,
 				38B644B417409B8800A681C0 /* CClipAbleLayerColor.h */,
+				503DEF4517700E240087D7E8 /* CClipAbleLayerGradient.cpp */,
+				503DEF4617700E240087D7E8 /* CClipAbleLayerGradient.h */,
 				38B644B517409B8800A681C0 /* CClipAbleSprite.cpp */,
 				38B644B617409B8800A681C0 /* CClipAbleSprite.h */,
 				38B644B717409B8800A681C0 /* CLabelAtlas.cpp */,
@@ -744,6 +752,8 @@
 				38B644CD17409B8800A681C0 /* CocoLoadingBar.h */,
 				38B644CE17409B8800A681C0 /* CocoPanel.cpp */,
 				38B644CF17409B8800A681C0 /* CocoPanel.h */,
+				503DEF4217700DF10087D7E8 /* CocoGradientPanel.cpp */,
+				503DEF4317700DF50087D7E8 /* CocoGradientPanel.h */,
 				38B644D017409B8800A681C0 /* CocoScrollView.cpp */,
 				38B644D117409B8800A681C0 /* CocoScrollView.h */,
 				38B644D217409B8800A681C0 /* CocoSlider.cpp */,
@@ -1395,6 +1405,8 @@
 				503DEF20176F10FE0087D7E8 /* CocosDenshion.m in Sources */,
 				503DEF21176F10FE0087D7E8 /* SimpleAudioEngine.mm in Sources */,
 				503DEF22176F10FE0087D7E8 /* SimpleAudioEngine_objc.m in Sources */,
+				503DEF4417700DF90087D7E8 /* CocoGradientPanel.cpp in Sources */,
+				503DEF4717700E250087D7E8 /* CClipAbleLayerGradient.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

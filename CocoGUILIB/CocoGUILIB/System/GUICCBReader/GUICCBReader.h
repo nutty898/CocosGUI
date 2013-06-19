@@ -150,6 +150,7 @@ namespace cs
         void setPropsForWidgetFromCCBFile(CocoWidget* widget);
         void setPropsForContainerWidgetFromCCBFile(CocoWidget* widget);
         void setPropsForPanelFromCCBFile(CocoWidget* widget);
+        void setPropsForGradientPanelFromCCBFile(CocoWidget* widget);
         void setPropsForScrollViewCCBFile(CocoWidget* widget);
         void setPropsForImageViewFromCCBFile(CocoWidget* widget);
         void setPropsForImageViewScale9FromCCBFile(CocoWidget* widget);
