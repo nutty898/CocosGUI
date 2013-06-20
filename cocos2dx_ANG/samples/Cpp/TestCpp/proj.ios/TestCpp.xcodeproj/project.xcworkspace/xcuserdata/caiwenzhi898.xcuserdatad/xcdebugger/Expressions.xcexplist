@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "cocos2d::extension::CocoImageButton::initPressState(cocos2d::extension::WidgetState):CocoImageButton.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this-&gt;m_pImageNormal">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cocos2d::extension::CocoListView::getCheckPositionChild():CocoListView.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this-&gt;m_eDirection">
+            </PersistentString>
+            <PersistentString
+               value = "this-&gt;m_eMoveDirection">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cocos2d::extension::CocoButton::initPressState(cocos2d::extension::WidgetState):CocoButton.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this-&gt;m_pButtonNormal">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
