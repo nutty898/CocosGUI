@@ -24,13 +24,28 @@ void CocosGUITestScene::runThisTest()
     COCOUISYSTEM->replaceUISceneWithFile(this, "cocosgui/CocoGUISample.json", 1, false, false, false);
     CocoScrollView* sc = (CocoScrollView*)(COCOUISYSTEM->getWidgetByName("scrollview"));
     sc->setUpdateEnable(true);
-    sc->setMoveMode(SCROLLVIEW_MOVE_MODE_ACTION);
+    sc->setMoveMode(SCROLLVIEW_MOVE_MODE_NORMAL);
+    
+    CocoImageView* image = dynamic_cast<CocoImageView*>(COCOUISYSTEM->getWidgetByName("imageview"));
+    image->setBeTouchAble(true);
+    image->addReleaseEvent(this, coco_releaseselector(CocosGUITestScene::MainMenuCallback));
+    
     
 }
 void CocosGUITestScene::MainMenuCallback(CCObject* pSender)
 {
-	TestScene::MainMenuCallback(pSender);
+    CocoImageView* image = dynamic_cast<CocoImageView*>(COCOUISYSTEM->getWidgetByName("imageview"));
+    static bool is = true;
     
-	removeAllChildren();
-	CCArmatureDataManager::sharedArmatureDataManager()->purgeArmatureSystem();
+    if (is) {
+        image->setScale9Enable(true);
+        image->setScale9Size(100, 100);
+    }else{
+        image->setScale9Enable(false);
+    }
+    is = !is;
+//	TestScene::MainMenuCallback(pSender);
+//    
+//	removeAllChildren();
+//	CCArmatureDataManager::sharedArmatureDataManager()->purgeArmatureSystem();
 }

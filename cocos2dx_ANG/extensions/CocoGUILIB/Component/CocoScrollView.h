@@ -67,10 +67,10 @@ typedef void (cocos2d::CCObject::*SEL_ScrollToTopEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_ScrollToBottomEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_ScrollToLeftEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_ScrollToRightEvent)(cocos2d::CCObject*);
-#define coco_ScrollToTopSelector(_SELECTOR) (cs::SEL_ScrollToTopEvent)(&_SELECTOR)
-#define coco_ScrollToBottomSelector(_SELECTOR) (cs::SEL_ScrollToBottomEvent)(&_SELECTOR)
-#define coco_ScrollToLeftSelector(_SELECTOR) (cs::SEL_ScrollToLeftEvent)(&_SELECTOR)
-#define coco_ScrollToRightSelector(_SELECTOR) (cs::SEL_ScrollToRightEvent)(&_SELECTOR)
+#define coco_ScrollToTopSelector(_SELECTOR) (cocos2d::extension::SEL_ScrollToTopEvent)(&_SELECTOR)
+#define coco_ScrollToBottomSelector(_SELECTOR) (cocos2d::extension::SEL_ScrollToBottomEvent)(&_SELECTOR)
+#define coco_ScrollToLeftSelector(_SELECTOR) (cocos2d::extension::SEL_ScrollToLeftEvent)(&_SELECTOR)
+#define coco_ScrollToRightSelector(_SELECTOR) (cocos2d::extension::SEL_ScrollToRightEvent)(&_SELECTOR)
 
 typedef void (cocos2d::CCObject::*SEL_BerthToTopEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_BerthToBottomEvent)(cocos2d::CCObject*);
@@ -78,12 +78,12 @@ typedef void (cocos2d::CCObject::*SEL_BerthToVerticalCenterEvent)(cocos2d::CCObj
 typedef void (cocos2d::CCObject::*SEL_BerthToLeftEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_BerthToRightEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_BerthToHorizontalCenterEvent)(cocos2d::CCObject*);
-#define coco_BerthToTopSelector(_SELECTOR) (cs::SEL_BerthToTopEvent)(&_SELECTOR)
-#define coco_BerthToBottomSelector(_SELECTOR) (cs::SEL_BerthToBottomEvent)(&_SELECTOR)
-#define coco_BerthToVerticalCenterSelector(_SELECTOR) (cs::SEL_BerthToVerticalCenterEvent)(&_SELECTOR)
-#define coco_BerthToLeftSelector(_SELECTOR) (cs::SEL_BerthToLeftEvent)(&_SELECTOR)
-#define coco_BerthToRightSelector(_SELECTOR) (cs::SEL_BerthToRightEvent)(&_SELECTOR)
-#define coco_HorizontalCenterSelector(_SELECTOR) (cs::SEL_BerthToHorizontalCenterEvent)(&_SELECTOR)
+#define coco_BerthToTopSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToTopEvent)(&_SELECTOR)
+#define coco_BerthToBottomSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToBottomEvent)(&_SELECTOR)
+#define coco_BerthToVerticalCenterSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToVerticalCenterEvent)(&_SELECTOR)
+#define coco_BerthToLeftSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToLeftEvent)(&_SELECTOR)
+#define coco_BerthToRightSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToRightEvent)(&_SELECTOR)
+#define coco_HorizontalCenterSelector(_SELECTOR) (cocos2d::extension::SEL_BerthToHorizontalCenterEvent)(&_SELECTOR)
 
 class CocoScrollView : public CocoPanel
 {

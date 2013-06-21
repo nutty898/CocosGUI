@@ -59,8 +59,7 @@ m_pCurScene(NULL),
 m_pUIInputManager(NULL),
 uiSystemInited(false),
 m_pInputLayer(NULL),
-m_textureFiles(NULL),
-m_classTypeDic(NULL)
+m_textureFiles(NULL)
 {
     cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
     this->m_fFileDesignWidth = winSize.width;
@@ -80,14 +79,10 @@ void UISystem::init()
         return;
     }
     this->m_pUIInputManager = new UIInputManager();
-#if VERSIONFORCOCOS2DX
     this->m_pCurScene = new UIScene();
     this->m_pCurScene->init();
     this->m_textureFiles = cocos2d::CCArray::create();
     this->m_textureFiles->retain();
-    this->m_classTypeDic = CCDictionary::create();
-    this->m_classTypeDic->retain();
-#endif
     this->uiSystemInited = true;
 }
 
@@ -164,7 +159,6 @@ void UISystem::adjustWidgetProperty(CocoWidget* root,float xProportion,float yPr
 
 void UISystem::resetSystem(cocos2d::CCNode* container,int nPriority)
 {
-#if VERSIONFORCOCOS2DX
     if (this->m_pInputLayer)
     {
         this->m_pInputLayer->setTouchEnabled(false);
@@ -183,7 +177,6 @@ void UISystem::resetSystem(cocos2d::CCNode* container,int nPriority)
     this->cleanUIScene();
     this->m_pCurScene->init();
     container->addChild(this->m_pCurScene->getRootWidget()->getContainerNode());
-#endif
 }
 
 void UISystem::setPriority(int nPriority)
@@ -197,7 +190,6 @@ void UISystem::setPriority(int nPriority)
 
 bool UISystem::replaceUISceneWithFile(cocos2d::CCNode* container,const char *fileName,int fileType,bool enableAdapt,bool scaleAdapt,bool equalProportions,int nPriority)
 {
-#if VERSIONFORCOCOS2DX
     if (!fileName || strcmp(fileName, "") == 0)
     {
         return false;
@@ -226,23 +218,18 @@ bool UISystem::replaceUISceneWithFile(cocos2d::CCNode* container,const char *fil
         cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
         this->adjustWidgetProperty(sceneRootWidget,winSize.width/this->getFileDesignWidth(),winSize.height/this->getFileDesignHeight(),scaleAdapt,equalProportions);
     }
-#endif
     return true;
 }
 
 void UISystem::cleanUIScene()
 {
-#if VERSIONFORCOCOS2DX
     this->m_pCurScene->cleanScene();
     this->removeAllSpriteFrame();
-#endif
 }
 
 void UISystem::update(float dt)
 {
-#if VERSIONFORCOCOS2DX
     this->m_pCurScene->update(dt);
-#endif
 }
 
 bool UISystem::onTouchPressed(cocos2d::CCTouch* touch)
@@ -311,16 +298,12 @@ CocoWidget* UISystem::checkWidgetByTag(CocoWidget *root, int tag)
 
 CocoWidget* UISystem::getWidgetByName(const char *name)
 {
-#if VERSIONFORCOCOS2DX
     return this->checkWidgetByName(this->getCurScene()->getRootWidget(), name);
-#endif
 }
 
 CocoWidget* UISystem::getWidgetByTag(int tag)
 {
-#if VERSIONFORCOCOS2DX
     return this->checkWidgetByTag(this->getCurScene()->getRootWidget(), tag);
-#endif
 }
 
 void UISystem::addSpriteFrame(const char *fileName)

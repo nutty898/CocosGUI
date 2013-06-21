@@ -29,7 +29,6 @@
 #include "UIScene.h"
 #include "../../CCArmature/external_tool/Json/CSContentJsonDictionary.h"
 
-#define VERSIONFORCOCOS2DX 1
 
 #define COCOUISYSTEM cocos2d::extension::UISystem::shareSystem()
 
@@ -80,8 +79,6 @@ protected:
     InputLayer* m_pInputLayer;
     //texture
     cocos2d::CCArray* m_textureFiles;
-    
-    cocos2d::CCDictionary* m_classTypeDic;
 };
 
 NS_CC_EXT_END

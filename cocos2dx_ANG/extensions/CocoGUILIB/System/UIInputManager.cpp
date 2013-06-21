@@ -68,9 +68,7 @@ void UIInputManager::sortWidgets()
 {
 
     this->m_manageredWidget->removeAllObjects();
-#if VERSIONFORCOCOS2DX
     this->sortRootWidgets(COCOUISYSTEM->getCurScene()->getRootWidget());
-#endif
     this->m_bWidgetBeSorted = true;
 }
 
