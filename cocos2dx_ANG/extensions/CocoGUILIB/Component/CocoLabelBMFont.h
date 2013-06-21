@@ -39,6 +39,7 @@ public:
     void setFntFile(const char* fileName);
     void setText(const char* value);
     const char* getStringValue();
+    virtual cocos2d::CCNode* getValidNode();
 protected:
     cocos2d::CCLabelBMFont* m_pLabelBMFont;
 };

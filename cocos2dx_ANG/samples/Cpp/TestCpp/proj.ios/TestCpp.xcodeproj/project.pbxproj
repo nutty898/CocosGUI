@@ -337,7 +337,6 @@
 		50016E4617718DCD00090055 /* CocoControlButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DDC17718DCD00090055 /* CocoControlButton.cpp */; };
 		50016E4717718DCD00090055 /* CocoGradientPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DDE17718DCD00090055 /* CocoGradientPanel.cpp */; };
 		50016E4917718DCD00090055 /* CocoImageView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DE217718DCD00090055 /* CocoImageView.cpp */; };
-		50016E4A17718DCD00090055 /* CocoImageViewScale9.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DE417718DCD00090055 /* CocoImageViewScale9.cpp */; };
 		50016E4B17718DCD00090055 /* CocoLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DE617718DCD00090055 /* CocoLabel.cpp */; };
 		50016E4C17718DCD00090055 /* CocoLabelAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DE817718DCD00090055 /* CocoLabelAtlas.cpp */; };
 		50016E4D17718DCD00090055 /* CocoLabelBMFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016DEA17718DCD00090055 /* CocoLabelBMFont.cpp */; };
@@ -354,25 +353,6 @@
 		50016E5817718DCD00090055 /* CCSReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0117718DCD00090055 /* CCSReader.cpp */; };
 		50016E5917718DCD00090055 /* CocosGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0317718DCD00090055 /* CocosGUI.cpp */; };
 		50016E5A17718DCD00090055 /* DictionaryHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0517718DCD00090055 /* DictionaryHelper.cpp */; };
-		50016E5B17718DCD00090055 /* GUICCBFileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0817718DCD00090055 /* GUICCBFileLoader.cpp */; };
-		50016E5C17718DCD00090055 /* GUICCBReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0A17718DCD00090055 /* GUICCBReader.cpp */; };
-		50016E5D17718DCD00090055 /* GUICCControlButtonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0C17718DCD00090055 /* GUICCControlButtonLoader.cpp */; };
-		50016E5E17718DCD00090055 /* GUICCControlLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E0E17718DCD00090055 /* GUICCControlLoader.cpp */; };
-		50016E5F17718DCD00090055 /* GUICCLabelBMFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1017718DCD00090055 /* GUICCLabelBMFontLoader.cpp */; };
-		50016E6017718DCD00090055 /* GUICCLabelTTFLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1217718DCD00090055 /* GUICCLabelTTFLoader.cpp */; };
-		50016E6117718DCD00090055 /* GUICCLayerColorLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1417718DCD00090055 /* GUICCLayerColorLoader.cpp */; };
-		50016E6217718DCD00090055 /* GUICCLayerGradientLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1617718DCD00090055 /* GUICCLayerGradientLoader.cpp */; };
-		50016E6317718DCD00090055 /* GUICCLayerLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1817718DCD00090055 /* GUICCLayerLoader.cpp */; };
-		50016E6417718DCD00090055 /* GUICCMenuItemImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1A17718DCD00090055 /* GUICCMenuItemImageLoader.cpp */; };
-		50016E6517718DCD00090055 /* GUICCMenuItemLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1C17718DCD00090055 /* GUICCMenuItemLoader.cpp */; };
-		50016E6617718DCD00090055 /* GUICCMenuLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E1E17718DCD00090055 /* GUICCMenuLoader.cpp */; };
-		50016E6717718DCD00090055 /* GUICCNodeLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2017718DCD00090055 /* GUICCNodeLoader.cpp */; };
-		50016E6817718DCD00090055 /* GUICCNodeLoaderLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2217718DCD00090055 /* GUICCNodeLoaderLibrary.cpp */; };
-		50016E6917718DCD00090055 /* GUICCNodeLoaderListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2417718DCD00090055 /* GUICCNodeLoaderListener.cpp */; };
-		50016E6A17718DCD00090055 /* GUICCParticleSystemQuadLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2617718DCD00090055 /* GUICCParticleSystemQuadLoader.cpp */; };
-		50016E6B17718DCD00090055 /* GUICCScale9SpriteLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2817718DCD00090055 /* GUICCScale9SpriteLoader.cpp */; };
-		50016E6C17718DCD00090055 /* GUICCScrollViewLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2A17718DCD00090055 /* GUICCScrollViewLoader.cpp */; };
-		50016E6D17718DCD00090055 /* GUICCSpriteLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2C17718DCD00090055 /* GUICCSpriteLoader.cpp */; };
 		50016E6E17718DCD00090055 /* InputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E2E17718DCD00090055 /* InputLayer.cpp */; };
 		50016E6F17718DCD00090055 /* UIInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E3017718DCD00090055 /* UIInputManager.cpp */; };
 		50016E7017718DCD00090055 /* UIScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50016E3217718DCD00090055 /* UIScene.cpp */; };
@@ -1123,8 +1103,6 @@
 		50016DDF17718DCD00090055 /* CocoGradientPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoGradientPanel.h; sourceTree = "<group>"; };
 		50016DE217718DCD00090055 /* CocoImageView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoImageView.cpp; sourceTree = "<group>"; };
 		50016DE317718DCD00090055 /* CocoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoImageView.h; sourceTree = "<group>"; };
-		50016DE417718DCD00090055 /* CocoImageViewScale9.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoImageViewScale9.cpp; sourceTree = "<group>"; };
-		50016DE517718DCD00090055 /* CocoImageViewScale9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoImageViewScale9.h; sourceTree = "<group>"; };
 		50016DE617718DCD00090055 /* CocoLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoLabel.cpp; sourceTree = "<group>"; };
 		50016DE717718DCD00090055 /* CocoLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoLabel.h; sourceTree = "<group>"; };
 		50016DE817718DCD00090055 /* CocoLabelAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocoLabelAtlas.cpp; sourceTree = "<group>"; };
@@ -1157,44 +1135,6 @@
 		50016E0417718DCD00090055 /* CocosGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosGUI.h; sourceTree = "<group>"; };
 		50016E0517718DCD00090055 /* DictionaryHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DictionaryHelper.cpp; sourceTree = "<group>"; };
 		50016E0617718DCD00090055 /* DictionaryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryHelper.h; sourceTree = "<group>"; };
-		50016E0817718DCD00090055 /* GUICCBFileLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCBFileLoader.cpp; sourceTree = "<group>"; };
-		50016E0917718DCD00090055 /* GUICCBFileLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCBFileLoader.h; sourceTree = "<group>"; };
-		50016E0A17718DCD00090055 /* GUICCBReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCBReader.cpp; sourceTree = "<group>"; };
-		50016E0B17718DCD00090055 /* GUICCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCBReader.h; sourceTree = "<group>"; };
-		50016E0C17718DCD00090055 /* GUICCControlButtonLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCControlButtonLoader.cpp; sourceTree = "<group>"; };
-		50016E0D17718DCD00090055 /* GUICCControlButtonLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCControlButtonLoader.h; sourceTree = "<group>"; };
-		50016E0E17718DCD00090055 /* GUICCControlLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCControlLoader.cpp; sourceTree = "<group>"; };
-		50016E0F17718DCD00090055 /* GUICCControlLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCControlLoader.h; sourceTree = "<group>"; };
-		50016E1017718DCD00090055 /* GUICCLabelBMFontLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCLabelBMFontLoader.cpp; sourceTree = "<group>"; };
-		50016E1117718DCD00090055 /* GUICCLabelBMFontLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCLabelBMFontLoader.h; sourceTree = "<group>"; };
-		50016E1217718DCD00090055 /* GUICCLabelTTFLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCLabelTTFLoader.cpp; sourceTree = "<group>"; };
-		50016E1317718DCD00090055 /* GUICCLabelTTFLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCLabelTTFLoader.h; sourceTree = "<group>"; };
-		50016E1417718DCD00090055 /* GUICCLayerColorLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCLayerColorLoader.cpp; sourceTree = "<group>"; };
-		50016E1517718DCD00090055 /* GUICCLayerColorLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCLayerColorLoader.h; sourceTree = "<group>"; };
-		50016E1617718DCD00090055 /* GUICCLayerGradientLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCLayerGradientLoader.cpp; sourceTree = "<group>"; };
-		50016E1717718DCD00090055 /* GUICCLayerGradientLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCLayerGradientLoader.h; sourceTree = "<group>"; };
-		50016E1817718DCD00090055 /* GUICCLayerLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCLayerLoader.cpp; sourceTree = "<group>"; };
-		50016E1917718DCD00090055 /* GUICCLayerLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCLayerLoader.h; sourceTree = "<group>"; };
-		50016E1A17718DCD00090055 /* GUICCMenuItemImageLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCMenuItemImageLoader.cpp; sourceTree = "<group>"; };
-		50016E1B17718DCD00090055 /* GUICCMenuItemImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCMenuItemImageLoader.h; sourceTree = "<group>"; };
-		50016E1C17718DCD00090055 /* GUICCMenuItemLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCMenuItemLoader.cpp; sourceTree = "<group>"; };
-		50016E1D17718DCD00090055 /* GUICCMenuItemLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCMenuItemLoader.h; sourceTree = "<group>"; };
-		50016E1E17718DCD00090055 /* GUICCMenuLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCMenuLoader.cpp; sourceTree = "<group>"; };
-		50016E1F17718DCD00090055 /* GUICCMenuLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCMenuLoader.h; sourceTree = "<group>"; };
-		50016E2017718DCD00090055 /* GUICCNodeLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCNodeLoader.cpp; sourceTree = "<group>"; };
-		50016E2117718DCD00090055 /* GUICCNodeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCNodeLoader.h; sourceTree = "<group>"; };
-		50016E2217718DCD00090055 /* GUICCNodeLoaderLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCNodeLoaderLibrary.cpp; sourceTree = "<group>"; };
-		50016E2317718DCD00090055 /* GUICCNodeLoaderLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCNodeLoaderLibrary.h; sourceTree = "<group>"; };
-		50016E2417718DCD00090055 /* GUICCNodeLoaderListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCNodeLoaderListener.cpp; sourceTree = "<group>"; };
-		50016E2517718DCD00090055 /* GUICCNodeLoaderListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCNodeLoaderListener.h; sourceTree = "<group>"; };
-		50016E2617718DCD00090055 /* GUICCParticleSystemQuadLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCParticleSystemQuadLoader.cpp; sourceTree = "<group>"; };
-		50016E2717718DCD00090055 /* GUICCParticleSystemQuadLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCParticleSystemQuadLoader.h; sourceTree = "<group>"; };
-		50016E2817718DCD00090055 /* GUICCScale9SpriteLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCScale9SpriteLoader.cpp; sourceTree = "<group>"; };
-		50016E2917718DCD00090055 /* GUICCScale9SpriteLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCScale9SpriteLoader.h; sourceTree = "<group>"; };
-		50016E2A17718DCD00090055 /* GUICCScrollViewLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCScrollViewLoader.cpp; sourceTree = "<group>"; };
-		50016E2B17718DCD00090055 /* GUICCScrollViewLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCScrollViewLoader.h; sourceTree = "<group>"; };
-		50016E2C17718DCD00090055 /* GUICCSpriteLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUICCSpriteLoader.cpp; sourceTree = "<group>"; };
-		50016E2D17718DCD00090055 /* GUICCSpriteLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUICCSpriteLoader.h; sourceTree = "<group>"; };
 		50016E2E17718DCD00090055 /* InputLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputLayer.cpp; sourceTree = "<group>"; };
 		50016E2F17718DCD00090055 /* InputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLayer.h; sourceTree = "<group>"; };
 		50016E3017718DCD00090055 /* UIInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIInputManager.cpp; sourceTree = "<group>"; };
@@ -2946,8 +2886,6 @@
 				50016DDF17718DCD00090055 /* CocoGradientPanel.h */,
 				50016DE217718DCD00090055 /* CocoImageView.cpp */,
 				50016DE317718DCD00090055 /* CocoImageView.h */,
-				50016DE417718DCD00090055 /* CocoImageViewScale9.cpp */,
-				50016DE517718DCD00090055 /* CocoImageViewScale9.h */,
 				50016DE617718DCD00090055 /* CocoLabel.cpp */,
 				50016DE717718DCD00090055 /* CocoLabel.h */,
 				50016DE817718DCD00090055 /* CocoLabelAtlas.cpp */,
@@ -2987,7 +2925,6 @@
 				50016E0417718DCD00090055 /* CocosGUI.h */,
 				50016E0517718DCD00090055 /* DictionaryHelper.cpp */,
 				50016E0617718DCD00090055 /* DictionaryHelper.h */,
-				50016E0717718DCD00090055 /* GUICCBReader */,
 				50016E2E17718DCD00090055 /* InputLayer.cpp */,
 				50016E2F17718DCD00090055 /* InputLayer.h */,
 				50016E3017718DCD00090055 /* UIInputManager.cpp */,
@@ -3000,51 +2937,6 @@
 				50016E3717718DCD00090055 /* UIWidgetPool.h */,
 			);
 			path = System;
-			sourceTree = "<group>";
-		};
-		50016E0717718DCD00090055 /* GUICCBReader */ = {
-			isa = PBXGroup;
-			children = (
-				50016E0817718DCD00090055 /* GUICCBFileLoader.cpp */,
-				50016E0917718DCD00090055 /* GUICCBFileLoader.h */,
-				50016E0A17718DCD00090055 /* GUICCBReader.cpp */,
-				50016E0B17718DCD00090055 /* GUICCBReader.h */,
-				50016E0C17718DCD00090055 /* GUICCControlButtonLoader.cpp */,
-				50016E0D17718DCD00090055 /* GUICCControlButtonLoader.h */,
-				50016E0E17718DCD00090055 /* GUICCControlLoader.cpp */,
-				50016E0F17718DCD00090055 /* GUICCControlLoader.h */,
-				50016E1017718DCD00090055 /* GUICCLabelBMFontLoader.cpp */,
-				50016E1117718DCD00090055 /* GUICCLabelBMFontLoader.h */,
-				50016E1217718DCD00090055 /* GUICCLabelTTFLoader.cpp */,
-				50016E1317718DCD00090055 /* GUICCLabelTTFLoader.h */,
-				50016E1417718DCD00090055 /* GUICCLayerColorLoader.cpp */,
-				50016E1517718DCD00090055 /* GUICCLayerColorLoader.h */,
-				50016E1617718DCD00090055 /* GUICCLayerGradientLoader.cpp */,
-				50016E1717718DCD00090055 /* GUICCLayerGradientLoader.h */,
-				50016E1817718DCD00090055 /* GUICCLayerLoader.cpp */,
-				50016E1917718DCD00090055 /* GUICCLayerLoader.h */,
-				50016E1A17718DCD00090055 /* GUICCMenuItemImageLoader.cpp */,
-				50016E1B17718DCD00090055 /* GUICCMenuItemImageLoader.h */,
-				50016E1C17718DCD00090055 /* GUICCMenuItemLoader.cpp */,
-				50016E1D17718DCD00090055 /* GUICCMenuItemLoader.h */,
-				50016E1E17718DCD00090055 /* GUICCMenuLoader.cpp */,
-				50016E1F17718DCD00090055 /* GUICCMenuLoader.h */,
-				50016E2017718DCD00090055 /* GUICCNodeLoader.cpp */,
-				50016E2117718DCD00090055 /* GUICCNodeLoader.h */,
-				50016E2217718DCD00090055 /* GUICCNodeLoaderLibrary.cpp */,
-				50016E2317718DCD00090055 /* GUICCNodeLoaderLibrary.h */,
-				50016E2417718DCD00090055 /* GUICCNodeLoaderListener.cpp */,
-				50016E2517718DCD00090055 /* GUICCNodeLoaderListener.h */,
-				50016E2617718DCD00090055 /* GUICCParticleSystemQuadLoader.cpp */,
-				50016E2717718DCD00090055 /* GUICCParticleSystemQuadLoader.h */,
-				50016E2817718DCD00090055 /* GUICCScale9SpriteLoader.cpp */,
-				50016E2917718DCD00090055 /* GUICCScale9SpriteLoader.h */,
-				50016E2A17718DCD00090055 /* GUICCScrollViewLoader.cpp */,
-				50016E2B17718DCD00090055 /* GUICCScrollViewLoader.h */,
-				50016E2C17718DCD00090055 /* GUICCSpriteLoader.cpp */,
-				50016E2D17718DCD00090055 /* GUICCSpriteLoader.h */,
-			);
-			path = GUICCBReader;
 			sourceTree = "<group>";
 		};
 		50472B271771C536000D9977 /* CocosGUITest */ = {
@@ -3550,7 +3442,6 @@
 				50016E4617718DCD00090055 /* CocoControlButton.cpp in Sources */,
 				50016E4717718DCD00090055 /* CocoGradientPanel.cpp in Sources */,
 				50016E4917718DCD00090055 /* CocoImageView.cpp in Sources */,
-				50016E4A17718DCD00090055 /* CocoImageViewScale9.cpp in Sources */,
 				50016E4B17718DCD00090055 /* CocoLabel.cpp in Sources */,
 				50016E4C17718DCD00090055 /* CocoLabelAtlas.cpp in Sources */,
 				50016E4D17718DCD00090055 /* CocoLabelBMFont.cpp in Sources */,
@@ -3567,25 +3458,6 @@
 				50016E5817718DCD00090055 /* CCSReader.cpp in Sources */,
 				50016E5917718DCD00090055 /* CocosGUI.cpp in Sources */,
 				50016E5A17718DCD00090055 /* DictionaryHelper.cpp in Sources */,
-				50016E5B17718DCD00090055 /* GUICCBFileLoader.cpp in Sources */,
-				50016E5C17718DCD00090055 /* GUICCBReader.cpp in Sources */,
-				50016E5D17718DCD00090055 /* GUICCControlButtonLoader.cpp in Sources */,
-				50016E5E17718DCD00090055 /* GUICCControlLoader.cpp in Sources */,
-				50016E5F17718DCD00090055 /* GUICCLabelBMFontLoader.cpp in Sources */,
-				50016E6017718DCD00090055 /* GUICCLabelTTFLoader.cpp in Sources */,
-				50016E6117718DCD00090055 /* GUICCLayerColorLoader.cpp in Sources */,
-				50016E6217718DCD00090055 /* GUICCLayerGradientLoader.cpp in Sources */,
-				50016E6317718DCD00090055 /* GUICCLayerLoader.cpp in Sources */,
-				50016E6417718DCD00090055 /* GUICCMenuItemImageLoader.cpp in Sources */,
-				50016E6517718DCD00090055 /* GUICCMenuItemLoader.cpp in Sources */,
-				50016E6617718DCD00090055 /* GUICCMenuLoader.cpp in Sources */,
-				50016E6717718DCD00090055 /* GUICCNodeLoader.cpp in Sources */,
-				50016E6817718DCD00090055 /* GUICCNodeLoaderLibrary.cpp in Sources */,
-				50016E6917718DCD00090055 /* GUICCNodeLoaderListener.cpp in Sources */,
-				50016E6A17718DCD00090055 /* GUICCParticleSystemQuadLoader.cpp in Sources */,
-				50016E6B17718DCD00090055 /* GUICCScale9SpriteLoader.cpp in Sources */,
-				50016E6C17718DCD00090055 /* GUICCScrollViewLoader.cpp in Sources */,
-				50016E6D17718DCD00090055 /* GUICCSpriteLoader.cpp in Sources */,
 				50016E6E17718DCD00090055 /* InputLayer.cpp in Sources */,
 				50016E6F17718DCD00090055 /* UIInputManager.cpp in Sources */,
 				50016E7017718DCD00090055 /* UIScene.cpp in Sources */,

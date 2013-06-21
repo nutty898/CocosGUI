@@ -27,6 +27,8 @@
 
 NS_CC_EXT_BEGIN
 
+#define DYNAMIC_CAST_CCSPRITE dynamic_cast<cocos2d::CCSprite*>(this->m_pRenderBar)
+
 CocoLoadingBar::CocoLoadingBar():
 m_nBarType(LoadingBarTypeLeft),
 m_nPercent(100),

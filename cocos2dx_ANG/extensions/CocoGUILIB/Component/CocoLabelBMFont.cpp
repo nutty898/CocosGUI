@@ -26,7 +26,8 @@
 
 NS_CC_EXT_BEGIN
     
-CocoLabelBMFont::CocoLabelBMFont()
+CocoLabelBMFont::CocoLabelBMFont():
+m_pLabelBMFont(NULL)
 {
     
 }
@@ -71,6 +72,11 @@ void CocoLabelBMFont::setText(const char* value)
 const char* CocoLabelBMFont::getStringValue()
 {
     return this->m_pLabelBMFont->getString();
+}
+
+CCNode* CocoLabelBMFont::getValidNode()
+{
+    return this->m_pLabelBMFont;
 }
 
 NS_CC_EXT_END

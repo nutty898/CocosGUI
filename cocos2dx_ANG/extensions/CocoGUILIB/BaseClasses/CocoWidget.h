@@ -31,35 +31,33 @@
 
 
 
-#define DYNAMIC_CAST_CCBLENDPROTOCOL dynamic_cast<cocos2d::CCBlendProtocol*>(this->m_pCCRenderNode)
 
-#define DYNAMIC_CAST_CCRGBAPROTOCOL dynamic_cast<cocos2d::CCRGBAProtocol*>(this->m_pCCRenderNode)
 
-#define DYNAMIC_CAST_CCNODE dynamic_cast<cocos2d::CCNode*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_GUINODERGBA dynamic_cast<GUINodeRGBA*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CCLAYER dynamic_cast<cocos2d::CCLayer*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CCSPRITE dynamic_cast<cocos2d::CCSprite*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CCLAYERCOLOR dynamic_cast<CCLayerColor*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CCLABELTTF dynamic_cast<cocos2d::CCLabelTTF*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CTEXTFIELD dynamic_cast<cocos2d::CTextfield*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CLIPSPRITE dynamic_cast<cocos2d::CClipSprite*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CLIPLAYERGRADIENT dynamic_cast<CClipAbleLayerGradient*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CLABELATLAS dynamic_cast<CLabelAtlas*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_SCALE9SPRITE dynamic_cast<cocos2d::extension::CCScale9Sprite*>(this->m_pCCRenderNode)
-
-#define DYNAMIC_CAST_CCLABELBMFONT dynamic_cast<cocos2d::CCLabelBMFont*>(this->m_pCCRenderNode)
+//#define DYNAMIC_CAST_CCNODE dynamic_cast<cocos2d::CCNode*>(this->m_pCCRenderNode)
+//
+//
+//
+//#define DYNAMIC_CAST_CCLAYER dynamic_cast<cocos2d::CCLayer*>(this->m_pCCRenderNode)
+//
+////#define DYNAMIC_CAST_CCSPRITE dynamic_cast<cocos2d::CCSprite*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CCLAYERCOLOR dynamic_cast<CCLayerColor*>(this->m_pCCRenderNode)
+//
+////#define DYNAMIC_CAST_CCLABELTTF dynamic_cast<cocos2d::CCLabelTTF*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CTEXTFIELD dynamic_cast<cocos2d::CTextfield*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CLIPSPRITE dynamic_cast<cocos2d::CClipSprite*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CLIPLAYERGRADIENT dynamic_cast<CClipAbleLayerGradient*>(this->m_pCCRenderNode)
+//
+////#define DYNAMIC_CAST_CLABELATLAS dynamic_cast<CLabelAtlas*>(this->m_pCCRenderNode)
+//
+////#define DYNAMIC_CAST_SCALE9SPRITE dynamic_cast<cocos2d::extension::CCScale9Sprite*>(this->m_pCCRenderNode)
+//
+//#define DYNAMIC_CAST_CCLABELBMFONT dynamic_cast<cocos2d::CCLabelBMFont*>(this->m_pCCRenderNode)
 
 
 
@@ -96,10 +94,10 @@ typedef void (cocos2d::CCObject::*SEL_PushEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_MoveEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_ReleaseEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_CancelEvent)(cocos2d::CCObject*);
-#define coco_pushselector(_SELECTOR) (cs::SEL_PushEvent)(&_SELECTOR)
-#define coco_moveselector(_SELECTOR) (cs::SEL_MoveEvent)(&_SELECTOR)
-#define coco_releaseselector(_SELECTOR) (cs::SEL_ReleaseEvent)(&_SELECTOR)
-#define coco_cancelselector(_SELECTOR) (cs::SEL_CancelEvent)(&_SELECTOR)
+#define coco_pushselector(_SELECTOR) (cocos2d::extension::SEL_PushEvent)(&_SELECTOR)
+#define coco_moveselector(_SELECTOR) (cocos2d::extension::SEL_MoveEvent)(&_SELECTOR)
+#define coco_releaseselector(_SELECTOR) (cocos2d::extension::SEL_ReleaseEvent)(&_SELECTOR)
+#define coco_cancelselector(_SELECTOR) (cocos2d::extension::SEL_CancelEvent)(&_SELECTOR)
 
 class CocoWidget : public cocos2d::CCObject
 {

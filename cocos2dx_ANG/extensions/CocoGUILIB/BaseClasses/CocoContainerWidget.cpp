@@ -28,6 +28,9 @@
 #include "DictionaryHelper.h"
 
 NS_CC_EXT_BEGIN
+
+#define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
+#define DYNAMIC_CAST_CLIPLAYERGRADIENT dynamic_cast<CClipAbleLayerGradient*>(this->m_pCCRenderNode)
     
 CocoContainerWidget::CocoContainerWidget():
 m_fWidth(0.0),

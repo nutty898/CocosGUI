@@ -27,6 +27,12 @@
 #include "UISystem.h"
 
 NS_CC_EXT_BEGIN
+
+#define DYNAMIC_CAST_CCBLENDPROTOCOL dynamic_cast<cocos2d::CCBlendProtocol*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_CCRGBAPROTOCOL dynamic_cast<cocos2d::CCRGBAProtocol*>(this->m_pCCRenderNode)
+
+#define DYNAMIC_CAST_GUINODERGBA dynamic_cast<GUINodeRGBA*>(this->m_pCCRenderNode)
     
 CocoWidget::CocoWidget():
 m_bEnabled(true),

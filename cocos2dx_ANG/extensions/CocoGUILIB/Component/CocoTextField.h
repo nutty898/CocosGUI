@@ -80,6 +80,7 @@ public:
     void addDetachWithIMEEvent(cocos2d::CCObject* target, SEL_TextFieldDetachWithIMEEvent selecor);
     void addInsertTextEvent(cocos2d::CCObject* target, SEL_TextFieldInsertTextEvent selecor);
     void addDeleteBackwardEvent(cocos2d::CCObject* target, SEL_TextFieldDeleteBackwardEvent selecor);
+    virtual cocos2d::CCNode* getValidNode();
     
 protected:
     float m_fTouchWidth;
@@ -95,6 +96,8 @@ protected:
     SEL_TextFieldDetachWithIMEEvent m_pfnDetachWithIMESelector;
     SEL_TextFieldInsertTextEvent m_pfnInsertTextSelector;
     SEL_TextFieldDeleteBackwardEvent m_pfnDeleteBackwardSelector;
+    
+    CTextField* m_pRenderTextField;
 };
 
 NS_CC_EXT_END

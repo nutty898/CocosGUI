@@ -50,63 +50,70 @@ CocoTextArea* CocoTextArea::create()
 
 void CocoTextArea::initNodes()
 {
-    this->m_pCCRenderNode = cocos2d::CCLabelTTF::create();
+    CocoWidget::initNodes();
+    m_pRenderLabel = cocos2d::CCLabelTTF::create();
+    this->m_pCCRenderNode->addChild(m_pRenderLabel);
 }
 
 void CocoTextArea::setText(const char* text)
 {
-    DYNAMIC_CAST_CCLABELTTF->setString(text);
+    m_pRenderLabel->setString(text);
 }
 
 void CocoTextArea::setTextAreaSize(const cocos2d::CCSize &size)
 {
-    DYNAMIC_CAST_CCLABELTTF->setDimensions(size);
+    m_pRenderLabel->setDimensions(size);
 }
 
 void CocoTextArea::setTextHorizontalAlignment(cocos2d::CCTextAlignment alignment)
 {
-    DYNAMIC_CAST_CCLABELTTF->setHorizontalAlignment(alignment);
+    m_pRenderLabel->setHorizontalAlignment(alignment);
 }
 
 void CocoTextArea::setTextVerticalAlignment(cocos2d::CCVerticalTextAlignment alignment)
 {
-    DYNAMIC_CAST_CCLABELTTF->setVerticalAlignment(alignment);
+    m_pRenderLabel->setVerticalAlignment(alignment);
 }
 
 int CocoTextArea::getStringLength()
 {
-    const char* str = DYNAMIC_CAST_CCLABELTTF->getString();
+    const char* str = m_pRenderLabel->getString();
     return strlen(str);
 }
 
 const char* CocoTextArea::getStringValue()
 {
-    return DYNAMIC_CAST_CCLABELTTF->getString();
+    return m_pRenderLabel->getString();
 }
 
 void CocoTextArea::setTextColor(int r,int g,int b)
 {
-    DYNAMIC_CAST_CCLABELTTF->setColor(cocos2d::ccc3(r, g, b));
+    m_pRenderLabel->setColor(cocos2d::ccc3(r, g, b));
 }
 
 void CocoTextArea::setFontSize(int size)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFontSize(size);
+    m_pRenderLabel->setFontSize(size);
 }
 
 void CocoTextArea::setFontName(const char *fontName)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFontName(fontName);
+    m_pRenderLabel->setFontName(fontName);
 }
 
 void CocoTextArea::setFlipX(bool flipX)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFlipX(flipX);
+    m_pRenderLabel->setFlipX(flipX);
 }
 
 void CocoTextArea::setFlipY(bool flipY)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFlipY(flipY);
+    m_pRenderLabel->setFlipY(flipY);
+}
+
+CCNode* CocoTextArea::getValidNode()
+{
+    return this->m_pRenderLabel;
 }
 
 NS_CC_EXT_END

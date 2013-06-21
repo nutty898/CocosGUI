@@ -30,7 +30,16 @@ NS_CC_EXT_BEGIN
 CocoTextField::CocoTextField():
 m_fTouchWidth(0.0),
 m_fTouchHeight(0.0),
-m_bUseTouchArea(false)
+m_bUseTouchArea(false),
+m_pRenderTextField(NULL),
+m_pAttachWithIMEListener(NULL),
+m_pDetachWithIMEListener(NULL),
+m_pInsertTextListener(NULL),
+m_pDeleteBackwardListener(NULL),
+m_pfnAttachWithIMESelector(NULL),
+m_pfnDetachWithIMESelector(NULL),
+m_pfnInsertTextSelector(NULL),
+m_pfnDeleteBackwardSelector(NULL)
 {
     
 }
@@ -63,7 +72,9 @@ bool CocoTextField::init()
 
 void CocoTextField::initNodes()
 {
-    this->m_pCCRenderNode = CTextField::create("input words here", "Thonburi", 20);
+    CocoWidget::initNodes();
+    m_pRenderTextField = CTextField::create("input words here", "Thonburi", 20);
+    this->m_pCCRenderNode->addChild(m_pRenderTextField);
 }
 
 void CocoTextField::setTouchSize(float width,float height)
@@ -75,38 +86,38 @@ void CocoTextField::setTouchSize(float width,float height)
 
 void CocoTextField::setText(const char* text)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setString(text);
+    m_pRenderTextField->setString(text);
 }
 
 void CocoTextField::setSize(cocos2d::CCSize &size)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setDimensions(size);
+    m_pRenderTextField->setDimensions(size);
 }
 
 void CocoTextField::setPlaceHolder(const char *value)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setPlaceHolder(value);
+    m_pRenderTextField->setPlaceHolder(value);
 }
 
 void CocoTextField::setFontSize(int size)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setFontSize(size);
+    m_pRenderTextField->setFontSize(size);
 }
 
 void CocoTextField::didNotSelectSelf()
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->closeIME();
+    m_pRenderTextField->closeIME();
 }
 
 const char* CocoTextField::getStringValue()
 {
-    return dynamic_cast<CTextField*>(this->m_pCCRenderNode)->getString();
+    return m_pRenderTextField->getString();
 }
 
 bool CocoTextField::onTouchPressed(cocos2d::CCPoint &touchPoint)
 {
     CocoWidget::onTouchPressed(touchPoint);
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->openIME();
+    m_pRenderTextField->openIME();
     return true;
 }
 
@@ -123,12 +134,12 @@ bool CocoTextField::pointAtSelfBody(cocos2d::CCPoint &pt)
 
 void CocoTextField::setCharacterLength(int length)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setCharacterLength(length);
+    m_pRenderTextField->setCharacterLength(length);
 }
 
 void CocoTextField::setIsPassWord(bool isPassword)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setIsPassword(isPassword);
+    m_pRenderTextField->setIsPassword(isPassword);
 }
 
 void CocoTextField::update(float dt)
@@ -157,42 +168,42 @@ void CocoTextField::update(float dt)
 
 bool CocoTextField::getAttachWithIME()
 {
-    return dynamic_cast<CTextField*>(this->m_pCCRenderNode)->getAttachWithIME();
+    return m_pRenderTextField->getAttachWithIME();
 }
 
 void CocoTextField::setAttachWithIME(bool attach)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setAttachWithIME(attach);
+    m_pRenderTextField->setAttachWithIME(attach);
 }
 
 bool CocoTextField::getDetachWithIME()
 {
-    return dynamic_cast<CTextField*>(this->m_pCCRenderNode)->getDetachWithIME();
+    return m_pRenderTextField->getDetachWithIME();
 }
 
 void CocoTextField::setDetachWithIME(bool detach)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setDetachWithIME(detach);
+    m_pRenderTextField->setDetachWithIME(detach);
 }
 
 bool CocoTextField::getInsertText()
 {
-    return dynamic_cast<CTextField*>(this->m_pCCRenderNode)->getInsertText();
+    return m_pRenderTextField->getInsertText();
 }
 
 void CocoTextField::setInsertText(bool insertText)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setInsertText(insertText);
+    m_pRenderTextField->setInsertText(insertText);
 }
 
 bool CocoTextField::getDeleteBackward()
 {
-    return dynamic_cast<CTextField*>(this->m_pCCRenderNode)->getDeleteBackward();
+    return m_pRenderTextField->getDeleteBackward();
 }
 
 void CocoTextField::setDeleteBackward(bool deleteBackward)
 {
-    dynamic_cast<CTextField*>(this->m_pCCRenderNode)->setDeleteBackward(deleteBackward);
+    m_pRenderTextField->setDeleteBackward(deleteBackward);
 }
 
 void CocoTextField::attachWithIMEEvent()
@@ -249,6 +260,11 @@ void CocoTextField::addDeleteBackwardEvent(cocos2d::CCObject *target, SEL_TextFi
 {
     m_pDeleteBackwardListener = target;
     m_pfnDeleteBackwardSelector = selecor;
+}
+
+CCNode* CocoTextField::getValidNode()
+{
+    return this->m_pRenderTextField;
 }
 
 NS_CC_EXT_END

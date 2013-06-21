@@ -29,6 +29,8 @@
 
 NS_CC_EXT_BEGIN
 
+#define DYNAMIC_CAST_CLIPLAYERCOLOR dynamic_cast<CClipAbleLayerColor*>(this->m_pCCRenderNode)
+
 CocoPanel::CocoPanel():
 m_bBackGroundScale9Enable(false),
 m_pBackGroundImage(NULL),

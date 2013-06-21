@@ -31,8 +31,8 @@ NS_CC_EXT_BEGIN
 
 typedef void (cocos2d::CCObject::*SEL_SelectEvent)(cocos2d::CCObject*);
 typedef void (cocos2d::CCObject::*SEL_UnSelectEvent)(cocos2d::CCObject*);
-#define coco_selectselector(_SELECTOR) (CocoGUI::SEL_SelectEvent)(&_SELECTOR)
-#define coco_unselectselector(_SELECTOR) (CocoGUI::SEL_UnSelectEvent)(&_SELECTOR)
+#define coco_selectselector(_SELECTOR) (cocos2d::extension::SEL_SelectEvent)(&_SELECTOR)
+#define coco_unselectselector(_SELECTOR) (cocos2d::extension::SEL_UnSelectEvent)(&_SELECTOR)
 class CocoCheckBox : public CocoWidget
 {
 public:

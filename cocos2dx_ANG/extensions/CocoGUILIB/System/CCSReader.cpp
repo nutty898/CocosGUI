@@ -438,7 +438,8 @@ void CCSReader::setPropsForImageViewFromCCDictionary(CocoWidget*widget,cocos2d::
         float cw = DICTOOL->getFloatValue(options, "capInsetsWidth");
         float ch = DICTOOL->getFloatValue(options, "capInsetsHeight");
         
-        imageView->setTexturesScale9(imageFileName, cocos2d::CCRect(cx, cy, cw, ch), widget->getUseMergedTexture());
+        imageView->setTexture(imageFileName, widget->getUseMergedTexture());
+        imageView->setCapInset(cocos2d::CCRect(cx, cy, cw, ch));
         bool sw = DICTOOL->checkObjectExist(options, "scale9Width");
         bool sh = DICTOOL->checkObjectExist(options, "scale9Height");
         if (sw && sh)
@@ -825,7 +826,8 @@ void CCSReader::setPropsForImageViewFromJsonDictionary(CocoWidget*widget,cs::CSJ
         float cw = DICTOOL->getFloatValue_json(options, "capInsetsWidth");
         float ch = DICTOOL->getFloatValue_json(options, "capInsetsHeight");
         
-        imageView->setTexturesScale9(imageFileName, cocos2d::CCRect(cx, cy, cw, ch), widget->getUseMergedTexture());
+        imageView->setTexture(imageFileName, widget->getUseMergedTexture());
+        imageView->setCapInset(cocos2d::CCRect(cx, cy, cw, ch));
         bool sw = DICTOOL->checkObjectExist_json(options, "scale9Width");
         bool sh = DICTOOL->checkObjectExist_json(options, "scale9Height");
         if (sw && sh)

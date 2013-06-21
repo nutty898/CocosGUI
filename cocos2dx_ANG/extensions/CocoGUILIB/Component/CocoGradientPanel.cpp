@@ -27,6 +27,8 @@
 
 NS_CC_EXT_BEGIN
 
+#define DYNAMIC_CAST_CLIPLAYERGRADIENT dynamic_cast<CClipAbleLayerGradient*>(this->m_pCCRenderNode)
+
 CocoGradientPanel::CocoGradientPanel()
 {
     m_renderType = RENDER_TYPE_LAYERGRADIENT;

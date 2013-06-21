@@ -41,7 +41,9 @@ public:
     void setStringValue(const char* value);
     const char* getStringValue();
     virtual void setAnchorPoint(const cocos2d::CCPoint &pt);
+    virtual cocos2d::CCNode* getValidNode();
 protected:
+    CLabelAtlas* m_pRenderLaberAtlas;
 };
 
 NS_CC_EXT_END

@@ -29,6 +29,9 @@
 
 NS_CC_EXT_BEGIN
 
+#define DYNAMIC_CAST_CCSPRITE dynamic_cast<cocos2d::CCSprite*>(this->m_pImageRender)
+#define DYNAMIC_CAST_SCALE9SPRITE dynamic_cast<cocos2d::extension::CCScale9Sprite*>(this->m_pImageRender)
+
 CocoImageView::CocoImageView():
 m_nViewType(1),
 m_nClickCount(0),
@@ -36,7 +39,9 @@ m_fClickTimeInterval(0.0),
 m_bStartCheckDoubleClick(false),
 m_touchRelease(false),
 m_bDoubleClickEnable(false),
-m_bScale9Enable(false)
+m_bScale9Enable(false),
+m_pImageRender(NULL),
+m_strTextureFile("")
 {
 
 }
@@ -59,16 +64,19 @@ CocoImageView* CocoImageView::create()
 
 void CocoImageView::initNodes()
 {
-    this->m_pCCRenderNode = cocos2d::CCSprite::create();
+    CocoWidget::initNodes();
+    this->m_pImageRender = cocos2d::CCSprite::create();
+    this->m_pCCRenderNode->addChild(m_pImageRender);
 }
 
 void CocoImageView::setTexture(const char* fileName,bool useSpriteFrame)
 {
+    this->m_strTextureFile = fileName;
     if (useSpriteFrame)
     {
         if (this->m_bScale9Enable)
         {
-            DYNAMIC_CAST_SCALE9SPRITE->initWithSpriteFrameName(fileName);
+            DYNAMIC_CAST_CCSPRITE->initWithSpriteFrameName(fileName);
         }
         else
         {
@@ -93,11 +101,11 @@ void CocoImageView::setTextureRect(const cocos2d::CCRect &rect)
 {
     if (this->m_bScale9Enable)
     {
-//            dynamic_cast<GUIScale9Sprite*>(this->m_pImage)->setTextureRect(rect);
+//        DYNAMIC_CAST_SCALE9SPRITE->setTextureRect(rect);
     }
     else
     {
-        dynamic_cast<cocos2d::CCSprite*>(this->m_pCCRenderNode)->setTextureRect(rect);
+        DYNAMIC_CAST_CCSPRITE->setTextureRect(rect);
     }
 }
 
@@ -224,17 +232,24 @@ void CocoImageView::setScale9Enable(bool able)
     this->m_nPrevPressstate = WidgetStateNone;
     this->m_nCurPressState = WidgetStateNone;
     this->m_bScale9Enable = able;
-    this->m_pCCRenderNode->removeChild(this->m_pCCRenderNode, true);
-    this->m_pCCRenderNode = NULL;
+    this->m_pCCRenderNode->removeChild(this->m_pImageRender, true);
+    this->m_pImageRender = NULL;
     if (this->m_bScale9Enable)
     {
-        this->m_pCCRenderNode = cocos2d::extension::CCScale9Sprite::create();
+        this->m_pImageRender = cocos2d::extension::CCScale9Sprite::create();
+        if (m_strTextureFile != "") {
+            DYNAMIC_CAST_SCALE9SPRITE->initWithFile(m_strTextureFile.c_str());
+        }
     }
     else
     {
-        this->m_pCCRenderNode = cocos2d::CCSprite::create();
+        this->m_pImageRender = cocos2d::CCSprite::create();
+        if (m_strTextureFile != "") {
+            DYNAMIC_CAST_CCSPRITE->initWithFile(m_strTextureFile.c_str());
+        }
     }
-    this->m_pCCRenderNode->addChild(m_pCCRenderNode);
+
+    this->m_pCCRenderNode->addChild(m_pImageRender);
 }
 
 void CocoImageView::setScale9Size(float width, float height)
@@ -246,22 +261,86 @@ void CocoImageView::setScale9Size(float width, float height)
     DYNAMIC_CAST_SCALE9SPRITE->setContentSize(cocos2d::CCSize(width,height));
 }
 
-void CocoImageView::setTexturesScale9(const char *fileName, cocos2d::CCRect capInsets, bool useSpriteFrame)
+void CocoImageView::setDisplayFrame(cocos2d::CCSpriteFrame *pNewFrame)
 {
-    if (useSpriteFrame)
+    if (this->m_bScale9Enable)
     {
-        DYNAMIC_CAST_SCALE9SPRITE->initWithSpriteFrameName(fileName, capInsets);
+//        DYNAMIC_CAST_SCALE9SPRITE->setDisplayFrame(pNewFrame);
     }
     else
     {
-        DYNAMIC_CAST_SCALE9SPRITE->initWithFile(fileName, capInsets);
+        DYNAMIC_CAST_CCSPRITE->setDisplayFrame(pNewFrame);
     }
-    
 }
 
-void CocoImageView::setDisplayFrame(cocos2d::CCSpriteFrame *pNewFrame)
+void CocoImageView::setSpriteFrame(cocos2d::CCSpriteFrame *pNewFrame)
 {
-    DYNAMIC_CAST_CCSPRITE->setDisplayFrame(pNewFrame);
+    if (this->m_bScale9Enable)
+    {
+        DYNAMIC_CAST_SCALE9SPRITE->setSpriteFrame(pNewFrame);
+    }
+    else
+    {
+//        DYNAMIC_CAST_CCSPRITE->setSpriteFrame(pNewFrame);
+    }
+}
+
+void CocoImageView::setPreferredSize(const cocos2d::CCSize &pSize)
+{
+    if (!this->m_bScale9Enable)
+    {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setPreferredSize(pSize);
+}
+
+void CocoImageView::setInsetLeft(float insetLeft)
+{
+    if (!this->m_bScale9Enable)
+    {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setInsetLeft(insetLeft);
+}
+
+void CocoImageView::setInsetTop(float insetTop)
+{
+    if (!this->m_bScale9Enable)
+    {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setInsetTop(insetTop);
+}
+
+void CocoImageView::setInsetRight(float insetRight)
+{
+    if (!this->m_bScale9Enable)
+    {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setInsetRight(insetRight);
+}
+
+void CocoImageView::setInsetBottom(float insetBottom)
+{
+    if (!this->m_bScale9Enable)
+    {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setInsetBottom(insetBottom);
+}
+
+void CocoImageView::setCapInset(const cocos2d::CCRect &capInset)
+{
+    if (!m_bScale9Enable) {
+        return;
+    }
+    DYNAMIC_CAST_SCALE9SPRITE->setCapInsets(capInset);
+}
+
+CCNode* CocoImageView::getValidNode()
+{
+    return this->m_pImageRender;
 }
 
 NS_CC_EXT_END

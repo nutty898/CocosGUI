@@ -48,7 +48,9 @@ public:
     void setFontName(const char* fontName);
     virtual void setFlipX(bool flipX);
     virtual void setFlipY(bool flipY);
+    virtual cocos2d::CCNode* getValidNode();
 protected:
+    CCLabelTTF* m_pRenderLabel;
 };
 
 NS_CC_EXT_END

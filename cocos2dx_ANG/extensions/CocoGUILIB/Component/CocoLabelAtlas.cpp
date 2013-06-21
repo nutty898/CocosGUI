@@ -27,7 +27,8 @@
 
 NS_CC_EXT_BEGIN
 
-CocoLabelAtlas::CocoLabelAtlas()
+CocoLabelAtlas::CocoLabelAtlas():
+m_pRenderLaberAtlas(NULL)
 {
 
 }
@@ -50,27 +51,35 @@ CocoLabelAtlas* CocoLabelAtlas::create()
 
 void CocoLabelAtlas::initNodes()
 {
-    this->m_pCCRenderNode = CLabelAtlas::create();
+    CocoWidget::initNodes();
+    this->m_pRenderLaberAtlas = CLabelAtlas::create();
+    this->m_pCCRenderNode->addChild(m_pRenderLaberAtlas);
 }
 
 void CocoLabelAtlas::setProperty(const char *stringValue, const char *charMapFile, int itemWidth, int itemHeight, const char *startCharMap,bool useSpriteFrame)
 {
-    DYNAMIC_CAST_CLABELATLAS->setProperty(stringValue, charMapFile, itemWidth, itemHeight, (int)(startCharMap[0]));
+    m_pRenderLaberAtlas->setProperty(stringValue, charMapFile, itemWidth, itemHeight, (int)(startCharMap[0]));
 }
 
 void CocoLabelAtlas::setStringValue(const char *value)
 {
-    DYNAMIC_CAST_CLABELATLAS->setString(value);
+    m_pRenderLaberAtlas->setString(value);
 }
 
 const char* CocoLabelAtlas::getStringValue()
 {
-    return DYNAMIC_CAST_CLABELATLAS->getString();
+    return m_pRenderLaberAtlas->getString();
 }
 
 void CocoLabelAtlas::setAnchorPoint(const cocos2d::CCPoint &pt)
 {
-    this->m_pCCRenderNode->setAnchorPoint(ccp(pt.x, pt.y-0.25f));
+    this->m_pRenderLaberAtlas->setAnchorPoint(ccp(pt.x, pt.y-0.25f));
 }
+
+CCNode* CocoLabelAtlas::getValidNode()
+{
+    return this->m_pRenderLaberAtlas;
+}
+
 
 NS_CC_EXT_END

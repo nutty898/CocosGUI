@@ -33,7 +33,8 @@ m_nGravity(LabelGravityCenter),
 m_sFontName("Thonburi"),
 m_nFontSize(10),
 m_fOnSelectedScaleOffset(0.5),
-m_fNormalScaleValue(1)
+m_fNormalScaleValue(1),
+m_pRenderLabel(NULL)
 {
 
 }
@@ -66,33 +67,35 @@ bool CocoLabel::init()
 
 void CocoLabel::initNodes()
 {
-    this->m_pCCRenderNode = cocos2d::CCLabelTTF::create();
+    CocoWidget::initNodes();
+    this->m_pRenderLabel = cocos2d::CCLabelTTF::create();
+    this->m_pCCRenderNode->addChild(m_pRenderLabel);
 }
 
 void CocoLabel::setText(const char* text)
 {
-    DYNAMIC_CAST_CCLABELTTF->setString(text);
+    m_pRenderLabel->setString(text);
 }
 
 const char* CocoLabel::getStringValue()
 {
-    return DYNAMIC_CAST_CCLABELTTF->getString();
+    return m_pRenderLabel->getString();
 }
 
 int CocoLabel::getStringLength()
 {
-    const char* str = DYNAMIC_CAST_CCLABELTTF->getString();
+    const char* str = m_pRenderLabel->getString();
     return strlen(str);
 }
 
 void CocoLabel::setFontSize(int size)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFontSize(size);
+    m_pRenderLabel->setFontSize(size);
 }
 
 void CocoLabel::setFontName(const char* name)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFontName(name);
+    m_pRenderLabel->setFontName(name);
 }
 
 void CocoLabel::setTouchScaleChangeAble(bool able)
@@ -134,12 +137,12 @@ void CocoLabel::clickScale(float scale)
 
 void CocoLabel::setFlipX(bool flipX)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFlipX(flipX);
+    m_pRenderLabel->setFlipX(flipX);
 }
 
 void CocoLabel::setFlipY(bool flipY)
 {
-    DYNAMIC_CAST_CCLABELTTF->setFlipY(flipY);
+    m_pRenderLabel->setFlipY(flipY);
 }
 
 void CocoLabel::setGravity(LabelGravity gravity)
@@ -148,13 +151,13 @@ void CocoLabel::setGravity(LabelGravity gravity)
     switch (this->m_nGravity)
     {
         case LabelGravityCenter:
-            DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(0.5, 0.5));
+            m_pRenderLabel->setAnchorPoint(ccp(0.5, 0.5));
             break;
         case LabelGravityLelf:
-            DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(0.0, 0.5));
+            m_pRenderLabel->setAnchorPoint(ccp(0.0, 0.5));
             break;
         case LabelGravityRight:
-            DYNAMIC_CAST_CCLABELTTF->setAnchorPoint(ccp(1.0, 0.5));
+            m_pRenderLabel->setAnchorPoint(ccp(1.0, 0.5));
             break;
         default:
             break;
@@ -164,7 +167,12 @@ void CocoLabel::setGravity(LabelGravity gravity)
 void CocoLabel::adaptSize(float xProportion, float yProportion)
 {
     float res = xProportion > yProportion ? xProportion : yProportion;
-    DYNAMIC_CAST_CCLABELTTF->setFontSize(DYNAMIC_CAST_CCLABELTTF->getFontSize()*res);
+    m_pRenderLabel->setFontSize(m_pRenderLabel->getFontSize()*res);
+}
+
+CCNode* CocoLabel::getValidNode()
+{
+    return this->m_pRenderLabel;
 }
 
 NS_CC_EXT_END

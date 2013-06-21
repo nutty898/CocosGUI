@@ -61,6 +61,7 @@ public:
     virtual void setFlipY(bool flipY);
     void setGravity(LabelGravity gravity);
     virtual void adaptSize(float xProportion,float yProportion);
+    virtual cocos2d::CCNode* getValidNode();
 protected:
     bool m_bTouchScaleChangeAble;
     float m_fNormalScaleValue;
@@ -68,6 +69,7 @@ protected:
     std::string m_sFontName;
     int m_nFontSize;
     float m_fOnSelectedScaleOffset;
+    CCLabelTTF* m_pRenderLabel;
 };
 
 NS_CC_EXT_END

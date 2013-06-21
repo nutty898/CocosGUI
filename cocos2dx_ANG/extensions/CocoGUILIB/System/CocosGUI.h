@@ -32,7 +32,6 @@
 #include "../Component/CocoButton.h"
 #include "../Component/CocoCheckBox.h"
 #include "../Component/CocoImageView.h"
-#include "../Component/CocoImageViewScale9.h"
 #include "../Component/CocoLabel.h"
 #include "../Component/CocoLabelAtlas.h"
 #include "../Component/CocoLoadingBar.h"
