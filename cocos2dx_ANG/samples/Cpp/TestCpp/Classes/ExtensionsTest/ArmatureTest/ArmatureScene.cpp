@@ -111,7 +111,6 @@ void ArmatureTestScene::runThisTest()
 
 	CCDirector::sharedDirector()->replaceScene(this);
     
-    COCOUISYSTEM->replaceUISceneWithFile(this, "cocosgui/CocoGUISample.json", 1, false, false, false);
 }
 void ArmatureTestScene::MainMenuCallback(CCObject* pSender)
 {

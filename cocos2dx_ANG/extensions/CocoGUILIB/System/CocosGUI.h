@@ -47,8 +47,9 @@
 #include "../Component/CocoControlButton.h"
 #include "../Component/CocoLabelBMFont.h"
 #include "../Component/CocoPageView.h"
-#include "UISystem.h"
+#include "UIHelper.h"
 #include "CCSReader.h"
+#include "UILayer.h"
     
 NS_CC_EXT_BEGIN
 

@@ -1,5 +1,5 @@
 #include "CocosGUIScene.h"
-#include "CocosGUI.h"
+
 
 CocosGUITestScene::CocosGUITestScene(bool bPortrait)
 {
@@ -21,12 +21,14 @@ void CocosGUITestScene::runThisTest()
     
 	CCDirector::sharedDirector()->replaceScene(this);
     
-    COCOUISYSTEM->replaceUISceneWithFile(this, "cocosgui/CocoGUISample.json", 1, false, false, false);
-    CocoScrollView* sc = (CocoScrollView*)(COCOUISYSTEM->getWidgetByName("scrollview"));
+    ul = UILayer::create();
+    this->addChild(ul);
+    ul->addWidget(CCUIHELPER->createWidgetFromFile_json("cocosgui/CocoGUISample.json"));
+    CocoScrollView* sc = (CocoScrollView*)(ul->getWidgetByName("scrollview"));
     sc->setUpdateEnable(true);
     sc->setMoveMode(SCROLLVIEW_MOVE_MODE_NORMAL);
     
-    CocoImageView* image = dynamic_cast<CocoImageView*>(COCOUISYSTEM->getWidgetByName("imageview"));
+    CocoImageView* image = dynamic_cast<CocoImageView*>(ul->getWidgetByName("imageview"));
     image->setBeTouchAble(true);
     image->addReleaseEvent(this, coco_releaseselector(CocosGUITestScene::MainMenuCallback));
     
@@ -34,7 +36,7 @@ void CocosGUITestScene::runThisTest()
 }
 void CocosGUITestScene::MainMenuCallback(CCObject* pSender)
 {
-    CocoImageView* image = dynamic_cast<CocoImageView*>(COCOUISYSTEM->getWidgetByName("imageview"));
+    CocoImageView* image = dynamic_cast<CocoImageView*>(ul->getWidgetByName("imageview"));
     static bool is = true;
     
     if (is) {

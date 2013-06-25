@@ -23,8 +23,7 @@
  ****************************************************************************/
 
 #include "CocoImageView.h"
-#include "UISystem.h"
-#include "DictionaryHelper.h"
+#include "../System/UIHelper.h"
 #include "CCScale9Sprite.h"
 
 NS_CC_EXT_BEGIN
@@ -190,7 +189,7 @@ void CocoImageView::setDoubleClickEnable(bool able)
     this->m_bDoubleClickEnable = able;
     if (able)
     {
-        COCOUISYSTEM->getUIInputManager()->addCheckedDoubleClickWidget(this);
+//        COCOUISYSTEM->getUIInputManager()->addCheckedDoubleClickWidget(this);
     }
     else
     {

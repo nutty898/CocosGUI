@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #include "UIInputManager.h"
-#include "UISystem.h"
+#include "UIHelper.h"
 
 NS_CC_EXT_BEGIN
 
@@ -34,7 +34,8 @@ m_bWidgetBeSorted(false),
 m_bTouchDown(false),
 m_fLongClickTime(0.0),
 m_fLongClickRecordTime(0.0),
-checkedDoubleClickWidget(NULL)
+checkedDoubleClickWidget(NULL),
+m_pRootWidget(NULL)
 {
     this->m_manageredWidget = cocos2d::CCArray::create();
     this->m_manageredWidget->retain();
@@ -44,7 +45,10 @@ checkedDoubleClickWidget(NULL)
 
 UIInputManager::~UIInputManager()
 {
-    
+    m_manageredWidget->removeAllObjects();
+    CC_SAFE_RELEASE_NULL(m_manageredWidget);
+    checkedDoubleClickWidget->removeAllObjects();
+    CC_SAFE_RELEASE_NULL(checkedDoubleClickWidget);
 }
 
 void UIInputManager::registWidget(CocoWidget* widget)
@@ -64,11 +68,11 @@ void UIInputManager::uiSceneHasChanged()
     this->m_bWidgetBeSorted = false;
 }
 
-void UIInputManager::sortWidgets()
+void UIInputManager::sortWidgets(cocos2d::extension::CocoWidget *widget)
 {
 
     this->m_manageredWidget->removeAllObjects();
-    this->sortRootWidgets(COCOUISYSTEM->getCurScene()->getRootWidget());
+    this->sortRootWidgets(widget);
     this->m_bWidgetBeSorted = true;
 }
 
@@ -100,12 +104,12 @@ void UIInputManager::removeManageredWidget(CocoWidget* widget)
 
 CocoWidget* UIInputManager::checkEventWidget(cocos2d::CCPoint &touchPoint)
 {
-    if (!this->m_bWidgetBeSorted)
+    if (!m_bWidgetBeSorted && m_pRootWidget)
     {
-        this->sortWidgets();
+        this->sortWidgets(m_pRootWidget);
     }
-    
-    for (int i=0;i<this->m_manageredWidget->count();i++)
+    int widgetCount = this->m_manageredWidget->count();
+    for (int i=0;i<widgetCount;i++)
     {
         CocoWidget* widget = (CocoWidget*)(this->m_manageredWidget->objectAtIndex(i));
         
@@ -230,70 +234,14 @@ bool UIInputManager::onTouchCanceled(cocos2d::CCTouch* touch)
     return true;
 }
 
-bool UIInputManager::onTouchPressed(float x,float y)
+void UIInputManager::setRootWidget(cocos2d::extension::CocoWidget *root)
 {
-    this->touchBeganedPoint.x = x;
-    this->touchBeganedPoint.y = y;
-    CocoWidget* hitWidget = this->checkEventWidget(this->touchBeganedPoint);
-    if (!hitWidget || !hitWidget->getActive())
-    {
-        this->m_pCurSelectedWidget = NULL;
-        return false;
-    }
-    this->m_pCurSelectedWidget = hitWidget;
-    hitWidget->onTouchPressed(this->touchBeganedPoint);
-    this->m_bTouchDown = true;
-    return true;
+    m_pRootWidget = root;
 }
 
-bool UIInputManager::onTouchMoved(float x,float y)
+CocoWidget* UIInputManager::getRootWidget()
 {
-    CocoWidget* hitWidget = this->m_pCurSelectedWidget;
-    if (!hitWidget || !hitWidget->getActive())
-    {
-        return false;
-    }
-    this->touchMovedPoint.x = x;
-    this->touchMovedPoint.y = y;
-    hitWidget->onTouchMoved(this->touchMovedPoint);
-    if (this->m_bTouchDown)
-    {
-        this->m_fLongClickRecordTime = 0;
-        this->m_bTouchDown = false;
-    }
-    return true;
-}
-
-bool UIInputManager::onTouchReleased(float x,float y)
-{
-    this->m_bTouchDown = false;
-    CocoWidget* hitWidget = this->m_pCurSelectedWidget;
-    if (!hitWidget || !hitWidget->getActive())
-    {
-        return false;
-    }
-    this->touchEndedPoint.x = x;
-    this->touchEndedPoint.y = y;
-    hitWidget->onTouchReleased(this->touchEndedPoint);
-    this->m_pCurSelectedWidget = NULL;
-    hitWidget = NULL;
-    return true;
-}
-
-bool UIInputManager::onTouchCanceled(float x,float y)
-{
-    this->m_bTouchDown = false;
-    CocoWidget* hitWidget = this->m_pCurSelectedWidget;
-    if (!hitWidget || !hitWidget->getActive())
-    {
-        return false;
-    }
-    this->touchEndedPoint.x = x;
-    this->touchEndedPoint.y = y;
-    hitWidget->onTouchReleased(this->touchEndedPoint);
-    this->m_pCurSelectedWidget = NULL;
-    hitWidget = NULL;
-    return true;
+    return m_pRootWidget;
 }
 
 NS_CC_EXT_END

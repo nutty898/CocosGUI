@@ -23,8 +23,9 @@
  ****************************************************************************/
 
 #include "CocoWidget.h"
-#include "DictionaryHelper.h"
-#include "UISystem.h"
+#include "../System/DictionaryHelper.h"
+#include "../System/UIHelper.h"
+#include "../System/UILayer.h"
 
 NS_CC_EXT_BEGIN
 
@@ -44,7 +45,7 @@ m_nCurPressState(WidgetStateNone),
 m_nPrevPressstate(WidgetStateNone),
 m_bBeTouchEnabled(false),
 m_nWidgetTag(-1),
-m_bUpdateAble(false),
+m_bUpdateEnable(false),
 m_pCCRenderNode(NULL),
 m_strName("default"),
 m_children(NULL),
@@ -70,7 +71,8 @@ m_bAbsoluteVisible(true),
 m_bVisibleDirty(true),
 m_fAdaptScaleX(1.0f),
 m_fAdaptScaleY(1.0f),
-m_anchorPoint(ccp(0.5f, 0.5f))
+m_anchorPoint(ccp(0.5f, 0.5f)),
+m_pUILayer(NULL)
 {
     
 }
@@ -160,7 +162,15 @@ bool CocoWidget::addChild(CocoWidget *child)
         }
     }
     this->addChildNode(child);
-    this->activeToUIInputManager();
+    
+    if (this->m_pUILayer) {
+        for (int i=0; i<this->m_children->count(); i++) {
+            CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
+            child->updateChildrenUILayer(this->m_pUILayer);
+        }
+    }
+    child->setUpdateEnable(child->getUpdateEnable());
+    structureChangedEvent();
     return true;
 }
 
@@ -168,6 +178,27 @@ void CocoWidget::addChildNode(CocoWidget *child)
 {
     child->m_pCCRenderNode->setZOrder(child->getWidgetZOrder());
     this->m_pCCRenderNode->addChild(child->m_pCCRenderNode);
+}
+
+void CocoWidget::setUILayer(cocos2d::extension::UILayer *uiLayer)
+{
+    this->m_pUILayer = uiLayer;
+}
+
+void CocoWidget::updateChildrenUILayer(UILayer* uiLayer)
+{
+    this->setUILayer(uiLayer);
+    for (int i=0; i<this->m_children->count(); i++) {
+        CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
+        child->updateChildrenUILayer(this->m_pUILayer);
+    }
+}
+
+void CocoWidget::structureChangedEvent()
+{
+    if (this->m_pUILayer) {
+        this->m_pUILayer->getInputManager()->uiSceneHasChanged();
+    }
 }
 
 bool CocoWidget::removeChild(CocoWidget *child, bool cleanup)
@@ -196,7 +227,8 @@ void CocoWidget::removeChildMoveToTrash(CocoWidget *child)
     if (this->m_children->containsObject(child))
     {
         this->m_children->removeObject(child);
-        child->cleanFromUIInputManager();
+        child->structureChangedEvent();
+        child->updateChildrenUILayer(NULL);
         child->setUpdateEnable(false);
         child->releaseResoures();
         child->m_pWidgetParent = NULL;
@@ -212,7 +244,8 @@ void CocoWidget::removeChildReferenceOnly(CocoWidget *child)
     }
     if (this->m_children->containsObject(child))
     {
-        child->cleanFromUIInputManager();
+        child->structureChangedEvent();
+        child->updateChildrenUILayer(NULL);
         this->m_pCCRenderNode->removeChild(child->m_pCCRenderNode, false);
         child->setNeedCheckVisibleDepandParent(false);
         this->m_children->removeObject(child);
@@ -226,6 +259,14 @@ void CocoWidget::removeFromParentAndCleanup(bool cleanup)
     {
         this->m_pWidgetParent->removeChild(this, cleanup);
     }
+    else
+    {
+        structureChangedEvent();
+        setUpdateEnable(false);
+        releaseResoures();
+        m_pWidgetParent = NULL;
+        delete this;
+    }
 }
 
 void CocoWidget::removeAllChildrenAndCleanUp(bool cleanup)
@@ -235,22 +276,13 @@ void CocoWidget::removeAllChildrenAndCleanUp(bool cleanup)
     {
         CocoWidget* child = (CocoWidget*)(m_children->lastObject());
         m_children->removeObject(child);
-        child->cleanFromUIInputManager();
+        child->structureChangedEvent();
+        child->updateChildrenUILayer(NULL);
+        child->setUILayer(NULL);
         child->releaseResoures();
         delete child;
         child = NULL;
     }
-}
-
-void CocoWidget::activeToUIInputManager()
-{
-    COCOUISYSTEM->getUIInputManager()->uiSceneHasChanged();
-}
-
-void CocoWidget::cleanFromUIInputManager()
-{
-    COCOUISYSTEM->getUIInputManager()->removeManageredWidget(this);
-    COCOUISYSTEM->getUIInputManager()->uiSceneHasChanged();
 }
 
 void CocoWidget::setWidgetZOrder(int z)
@@ -301,7 +333,7 @@ void CocoWidget::reorderChild(CocoWidget* child)
             this->m_children->insertObject(child,0);
         }
     }
-    COCOUISYSTEM->getUIInputManager()->uiSceneHasChanged();
+    structureChangedEvent();
 }
 
 void CocoWidget::setNeedCheckVisibleDepandParent(bool need)
@@ -317,39 +349,10 @@ void CocoWidget::setNeedCheckVisibleDepandParent(bool need)
     }
 }
 
-void CocoWidget::setVisibleTouch(bool visible)
+void CocoWidget::setBeTouchAble(bool enable)
 {
-    this->m_bVisibleTouch = visible;
-    if (this->m_children)
-    {
-        for (int i=0;i<this->m_children->count();i++)
-        {
-            CocoWidget* child = (CocoWidget*)(this->m_children->objectAtIndex(i));
-            child->setVisibleTouch(visible);
-        }
-    }
-}
-
-int CocoWidget::checkContainedChild(CocoWidget* child)
-{
-    if (!child)
-    {
-        return -1;
-    }
-    for (int i=0;i<this->m_children->count();i++)
-    {
-        if (child == this->m_children->objectAtIndex(i))
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-void CocoWidget::setBeTouchAble(bool able)
-{
-    this->m_bBeTouchEnabled = able;
-    COCOUISYSTEM->getUIInputManager()->uiSceneHasChanged();
+    this->m_bBeTouchEnabled = enable;
+    structureChangedEvent();
 }
 
 bool CocoWidget::getBeTouchAble()
@@ -357,16 +360,28 @@ bool CocoWidget::getBeTouchAble()
     return this->m_bBeTouchEnabled;
 }
 
-void CocoWidget::setUpdateEnable(bool able)
+void CocoWidget::setUpdateEnable(bool enable)
 {
-    if (able)
+    m_bUpdateEnable = enable;
+    if (enable)
     {
-        COCOUISYSTEM->getCurScene()->addUpdateEnableWidget(this);
+        if (this->m_pUILayer)
+        {
+            m_pUILayer->addUpdateEnableWidget(this);
+        }
     }
     else
     {
-        COCOUISYSTEM->getCurScene()->removeUpdateEnableWidget(this);
+        if (this->m_pUILayer)
+        {
+            m_pUILayer->removeUpdateEnableWidget(this);
+        }
     }
+}
+
+bool CocoWidget::getUpdateEnable()
+{
+    return this->m_bUpdateEnable;
 }
 
 bool CocoWidget::getBeFocus()

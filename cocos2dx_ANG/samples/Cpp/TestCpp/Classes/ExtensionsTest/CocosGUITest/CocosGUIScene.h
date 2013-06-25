@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "../../testBasic.h"
+#include "CocosGUI.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -17,6 +18,7 @@ public:
     
 	// The CallBack for back to the main menu scene
 	virtual void MainMenuCallback(CCObject* pSender);
+    UILayer* ul;
 };
 
 #endif /* defined(__TestCpp__CocosGUIScene__) */

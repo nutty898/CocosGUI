@@ -37,7 +37,7 @@ public:
     ~UIInputManager();
     void registWidget(CocoWidget* widget);
     void uiSceneHasChanged();
-    void sortWidgets();
+    void sortWidgets(CocoWidget* widget);
     void sortRootWidgets(CocoWidget* root);
     void removeManageredWidget(CocoWidget* widget);
     CocoWidget* checkEventWidget(cocos2d::CCPoint &touchPoint);
@@ -47,10 +47,10 @@ public:
     bool onTouchMoved(cocos2d::CCTouch* touch);
     bool onTouchReleased(cocos2d::CCTouch* touch);
     bool onTouchCanceled(cocos2d::CCTouch* touch);
-    bool onTouchPressed(float x,float y);
-    bool onTouchMoved(float x,float y);
-    bool onTouchReleased(float x,float y);
-    bool onTouchCanceled(float x,float y);
+    
+    void setRootWidget(CocoWidget* root);
+    CocoWidget* getRootWidget();
+    
 protected:
     cocos2d::CCArray* m_manageredWidget;
     CocoWidget* m_pCurSelectedWidget;
@@ -63,6 +63,7 @@ protected:
     float m_fLongClickTime;
     float m_fLongClickRecordTime;
     cocos2d::CCArray* checkedDoubleClickWidget;
+    CocoWidget* m_pRootWidget;
 };
 
 NS_CC_EXT_END

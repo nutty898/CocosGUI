@@ -99,6 +99,8 @@ typedef void (cocos2d::CCObject::*SEL_CancelEvent)(cocos2d::CCObject*);
 #define coco_releaseselector(_SELECTOR) (cocos2d::extension::SEL_ReleaseEvent)(&_SELECTOR)
 #define coco_cancelselector(_SELECTOR) (cocos2d::extension::SEL_CancelEvent)(&_SELECTOR)
 
+class UILayer;
+
 class CocoWidget : public cocos2d::CCObject
 {
 public:
@@ -110,22 +112,19 @@ public:
     virtual void initNodes();
     virtual bool addChild(CocoWidget* child);
     virtual void addChildNode(CocoWidget* child);
-    virtual void activeToUIInputManager();
-    virtual void cleanFromUIInputManager();
     virtual void setWidgetZOrder(int z);
     virtual int getWidgetZOrder();
     virtual void reorderChild(CocoWidget* child);
     virtual void setNeedCheckVisibleDepandParent(bool need);
-    virtual void setVisibleTouch(bool visible);
     virtual bool removeChild(CocoWidget* child,bool cleanup);
     virtual void removeChildMoveToTrash(CocoWidget* child);
     virtual void removeChildReferenceOnly(CocoWidget* child);
     virtual void removeFromParentAndCleanup(bool cleanup);
     virtual void removeAllChildrenAndCleanUp(bool cleanup);
-    int checkContainedChild(CocoWidget* child);
-    void setBeTouchAble(bool able);
+    void setBeTouchAble(bool enable);
     bool getBeTouchAble();
-    void setUpdateEnable(bool able);
+    void setUpdateEnable(bool enable);
+    bool getUpdateEnable();
     bool getBeFocus();
     void setBeFocus(bool fucos);
     void didNotSelectSelf();
@@ -221,6 +220,9 @@ public:
     virtual void updateChildrenOpacityDirty(bool dirty);
     virtual void adaptSize(float xProportion,float yProportion);
     
+    void setUILayer(UILayer* uiLayer);
+    void updateChildrenUILayer(UILayer* uiLayer);
+    void structureChangedEvent();
     
     //cocos action
     virtual void setActionManager(cocos2d::CCActionManager* actionManager);
@@ -286,7 +288,7 @@ protected:
     
     WidgetState m_nCurPressState;
     WidgetState m_nPrevPressstate;
-    bool m_bUpdateAble;
+    bool m_bUpdateEnable;
     cocos2d::CCNode* m_pCCRenderNode;
     float m_fContentSizeWidth;
     float m_fContentSizeHeight;
@@ -324,6 +326,8 @@ protected:
     bool m_bOpacityDirty;
     float m_fAdaptScaleX;
     float m_fAdaptScaleY;
+    
+    UILayer* m_pUILayer;
 };
 
 NS_CC_EXT_END

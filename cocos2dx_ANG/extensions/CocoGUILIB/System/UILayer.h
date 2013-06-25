@@ -22,29 +22,58 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __INPUTLAYER_H__
-#define __INPUTLAYER_H__
+
+#ifndef __UILAYER_H__
+#define __UILAYER_H__
 
 #include "cocos2d.h"
-#include "UISystem.h"
+#include "ExtensionMacros.h"
+#include "../BaseClasses/CocoRootWidget.h"
+#include "../System/UIInputManager.h"
 
 NS_CC_EXT_BEGIN
 
-class InputLayer : public cocos2d::CCLayer
+class UILayer : public CCLayer
 {
+    
 public:
-    InputLayer();
-    virtual ~InputLayer();
-    static InputLayer *createWithUISystem(UISystem* system);
+    UILayer();
+    virtual ~UILayer();
+    virtual bool init();
+    
+    static UILayer *create(void);
+    
+    virtual void onEnter();
+    virtual void onExit();
+    virtual void onEnterTransitionDidFinish();
+    
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
+    
+    
+    void addWidget(CocoWidget* widget);
+    void removeWidgetAndCleanUp(CocoWidget* widget,bool cleanup);
+    virtual void setVisible(bool visible);
     void update(float dt);
+    void addUpdateEnableWidget(CocoWidget* widget);
+    void removeUpdateEnableWidget(CocoWidget* widget);
+    CocoWidget* getWidgetByTag(int tag);
+    CocoWidget* getWidgetByName(const char* name);
+    UIInputManager* getInputManager();
+    void dispose();
 protected:
-    virtual bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
-    virtual void ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
-    virtual void ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
-    virtual void ccTouchCancelled(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
-    UISystem* m_pUISystem;
+    CocoWidget* seekWidgetByTag(CocoWidget* root, int tag);
+    CocoWidget* seekWidgetByName(CocoWidget* root, const char* name);
+    
+    CocoRootWidget* m_pRootWidget;
+    UIInputManager* m_pInputManager;
+    CCArray* m_updateEnableWidget;
 };
 
 NS_CC_EXT_END
 
-#endif /* defined(__CocoGUI__InputLayer__) */
+
+
+#endif /* defined(__UILAYER_H__) */

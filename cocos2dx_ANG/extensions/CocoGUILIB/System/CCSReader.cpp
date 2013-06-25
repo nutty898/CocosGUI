@@ -242,7 +242,7 @@ CocoWidget* CCSReader::widgetFromPlistFile(const char* fileName)
     for (int i=0; textures->count(); i++)
     {
         cocos2d::CCString* file = (cocos2d::CCString*)(textures->objectAtIndex(i));
-        COCOUISYSTEM->addSpriteFrame(file->m_sString.c_str());
+        CCUIHELPER->addSpriteFrame(file->m_sString.c_str());
     }
     float fileDesignWidth = DICTOOL->getFloatValue(dic, "designWidth");
     float fileDesignHeight = DICTOOL->getFloatValue(dic, "designHeight");
@@ -250,13 +250,13 @@ CocoWidget* CCSReader::widgetFromPlistFile(const char* fileName)
     {
         printf("Read design size error!\n");
         cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
-        UISystem::shareSystem()->setFileDesignWidth(winSize.width);
-        UISystem::shareSystem()->setFileDesignHeight(winSize.height);
+        CCUIHELPER->setFileDesignWidth(winSize.width);
+        CCUIHELPER->setFileDesignHeight(winSize.height);
     }
     else
     {
-        UISystem::shareSystem()->setFileDesignWidth(fileDesignWidth);
-        UISystem::shareSystem()->setFileDesignHeight(fileDesignHeight);
+        CCUIHELPER->setFileDesignWidth(fileDesignWidth);
+        CCUIHELPER->setFileDesignHeight(fileDesignHeight);
     }
     cocos2d::CCDictionary* widgetTree = (cocos2d::CCDictionary*)(DICTOOL->getArrayValue(dic, "widgetTree"));
     return this->widgetFromCCDictionary(widgetTree);
@@ -290,20 +290,20 @@ CocoWidget* CCSReader::widgetFromJsonFile(const char *fileName)
         const char* file = DICTOOL->getStringValueFromArray_json(jsonDict, "textures", i);
         std::string tp = pPath;
         tp.append(file);
-        COCOUISYSTEM->addSpriteFrame(tp.c_str());
+        CCUIHELPER->addSpriteFrame(tp.c_str());
     }
     float fileDesignWidth = DICTOOL->getFloatValue_json(jsonDict, "designWidth");
     float fileDesignHeight = DICTOOL->getFloatValue_json(jsonDict, "designHeight");
     if (fileDesignWidth <= 0 || fileDesignHeight <= 0) {
         printf("Read design size error!\n");
         cocos2d::CCSize winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
-        UISystem::shareSystem()->setFileDesignWidth(winSize.width);
-        UISystem::shareSystem()->setFileDesignHeight(winSize.height);
+        CCUIHELPER->setFileDesignWidth(winSize.width);
+        CCUIHELPER->setFileDesignHeight(winSize.height);
     }
     else
     {
-        UISystem::shareSystem()->setFileDesignWidth(fileDesignWidth);
-        UISystem::shareSystem()->setFileDesignHeight(fileDesignHeight);
+        CCUIHELPER->setFileDesignWidth(fileDesignWidth);
+        CCUIHELPER->setFileDesignHeight(fileDesignHeight);
     }
     cs::CSJsonDictionary* widgetTree = DICTOOL->getSubDictionary_json(jsonDict, "widgetTree");
     CocoWidget* widget = this->widgetFromJsonDictionary(widgetTree);

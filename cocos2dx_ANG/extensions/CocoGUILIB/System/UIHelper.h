@@ -22,62 +22,42 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "InputLayer.h"
+#ifndef __UISYSTEM_H__
+#define __UISYSTEM_H__
+
+#include "UIInputManager.h"
+#include "UIScene.h"
+#include "../../CCArmature/external_tool/Json/CSContentJsonDictionary.h"
+
+
+#define CCUIHELPER cocos2d::extension::UIHelper::instance()
 
 NS_CC_EXT_BEGIN
+
+class UIHelper
+{
+public:
+    UIHelper();
+    ~UIHelper();
+    void init();
+    CocoWidget* createWidget(cocos2d::CCDictionary* data);
+    CocoWidget* createWidgetFromFile(const char* fileName);
+    CocoWidget* createWidget_json(cs::CSJsonDictionary* data);
+    CocoWidget* createWidgetFromFile_json(const char* fileName);
+    CocoWidget* createWidgetFromFileWithAdapt_json(const char* fileName, bool scaleAdapt, bool equalProportions);
+    void adjustWidgetProperty(CocoWidget* root,float xProportion,float yProportion,bool scaleAdapt,bool equalProportions);
+    static UIHelper* instance();
+    void addSpriteFrame(const char* fileName);
+    void removeSpriteFrame(const char* fileName);
+    void removeAllSpriteFrame();
     
-InputLayer::InputLayer():m_pUISystem(NULL)
-{
-    
-}
-
-InputLayer::~InputLayer()
-{
-}
-
-InputLayer* InputLayer::createWithUISystem(UISystem *system)
-{
-    InputLayer *pRet = new InputLayer();
-    pRet->scheduleUpdate();
-    if (pRet && pRet->init())
-    {
-        pRet->autorelease();
-        pRet->m_pUISystem = system;
-        return pRet;
-    }
-    else
-    {
-        CC_SAFE_DELETE(pRet);
-        return NULL;
-    }
-}
-
-bool InputLayer::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
-{
-    return this->m_pUISystem->onTouchPressed(pTouch);   
-}
-
-void InputLayer::ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
-{
-    this->m_pUISystem->onTouchMoved(pTouch);
-}
-
-void InputLayer::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
-{
-    this->m_pUISystem->onTouchReleased(pTouch);
-}
-
-void InputLayer::ccTouchCancelled(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
-{
-    this->m_pUISystem->onTouchCanceled(pTouch);
-}
-
-void InputLayer::update(float dt)
-{
-    if (m_pUISystem)
-    {
-        m_pUISystem->update(dt);
-    }
-}
+protected:
+    CC_SYNTHESIZE(float, m_fFileDesignWidth, FileDesignWidth)
+    CC_SYNTHESIZE(float, m_fFileDesignHeight, FileDesignHeight)
+    //texture
+    cocos2d::CCArray* m_textureFiles;
+};
 
 NS_CC_EXT_END
+
+#endif /* defined(__CocoGUI__UISystem__) */

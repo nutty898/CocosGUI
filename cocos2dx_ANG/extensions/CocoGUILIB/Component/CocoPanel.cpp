@@ -78,6 +78,7 @@ void CocoPanel::setBackGroundImageScale9Enable(bool able)
     this->m_pCCRenderNode->removeChild(this->m_pBackGroundImage, true);
     this->m_pBackGroundImage = NULL;
     this->m_bBackGroundScale9Enable = able;
+    m_bBackGroundInited = false;
 }
     
 void CocoPanel::setSize(const cocos2d::CCSize &size)
